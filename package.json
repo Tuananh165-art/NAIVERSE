@@ -16,6 +16,8 @@
     "test:e2e": "playwright test",
     "test:e2e:install": "playwright install chromium",
     "seed:catalog": "node --experimental-strip-types scripts/seed-catalog.mjs",
+    "db:bundle-sql": "node --experimental-strip-types scripts/build-supabase-single-sql.mjs",
+    "services:probe": "node scripts/probe-services.mjs",
     "catalog:photo-gaps": "node --experimental-strip-types scripts/catalog-photo-gaps.mjs",
     "catalog:check-photos": "node --experimental-strip-types scripts/check-photo-sources.mjs"
   },
@@ -41,6 +43,7 @@
     "@types/node": "24.10.0",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "axe-core": "^4.14.0",
     "eslint": "9.39.5",
     "eslint-config-next": "^16.4.1",
     "postcss": "8.5.30",

@@ -2,6 +2,7 @@ import { Link } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
 import { MapPin, Sparkles } from "lucide-react";
 import { LocaleSwitcher } from "@/components/locale-switcher";
+import { SignOutButton } from "@/components/sign-out-button";
 import { getCurrentUser } from "@/lib/supabase/server";
 import { getLocale } from "next-intl/server";
 
@@ -22,12 +23,14 @@ export async function SiteHeader() {
           <Link className="optional" href="/journey">{t("journeys")}</Link>
           <Link className="optional" href="/ai/conditions">{en ? "Weather & safety" : "Thời tiết & an toàn"}</Link>
           <Link className="optional" href="/ai/routes">{en ? "AI routes" : "AI giao thông"}</Link>
+          <Link className="optional" href="/ai/guide">{en ? "AI guide" : "AI tra cứu có nguồn"}</Link>
+          <Link className="optional" href="/ai/fair-price">{en ? "Quote review" : "Rà soát báo giá"}</Link>
           <Link className="optional" href="/partner">{t("business")}</Link>
         </nav>
         <div className="nav-actions">
           <LocaleSwitcher />
           {user
-            ? <Link className="button button-primary" href="/trips"><Sparkles size={16} />{t("journeys")}</Link>
+            ? <><Link className="button button-primary" href="/trips"><Sparkles size={16} />{t("journeys")}</Link><SignOutButton /></>
             : <Link className="button button-primary" href="/auth">{t("signIn")}</Link>}
         </div>
       </div>

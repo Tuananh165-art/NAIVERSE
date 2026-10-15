@@ -88,7 +88,8 @@ create index if not exists places_region_idx on public.places (region);
 create index if not exists places_category_idx on public.places (category);
 create index if not exists places_aliases_idx on public.places using gin (aliases);
 create index if not exists places_search_idx on public.places using gin (
-  to_tsvector('simple', name || ' ' || name_en || ' ' || region || ' ' || region_en || ' ' || array_to_string(aliases, ' '))
+  -- The regconfig overload is immutable; the text-config overload is only stable.
+  to_tsvector('simple'::regconfig, name || ' ' || name_en || ' ' || region || ' ' || region_en)
 );
 
 create table if not exists public.price_references (

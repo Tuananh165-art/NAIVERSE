@@ -1,22 +1,45 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { places } from "@/lib/catalog";
+import { placeIllustrationIds } from "@/components/place-illustration";
 
 const { createSupabaseServerClient } = vi.hoisted(() => ({ createSupabaseServerClient: vi.fn() }));
 vi.mock("server-only", () => ({}));
 vi.mock("@/lib/supabase/server", () => ({ createSupabaseServerClient }));
 
 describe("destination evidence coverage", () => {
+  it("gives every destination without a licensed photo a clearly labelled concept illustration", () => {
+    const withoutPhotos = places.filter((place) => place.photos.length === 0).map((place) => place.id).sort();
+    expect(withoutPhotos).toEqual(["community-cultural-experiences"]);
+    expect(withoutPhotos.every((id) => placeIllustrationIds.includes(id))).toBe(true);
+  });
+
+  it("provides a direct operator contact source for confirming Giang Dien services", () => {
+    const contact = places.find((place) => place.id === "giang-dien-waterfall")?.evidence.find((item) => item.url === "https://giangdien.vn/lien-he/");
+
+    expect(contact?.label).toContain("0251 392 3930");
+    expect(contact?.label).toContain("kinhdoanh@giangdien.vn");
+    expect(contact?.labelEn).toContain("confirm service hours, prices and availability");
+    expect(contact?.checkedAt).toBe("2026-10-15");
+  });
+
   it("has sourced, licensed photos for named destinations and does not use them as current-state claims", () => {
     const withPhotos = places.filter((place) => place.photos.length > 0);
     expect(places).toHaveLength(36);
     expect(withPhotos.map((place) => place.id).sort()).toEqual([
       "ba-chong-rocks", "ba-ra-mountain", "buu-long", "cat-tien", "chua-chan", "dao-o-dong-truong", "giang-dien-waterfall", "suoimo", "la-nga-glamping",
       "bo-cap-vang", "bu-gia-map", "bu-lach-grassland", "dong-nai-museum", "ma-da-reserve", "nguyen-huu-canh-temple", "soc-bom-bo", "ta-lai", "thac-mai-bau-nuoc-soi", "thac-mo-lake", "tran-bien-temple-of-literature", "tri-an-lake", "war-zone-d",
+      "amazing-bay", "son-tien-amazing-world", "ong-pagoda", "ta-thiet", "phu-dien-fields", "my-le-eco-resort", "nam-hue-orchard", "tan-trieu-orchards", "long-khanh-fruit-festival", "loc-ninh-meeting-house", "dak-mai-waterfall", "da-han-waterfall", "binh-loc-orchards",
     ].sort());
-    expect(withPhotos.reduce((sum, place) => sum + place.photos.length, 0)).toBe(29);
+    expect(withPhotos).toHaveLength(35);
+    expect(withPhotos.reduce((sum, place) => sum + place.photos.length, 0)).toBe(43);
+    const userGranted = withPhotos.flatMap((place) => place.photos).filter((photo) => photo.permissionBasis === "direct_permission");
+    expect(userGranted).toHaveLength(14);
+    expect(userGranted.every((photo) => photo.url.startsWith("/images/places/") && photo.sourceUrl === null && photo.licenseUrl === null)).toBe(true);
+    expect(places.find((place) => place.id === "community-cultural-experiences")?.photos).toHaveLength(0);
     expect(places.find((place) => place.id === "dong-nai-museum")?.photos[0]).toMatchObject({ credit: "Hoangkid", license: "CC BY-SA 4.0", archival: true });
     expect(places.find((place) => place.id === "bo-cap-vang")?.photos[0]).toMatchObject({ credit: "Prenn", license: "CC BY-SA 3.0", archival: true });
-    expect(places.find((place) => place.id === "bu-lach-grassland")?.photos[0]).toMatchObject({ credit: "Lam Tr Th", license: "CC BY-SA 3.0", archival: true });
+    expect(places.find((place) => place.id === "bu-lach-grassland")?.photos[0]).toMatchObject({ permissionBasis: "direct_permission", sourceUrl: null });
+    expect(places.find((place) => place.id === "bu-lach-grassland")?.photos[1]).toMatchObject({ credit: "Lam Tr Th", license: "CC BY-SA 3.0", archival: true });
     expect(places.find((place) => place.id === "war-zone-d")?.photos[0]).toMatchObject({ credit: "Lam Tr Th", license: "CC BY-SA 3.0", archival: true });
     expect(places.find((place) => place.id === "war-zone-d")?.photos[1]).toMatchObject({ credit: "Phương Huy", license: "CC BY-SA 4.0", archival: true });
     expect(places.find((place) => place.id === "war-zone-d")?.photos[1].sourceUrl).toContain("rừng_Mã_Đà");
@@ -47,9 +70,11 @@ describe("destination evidence coverage", () => {
     });
     for (const place of withPhotos) {
       for (const photo of place.photos) {
-        expect(photo.url).toMatch(/^https:\/\//);
-        expect(photo.sourceUrl).toMatch(/^https:\/\//);
-        expect(photo.licenseUrl).toMatch(/^https:\/\//);
+        expect(photo.url).toMatch(photo.permissionBasis === "direct_permission" ? /^\/images\/places\// : /^https:\/\//);
+        if (photo.permissionBasis !== "direct_permission") {
+          expect(photo.sourceUrl).toMatch(/^https:\/\//);
+          expect(photo.licenseUrl).toMatch(/^https:\/\//);
+        }
         expect(photo.credit.length).toBeGreaterThan(1);
       }
     }
@@ -62,6 +87,18 @@ describe("destination evidence coverage", () => {
     expect(places.find((place) => place.id === "amazing-bay")).toMatchObject({ latitude: 10.87485, longitude: 106.87036, coordinatePrecision: "venue_feature" });
     expect(places.find((place) => place.id === "chua-chan")).toMatchObject({ latitude: 10.94111, longitude: 107.37937, coordinatePrecision: "venue_feature" });
     expect(places.filter((place) => place.coordinatePrecision === "entrance_verified")).toHaveLength(0);
+    const buuLong = places.find((place) => place.id === "buu-long");
+    const buuLongOsmHours = buuLong?.evidence.find((source) => source.url === "https://www.openstreetmap.org/way/972604563");
+    expect(buuLong?.coordinatePrecision).toBe("venue_feature");
+    expect(buuLongOsmHours?.label).toContain("chưa được nhà vận hành xác nhận");
+    expect(buuLongOsmHours?.label).toMatch(/không dùng tag này để xác nhận giờ hiện hành hoặc tọa độ cổng/i);
+    const maDa = places.find((place) => place.id === "ma-da-reserve");
+    const maDaGateCandidate = maDa?.evidence.find((source) => source.url === "https://www.openstreetmap.org/node/9784252674");
+    expect(maDa?.coordinatePrecision).toBe("venue_feature");
+    expect(maDaGateCandidate?.label).toContain("11.1115345, 107.0519628");
+    expect(maDaGateCandidate?.label).toContain("không phải cổng đón khách đã xác minh");
+    const amazingBayEntranceNote = places.find((place) => place.id === "amazing-bay")?.evidence.find((source) => source.url === "https://www.theamazingbay.com/gioi-thieu/vi-tri");
+    expect(amazingBayEntranceNote?.label).toContain("không công bố tọa độ cổng");
   });
 });
 
@@ -105,8 +142,10 @@ describe("public source fallbacks", () => {
     const catTien = await getPlacePriceReferences("cat-tien");
     const buuLong = await getPlacePriceReferences("buu-long");
     const suoiMo = await getPlacePriceReferences("suoimo");
-    expect(catTien).toHaveLength(4);
-    expect(catTien.every((price) => price.status === "verified" && price.amount_vnd !== null)).toBe(true);
+    expect(catTien).toHaveLength(11);
+    expect(catTien.filter((price) => price.status === "verified" && price.amount_vnd !== null)).toHaveLength(10);
+    expect(catTien.find((price) => price.id === "cat-tien-bau-sau-guide")).toMatchObject({ status: "unknown", amount_vnd: null });
+    expect(catTien.every((price) => price.source_url === "https://cattiennationalpark.com.vn/wp-content/uploads/2024/06/bang-gia-khach-noi-dia-2025.pdf")).toBe(true);
     expect(buuLong).toHaveLength(11);
     expect(buuLong.every((price) => price.status === "historical")).toBe(true);
     const aprilEventPrices = buuLong.filter((price) => price.checked_at === "2026-04-26");
@@ -116,10 +155,13 @@ describe("public source fallbacks", () => {
     expect(summerReportPrices).toHaveLength(5);
     expect(summerReportPrices.every((price) => price.status === "historical" && price.source_url?.includes("baodongnai.com.vn/giai-tri/202608/"))).toBe(true);
     expect(summerReportPrices.find((price) => price.id === "buu-long-summer-child-game-promo-2026")).toMatchObject({ amount_vnd: 30_000, valid_to: "2026-08-31" });
-    expect(suoiMo).toHaveLength(5);
-    expect(suoiMo.every((price) => price.status === "verified" && price.checked_at === "2026-10-15")).toBe(true);
-    expect(suoiMo.map((price) => price.amount_vnd)).toEqual([130_000, 150_000, 60_000, 70_000, 0]);
-    expect(suoiMo.every((price) => price.source_url?.includes("suoimopark.com/uploads/BANG%20GIA/"))).toBe(true);
+    const suoiMoCurrent = suoiMo.filter((price) => price.source_url === "https://suoimopark.com/uploads/BANG%20GIA/2026.pdf");
+    const suoiMoHistorical = suoiMo.filter((price) => price.source_url?.endsWith("Bang%20Gia%20Suoi%20Mo%202025.pdf"));
+    expect(suoiMoCurrent).toHaveLength(5);
+    expect(suoiMoCurrent.every((price) => price.status === "verified" && price.checked_at === "2026-10-15")).toBe(true);
+    expect(suoiMoCurrent.map((price) => price.amount_vnd)).toEqual([130_000, 150_000, 60_000, 70_000, 0]);
+    expect(suoiMoHistorical).toHaveLength(5);
+    expect(suoiMoHistorical.every((price) => price.status === "historical" && price.valid_to === "2025-12-31")).toBe(true);
   });
 
   it("shows operator-published night-ticket prices for Son Tien Amazing World with eligibility caveat", async () => {
@@ -144,10 +186,14 @@ describe("public source fallbacks", () => {
       [279_000, "conflicting"],
     ]);
     expect(childPrices.map((price) => price.source_url)).toEqual([
-      "https://www.sontien.com/blogs/faq",
+      "https://www.sontien.com/products/ve-cong-vien-nuoc-vinh-ky-dieu-the-amazing-bay",
       "https://amazingbay.vn/huong-dan-dat-ve-online-tai-the-amazing-bay-vinh-ky-dieu/",
     ]);
-    expect(prices.find((price) => price.id === "amazing-bay-adult-price-2026-10")?.status).toBe("verified");
+    expect(prices.find((price) => price.id === "amazing-bay-adult-price-2026-10")).toMatchObject({
+      amount_vnd: 490_000,
+      status: "verified",
+      source_url: "https://www.sontien.com/products/ve-cong-vien-nuoc-vinh-ky-dieu-the-amazing-bay",
+    });
   });
 
   it("shows Buu Long's reported hours as unverified and retains the venue source", async () => {
@@ -185,13 +231,20 @@ describe("public source fallbacks", () => {
     expect(hours[0].note_en).toContain("18 Dec 2023");
   });
 
-  it("shows Suoi Mo's directory hours as reported and unverified", async () => {
+  it("shows Suoi Mo's operator-reported activity hours without claiming gate hours", async () => {
     createSupabaseServerClient.mockResolvedValue(null);
     const { getPlaceHours } = await import("@/lib/catalog-server");
     const hours = await getPlaceHours("suoimo");
-    expect(hours).toHaveLength(7);
-    expect(hours.every((entry) => entry.status === "unknown" && entry.opens_local === "07:30:00" && entry.closes_local === "17:00:00")).toBe(true);
-    expect(hours.every((entry) => entry.source_url === "https://www.viet-biz.com/c%C3%B4ng-vi%C3%AAn-su%E1%BB%91i-m%C6%A1_5d-0251-6270-777")).toBe(true);
-    expect(hours.every((entry) => entry.note_en.includes("not an operator confirmation"))).toBe(true);
+    expect(hours).toHaveLength(1);
+    expect(hours[0]).toMatchObject({
+      weekday: -1,
+      opens_local: "08:00:00",
+      closes_local: "17:00:00",
+      status: "unknown",
+      source_url: "https://suoimopark.com/vn/visit-picnic",
+      checked_at: "2026-10-15",
+    });
+    expect(hours[0].note).toContain("không xác nhận giờ mở cổng/toàn khu");
+    expect(hours[0].note_en).toContain("does not confirm whole-park/gate hours");
   });
 });

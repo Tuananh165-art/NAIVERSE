@@ -34,7 +34,8 @@ function chooseStops(intent: TripIntent, prompt: string, seed: string, places: P
     const regionMatch = regions.length > 0 && regions.some((region) => haystack.includes(region) || region.includes(haystack));
     const categoryMatch = categories.has(place.category);
     const verified = place.status === "reference" ? 1 : 0;
-    const travelEase = place.latitude !== null && place.longitude !== null ? 2 : 0;
+    const hasVerifiedEntrance = place.latitude !== null && place.longitude !== null && place.coordinatePrecision === "entrance_verified";
+    const travelEase = hasVerifiedEntrance ? 2 : 0;
     const varietyNoise = seed === "varied" ? ((place.id.charCodeAt(0) + place.id.length * 7) % 9) / 10 : 0;
     const score = seed === "easy"
       ? (categoryMatch ? 3 : 0) + (regionMatch ? 2 : 0) + travelEase + verified
@@ -63,11 +64,12 @@ export async function buildPlans(intent: TripIntent, prompt: string, places: Pla
   const variants = ["easy", "short-drive", "varied"] as const;
   return Promise.all(variants.map(async (variant) => {
     const stops = chooseStops(intent, prompt, variant, places);
-    const route = ["car", "private_vehicle"].includes(intent.transport) ? await getDrivingRoute(stops) : null;
+    const hasVerifiedEntrances = stops.every((place) => place.latitude !== null && place.longitude !== null && place.coordinatePrecision === "entrance_verified");
+    const route = ["car", "private_vehicle"].includes(intent.transport) && hasVerifiedEntrances ? await getDrivingRoute(stops) : null;
     const cost = priceBreakdown(stops);
     const warnings: string[] = [];
 
-    if (stops.some((place) => place.latitude === null || place.longitude === null)) warnings.push("Thiếu tọa độ cổng vào; không thể xác nhận khoảng cách tuyến.");
+    if (stops.some((place) => place.latitude === null || place.longitude === null || place.coordinatePrecision !== "entrance_verified")) warnings.push("Thiếu tọa độ cổng vào đã xác minh; không tạo tuyến lái xe tin cậy.");
     const unavailableRequired = intent.requiredPlaceIds.filter((id) => !stops.some((place) => place.id === id));
     if (unavailableRequired.length) warnings.push(`Không thể đáp ứng địa điểm bắt buộc: ${unavailableRequired.join(", ")}. Hãy chọn một yêu cầu khác hoặc xác minh tình trạng địa điểm.`);
     if (stops.some((place) => place.status !== "reference")) warnings.push("Có điểm chưa xác minh tình trạng tiếp khách hoặc giờ mở cửa.");

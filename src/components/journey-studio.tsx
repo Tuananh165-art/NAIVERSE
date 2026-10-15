@@ -8,6 +8,7 @@ import type { Place } from "@/lib/catalog";
 import type { PlanOption } from "@/lib/planner";
 import type { TripIntent } from "@/lib/schemas";
 import { ExploreMapLoader } from "@/components/explore-map-loader";
+import { PackingAssistant } from "@/components/packing-assistant";
 
 type Result = { intent: TripIntent; options: PlanOption[]; warnings: string[]; demo: boolean };
 const descriptions = { easy: { vi: "Ưu tiên trải nghiệm bạn yêu thích.", en: "Prioritizes the experiences you asked for." }, "short-drive": { vi: "Ưu tiên ở cùng một cụm địa lý.", en: "Prioritizes destinations in one region." }, varied: { vi: "Kết hợp nhiều kiểu trải nghiệm.", en: "Balances different types of experiences." } };
@@ -117,7 +118,7 @@ export function JourneyStudio({ initialPrompt, places, signedIn }: { initialProm
             <label><span>{english ? "Travelers" : "Số khách"}</span><input className="field" type="number" min="1" max="40" value={partySize} onChange={(event) => setPartySize(event.target.value)} placeholder="1–40" disabled={!signedIn || loading}/></label>
             <label><span>{english ? "Budget (VND)" : "Ngân sách (VND)"}</span><input className="field" type="number" min="0" max="500000000" step="1000" value={budget} onChange={(event) => setBudget(event.target.value)} placeholder={english ? "Unknown" : "Chưa xác định"} disabled={!signedIn || loading}/></label>
             <label><span>{english ? "Start date" : "Ngày khởi hành"}</span><input className="field" type="date" value={travelDate} onChange={(event) => setTravelDate(event.target.value)} disabled={!signedIn || loading}/></label>
-            <label><span>{english ? "Transport" : "Phương tiện"}</span><select className="field" value={transport} onChange={(event) => setTransport(event.target.value)} disabled={!signedIn || loading}><option value="unknown">{english ? "Not sure" : "Chưa rõ"}</option><option value="car">{english ? "Car" : "Ô tô"}</option><option value="private_vehicle">{english ? "Private vehicle" : "Xe riêng"}</option><option value="motorbike">{english ? "Motorbike" : "Xe máy"}</option><option value="bus">{english ? "Bus" : "Xe buýt/xe khách"}</option><option value="walking">{english ? "Walking" : "Đi bộ"}</option></select></label>
+            <label><span>{english ? "Transport" : "Phương tiện"}</span><select className="field" value={transport} onChange={(event) => setTransport(event.target.value)} disabled={!signedIn || loading}><option value="unknown">{english ? "Not sure" : "Chưa rõ"}</option><option value="car">{english ? "Car" : "Ô tô"}</option><option value="private_vehicle">{english ? "Private vehicle" : "Xe riêng"}</option><option value="motorbike">{english ? "Motorbike" : "Xe máy"}</option><option value="bus">{english ? "Bus" : "Xe buýt/xe khách"}</option><option value="bicycle">{english ? "Bicycle" : "Xe đạp"}</option><option value="walking">{english ? "Walking" : "Đi bộ"}</option></select></label>
           </div>
           <p className="form-hint">{english ? "Do not include names, phone numbers, email addresses or precise live location. The request is sent to the configured AI provider and is not saved until you choose Save." : "Không nhập tên, số điện thoại, email hoặc vị trí chính xác. Yêu cầu được gửi tới nhà cung cấp AI và chưa lưu cho đến khi bạn chọn Lưu."}</p>
           <label style={{ display: "flex", alignItems: "flex-start", gap: 9, marginTop: 17, color: "#61746b", fontSize: ".78rem", lineHeight: 1.6 }}>
@@ -172,7 +173,8 @@ export function JourneyStudio({ initialPrompt, places, signedIn }: { initialProm
               </div>
             </section>
           </div>
-          <section className="panel" style={{ marginTop: 17 }}><h3 className="panel-title">{english ? "Map preview" : "Bản đồ hành trình"}</h3><p className="panel-copy">{english ? "Only verified destination pins and actual driving routes are drawn." : "Chỉ hiện pin địa điểm đã đối chiếu và tuyến lái xe thật."}</p><div style={{ marginTop: 14 }}><ExploreMapLoader places={selectedOption.stops} route={selectedOption.route} /></div></section>
+          <section className="panel" style={{ marginTop: 17 }}><h3 className="panel-title">{english ? "Map preview" : "Bản đồ hành trình"}</h3><p className="panel-copy">{english ? "Mapped place features are not verified entrances. A driving route appears only when every entrance is verified." : "Đối tượng địa điểm trên bản đồ chưa phải cổng vào đã xác minh. Chỉ hiện tuyến lái xe khi mọi cổng vào đều được đối chiếu."}</p><div style={{ marginTop: 14 }}><ExploreMapLoader places={selectedOption.stops} route={selectedOption.route} /></div></section>
+          <PackingAssistant signedIn={signedIn} intent={result.intent} placeIds={normalizedStops.map((place) => place.id)} />
         </>}
       </section>}
     </div>

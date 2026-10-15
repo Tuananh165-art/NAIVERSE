@@ -1,9 +1,9 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { useLocale } from "next-intl";
-import { ArrowRight, Copy, Pencil, Printer, Trash2 } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUp, Copy, Pencil, Printer, Trash2 } from "lucide-react";
 import { Link } from "@/i18n/routing";
-type Trip = { id: string; title: string; locale: string; trip_intent: { durationDays?: number; partySize?: number }; plan_data: { selectedOption?: string; options?: Array<{ id: string; stops: Array<{ name: string; nameEn: string }> }> }; updated_at: string; shares?: Array<{ id: string; expires_at: string }> };
+type Trip = { id: string; title: string; locale: string; trip_intent: { durationDays?: number; partySize?: number }; plan_data: { selectedOption?: string; options?: Array<{ id: string; stops: Array<{ id: string; name: string; nameEn: string }>; orderManuallyChanged?: boolean }> }; updated_at: string; shares?: Array<{ id: string; expires_at: string }> };
 type Inquiry = { id: string; trip_id: string | null; status: string; is_demo: boolean; created_at: string; quotes?: Array<{ id: string; status: string; items: Array<{ label: string; quantity: number; unitPriceVnd: number | null }>; terms: string }> };
 export function TripsDashboard() {
   const locale = useLocale(); const en = locale === "en";
@@ -43,6 +43,27 @@ export function TripsDashboard() {
     setBusy(trip.id); const response = await fetch("/api/trips/" + trip.id, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ title }) }); setBusy("");
     if (!response.ok) setError(en ? "Trip could not be renamed." : "Không đổi được tên hành trình."); else await refresh();
   }
+  async function moveStop(trip: Trip, index: number, direction: -1 | 1) {
+    const option = trip.plan_data.options?.find((item) => item.id === trip.plan_data.selectedOption) ?? trip.plan_data.options?.[0];
+    if (!option || index + direction < 0 || index + direction >= option.stops.length) return;
+    const nextStops = [...option.stops];
+    [nextStops[index], nextStops[index + direction]] = [nextStops[index + direction], nextStops[index]];
+    setBusy(trip.id);
+    try {
+      const response = await fetch("/api/trips/" + trip.id, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ stopOrder: nextStops.map((stop) => stop.id) }),
+      });
+      const body = await response.json().catch(() => ({}));
+      if (!response.ok) setError(body.error?.message ?? (en ? "Stop order could not be saved." : "Không lưu được thứ tự điểm dừng."));
+      else await refresh();
+    } catch {
+      setError(en ? "Stop order could not be saved. Check your connection and retry." : "Không lưu được thứ tự điểm dừng. Hãy kiểm tra kết nối rồi thử lại.");
+    } finally {
+      setBusy("");
+    }
+  }
   async function clone(trip: Trip) {
     const option = trip.plan_data.options?.find((item) => item.id === trip.plan_data.selectedOption) ?? trip.plan_data.options?.[0];
     if (!option || !trip.plan_data.options) return;
@@ -55,7 +76,10 @@ export function TripsDashboard() {
     <div className="result-heading" style={{ marginTop: 28 }}><h2 className="section-title" style={{ fontSize: "1.5rem" }}>{en ? "Saved trips" : "Chuyến đi đã lưu"}</h2><Link className="button button-primary" href="/journey">{en ? "Plan a trip" : "Lập hành trình"}<ArrowRight size={15}/></Link></div>
     {!trips.length ? <div className="empty-state">{en ? "No saved trips yet." : "Bạn chưa lưu chuyến đi nào."}</div> : <div className="place-grid">{trips.map((trip) => {
       const option = trip.plan_data.options?.find((item) => item.id === trip.plan_data.selectedOption) ?? trip.plan_data.options?.[0];
-      return <article className="place-card" key={trip.id}><div className="place-card-content"><span className="status-label">{trip.trip_intent.durationDays ?? 1} {en ? "days" : "ngày"} · {trip.trip_intent.partySize ?? 1} {en ? "travelers" : "khách"}</span><h3>{trip.title}</h3><p>{option?.stops.map((stop) => en ? stop.nameEn : stop.name).join(" · ") ?? (en ? "Saved trip details" : "Chi tiết hành trình đã lưu")}</p><small className="form-hint">{new Date(trip.updated_at).toLocaleString(en ? "en-US" : "vi-VN")}</small><div className="action-row"><button className="button button-secondary" disabled={busy === trip.id} onClick={() => void share(trip.id)}><Copy size={15}/>{en ? "Share" : "Chia sẻ"}</button><button className="button button-quiet" disabled={busy === trip.id} onClick={() => void rename(trip)} aria-label={en ? "Rename trip" : "Đổi tên hành trình"}><Pencil size={15}/></button><button className="button button-quiet" disabled={busy === trip.id} onClick={() => void clone(trip)}>{en ? "Copy" : "Sao chép"}</button><button className="button button-quiet" onClick={() => window.print()} aria-label={en ? "Print trip list" : "In danh sách chuyến đi"}><Printer size={15}/></button><Link className="button button-quiet" href={"/inquiry?trip=" + trip.id}>{en ? "Ask for advice" : "Gửi yêu cầu"}</Link><button className="button button-quiet" disabled={busy === trip.id} onClick={() => void remove(trip.id)} aria-label={en ? "Delete trip" : "Xóa chuyến đi"}><Trash2 size={16}/></button></div>{(trip.shares ?? []).map((shareItem) => <div className="form-hint" key={shareItem.id}>{en ? "Link expires" : "Liên kết hết hạn"} {new Date(shareItem.expires_at).toLocaleString(en ? "en-US" : "vi-VN")} <button className="text-link" onClick={() => void revoke(trip.id, shareItem.id)}>{en ? "Revoke" : "Thu hồi"}</button></div>)}</div></article>;
+      return <article className="place-card" key={trip.id}><div className="place-card-content"><span className="status-label">{trip.trip_intent.durationDays ?? 1} {en ? "days" : "ngày"} · {trip.trip_intent.partySize ?? 1} {en ? "travelers" : "khách"}</span><h3>{trip.title}</h3>
+        {option?.stops.length ? <ol className="saved-stop-list" aria-label={en ? "Saved itinerary stops" : "Các điểm dừng đã lưu"}>{option.stops.map((stop, index) => <li key={stop.id}><span>{index + 1}. {en ? stop.nameEn : stop.name}</span><span className="saved-stop-actions"><button className="button button-quiet" disabled={busy === trip.id || index === 0} aria-label={en ? `Move ${stop.nameEn} up` : `Đưa ${stop.name} lên`} onClick={() => void moveStop(trip, index, -1)}><ArrowUp size={15}/></button><button className="button button-quiet" disabled={busy === trip.id || index === option.stops.length - 1} aria-label={en ? `Move ${stop.nameEn} down` : `Đưa ${stop.name} xuống`} onClick={() => void moveStop(trip, index, 1)}><ArrowDown size={15}/></button></span></li>)}</ol> : <p>{en ? "Saved trip details" : "Chi tiết hành trình đã lưu"}</p>}
+        {option?.orderManuallyChanged && <p className="form-hint" role="status">{en ? "You changed the stop order. Road route and travel time have not been recalculated." : "Bạn đã đổi thứ tự điểm dừng. Tuyến đường và thời gian chưa được tính lại."}</p>}
+        <small className="form-hint">{new Date(trip.updated_at).toLocaleString(en ? "en-US" : "vi-VN")}</small><div className="action-row"><button className="button button-secondary" disabled={busy === trip.id} onClick={() => void share(trip.id)}><Copy size={15}/>{en ? "Share" : "Chia sẻ"}</button><button className="button button-quiet" disabled={busy === trip.id} onClick={() => void rename(trip)} aria-label={en ? "Rename trip" : "Đổi tên hành trình"}><Pencil size={15}/></button><button className="button button-quiet" disabled={busy === trip.id} onClick={() => void clone(trip)}>{en ? "Copy" : "Sao chép"}</button><button className="button button-quiet" onClick={() => window.print()} aria-label={en ? "Print trip list" : "In danh sách chuyến đi"}><Printer size={15}/></button><Link className="button button-quiet" href={"/inquiry?trip=" + trip.id}>{en ? "Ask for advice" : "Gửi yêu cầu"}</Link><button className="button button-quiet" disabled={busy === trip.id} onClick={() => void remove(trip.id)} aria-label={en ? "Delete trip" : "Xóa chuyến đi"}><Trash2 size={16}/></button></div>{(trip.shares ?? []).map((shareItem) => <div className="form-hint" key={shareItem.id}>{en ? "Link expires" : "Liên kết hết hạn"} {new Date(shareItem.expires_at).toLocaleString(en ? "en-US" : "vi-VN")} <button className="text-link" onClick={() => void revoke(trip.id, shareItem.id)}>{en ? "Revoke" : "Thu hồi"}</button></div>)}</div></article>;
     })}</div>}
     <section className="section-sm"><h2 className="section-title" style={{ fontSize: "1.5rem" }}>{en ? "Consultation updates" : "Cập nhật tư vấn"}</h2>{!inquiries.length ? <div className="empty-state">{en ? "No requests have been sent." : "Chưa gửi yêu cầu tư vấn."}</div> : <div className="panel">{inquiries.map((item) => <div className="itinerary-stop" key={item.id}><span className="itinerary-marker"/><span style={{ flex: 1 }}><strong>{status(item.status)} {item.is_demo && <span className="demo-ribbon">DEMO</span>}</strong><p>{new Date(item.created_at).toLocaleString(en ? "en-US" : "vi-VN")}</p>{(item.quotes ?? []).filter((quote) => quote.status === "shared").map((quote) => <div className="alert" key={quote.id} style={{ marginTop: 7 }}>{quote.items.map((line) => line.label + ": " + (line.unitPriceVnd === null ? (en ? "price to confirm" : "giá cần xác nhận") : line.unitPriceVnd.toLocaleString(en ? "en-US" : "vi-VN") + " ₫")).join(" · ")}<br/>{quote.terms}</div>)}</span>{item.trip_id && <Link className="button button-quiet" href={"/inquiry?trip=" + item.trip_id}>{en ? "Open trip" : "Mở chuyến"}</Link>}</div>)}</div>}</section>
   </div>;

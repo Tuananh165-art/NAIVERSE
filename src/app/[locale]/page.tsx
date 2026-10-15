@@ -1,6 +1,6 @@
 import { Link } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
-import { ArrowRight, BadgeCheck, CircleDollarSign, CloudSun, Compass, Heart, Leaf, Route, ShieldCheck, Sparkles, Trees, Utensils } from "lucide-react";
+import { ArrowRight, BadgeCheck, BookOpenCheck, CircleDollarSign, CloudSun, Compass, Heart, Leaf, Route, ShieldCheck, Sparkles, Trees, Utensils } from "lucide-react";
 import { HomeSearch } from "@/components/home-search";
 import { getPlaceCatalog } from "@/lib/catalog-server";
 import { PlaceCard } from "@/components/place-card";
@@ -30,6 +30,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
             <Link href="/journey" className="button button-secondary"><Sparkles size={16} />{english ? "AI trip planner" : "AI lập kế hoạch chuyến đi"}</Link>
             <Link href="/ai/conditions" className="button button-secondary"><CloudSun size={16} />{english ? "Weather, safety & green travel" : "AI thời tiết, an toàn & du lịch xanh"}</Link>
             <Link href="/ai/routes" className="button button-secondary"><Route size={16} />{english ? "AI traffic & routes" : "AI giao thông & hành trình"}</Link>
+            <Link href="/ai/guide" className="button button-secondary"><BookOpenCheck size={16} />{english ? "Source-grounded AI guide" : "AI tra cứu có nguồn"}</Link>
           </div>
           <div className="trust-row">
             <span><ShieldCheck size={15} />{english ? "Clear information status" : "Rõ trạng thái thông tin"}</span>
@@ -41,10 +42,12 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       </section>
 
       <section className="section-sm container" aria-labelledby="ai-assistants-title">
-        <div className="section-heading"><p className="eyebrow"><Sparkles size={15} />{english ? "AI TRAVEL TOOLS" : "CÔNG CỤ AI DU LỊCH"}</p><h2 id="ai-assistants-title" className="section-title">{english ? "More than itinerary planning" : "Không chỉ lập kế hoạch du lịch"}</h2><p className="section-description">{english ? "Explore weather, safety and lower-impact travel advice, or compare road routes on the map." : "Xem dự báo thời tiết, gợi ý an toàn và du lịch xanh, hoặc so sánh tuyến đường ngay trên bản đồ."}</p></div>
+        <div className="section-heading"><p className="eyebrow"><Sparkles size={15} />{english ? "AI TRAVEL TOOLS" : "CÔNG CỤ AI DU LỊCH"}</p><h2 id="ai-assistants-title" className="section-title">{english ? "More than itinerary planning" : "Không chỉ lập kế hoạch du lịch"}</h2><p className="section-description">{english ? "Explore sourced destination information, review pasted quote terms, check weather and safety, or compare road routes." : "Tra cứu địa điểm có nguồn, rà soát điều kiện báo giá bạn dán, xem thời tiết và an toàn hoặc so sánh tuyến đường."}</p></div>
         <div className="ai-tools-grid">
+          <Link href="/ai/guide" className="ai-tool-card"><span className="ai-tool-icon"><BookOpenCheck size={22} /></span><span className="ai-tool-copy"><strong>{english ? "Source-grounded AI guide" : "AI tra cứu địa điểm có nguồn"}</strong><p>{english ? "Ask about a public destination, prices or reported hours; every answer cites retrieved records." : "Hỏi về địa điểm, giá hoặc giờ được nguồn nêu; câu trả lời dẫn bản ghi đã truy xuất."}</p><small>{english ? "Sign in · no free-text prompt is sent" : "Cần đăng nhập · không gửi prompt tự do"}</small></span><ArrowRight size={18} aria-hidden="true" /></Link>
           <Link href="/ai/conditions" className="ai-tool-card"><span className="ai-tool-icon"><CloudSun size={22} /></span><span className="ai-tool-copy"><strong>{english ? "Weather, safety & green travel" : "AI thời tiết, an toàn & du lịch xanh"}</strong><p>{english ? "Regional forecast, practical preparation, incident guidance and direct emergency contacts." : "Dự báo theo vùng, gợi ý chuẩn bị, hướng dẫn sự cố và số liên hệ khẩn cấp trực tiếp."}</p><small>{english ? "Sign in for model advice · emergency contacts are available without AI" : "Đăng nhập để hỏi AI · số khẩn cấp luôn xem được, không cần chatbot"}</small></span><ArrowRight size={18} aria-hidden="true" /></Link>
           <Link href="/ai/routes" className="ai-tool-card"><span className="ai-tool-icon"><Route size={22} /></span><span className="ai-tool-copy"><strong>{english ? "AI traffic & route planning" : "AI giao thông & hành trình di chuyển"}</strong><p>{english ? "Pick stops on the map, compare fastest and shortest road estimates, and review limitations." : "Chọn điểm trên bản đồ, so sánh tuyến nhanh/ngắn và xem rõ giới hạn dữ liệu."}</p><small>{english ? "Sign in and configure OpenRouteService for live route requests" : "Cần đăng nhập và cấu hình OpenRouteService để tính tuyến thật"}</small></span><ArrowRight size={18} aria-hidden="true" /></Link>
+          <Link href="/ai/fair-price" className="ai-tool-card"><span className="ai-tool-icon"><CircleDollarSign size={22} /></span><span className="ai-tool-copy"><strong>{english ? "Review a travel quote" : "AI rà soát báo giá du lịch"}</strong><p>{english ? "Extract quote details, flag missing terms and show sourced catalog references for you to verify." : "Trích nội dung báo giá, nêu điều kiện còn thiếu và đưa giá catalog có nguồn để bạn tự kiểm tra."}</p><small>{english ? "Sign in · paste text only · consent required · no price verdict" : "Cần đăng nhập · chỉ dán văn bản · cần đồng ý · không kết luận giá tốt/xấu"}</small></span><ArrowRight size={18} aria-hidden="true" /></Link>
         </div>
       </section>
 

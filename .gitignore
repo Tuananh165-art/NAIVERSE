@@ -28,3 +28,6 @@ npm-debug.log*
 # Local Supabase state
 supabase/.branches/
 supabase/.temp/
+
+# User-provided originals; deployable copies are under public/images/places
+/images/NaiVerse/

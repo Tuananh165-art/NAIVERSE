@@ -1,0 +1,146 @@
+# Kịch bản demo và kiểm thử NaiVerse
+
+Tài liệu này giúp chạy demo từ tài khoản mới tới hành trình và luồng doanh nghiệp. Giao diện có Việt/Anh; dùng /vi/... hoặc /en/.... Mọi dữ liệu đối tác mẫu phải giữ nhãn **DEMO**. Demo không đặt chỗ, không thu tiền và không xác nhận dịch vụ.
+
+## 1. Trạng thái trước khi demo
+
+1. Cài Node.js 24.x và chạy ở PowerShell:
+
+       npm.cmd ci
+       npm.cmd run dev
+
+2. Điền dịch vụ trong .env theo THIET_LAP_DICH_VU.md. DeepSeek, Supabase Auth và Upstash cần hoạt động cho AI thật. OpenRouteService cần key để lấy tuyến lái xe. Open-Meteo không cần key.
+3. Với Supabase hoàn toàn mới, chạy một lần file NAIVERSE_SETUP_ALL.sql trong SQL Editor. File gồm 34 migration theo thứ tự và seed 36 hồ sơ địa điểm. Không chạy từng migration sau khi đã chạy bundle. Nếu lần trước đã báo lỗi, làm truy vấn preflight ở đầu HUONG_DAN.md trước khi quyết định chạy lại.
+4. Đặt Supabase Site URL là http://localhost:3000; thêm redirect URL local. Đăng ký một khách qua /vi/auth, xác nhận email nếu Supabase yêu cầu.
+5. Chạy npm.cmd run services:probe. Mong đợi Auth settings 200, public.places 200 và Upstash PONG. Lỗi 404/PGRST205 trên places nghĩa là schema chưa sẵn sàng; AI thật fail-closed khi thiếu session/limiter.
+6. Mở http://localhost:3000/vi; thử đổi sang English bằng nút ngôn ngữ. Trang chỉ dùng GPS sau khi khách chủ động bấm nút định vị.
+
+## 2. Luồng demo khách
+
+### Khám phá địa điểm và minh bạch ảnh
+
+1. Vào /vi/places, tìm Amazing Bay, lọc theo loại hình và mở thẻ địa điểm.
+2. Trang chi tiết hiển thị giá/giờ theo nguồn và trạng thái. Xung đột giá trẻ em Amazing Bay không được cộng vào giá hiện hành. Giá Bửu Long lịch sử không được trình bày như giá hôm nay.
+3. Ảnh Amazing Bay và 12 điểm khác có ghi người dùng NaiVerse cấp quyền trực tiếp. Tác giả và URL license chưa được cung cấp nên không hiển thị credit/license giả.
+4. Tìm “nghề và ẩm thực cộng đồng”: nhóm này chủ động không dùng ảnh địa điểm và hiển thị minh họa có nhãn theo yêu cầu người dùng. Ảnh trảng cỏ Bù Lạch được gắn đúng vào hồ sơ `bu-lach-grassland`.
+5. Mở bản đồ, từ chối quyền GPS hoặc đóng lời nhắc: danh sách và bản đồ vẫn sử dụng được. Các điểm OSM hiện có là feature point, không phải cổng vào đã khảo sát.
+
+### AI Guide có nguồn, không gửi câu hỏi tự do
+
+1. Đăng nhập rồi mở `/vi/ai/guide`; nếu chưa áp dụng schema Supabase, hãy cài project mới bằng `NAIVERSE_SETUP_ALL.sql` trước.
+2. Chọn địa điểm và một loại câu hỏi cố định như tổng quan, giá/điều kiện, giờ nguồn nêu, gia đình/tiếp cận hoặc tình trạng nguồn.
+3. Đọc nội dung đồng ý: chỉ ID địa điểm công khai, loại câu hỏi, ngôn ngữ và hồ sơ catalog liên quan được gửi tới DeepSeek; màn hình không có ô nhập tự do, không gửi GPS hay thông tin liên hệ.
+4. Tích consent rồi hỏi. Câu trả lời hiển thị nguồn, trạng thái và ngày đối chiếu; giá/giờ cũ, mâu thuẫn hoặc chưa xác minh phải giữ nguyên nhãn. Trích dẫn model không khớp tập nguồn đã truy xuất sẽ bị từ chối.
+5. Mở `/en/ai/guide` và lặp lại để kiểm tra tiếng Anh. Thu hồi consent thì nút gửi bị khóa.
+
+### FairPrice Lens — trích báo giá, không chấm “đắt/rẻ”
+
+1. Đăng nhập rồi mở `/vi/ai/fair-price`. Chọn một địa điểm cụ thể trong catalog; nhóm trải nghiệm không được gửi làm điểm so sánh.
+2. Dán fixture không có dữ liệu cá nhân: `Vé người lớn 350.000 ₫ cho ngày thường. Giá chưa gồm xe đưa đón.` Tích đồng ý xử lý bằng AI rồi gửi.
+3. Kiểm tra model chỉ trích khoản giá/đối tượng/điều kiện có trong câu quote; đoạn trích phải trùng nguyên văn. Field không được bằng chứng hỗ trợ cần để trống và xuất hiện trong mục “Thiếu hoặc chưa rõ”.
+4. Đọc giá catalog riêng biệt với nguồn, ngày đối chiếu và nhãn trạng thái. “Candidate” chỉ là gợi ý; người dùng phải tự kiểm tra đơn vị, đối tượng, ngày và điều kiện. Không có kết luận giá tốt/xấu hay xác nhận booking.
+5. Kiểm tra ô dán tối đa 4.000 ký tự, không có upload, consent chưa chọn thì nút gửi khóa; nội dung quote không được ghi DB/log bởi route này. Dùng quote giả, không nhập tên, số điện thoại, email, mã đặt chỗ hoặc nội dung nhạy cảm.
+6. Lặp lại ở `/en/ai/fair-price`. Nếu chưa đăng nhập, API cần trả 401; nếu thiếu Redis/key hoặc DeepSeek lỗi, UI phải báo lỗi cấu hình/provider thay vì tạo kết quả giả.
+
+### Journey Studio và Trip DNA
+
+1. Đăng nhập tại /vi/auth bằng username hoặc email + password. Đăng ký cần tên, username, email và password để Supabase xác nhận/khôi phục tài khoản.
+2. Mở /vi/journey, nhập: “Gia đình từ TP.HCM, 2 người lớn và bé cao 1,2 m, đi 2 ngày, ngân sách 3 triệu, thích thiên nhiên, ít đi bộ, nếu mưa cần phương án trong nhà”.
+3. Chấp thuận gửi mô tả chuyến đi đã lọc tới DeepSeek. Trước khi gọi model, server che email, số điện thoại, cặp GPS trong văn bản và bỏ các field tọa độ; không ghi prompt vào log. Tên tự nhập trong mô tả vẫn có thể được gửi, nên không nhập tên/số giấy tờ nếu không cần thiết.
+4. Kiểm tra trường Trip DNA đã trích xuất và chỉnh các ràng buộc trước khi tạo hành trình.
+5. Đọc phương án, nguồn điểm dừng, cảnh báo, tuyến nếu định tuyến trả về và mục chi phí đã biết/chưa biết. Thiếu giá xác minh không được coi là miễn phí hoặc khẳng định nằm trong ngân sách.
+6. Tạo lại với điểm bắt buộc đã đóng/chưa xác minh. Mong đợi trạng thái “cần xác nhận” hoặc không khả thi; không âm thầm bỏ ràng buộc.
+7. Lưu chuyến, đổi tên, sao chép, xóa hoặc tạo link chỉ xem 7 ngày. Trong `/vi/trips`, dùng nút mũi tên để đổi thứ tự điểm dừng; chuyến lưu lại thứ tự mới, còn metric/tuyến cũ bị xóa và giao diện báo chưa tính lại. Mở link chia sẻ mới để xác nhận thứ tự; thu hồi link tại `/vi/trips`, thử lại link cũ và xác nhận không còn đọc được.
+8. Ở phương án đã chọn, mở **AI chuẩn bị hành lý**, đọc consent rồi tạo checklist. DeepSeek chỉ nhận thời lượng, số khách, sở thích/loại điểm và nhu cầu đã chọn; không nhận prompt gốc, ngân sách, tọa độ hay liên hệ. Tick một vài món; kiểm tra nhãn “gợi ý chung” và không xem đây là dự báo, quy định địa điểm hay tư vấn y tế.
+9. Đổi `/vi/journey` sang `/en/journey` và chạy lại AI planner để xem checklist tiếng Anh. Mục cần chỉnh tay hoặc không có bằng chứng cụ thể vẫn phải xác nhận với nơi cung cấp dịch vụ.
+
+### Thời tiết, Rain Plan, an toàn và du lịch xanh
+
+1. Mở /vi/ai/conditions, chọn địa bàn và ngày trong phạm vi dự báo. Kết quả phải kèm nguồn Open-Meteo và thời điểm lấy dữ liệu.
+2. Thử ngày ngoài phạm vi dự báo: website nói rõ chưa có dự báo, không tự nội suy.
+3. Dùng tình huống mưa do người dùng nhập để xem phương án thay thế; đây là gợi ý, không phải cảnh báo khí tượng chính thức.
+4. Bấm nút khẩn cấp để hiện số gọi trực tiếp. Luồng khẩn cấp không cần gọi DeepSeek.
+5. Thử sự cố động vật hoang dã hoặc nghi ngờ lừa đảo: AI đưa bước xử lý thận trọng, không chẩn đoán y tế hay xác nhận an toàn.
+6. Kiểm tra gợi ý xanh: “quãng đường ngắn hơn” chỉ là chỉ báo khoảng cách, không phải số phát thải hoặc tuyên bố trung hòa carbon.
+
+### So sánh tuyến AI
+
+1. Mở /vi/ai/routes, đặt ít nhất hai điểm bằng cách chọn trên bản đồ hoặc danh mục; không dùng Nominatim autocomplete.
+2. So sánh nhanh nhất/ngắn nhất. ORS cung cấp metric/tuyến đường, DeepSeek chỉ diễn giải dữ liệu đã nhận.
+3. Nếu ORS bị lỗi hoặc thiếu điểm tọa độ đủ điều kiện, giao diện giữ thứ tự điểm và báo chưa xác minh tuyến; không vẽ đường chim bay thay đường xe.
+4. Ước lượng không gồm tắc đường thực thời, giờ mở cửa hoặc thời lượng hoạt động tại điểm.
+
+## 3. Luồng khách–doanh nghiệp DEMO
+
+1. Khách lưu hành trình rồi chọn gửi yêu cầu tư vấn. Xem lại tổ chức nhận, dữ liệu hành trình được chia sẻ và consent trước khi gửi.
+2. Tạo tài khoản nhân viên riêng. Project owner cấp thành viên tổ chức DEMO bằng SQL đã ghi trong HUONG_DAN.md; không cấp quyền quản trị cho tài khoản khách.
+3. Nhân viên mở /vi/partner, đọc yêu cầu, cập nhật trạng thái và tạo báo giá nháp có cấu phần/điều kiện.
+4. Nhân viên duyệt phản hồi trước khi công bố. Khách đăng nhập lại và mở yêu cầu để xem tiến độ/báo giá.
+5. Xác nhận giao diện ghi DEMO và không đổi trạng thái thành booking hoặc thanh toán đã xác nhận.
+6. Với project có hai tổ chức thật do bạn tự tạo, kiểm thử A/B phải chứng minh nhân viên A không đọc lead/quote của B. Cần chạy trên Supabase thật với hai tài khoản; unit test không phải bằng chứng RLS production.
+
+## 4. Đăng xuất và xác nhận session
+
+1. Khi đăng nhập, nút Đăng xuất hiển thị trên thanh điều hướng.
+2. Bấm nút, mong đợi quay về trang chủ; làm mới trang và xác nhận giao diện hiện “Đăng nhập”.
+3. Đăng nhập lại bằng username/password hoặc email/password. Đăng xuất chỉ xóa session trên trình duyệt này, không đăng xuất các thiết bị khác.
+
+## 5. Kiểm tra lỗi có chủ đích
+
+- Thiếu DeepSeek hoặc key sai: AI báo lỗi cấu hình/provider; không giả lập thành công.
+- Thiếu Upstash: AI thật fail-closed; services:probe không ghi dữ liệu.
+- Ngày thời tiết ngoài cửa sổ dự báo: thông báo thiếu forecast.
+- Tuyến không đủ tọa độ hoặc ORS lỗi: không trả quãng đường giả.
+- Giá/giờ hết hạn hoặc mâu thuẫn: không cộng khoản không xác minh vào tổng.
+- Không đăng nhập: API AI/chuyến riêng yêu cầu đăng nhập; trang khám phá công khai vẫn dùng được.
+- Chia sẻ hết hạn/thu hồi: endpoint không còn công khai snapshot.
+
+Không chạy lỗi provider bằng cách sửa key trong file dùng thật; nếu cần test, dùng .env.test.local riêng hoặc biến tạm của tiến trình. Không ghi key, email cá nhân hoặc GPS vào ảnh/log.
+
+## 6. Kiểm tra tự động và bằng chứng
+
+       npm.cmd run lint
+       npm.cmd run typecheck
+       npm.cmd test -- --maxWorkers=1
+       npm.cmd run test:e2e -- --workers=1
+       npm.cmd run build
+
+Lưu log lệnh, ảnh chụp trang nguồn, kết quả AI kèm model/provider, và ảnh các luồng đăng nhập/khách/nhân viên. Test tự động với mock không chứng minh dịch vụ ngoài đã hoạt động.
+
+Live smoke DeepSeek/ORS tốn request thật. Nếu chủ động chạy, dùng PowerShell:
+
+       $env:RUN_LIVE_AI_SMOKE = 'true'
+       $env:RUN_LIVE_AI_HANDLERS_SMOKE = 'true'
+       $env:RUN_LIVE_ROUTE_SMOKE = 'true'
+       $env:RUN_LIVE_AI_FULL_ROUTE_SMOKE = 'true'
+       $env:RUN_LIVE_AI_PLAN_SMOKE = 'true'
+       $env:RUN_LIVE_AI_GUIDE_SMOKE = 'true'
+       $env:RUN_LIVE_AI_PACKING_SMOKE = 'true'
+       npm.cmd test -- --maxWorkers=1 src/lib/ai-live-smoke.test.ts src/lib/ai-handler-live-smoke.test.ts src/lib/route-assist-live-smoke.test.ts src/lib/plan-live-smoke.test.ts
+       npm.cmd test -- --maxWorkers=1 src/lib/guide-live-smoke.test.ts src/lib/packing-live-smoke.test.ts
+       $env:RUN_LIVE_AI_FAIR_PRICE_SMOKE = 'true'
+       npm.cmd test -- --maxWorkers=1 src/lib/fair-price-live-smoke.test.ts
+       Remove-Item Env:\RUN_LIVE_AI_FAIR_PRICE_SMOKE -ErrorAction SilentlyContinue
+       Remove-Item Env:\RUN_LIVE_AI_SMOKE, Env:\RUN_LIVE_AI_HANDLERS_SMOKE, Env:\RUN_LIVE_ROUTE_SMOKE, Env:\RUN_LIVE_AI_FULL_ROUTE_SMOKE, Env:\RUN_LIVE_AI_PLAN_SMOKE, Env:\RUN_LIVE_AI_GUIDE_SMOKE, Env:\RUN_LIVE_AI_PACKING_SMOKE
+
+Lệnh này gửi request tới model thật; không bật trong CI. Bộ lọc che email/điện thoại/cặp GPS ở server, nhưng hãy dùng dữ liệu giả lập và không nhập bí mật. Handler smoke cô lập session/Redis/ghi DB nên không chứng minh các dịch vụ đó hoạt động xuyên suốt. Kết quả live trước đó không thay thế lần kiểm tra mới sau khi đổi code.
+
+Evaluator Trip DNA giữ riêng 40 ca development và 20 ca holdout (mỗi split cân bằng VI/EN). Mỗi lần chạy tương ứng số request DeepSeek theo split; có thể phát sinh chi phí. Đo development trước khi chỉnh parser:
+
+       $env:RUN_LIVE_AI_TRIP_DNA_EVAL = 'true'
+       $env:RUN_LIVE_AI_TRIP_DNA_SPLIT = 'development'
+       npm.cmd test -- --maxWorkers=1 src/lib/trip-dna-live-eval.test.ts -t 'meets the 90%'
+       Remove-Item Env:\RUN_LIVE_AI_TRIP_DNA_EVAL, Env:\RUN_LIVE_AI_TRIP_DNA_SPLIT -ErrorAction SilentlyContinue
+
+Sau khi khóa thay đổi, chạy holdout riêng bằng cách bỏ biến split (mặc định là holdout):
+
+       $env:RUN_LIVE_AI_TRIP_DNA_EVAL = 'true'
+       Remove-Item Env:\RUN_LIVE_AI_TRIP_DNA_SPLIT -ErrorAction SilentlyContinue
+       npm.cmd test -- --maxWorkers=1 src/lib/trip-dna-live-eval.test.ts -t 'meets the 90%'
+       Remove-Item Env:\RUN_LIVE_AI_TRIP_DNA_EVAL -ErrorAction SilentlyContinue
+
+Lần đo mới nhất ngày 16/10/2026: development 353/358 field (98,6%); holdout 173/180 (96,1%). Đây là số đo trên mẫu nhỏ, không phải KPI tổng quát; mismatch có thể thay đổi giữa các lần gọi dù parser đặt `temperature: 0`. Chỉ chỉnh bằng 40 ca development; giữ 20 ca holdout cho tới khi khóa thay đổi, rồi chạy holdout một lần để xác nhận.
+
+## 7. Ranh giới tính năng hiện tại
+
+Đã có AI trip extraction/suggestions, thời tiết và lời khuyên an toàn/xanh, giải thích metric tuyến, AI Guide tra cứu theo câu hỏi cố định, AI Packing Assistant và FairPrice Lens có giới hạn. Tên/giờ/giá catalog do ứng dụng quản lý; model không xác minh hiện trạng. Guide không có prompt tự do; packing dùng mã có kiểm soát. FairPrice chỉ trích quote có bằng chứng exact substring và đưa candidate giá nguồn; chưa có xác minh end-to-end trên Supabase/Upstash thật. Retrieval Guide hiện là catalog có cấu trúc, chưa cần LangChain/embeddings ở quy mô này. Operator Copilot, thuyết minh/TTS và Stress Test theo timeline/giờ mở cửa vẫn thuộc backlog; không trình diễn chúng như đã hoàn thành. Xem [AI_AUDIT.md](AI_AUDIT.md) và PLAN_TODO.md để theo dõi trạng thái.

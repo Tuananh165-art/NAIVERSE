@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import { places } from "@/lib/catalog";
 import { placeMatches } from "@/lib/catalog";
 import { priceBreakdown } from "@/lib/cost";
-import { tripIntentSchema } from "@/lib/schemas";
+import { packingInputSchema, tripIntentSchema } from "@/lib/schemas";
 
 describe("NaiVerse source and price invariants", () => {
   it("keeps all 36 initial entries and distinguishes mapped venue features from verified entrances", () => {
@@ -39,7 +39,12 @@ describe("NaiVerse source and price invariants", () => {
       lowMobility: false, rainyDay: true, missingInformation: [],
     };
     expect(tripIntentSchema.safeParse(valid).success).toBe(true);
+    expect(tripIntentSchema.safeParse({ ...valid, transport: "bicycle" }).success).toBe(true);
     expect(tripIntentSchema.safeParse({ ...valid, partySize: 41 }).success).toBe(false);
     expect(tripIntentSchema.safeParse({ ...valid, transport: "helicopter" }).success).toBe(false);
+    expect(packingInputSchema.safeParse({
+      locale: "en", consent: true, durationDays: 1, partySize: 3, transport: "bicycle",
+      interests: ["nature"], childHeightCm: null, lowMobility: false, rainyDay: false, placeIds: ["tri-an"],
+    }).success).toBe(true);
   });
 });

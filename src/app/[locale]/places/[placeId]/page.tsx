@@ -4,6 +4,7 @@ import { ArrowLeft, ExternalLink, Flag, MapPin } from "lucide-react";
 import { Link } from "@/i18n/routing";
 import { getPlaceCatalog, getPlaceHours, getPlacePriceReferences } from "@/lib/catalog-server";
 import { PlaceReportForm } from "@/components/place-report-form";
+import { PlaceIllustration } from "@/components/place-illustration";
 
 const weekdays = {
   vi: ["Chủ nhật", "Thứ hai", "Thứ ba", "Thứ tư", "Thứ năm", "Thứ sáu", "Thứ bảy"],
@@ -12,6 +13,12 @@ const weekdays = {
 const weekdayLabel = (weekday: number, locale: "vi" | "en") => weekday === -1
   ? (locale === "en" ? "General hours (day not specified)" : "Giờ chung (nguồn không nêu ngày cụ thể)")
   : weekdays[locale][weekday];
+const priceStatusLabel = (status: string, en: boolean) => ({
+  verified: en ? "Verified" : "Đã xác minh",
+  historical: en ? "Historical" : "Lịch sử",
+  conflicting: en ? "Conflicting sources" : "Nguồn mâu thuẫn",
+  unknown: en ? "Unconfirmed" : "Chưa xác minh",
+}[status] ?? status);
 
 export default async function PlacePage({ params }: { params: Promise<{ locale: string; placeId: string }> }) {
   const { locale, placeId } = await params;
@@ -37,11 +44,15 @@ export default async function PlacePage({ params }: { params: Promise<{ locale: 
       {en ? "Some published prices conflict across sources. NaiVerse excludes them from current-price summaries and itinerary totals; confirm the amount with the operator before purchase." : "Một số giá được công bố đang mâu thuẫn giữa các nguồn. NaiVerse không tính chúng vào giá hiện hành hoặc tổng lịch trình; hãy xác nhận mức giá với đơn vị vận hành trước khi mua."}
     </div>}
     {place.photos.length > 0 && <section className="photo-gallery" aria-label={en ? "Destination photos" : "Ảnh địa điểm"}>
-      {place.photos.map((photo) => <figure className="licensed-photo" key={photo.sourceUrl}>
+      {place.photos.map((photo) => <figure className="licensed-photo" key={photo.sourceUrl ?? photo.url}>
         <Image src={photo.url} alt={en ? photo.altEn : photo.altVi} width={1100} height={720} unoptimized/>
-        <figcaption>{photo.archival && <strong>{en ? "Archive photo · " : "Ảnh tư liệu · "}</strong>}{photo.credit} · <a href={photo.licenseUrl} target="_blank" rel="noreferrer">{photo.license}</a> · <a href={photo.sourceUrl} target="_blank" rel="noreferrer">{en ? "Original photo" : "Nguồn ảnh"}</a> · {en ? "Checked" : "Đối chiếu"} {photo.checkedAt}.</figcaption>
+        <figcaption>{photo.archival && <strong>{en ? "Archive photo · " : "Ảnh tư liệu · "}</strong>}{photo.credit} · {photo.licenseUrl ? <a href={photo.licenseUrl} target="_blank" rel="noreferrer">{photo.license}</a> : photo.license}{photo.sourceUrl && <> · <a href={photo.sourceUrl} target="_blank" rel="noreferrer">{en ? "Original photo" : "Nguồn ảnh"}</a></>} · {en ? "Checked" : "Đối chiếu"} {photo.checkedAt}.</figcaption>
       </figure>)}
     </section>}
+    {place.photos.length === 0 && <figure className="place-illustration-gallery">
+      <PlaceIllustration placeId={place.id} placeName={en ? place.nameEn : place.name} locale={locale}/>
+      <figcaption>{en ? "NaiVerse concept illustration, not a photograph of this destination. It does not verify the site's appearance, access or current condition." : "Minh họa ý tưởng của NaiVerse, không phải ảnh chụp địa điểm. Hình không xác minh diện mạo, lối vào hay hiện trạng hiện nay."}</figcaption>
+    </figure>}
     <section className="panel" style={{ marginTop: 22 }}>
       <span className="status-label">{place.status === "paused_reference" ? (en ? "Paused reference" : "Tạm dừng tham khảo") : place.status === "reference" ? (en ? "Reference" : "Thông tin tham khảo") : (en ? "Needs confirmation" : "Cần xác minh")}</span>
       <h2 className="panel-title">{en ? "Information status" : "Trạng thái thông tin"}</h2>
@@ -53,7 +64,7 @@ export default async function PlacePage({ params }: { params: Promise<{ locale: 
       </div>
       {place.photos.length === 0 && <p className="form-hint">{en ? "No appropriately licensed destination photo has been reviewed yet." : "Chưa có ảnh địa điểm được rà soát giấy phép phù hợp."}</p>}
       {activePrices.length > 0 && <><h3 className="panel-title" style={{ marginTop: 20 }}>{en ? "Verified price references" : "Giá đã đối chiếu nguồn"}</h3>{activePrices.map((price) => <div className="itinerary-stop" key={price.id}><span className="itinerary-marker"/><span><strong>{price.item_label} · {price.audience}</strong><p>{price.amount_vnd === null ? (en ? "Amount unknown" : "Chưa biết số tiền") : price.amount_vnd.toLocaleString(en ? "en-US" : "vi-VN") + " ₫"} · {price.source_label} · {price.checked_at}</p><p>{price.terms}</p>{price.source_url && <a className="text-link" href={price.source_url} target="_blank" rel="noreferrer"><ExternalLink size={14}/>{en ? "Open price source" : "Mở nguồn giá"}</a>}</span></div>)}</>}
-      {prices.some((price) => price.status !== "verified" || (price.valid_to !== null && price.valid_to < today) || !isFresh(price.checked_at)) && <><h3 className="panel-title" style={{ marginTop: 20 }}>{en ? "Historical, stale or unconfirmed price notes" : "Giá lịch sử, đã cũ hoặc chưa xác nhận"}</h3>{prices.filter((price) => price.status !== "verified" || (price.valid_to !== null && price.valid_to < today) || !isFresh(price.checked_at)).map((price) => <div className="itinerary-stop" key={price.id}><span className="itinerary-marker"/><span><strong>{price.item_label} · {price.status}</strong><p>{price.amount_vnd === null ? (en ? "Amount unknown" : "Chưa biết số tiền") : price.amount_vnd.toLocaleString(en ? "en-US" : "vi-VN") + " ₫"} · {price.source_label} · {price.checked_at ?? (en ? "date unknown" : "chưa có ngày kiểm tra")}</p><p>{price.terms}</p>{price.source_url && <a className="text-link" href={price.source_url} target="_blank" rel="noreferrer"><ExternalLink size={14}/>{en ? "Open source" : "Mở nguồn"}</a>}</span></div>)}</>}
+      {prices.some((price) => price.status !== "verified" || (price.valid_to !== null && price.valid_to < today) || !isFresh(price.checked_at)) && <><h3 className="panel-title" style={{ marginTop: 20 }}>{en ? "Historical, stale or unconfirmed price notes" : "Giá lịch sử, đã cũ hoặc chưa xác nhận"}</h3>{prices.filter((price) => price.status !== "verified" || (price.valid_to !== null && price.valid_to < today) || !isFresh(price.checked_at)).map((price) => <div className="itinerary-stop" key={price.id}><span className="itinerary-marker"/><span><strong>{price.item_label} · {priceStatusLabel(price.status, en)}</strong><p>{price.amount_vnd === null ? (en ? "Amount unknown" : "Chưa biết số tiền") : price.amount_vnd.toLocaleString(en ? "en-US" : "vi-VN") + " ₫"} · {price.source_label} · {price.checked_at ?? (en ? "date unknown" : "chưa có ngày kiểm tra")}</p><p>{price.terms}</p>{price.source_url && <a className="text-link" href={price.source_url} target="_blank" rel="noreferrer"><ExternalLink size={14}/>{en ? "Open source" : "Mở nguồn"}</a>}</span></div>)}</>}
       {activeHours.length > 0 && <><h3 className="panel-title" style={{ marginTop: 20 }}>{en ? "Published opening hours" : "Giờ hoạt động có nguồn"}</h3>{activeHours.map((entry) => <div className="itinerary-stop" key={entry.id}><span className="itinerary-marker"/><span><strong>{weekdayLabel(entry.weekday, en ? "en" : "vi")}:</strong> {entry.opens_local?.slice(0, 5)}–{entry.closes_local?.slice(0, 5)} · {entry.source_label} · {entry.checked_at}<p>{en ? entry.note_en : entry.note}</p>{entry.source_url && <a className="text-link" href={entry.source_url} target="_blank" rel="noreferrer"><ExternalLink size={14}/>{en ? "Source" : "Nguồn"}</a>}</span></div>)}</>}
       {reportedHours.length > 0 && <><h3 className="panel-title" style={{ marginTop: 20 }}>{en ? "Schedule reported by the source (unverified)" : "Lịch nguồn công bố (chưa xác minh)"}</h3>{reportedHours.map((entry) => <div className="itinerary-stop" key={entry.id}><span className="itinerary-marker"/><span><strong>{weekdayLabel(entry.weekday, en ? "en" : "vi")}:</strong> {entry.opens_local && entry.closes_local ? `${entry.opens_local.slice(0, 5)}–${entry.closes_local.slice(0, 5)}` : (en ? "Reported closed; holiday exceptions may apply" : "Nguồn ghi nghỉ; có thể có ngoại lệ ngày lễ")}<p>{en ? entry.note_en : entry.note}</p><p>{entry.source_label} · {entry.checked_at} {entry.source_url && <a className="text-link" href={entry.source_url} target="_blank" rel="noreferrer"><ExternalLink size={14}/>{en ? "Open schedule source" : "Mở nguồn giờ"}</a>}</p></span></div>)}</>}
       {!activeHours.length && !reportedHours.length && <p className="form-hint">{en ? "Opening hours have not been confirmed from a source. Contact the operator before travelling." : "Chưa xác nhận giờ hoạt động từ nguồn. Hãy liên hệ cơ sở trước khi đi."}</p>}

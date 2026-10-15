@@ -9,7 +9,7 @@ export function LocaleSwitcher() {
   const router = useRouter();
   const target = locale === "vi" ? "en" : "vi";
   return (
-    <button className="locale-link" type="button" aria-label={target === "en" ? "Switch to English" : "Chuyển sang tiếng Việt"} onClick={() => router.push(pathname.replace(/^\/(vi|en)(?=\/|$)/, `/${target}`))}>
+    <button className="locale-link" type="button" aria-label={target === "en" ? "EN — Switch to English" : "VI — Chuyển sang tiếng Việt"} onClick={() => router.push(pathname.replace(/^\/(vi|en)(?=\/|$)/, `/${target}`))}>
       {target === "en" ? "EN" : "VI"}
     </button>
   );

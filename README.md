@@ -1,10 +1,14 @@
 # NaiVerse — Du lịch AI Đồng Nai
 
+**Cập nhật 16/10/2026:** AI Guide VI/EN dùng retrieval catalog có nguồn; FairPrice Lens trích báo giá theo exact evidence, không phán giá tốt/xấu; Trip DNA/AI sự cố lọc email, số điện thoại và GPS trước khi gọi DeepSeek. Trip DNA hỗ trợ riêng xe đạp (chưa có định tuyến xe đạp), dùng temperature 0 khi trích xuất; lần đo mới nhất đạt 353/358 development và 173/180 holdout trên hai mẫu nhỏ, mismatch có thể dao động. Trong 22 live smoke feature, 20 pass lượt đầu và hai ca Weather đạt 2/2 khi chạy lại sau HTTP 503; FairPrice fixture DeepSeek VI/EN đạt 2/2 riêng. Đã tích hợp đủ 14 ảnh người dùng xác nhận quyền sử dụng, khớp hash; 43 lượt dùng ảnh phủ đủ 35 hồ sơ yêu cầu ảnh. Nhóm trải nghiệm nghề/ẩm thực cộng đồng được miễn ảnh theo yêu cầu người dùng và giữ minh họa có nhãn. Có đăng ký/đăng nhập username/email + password và đăng xuất local; luồng thật chờ áp dụng Supabase schema. File `NAIVERSE_SETUP_ALL.sql` chứa 34 migration; xem hướng dẫn preflight trước khi chạy. Xem [kịch bản demo](docs/DEMO_KICH_BAN.md), [kiểm toán AI](docs/AI_AUDIT.md), [trạng thái ảnh](docs/PHOTO_GAPS.md) và [kế hoạch](docs/PLAN_TODO.md).
+
 NaiVerse là ứng dụng web song ngữ Việt–Anh giúp khám phá 36 mục trong danh mục ý tưởng, đăng nhập bằng username/email và password qua Supabase, lập hành trình với DeepSeek, nhận tư vấn thời tiết/an toàn/du lịch xanh, so sánh tuyến đường trên bản đồ và chuyển yêu cầu tới hộp thư doanh nghiệp giả lập có nhãn **DEMO**.
 
-Các nguyên tắc dữ liệu: chỉ hiển thị ảnh có ghi tác giả/giấy phép; hiện có 29 ảnh có nguồn/giấy phép cho 22/36 hồ sơ (28 Wikimedia, 1 Pexels); 28 URL ảnh duy nhất đã qua kiểm tra tải, còn thiếu 14 hồ sơ. Danh sách và quy trình thu thập ảnh đúng địa điểm kèm license nằm ở [docs/PHOTO_GAPS.md](docs/PHOTO_GAPS.md). Ảnh cổng Văn Miếu Trấn Biên là tư liệu năm 2009, không xác nhận cổng vào hiện dùng; ảnh cảnh quan La Ngà không phải ảnh cơ sở lưu trú. 10 hồ sơ có điểm feature OSM nhưng 0 cổng vào đã xác minh; lịch tuần có nguồn cho 4/36 điểm, trong đó 1 lịch được xác minh (The Amazing Bay 09:00–17:00) và 3 lịch chưa xác minh lại (Bửu Long, Bảo tàng Đồng Nai, Suối Mơ). Nguồn Báo Đồng Nai dẫn giờ Bửu Long được đăng 07/08/2026 và chưa xác nhận lại; lịch Bảo tàng Đồng Nai được đăng năm 2023; lịch Suối Mơ do danh bạ Viet-Biz nêu. Giá có nguồn/ngày rà soát và tự rời nhãn hiện hành sau 30 ngày. Bửu Long hiện chỉ có giá lịch sử (02/01, 26/04 và bài báo hè 07/08/2026; chương trình khuyến mãi đã hết hạn), không có giá hiện hành đã xác minh; Amazing Bay, Amazing World, Cát Tiên và Suối Mơ có nguồn giá được rà soát ngày 15/10/2026. Vé Amazing World được ghi rõ là combo khung giờ đêm; điều kiện vé trẻ em chưa nêu trên trang. Bảng Suối Mơ ghi hiệu lực đến khi được thay thế; vẫn cần xác nhận với cơ sở trước khi mua. Gợi ý AI không phải booking hoặc cảnh báo chính thức.
+Nguyên tắc dữ liệu địa phương: 29 lượt dùng ảnh có license công khai và 14 lượt dùng ảnh được ghi nhận theo xác nhận quyền trực tiếp của người dùng; tổng 43 lượt dùng trên 35 hồ sơ yêu cầu ảnh. Nhóm trải nghiệm cộng đồng được miễn ảnh và tiếp tục dùng artwork có nhãn. Tác giả của ảnh cấp quyền chưa được cung cấp, nên ứng dụng không bịa credit hoặc URL license. Chi tiết ảnh ở [docs/PHOTO_GAPS.md](docs/PHOTO_GAPS.md). Các pin OSM là điểm địa lý, không mặc định là cổng đã khảo sát; hiện chưa có cổng vào nào được xác minh. Giá, giờ và hoạt động vẫn gắn nguồn/trạng thái; xung đột hoặc dữ liệu cũ không được hiển thị như thông tin hiện hành. Gợi ý AI không phải booking hoặc cảnh báo chính thức.
 
 ## Chạy local
+
+Thác Đá Hàn có hai lịch tham khảo mâu thuẫn (07:00–19:00 và 07:00–17:00), đều chưa được nhà vận hành xác nhận; các giá từ nguồn thứ cấp có `amount_vnd = null` nên không ảnh hưởng tổng chi phí. Chi tiết và migration: [docs/THAC_DA_HAN_DATA.md](docs/THAC_DA_HAN_DATA.md).
 
 Yêu cầu Node.js 24.x. Trên Windows PowerShell:
 
@@ -13,6 +17,10 @@ npm.cmd ci
 Copy-Item .env.example .env
 npm.cmd run dev
 ~~~~
+
+Sau khi điền `.env`, chạy `npm.cmd run services:probe` để kiểm tra kết nối Supabase Auth/schema và Upstash Redis mà không in secret. `public.places` có thể báo `404/PGRST205` cho tới khi áp dụng đủ migration theo [hướng dẫn cài đặt](docs/HUONG_DAN.md).
+
+Để tạo tài khoản dịch vụ, lấy đúng API URL/key, cấu hình environment variables và import GitHub vào Vercel theo từng bước, xem [Hướng dẫn thiết lập dịch vụ](docs/THIET_LAP_DICH_VU.md). Hướng dẫn test theo vai trò và cập nhật dữ liệu nằm trong [Hướng dẫn cài đặt, kiểm thử và demo](docs/HUONG_DAN.md).
 
 Mở http://localhost:3000/vi. Khám phá danh mục không cần tài khoản. Trang chủ có thẻ dẫn tới AI Thời tiết/An toàn/Xanh và AI Giao thông; hai liên kết trên thanh điều hướng vẫn cuộn ngang được trên điện thoại. Đăng ký, AI thật, lưu hành trình, chia sẻ và gửi yêu cầu cần cấu hình dịch vụ theo docs/HUONG_DAN.md.
 
@@ -27,7 +35,7 @@ Mở http://localhost:3000/vi. Khám phá danh mục không cần tài khoản. 
 - Giá có nguồn cho Amazing Bay, Amazing World, VQG Cát Tiên và Suối Mơ; giá Bửu Long được giữ nhãn lịch sử đến khi xác nhận lại
 - Mười đối tượng bản đồ OSM có link nguồn và nhãn “không phải cổng vào đã xác minh”
 
-MVP chưa có traffic realtime, cổng vào đã khảo sát, giờ hàng ngày được xác minh, ảnh cho đủ 36 điểm, giá hiện hành cho toàn catalog, thanh toán, booking tồn chỗ, OCR, giọng nói, AI Guide, FairPrice tự phân tích báo giá hoặc Operator Copilot bằng LLM. Các mục còn thiếu được ghi ở docs/PLAN_TODO.md. Không dùng Nominatim công cộng cho autocomplete.
+AI Guide hiện chỉ tra cứu dữ liệu công khai theo địa điểm và loại câu hỏi cố định; AI Packing Assistant chỉ ưu tiên checklist mã vật dụng từ dữ kiện cấu trúc, không phải chatbot tự do hay tư vấn y tế. MVP chưa có traffic realtime, cổng vào đã khảo sát, giờ hàng ngày được xác minh, ảnh cho đủ 36 điểm, giá hiện hành cho toàn catalog, thanh toán, booking tồn chỗ, OCR, TTS, FairPrice tự phân tích báo giá hoặc Operator Copilot bằng LLM. Các mục còn thiếu được ghi ở docs/PLAN_TODO.md. Không dùng Nominatim công cộng cho autocomplete.
 
 ## Kiểm tra
 
@@ -49,3 +57,7 @@ Các kiểm tra mã nguồn không chứng minh dịch vụ bên ngoài đã ho�
 Đã lưu 11 khoản camping/thuê lều từ trang giá chính thức vào migration `0020_giang_dien_camping_price_notes.sql` và chế độ dự phòng không cần Supabase. Vì các bảng ảnh không ghi ngày hiệu lực, UI hiển thị đây là giá tham khảo chưa xác nhận; Journey Studio không cộng các mức này vào chi phí đã biết.
 
 Migration `0021_giang_dien_current_price_and_general_hours.sql` đối chiếu riêng Combo 01 với trang sản phẩm hiện hành: 449.000 ₫/khách, tối thiểu hai khách, trạng thái nguồn `verified`. Trang cũng nêu giờ khu vui chơi 07:30–17:00 nhưng không nêu lịch từng ngày; giờ chung được hiển thị là `unknown`, không phải lịch hằng ngày đã xác nhận.
+
+Migration `0032_giang_dien_operator_services.sql` bổ sung giờ hoạt động theo dịch vụ của hai nhà hàng và thông tin nhận khách Khách sạn Tre Xanh; trang sản phẩm đang hiển thị giá 550.000 ₫ nhưng chưa nêu rõ đơn vị/sức chứa nên giá giữ `unknown`, không cộng vào dự toán. Chi tiết nguồn và cách xác minh: [docs/GIANG_DIEN_SERVICES.md](docs/GIANG_DIEN_SERVICES.md).
+
+Migration `0033_giang_dien_combo3_current_operator_page.sql` cập nhật Combo 3 từ bảng ảnh cũ sang trang sản phẩm nhà vận hành đang hiển thị 599.000 ₫ (giá gạch 699.000 ₫). Trang không nêu đơn vị giá, sức chứa hay hạn ưu đãi, nên NaiVerse vẫn giữ `unknown` và không cộng vào chi phí hành trình.

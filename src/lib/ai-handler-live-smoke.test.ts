@@ -65,7 +65,7 @@ describe.skipIf(!enabled)("live AI API handler smoke (provider real; auth and Re
     const response = await postConditions(request);
     const payload = await response.json();
 
-    expect(response.status).toBe(200);
+    expect(response.status, JSON.stringify(payload)).toBe(200);
     expect(payload.aiUsed).toBe(true);
     expect(payload.urgent).toBe(false);
     expect(payload.weather.forecast.date).toBe(travelDate);
