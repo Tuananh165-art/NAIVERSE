@@ -1,0 +1,30 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+!.env.test.example
+.vercel
+.npm-cache/
+.swc-native-cache/
+*.tsbuildinfo
+
+# Node and build output
+node_modules/
+.next/
+/.next-*/
+out/
+dist/
+coverage/
+playwright-report/
+test-results/
+
+# Editors and operating system
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+npm-debug.log*
+
+# Local Supabase state
+supabase/.branches/
+supabase/.temp/

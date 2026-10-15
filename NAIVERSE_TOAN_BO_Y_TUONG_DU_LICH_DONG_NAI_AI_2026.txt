@@ -1,0 +1,1122 @@
+NAIVERSE — HỆ SINH THÁI DU LỊCH AI THÀNH PHỐ ĐỒNG NAI
+TỔNG HỢP TOÀN DIỆN MỌI Ý TƯỞNG SẢN PHẨM, AI, DỊCH VỤ, KINH DOANH VÀ TRẢI NGHIỆM DU LỊCH ĐỒNG NAI
+PHIÊN BẢN MỞ RỘNG CHUYÊN SÂU: 45 PHẦN, 190 KHẢ NĂNG AI/TỰ ĐỘNG HÓA, 50 CONCEPT TOUR
+Ngày tham chiếu: 15/10/2026 | Tài liệu ý tưởng, không phải danh sách đã kiểm định mọi dịch vụ.
+
+I. ĐỊNH VỊ SẢN PHẨM
+Một nền tảng du lịch AI chuyên sâu toàn Thành phố Đồng Nai, gồm địa bàn tỉnh Đồng Nai và Bình Phước trước sáp nhập. Khách khám phá cảnh quan/di sản/ẩm thực, xem ảnh và video đã xác minh, tương tác bản đồ, nhập ngân sách hoặc nói mong muốn bằng giọng nói, nhận lịch trình phù hợp, bảng chi phí minh bạch, liên hệ đặt tour với đơn vị có giấy phép, đặt lưu trú và trải nghiệm địa phương; cộng đồng đăng trải nghiệm và các báo cáo an toàn được kiểm duyệt.
+Tên thương hiệu chính thức: NaiVerse (Nai + Universe) — Vũ trụ khám phá du lịch Đồng Nai bằng AI. Khẩu hiệu: Khám phá đúng nơi – đi đúng gu – chi tiêu rõ ràng – trải nghiệm địa phương.
+
+II. CĂN CỨ ĐỊA PHƯƠNG VÀ GIÁ TRỊ CHO CUỘC THI
+- Nghị quyết 30/2026/QH16 có hiệu lực 30/4/2026, chính thức thành lập Thành phố Đồng Nai. Nguồn: https://xaydungchinhsach.chinhphu.vn/nghi-quyet-so-30-2026-qh16-thanh-lap-thanh-pho-dong-nai-119260430102336551.htm
+- Theo kế hoạch du lịch 2026 được địa phương công bố: khoảng 5,8 triệu lượt khách, 4.500 tỷ đồng doanh thu, thời gian lưu trú mục tiêu 2 ngày; đây là MỤC TIÊU, không phải kết quả đã đạt. Nguồn: https://dongnai.gov.vn/vi/wcag/Tin-chi-dao-dieu-hanh/ban-hanh-ke-hoach-phat-trien-du-lich-tren-dia-ban-tinh-dong-nai-nam-2026-11312.html
+- Nghị quyết 10-NQ/TU 20/8/2026 định hướng du lịch là ngành kinh tế mạnh, một trong các trụ cột kinh tế: https://svhttdl.dongnai.gov.vn/vi/news/van-hoa-xa-hoi/nghi-quyet-so-10-nq-tu-dong-luc-chien-luoc-dua-du-lich-thanh-pho-dong-nai-but-pha-thanh-nganh-kinh-te-manh-357.html
+- Ba nhóm sản phẩm địa phương tập trung: sinh thái – nghỉ dưỡng; văn hóa – tâm linh; nông nghiệp – nông thôn. Gắn khối giải trí và MICE/công nghiệp có điều kiện. https://dongnai.gov.vn/vi/news/kinh-te-xa-hoi/tap-trung-phat-trien-3-nhom-san-pham-du-lich-chinh-58508.html
+- Điểm cạnh tranh: AI không chỉ kể địa danh mà hỗ trợ doanh nghiệp bán gói dịch vụ, ghép lịch trình thực tế, xử lý yêu cầu khách nước ngoài, tăng khả năng khách ở lại và tham gia nhiều hoạt động trả phí từ cộng đồng.
+
+III. ĐỊA ĐIỂM – DANH MỤC KHÁM PHÁ BAN ĐẦU (KHÔNG TUYÊN BỐ BAO QUÁT 100%)
+A. Đô thị Biên Hòa, Long Hưng, Trấn Biên:
+1. The Amazing Bay – Vịnh Kỳ Diệu (Sơn Tiên), công viên nước, gia đình, nhóm bạn; cần kiểm tra chính sách chiều cao, trò chơi và lịch hoạt động.
+2. Sơn Tiên Amazing World, công viên chủ đề, trải nghiệm giải trí bổ sung.
+3. Khu du lịch Bửu Long, cảnh hồ Long Ẩn, núi và hoạt động giải trí.
+4. Văn miếu Trấn Biên, văn hóa, lịch sử, giáo dục.
+5. Thất phủ cổ miếu / chùa Ông, văn hóa tín ngưỡng; lưu ý ứng xử phù hợp.
+6. Đền thờ Nguyễn Hữu Cảnh; các di tích Biên Hòa/Trấn Biên theo danh mục Sở.
+7. Bảo tàng Đồng Nai, di sản, nghề gốm Biên Hòa, tuyến đi bộ di sản.
+8. Làng bưởi Tân Triều và Làng bưởi Năm Huệ, ẩm thực và sản phẩm địa phương; phải hỏi trước ngày mở cửa, lịch trải nghiệm.
+9. Khu sinh thái Bò Cạp Vàng (Đại Phước), team building/trò chơi nước nếu dịch vụ còn hoạt động hợp pháp.
+10. Khu du lịch Thác Giang Điền; xác minh lịch và giá theo cơ sở.
+B. Hồ, rừng, thể thao thiên nhiên Trị An:
+11. Hồ Trị An, ngắm cảnh, bình minh/hoàng hôn, chụp ảnh, hoạt động trên nước qua đơn vị được cấp phép.
+12. Đảo Ó – Đồng Trường, cảnh quan đảo/lòng hồ. CHÚ Ý: hoạt động khu du lịch từng bị tạm dừng năm 2025; chưa xác nhận pháp lý/đặt tàu hiện tại nên chỉ hiển thị tham khảo cho đến khi đối tác chứng minh được dịch vụ đang được phép. https://vnexpress.net/khu-du-lich-giua-ho-tri-an-chua-co-danh-gia-tac-dong-moi-truong-4857242.html và https://dufo.dongnai.gov.vn/Pages/newsdetail.aspx?CatId=96&NewsId=2118
+13. Khu Bảo tồn Thiên nhiên – Văn hóa Đồng Nai / rừng Mã Đà, trekking/cycling chỉ theo tuyến được phép và hướng dẫn địa phương.
+14. Chiến khu D và những di tích liên quan; trải nghiệm giáo dục lịch sử.
+15. Các khu camping/glamping quanh Trị An, lập danh sách cơ sở được xác minh về đất đai, phòng cháy, cứu hộ, nước và vệ sinh; không đồng nhất mọi bờ hồ với bãi được phép cắm trại.
+C. Tân Phú, Nam Cát Tiên, Định Quán, La Ngà:
+16. Công viên Suối Mơ (Tân Phú), nước thiên nhiên và trò chơi.
+17. Vườn quốc gia Cát Tiên – cổng Nam Cát Tiên, rừng, ngắm chim/động vật, cây cổ thụ; tuân thủ chương trình và hướng dẫn quản lý vườn.
+18. Làng du lịch cộng đồng Tà Lài, sinh hoạt và nghệ thuật của cộng đồng người Mạ; phải tôn trọng quyền kể chuyện và lợi ích của cộng đồng.
+19. Đá Ba Chồng (Định Quán), kỳ quan đá và chụp ảnh từ vị trí an toàn.
+20. Thác Mai – Bàu Nước Sôi, điểm thiên nhiên có dự án phát triển; cần xác nhận điều kiện tiếp cận và tình trạng mở cửa.
+21. Các trải nghiệm đồng lúa Phú Điền, vùng Phú Hòa; triển khai khi có nhà cung cấp thực tế đồng ý.
+22. Không gian glamping La Ngà như Panorama Glamping, Tropical Eglamping (chỉ đưa trạng thái được nhận đặt sau khi kiểm chứng).
+D. Long Khánh, Xuân Lộc, Trảng Bom:
+23. Vườn trái cây Bình Lộc và các nhà vườn Long Khánh, mùa chôm chôm, sầu riêng, măng cụt, các vườn có đăng ký đón khách.
+24. Núi Chứa Chan / Gia Lào, leo núi, tôn giáo và ngắm cảnh: nhắc về sức khỏe, thời tiết, đường mòn, quy định.
+25. Thác Đá Hàn (Trảng Bom) nếu cơ sở đang hoạt động và an toàn.
+26. Lễ hội Mùa trái cây Long Khánh: tính thời vụ, theo lịch tổ chức; không quảng bá là sự kiện đang diễn ra cả năm.
+E. Vùng Bình Phước cũ, thuộc Thành phố Đồng Nai hiện nay:
+27. Vườn quốc gia Bù Gia Mập, rừng, trải nghiệm thiên nhiên, cần guide và quy định khu bảo tồn.
+28. Di tích Sóc Bom Bo, văn hóa S’tiêng và M’nông, nghi lễ/giã gạo/cồng chiêng chỉ khi cộng đồng cho phép và tự quản tổ chức.
+29. Trảng cỏ Bù Lạch, phong cảnh thảo nguyên; xác minh tuyến tiếp cận và bảo vệ cảnh quan.
+30. Núi Bà Rá, tuyến văn hóa – thiên nhiên; không tự quảng bá cáp treo hoạt động nếu chưa xác nhận.
+31. Hồ Thác Mơ, cảnh quan và chụp ảnh ven hồ ở khu vực được phép.
+32. Căn cứ Tà Thiết, di tích lịch sử quốc gia đặc biệt, chương trình học tập lịch sử.
+33. Nhà Giao tế Lộc Ninh, di tích lịch sử.
+34. Khu du lịch sinh thái Mỹ Lệ, sản phẩm du lịch vùng Phước Long khi cơ sở xác nhận mở cửa.
+35. Thác Đắk Mai, tuyến trong/ven VQG Bù Gia Mập – tour phải có đơn vị tổ chức và giấy phép phù hợp.
+36. Các nghề thủ công/ẩm thực S’tiêng, M’nông, Chơro, Mạ do cộng đồng chủ trì.
+Nguồn rà soát danh mục: https://dongnai.gov.vn/vi/news/Du-lich-Dong-Nai/goi-y-10-diem-du-lich-trai-nghiem-o-tinh-dong-nai-55427.html ; https://baodongnai.com.vn/giai-tri/202605/nhieu-diem-den-du-lich-hap-dan-tai-ong-nai-8f50f9c/ ; https://baodongnai.com.vn/kinh-te/dich-vu/202604/khai-thac-du-dia-du-lich-ve-nguon-cho-hoc-sinh-70e4c3d/ ; https://dongnai.gov.vn/vi/news/Du-lich-Dong-Nai/lan-gio-moi-cho-du-lich-dong-nai-55428.html
+Mỗi địa điểm khi nhập hệ thống phải có mã định danh, tọa độ đã kiểm tra, địa chỉ theo năm, tên cũ/alias, nguồn cập nhật, quyền ảnh, mùa đẹp, tiện nghi, giới hạn sức khỏe, rủi ro, chủ thể quản lý, tình trạng tiếp khách, trang đặt vé chính thức.
+
+IV. GIÁ VÉ – PHẦN QUAN TRỌNG NHẤT CỦA UY TÍN
+- The Amazing Bay: FAQ của Sơn Tiên có niêm yết giá người lớn 490.000 đồng, trẻ em 1-1,4 m 270.000 đồng, dưới 1 m miễn phí (https://www.sontien.com/blogs/faq). Tuy nhiên trang booking trên theamazingbay.com hiển thị 600.000/350.000 đồng tại thời điểm kiểm tra: https://theamazingbay.com/en-US/Product/Booking.aspx. Không có bằng chứng đủ để chọn một trong hai làm 'giá hiện tại'. Hệ thống cần gắn nhãn CÓ KHÁC BIỆT GIỮA NGUỒN, yêu cầu khách kiểm tra giá tại thời điểm đặt với nhà vận hành chính thức.
+- Suối Mơ: PDF bảng giá 2025 được index trên tên miền của công viên thể hiện người lớn 130.000 đồng và trẻ 60.000 đồng ngày thường; lễ Tết 150.000/70.000 đồng. Đây là GIÁ THEO TÀI LIỆU 2025, không phải xác nhận giá 2026: https://www.suoimopark.com/uploads/BANG%20GIA/2025.pdf
+- The Mira Central Park: website khách sạn thể hiện phòng Classic 'từ 1.500.000 đồng/đêm'; không phải báo giá còn phòng vào ngày chọn: https://themiracentralpark.com.vn/vi/
+- Tuyệt đối không tự tạo giá vé Đảo Ó, Cát Tiên, Bửu Long, tour, homestay hay nhà hàng khi chưa xác minh. Bảng chi phí phải phân loại: niêm yết đã xác minh có ngày / giá tham khảo lịch sử / đang hỏi báo giá / chưa có giá.
+- Công cụ so sánh phải đối chiếu cùng ngày, đúng độ tuổi/chiều cao, bao gồm VAT/phí, dịch vụ đi kèm và chính sách hoàn hủy. AI không được tự tuyên bố dịch vụ rẻ nhất khi nguồn chưa đủ.
+
+V. ĐỐI TÁC VÀ CƠ SỞ LƯU TRÚ CÓ NGUỒN
+Nguồn kiểm tra lữ hành chính thức: https://svhttdl.dongnai.gov.vn/vi/gioi-thieu/danh-sach-cac-cong-ty-da-cap-giay-phep-kinh-doanh-lu-hanh-noi-dia.html
+Một số doanh nghiệp xuất hiện trong danh sách: Công ty TNHH Trị An Adventure (75-0062/2025); Công ty CP Truyền thông – Du lịch Long Khánh (75-0061/2025); Công ty TNHH TMDV DL CK Journey (75-0053/2024); Công ty TNHH DV Du lịch Meerkat Travel (75-0011/2019); Trấn Biên; Trị An Adventure; các chi nhánh Vietravel Đồng Nai và Saigontourist có địa chỉ trong danh sách. Đây là ỨNG VIÊN CẦN MỜI HỢP TÁC, không khẳng định đã ký đối tác hoặc giấy phép hiện đang còn hiệu lực nếu chưa kiểm tra lại.
+Sở VHTTDL Đồng Nai/Phòng Quản lý Du lịch: https://svhttdl.dongnai.gov.vn/vi/gioi-thieu/phong-quan-ly-du-lich.html ; số chung Sở 0251.3822038, email ubnd-svhttdl@dongnai.gov.vn. Đây là liên hệ hành chính công khai, không phải đường dây hỗ trợ khẩn cấp hay sự bảo trợ của Nhà nước.
+Khách sạn/khu ở có trang chính thức: The Mira Central Park (https://themiracentralpark.com.vn/vi/); Aurora Hotel Plaza (https://aurorahotelplaza.com/); Cát Tiên Jungle Lodge (https://cattienjunglelodge.com/vi/); Orchard Home Resort Nam Cát Tiên (https://orchardresort.vn/). Cần xác minh riêng hạng phòng, tổng giá theo ngày, phản hồi khách gần đây, chính sách hoàn hủy, phòng trống, tiện nghi thật.
+Lưu trú thiên nhiên: Green Hope Lodge, Forest Floor Lodge, các campsite hồ Trị An như Woonymaica (kiểm tra giấy phép/địa điểm); không tự chứng nhận đủ điều kiện an toàn.
+Ăn uống: Làng bưởi Năm Huệ Tân Triều; món gỏi bưởi, chè bưởi, gà chế biến với bưởi; cá lăng và thủy sản hồ Trị An; trái cây Long Khánh; ẩm thực S’tiêng/M’nông như canh thục. Dịch vụ ăn uống phải do cửa hàng thực sự xác minh thực đơn/giá/giờ nhận khách; menu và ảnh lấy từ cơ sở hoặc người dùng được cấp quyền, không dùng ảnh minh họa như ảnh món thật.
+
+VI. 15 MÔ-ĐUN TÍNH NĂNG HẤP DẪN
+1. Trang khám phá đa phương tiện: bản đồ, card ảnh, video, 360° có nguồn, bộ lọc mùa/giá/tính phù hợp, điểm mới/ít người biết.
+2. Trip DNA AI: mô tả gu du lịch bằng tiếng Việt/Anh hoặc giọng nói; trích xuất nhu cầu, nhóm tuổi, ngân sách, sở thích, hạn chế sức khỏe, điểm đi, điểm đến.
+3. Trip Builder: dựng lịch trình theo giờ, thứ tự địa lý, giờ mở cửa đã xác minh, thời gian di chuyển tính bởi API định tuyến, thời gian nghỉ, chi phí và phương án dự phòng khi mưa.
+4. Honest Price Compare: so giá vé, tour, lưu trú trên cùng điều kiện; hiển thị nguồn, ngày, cảnh báo giá thiếu hoặc mâu thuẫn, chính sách hủy.
+5. Tour Marketplace: doanh nghiệp lữ hành có hồ sơ giấy phép được kiểm chứng định kỳ; bán combo, tour riêng, tour giáo dục, tour đoàn, tour quốc tế; chính sách hợp đồng minh bạch.
+6. Accommodation Match: đặt chỗ hoặc chuyển đến trang đặt phòng hợp lệ; kết hợp với hành trình, giới hạn di chuyển, khách gia đình/khách nước ngoài.
+7. Local Experiences: đặt trải nghiệm làng bưởi, hái trái cây, nấu ăn, gốm Biên Hòa, giao lưu văn hóa cộng đồng tự nguyện, trekking có hướng dẫn, tour sinh học.
+8. Food Map: món đặc trưng theo vùng, thực đơn đã cập nhật, bộ lọc ăn chay/kiêng dị ứng, giờ mở cửa, phân bổ bữa theo điểm dừng.
+9. AI Guide & Audio Stories: thuyết minh đa ngữ, QR tại điểm tham quan, dẫn nguồn lịch sử; bản giọng nói AI phải tôn trọng quyền văn hóa cộng đồng.
+10. Community Hub: bài đăng, album, hỏi đáp, nhóm hành trình, nhật ký 'mình vừa đi về', bình chọn đề xuất với nhiều cấp xác minh trải nghiệm.
+11. Safety Centre: thời tiết, chỉ dẫn pháp lý, kiểm tra tour/nhà cung cấp, báo cáo giá bất thường, đường nguy hiểm, địa điểm đóng cửa, link chính quyền; nút khẩn cấp gọi 113/114/115 và chia sẻ vị trí CHỈ KHI NGƯỜI DÙNG CHỦ ĐỘNG.
+12. Green Travel Score: gợi ý di chuyển ít phát thải, phân bổ khách tới điểm ít quá tải, quy tắc không rác/không làm phiền động vật, hành trình tôn trọng cộng đồng.
+13. Local Business Studio: chủ cơ sở tự tạo lịch dịch vụ, đăng ảnh thật, giá và suất còn trống, trả lời chat, xem lead/đơn/đánh giá, theo dõi tỉ lệ chuyển đổi.
+14. Operator Copilot: nhận brief đoàn công ty, hiểu ràng buộc và lịch trình, lấy bảng giá thật, tạo báo giá nháp PDF, chuyển nhân viên duyệt, chăm sóc sau tour.
+15. Tourism Insights: heatmap quan tâm theo cụm, phân tích nhu cầu ẩn danh, điểm dịch vụ thiếu, báo cáo tín hiệu bất thường được kiểm duyệt; dashboard cho đơn vị đối tác, không mạo danh dashboard của cơ quan chính quyền.
+
+VII. 18 Ý TƯỞNG SÁNG TẠO ĐỂ KHÁC BIỆT
+- Gu-to-Trip: '4 người, 2 trẻ nhỏ, 2 ngày, thích thiên nhiên, tối đa 3 triệu' -> 3 lịch trình so sánh, không vượt ngân sách đã biết; ghi rõ chi phí chưa biết.
+- FairPrice Lens: nhận ảnh báo giá hoặc đường dẫn tour -> chuẩn hóa dịch vụ và điều kiện -> báo chênh lệch, nhưng không tố cáo gian lận chỉ vì giá cao.
+- Green/Rest/Adventure sliders: thay đổi sở thích khiến AI dựng lại tour và phần giải thích.
+- Itinerary Stress Test: kiểm tra trùng giờ, thời gian di chuyển, trẻ nhỏ, chuyến về quá muộn, khu vực đóng cửa, cần đặt trước.
+- Weather-aware tour: phương án trong nhà nếu mưa, không mặc định thời tiết theo dự báo chính xác.
+- Hidden Gem Radar: phát hiện địa điểm nhỏ có bằng chứng, không dùng tối ưu hóa đẩy lượng khách vượt sức chứa.
+- Crowd intelligence: báo đông/chờ/thiếu bãi xe được kiểm duyệt, hiển thị mức tin cậy, không giả làm realtime.
+- Foreign Guest Mode: EN/KO/JP/ZH tùy phạm vi, tiền tệ, dị ứng, quy tắc ứng xử, hotline cơ sở, câu giao tiếp.
+- Accessible Trips: hỗ trợ xe lăn/người cao tuổi, nhà vệ sinh, cầu thang, khoảng cách đi bộ và điểm nghỉ; chỉ khẳng định accessibility sau xác minh.
+- Digital Travel Passport: check-in bằng QR có xác minh và mini game, quà địa phương do doanh nghiệp tài trợ; tránh phát tán tọa độ loài quý hiếm.
+- 360 Nature Viewer: panorama/video thực địa có bản quyền để người xem cảnh quan trước khi đi.
+- AI Photo Story: nhận ảnh địa điểm và gợi ý bài kể chuyện/hồ sơ địa danh sau khi kiểm chứng geolocation; không nhận diện cá nhân.
+- Travel Buddy: ghép nhóm có opt-in, kiểm soát an toàn và bảo vệ vị trí riêng tư.
+- Citizen Feedback: phân loại phản ánh rác/xả thải/sai biển giá; cần người duyệt trước khi công khai hoặc chuyển cơ quan.
+- Dynamic Tour Bundling: doanh nghiệp đăng room/activity/guide slots; ghép phù hợp, không tự xuất giá giả.
+- Farm-to-Experience Commerce: nối nhà vườn với sản phẩm đặc sản sau trải nghiệm; voucher và đặt hàng rõ ràng.
+- Trip Memory: album check-in, bản đồ ảnh theo ngày, chi phí thực tế, chia sẻ bằng link riêng.
+- Event Calendar: lễ hội trái cây Long Khánh, hoạt động tại Sơn Tiên, văn hóa truyền thống có phép tổ chức; chỉ hiển thị ngày diễn ra đã xác minh.
+
+VIII. MÔ HÌNH AI — PHÂN BIỆT RÕ AI VÀ TÍNH TOÁN
+A. AI ngôn ngữ/RAG tra cứu catalog du lịch từ cơ sở dữ liệu có nguồn, hiểu mong muốn, hỏi lại ràng buộc thiếu, đề xuất địa điểm với lý do và đường dẫn. Không tự sáng tác nhà hàng hoặc giá.
+B. AI tối ưu hành trình: truy xuất nhóm ứng viên, lọc bằng ràng buộc cứng (ngày, ngân sách, sức khỏe, đặt trước, trạng thái mở), sau đó tối ưu nhiều mục tiêu: chất lượng sở thích, rủi ro thời tiết, thời gian di chuyển, mức chi phí, đa dạng trải nghiệm, doanh thu địa phương. Thuật toán ràng buộc tuyến là optimization, không nên dán nhãn toàn bộ là AI.
+C. AI thuyết minh đa ngữ: trả lời theo bộ tri thức địa phương đã xác minh; cảnh báo khi thông tin lịch sử có tranh cãi/thiếu nguồn.
+D. AI tóm tắt review thật và xử lý bất thường: phát hiện review trùng, spam, mâu thuẫn giờ/giá; có nút khiếu nại minh bạch và quyền phản hồi của doanh nghiệp.
+E. AI Sales Copilot B2B: brief khách đoàn -> trích số khách, độ tuổi, nhu cầu, ngân sách -> bảng cấu phần -> đề nghị báo giá -> nhân viên công ty duyệt và gửi.
+F. AI phát hiện ảnh không đúng địa điểm: metadata, so ảnh địa điểm và kiểm tra bằng chứng; không kết luận giả mạo chỉ từ suy luận của model.
+G. AI dự báo nhu cầu kinh doanh chỉ triển khai khi đã có lịch sử thực: tìm mùa cao điểm, đặt dịch vụ dự kiến, tối ưu nhân sự; so sánh với baseline.
+
+IX. VAI TRÒ NGƯỜI DÙNG
+Khách vãng lai, khách trong thành phố, khách ngoài tỉnh, khách nước ngoài, khách gia đình/cao tuổi/khả năng vận động hạn chế, khách học sinh, khách công ty B2B, hướng dẫn viên, homestay/khách sạn, nhà hàng/nhà vườn, doanh nghiệp lữ hành, kiểm duyệt viên, quản trị hệ thống. Cơ quan công quyền chỉ có role sau khi hợp tác có thỏa thuận, không tự gắn 'official'.
+
+X. MÔ HÌNH KINH DOANH
+- B2B SaaS: phí thuê phần mềm cho 1 đơn vị lữ hành hoặc mạng đối tác.
+- Lead generation: phí kết nối khách tiềm năng minh bạch, chỉ tính khi phù hợp và đã đồng ý.
+- Hoa hồng đặt chỗ/tour từ đối tác khi có hợp đồng và quyền vận hành; không tự thu tiền trước khi bảo đảm trách nhiệm pháp lý/hủy trả.
+- Công cụ tạo báo giá tour doanh nghiệp, landing page cá nhân hóa cho nhà cung cấp nhỏ, chăm sóc khách đa ngữ.
+- Bán gói combo trải nghiệm (vé + ăn + ở + phương tiện) do nhà cung cấp chịu trách nhiệm pháp lý và xác nhận giá.
+- Ưu tiên thứ hạng hữu cơ theo phù hợp; bài quảng bá tài trợ ghi rõ nhãn, tránh đánh tráo 'uy tín' bằng quảng cáo.
+- KPI có thể đo: thời gian tạo hành trình/báo giá, độ chính xác chi phí được báo, tỉ lệ lead->booking, doanh thu đối tác, số dịch vụ địa phương được khám phá, số đêm lưu trú, CSAT và số phản ánh xử lý.
+
+XI. PHẦN CỘNG ĐỒNG
+- Dòng trải nghiệm theo địa bàn, album có geotag tùy chọn, 'người địa phương chia sẻ', hỏi đáp theo điểm đến, tìm bạn cùng chuyến với quyền riêng tư.
+- Hồ sơ review 3 cấp: có ảnh/chi tiết; có hóa đơn hoặc đặt chỗ được duyệt; doanh nghiệp phản hồi. Không coi ảnh là bằng chứng duy nhất.
+- AI gộp nhiều review để tóm tắt điểm mạnh/yếu, dẫn về review cụ thể; nhãn 'trải nghiệm chủ quan'.
+- Báo cáo sai giá/đóng cửa/điểm nguy hiểm -> phiếu kiểm duyệt -> yêu cầu doanh nghiệp phản hồi -> chỉnh trạng thái theo bằng chứng.
+- Bộ quy tắc không tiết lộ tọa độ sinh vật nguy cấp, không đăng mặt trẻ em nếu thiếu đồng ý, không công khai địa chỉ nhà riêng/điểm ở nhạy cảm, không cổ vũ xâm nhập rừng/khu cấm.
+
+XII. PHẦN AN TOÀN VÀ HỖ TRỢ NHÀ NƯỚC
+- Nút số khẩn cấp Việt Nam: 113 công an, 114 cứu hỏa/cứu nạn, 115 cấp cứu, với cảnh báo liên hệ ngay thay vì đợi chatbot; xác nhận số và khả năng gọi từ máy khách ngoại quốc.
+- Liên kết cơ quan công khai: Sở VHTTDL Đồng Nai https://svhttdl.dongnai.gov.vn/ ; Phòng Quản lý Du lịch https://svhttdl.dongnai.gov.vn/vi/gioi-thieu/phong-quan-ly-du-lich.html ; Cổng thông tin Đồng Nai https://dongnai.gov.vn ; Cục Du lịch Quốc gia https://vietnamtourism.gov.vn ; Trung tâm KTTV quốc gia https://nchmf.gov.vn .
+- Chưa ký kết thì KHÔNG được hiển thị 'Sở bảo trợ', 'cơ quan đã tiếp nhận', 'đảm bảo an toàn' hay 'hotline 24/7' giả.
+- Thông tin thời tiết từ nhà cung cấp có phép; nguồn báo chính thức; cấm AI khuyến nghị bơi hồ tự do, tiếp cận công trình thủy điện, trekking vùng cấm hoặc cho rằng tuyến đường luôn an toàn.
+
+XIII. TẦNG DỮ LIỆU GIÁ VÀ UY TÍN
+Mỗi entity dịch vụ có name, alias, id, phone, vị trí, chủ thể pháp lý, giấy phép nếu phải có, trạng thái đã xác minh, nguồn bằng chứng, expires_at, giờ mở cửa, thời gian kiểm tra; giá theo ngày áp dụng, loại người dùng, tách bao gồm/không bao gồm, VAT, chính sách hủy; khóa cập nhật giá từ bên thứ ba; chi phí phụ thu.
+Cấp trạng thái: VERIFIED BY PROVIDER; VERIFIED FROM PRIMARY WEBPAGE; THIRD PARTY REFERENCE; SELF-REPORTED; UNVERIFIED; CLOSED/PAUSED; EXPIRED PRICE. Không sử dụng nhãn 'đối tác chính thức' khi thiếu hợp đồng.
+
+XIV. DỮ LIỆU, BẢN ĐỒ, API
+- OpenStreetMap: dữ liệu POI và đường, phải có attribution và tuân thủ ODbL. Tile công cộng không bảo đảm đáp ứng ứng dụng thương mại lớn: https://operations.osmfoundation.org/policies/tiles/
+- Nominatim public: tối đa 1 req/s tổng ứng dụng, có nhận diện và cache; https://operations.osmfoundation.org/policies/nominatim/
+- openrouteservice cho tuyến di chuyển theo quota và điều khoản: https://openrouteservice.org/restrictions/
+- Weather (Open-Meteo): free non-commercial, sản phẩm có thương mại phải đăng ký thương mại/nguồn được phép: https://open-meteo.com/en/terms
+- Chỉ tích hợp đặt phòng, đặt vé trực tiếp khi đối tác cung cấp API chính thức hợp lệ và cho phép. Đa số website không có booking API public; khi chưa có nên chuyển tiếp trang đặt chính thức hoặc tạo yêu cầu báo giá có xác nhận.
+- Ảnh từ đối tác được quyền sử dụng, Wikimedia Commons với kiểm tra license từng ảnh, ảnh do người dùng đồng ý cung cấp. Không copy ảnh Google Maps hay mạng xã hội trái điều khoản.
+
+XV. 9 KỊCH BẢN KHÁCH HÀNG
+1. Khách gia đình HCM: 1 ngày giải trí trong nhà/ngoài trời Sơn Tiên – Bửu Long; vé chính xác theo ngày và chiều cao trẻ em.
+2. Cặp đôi: 2 ngày hồ Trị An – vùng nhà vườn, ngắm cảnh, một chỗ nghỉ xác minh và thời tiết phù hợp.
+3. Nhóm bạn thích rừng: Nam Cát Tiên 2N1Đ, tham quan theo giờ hoạt động, guide được phép, lodge có giá thực.
+4. Du khách quốc tế: 3 ngày Biên Hòa di sản – Tà Lài – Cát Tiên, trợ lý đa ngữ, hỗ trợ ăn kiêng và phương tiện.
+5. Gia đình có người lớn tuổi: ưu tiên quãng đi bộ ngắn, điểm có nhà vệ sinh/chỗ ngồi, hoạt động ít rủi ro.
+6. Đoàn công ty 40 người: AI lập ba phương án tour, mỗi phương án có xe, ăn, hoạt động, bảo hiểm, dịch vụ, điều khoản; bên lữ hành duyệt giá.
+7. Đoàn trường học: tour tìm hiểu Văn miếu Trấn Biên – Sóc Bom Bo/Tà Thiết nhưng chỉ trong lịch trình phù hợp quãng đường theo nhóm tuổi.
+8. Khách mê ẩm thực: các điểm gỏi bưởi Tân Triều, trái cây Long Khánh, món cá vùng hồ và trải nghiệm nấu ăn có cơ sở tiếp đón thật.
+9. Khách niche Bình Phước cũ: Sóc Bom Bo, Bù Gia Mập, Bà Rá – Thác Mơ, kết hợp lịch cộng đồng và lưu trú có phép.
+
+XVI. DEMO KHI THI – MỘT TÌNH HUỐNG THUYẾT PHỤC
+Khách nhập: 'Chúng tôi từ TP.HCM, hai người lớn và một trẻ cao 1m2, đi 2 ngày, muốn chơi nước, ăn đặc sản và ngắm hồ; ngân sách 3 triệu. Nếu trời mưa thì sao?'
+Nền tảng hiểu nhóm tuổi/chiều cao/ngân sách/ngày, truy xuất điểm, trả 2–3 lịch trình, giải thích giá nào được nhà cung cấp xác nhận, chỗ nào còn chờ giá, chỉ các cảnh báo liên quan Đảo Ó, cho thay Amazing Bay bằng phương án khác khi khách đổi ngân sách, so sánh tác động tới tổng tiền và thời gian di chuyển. Khách chọn chuyến, gửi yêu cầu đặt đến một doanh nghiệp có giấy phép, người bán nhìn thấy lead ở dashboard và phản hồi. Mọi giá khác giả lập phải gắn nhãn DEMO; kịch bản demo không được tự tạo xác nhận thanh toán, hợp đồng hay booking.
+
+XVII. RÀ SOÁT TÌNH TRẠNG ĐẢO Ó – ĐỒNG TRƯỜNG
+Báo VnExpress 6/3/2025 phản ánh cơ sở kinh doanh từng bị tạm dừng hoạt động vì thủ tục môi trường/xây dựng/đất đai. Trang Liên hiệp các tổ chức hữu nghị TP Đồng Nai tháng 7/2026 giới thiệu vẻ đẹp cảnh quan, nhưng chưa đủ chứng minh mọi dịch vụ đảo được phép vận hành/đón khách tại ngày đến. Chỉ xếp vào danh mục khám phá và liên hệ xác minh; không thu tiền tour/đò nếu chưa kiểm tra cụ thể.
+
+XVIII. KIỂM TRA THỰC TẾ VÀ QUYỀN RIÊNG TƯ
+Không đưa review chưa kiểm duyệt lên thành thông báo chính thức; không tự kết luận cơ sở lừa đảo chỉ từ ảnh chụp báo giá; có khiếu nại/chứng minh/cơ chế sửa. Không giữ số điện thoại/vị trí liên tục không cần thiết. Nếu định triển khai cho khách ngoại quốc, chú trọng hỗ trợ đa ngữ và quy định bảo vệ thông tin cá nhân/visa mà không tư vấn pháp lý không chắc chắn. Không quảng cáo tour trải nghiệm văn hóa với lịch biểu diễn cố định nếu cộng đồng chưa xác nhận.
+
+XIX. THANG ĐO AI VÀ HIỆU QUẢ KINH DOANH
+- Bộ dữ liệu 50-100 yêu cầu du lịch Việt/Anh đủ loại; kiểm tra AI bóc tách ngân sách, số khách, ngày, sở thích, giới hạn.
+- Baseline bộ lọc thông thường hoặc tư vấn viên nhập tay; nhóm dùng AI vs không AI với ca cân bằng.
+- KPI: thời gian có lịch trình hợp lệ, thời gian lập báo giá, phần trăm lịch trình phạm điều kiện đóng cửa, phần trăm giá không có nguồn, tỉ lệ khách hoàn tất yêu cầu tư vấn/booking, độ hài lòng; tuyệt đối không bịa đặt cải thiện 90% nếu chưa đo.
+- Bộ kiểm tra hard-case: đảo Ó chưa xác nhận, giá The Amazing Bay mâu thuẫn, tour rừng trái mùa, khách dùng xe lăn, combo vượt ngân sách, khách nước ngoài dị ứng, đi quá xa trong một ngày, ngày không có chỗ, dịch vụ đóng cửa.
+
+XX. KẾT LUẬN
+Hướng đoạt giải AI Digital Business không phải xây thêm một blog du lịch thông thường. Phải chứng minh một chuỗi giá trị có thể giao dịch: Hỏi nhu cầu -> AI lựa chọn các dịch vụ thật có nguồn -> dựng tour và giá minh bạch -> khách xác nhận -> chuyển đúng doanh nghiệp có giấy phép -> xử lý yêu cầu -> đánh giá sau tour -> số liệu tiết kiệm công tư vấn và đóng góp kinh tế cho cơ sở địa phương.
+Tài liệu là TỔNG HỢP Ý TƯỞNG VÀ NGHIÊN CỨU, chưa phải bản thiết kế kỹ thuật chi tiết, prompt coding hay bằng chứng đã ký với doanh nghiệp.
+
+
+================================================================================
+PHẦN MỞ RỘNG CHUYÊN SÂU — NAIVERSE 360° / 2026
+KHO Ý TƯỞNG TOÀN DIỆN: DU KHÁCH • ĐIỂM ĐẾN • AI • CỘNG ĐỒNG • DOANH NGHIỆP
+================================================================================
+
+GHI CHÚ TRƯỚC KHI ĐỌC:
+Đây là phần MỞ RỘNG TÀI LIỆU Ý TƯỞNG đã có ở mục I–XX phía trên; không phải kế hoạch triển khai, không phải prompt lập trình, không phải minh chứng rằng các dịch vụ đã có thật. Phạm vi là 'tất cả nhóm khả năng có ý nghĩa', không thể khẳng định đã bao quát tuyệt đối mọi địa điểm hoặc mọi công nghệ xuất hiện trong tương lai.
+
+Các mức độ bằng chứng:
+[ĐÃ CÓ NGUỒN] Sự kiện, cơ sở hoặc chính sách có đường dẫn nguồn công khai, nhưng vẫn cần xác minh trạng thái vào ngày giao dịch.
+[Ý TƯỞNG] Sản phẩm/chức năng mới NaiVerse có thể phát triển; không phải tính năng đang chạy.
+[CẦN ĐỐI TÁC] Chỉ dùng khi có doanh nghiệp hoặc cộng đồng cung cấp dịch vụ thực, giấy phép và dữ liệu.
+[CẦN DỮ LIỆU] Mô hình AI nâng cao phụ thuộc dữ liệu huấn luyện/đánh giá đủ chất lượng.
+[KHÔNG TỰ ĐỘNG] Hệ thống chỉ hỗ trợ, không được tự kết luận mức độ an toàn, ban hành cảnh báo chính thức, đặt cọc hay thu tiền thay bên cung cấp khi chưa có thẩm quyền.
+
+XXI. NAIVERSE LÀ GÌ KHI PHÁT TRIỂN ĐẾN MỨC TỐT NHẤT?
+
+NaiVerse không phải một công cụ 'chatbot du lịch' đơn lẻ. Đó là 'bản đồ tri thức du lịch sống' + 'người bạn đồng hành AI' + 'chợ trải nghiệm có trách nhiệm' + 'công cụ kinh doanh của cơ sở du lịch địa phương' + 'cộng đồng du lịch và nguồn tin đáng tin'. Khách có thể bắt đầu từ một câu hỏi không rõ ràng, dần tìm được trải nghiệm phù hợp, so sánh tổng chi phí, kiểm chứng thông tin, lập lịch trình, gửi nhu cầu đến người bán và lưu lại hành trình khi về nhà.
+
+Giá trị khác biệt hình thành từ 7 lớp kết nối:
+1. Bản đồ liên kết địa lý: cảnh quan – điểm dừng – đường – quãng đi – mùa – thời gian – mức tiếp cận.
+2. Bản đồ trải nghiệm: mọi nơi không chỉ có 'địa chỉ' mà còn có hoạt động, câu chuyện, đối tượng phù hợp, quy tắc tham quan, những gì không nên làm.
+3. Bản đồ thương mại: vé, phòng, tour, hướng dẫn viên, di chuyển, bữa ăn, dịch vụ và điều kiện giao dịch thật.
+4. Bản đồ bằng chứng: nguồn giá, ngày cập nhật, giấy phép, ai xác minh, review có nguồn, lịch sử đính chính.
+5. Bản đồ cảm xúc: khách thích yên tĩnh, thích ảnh đẹp, khám phá, thể thao, tâm linh, ẩm thực, thiên nhiên hay trò chơi.
+6. Bản đồ tác động: chi tiêu địa phương, hành trình ít di chuyển vòng, bảo vệ môi trường và bảo tồn văn hóa.
+7. Bản đồ trí tuệ: AI làm cầu nối giữa nhu cầu của khách và dữ liệu đáng tin, giải thích lựa chọn, hỗ trợ quyết định và trả lời đa ngữ.
+
+Tuyên ngôn thương hiệu: 'Cả Đồng Nai trong một bản đồ, mỗi người một hành trình.'
+Tên phụ mô tả: 'NaiVerse – Vũ trụ du lịch Thành phố Đồng Nai'.
+Thông điệp cho khách quốc tế: 'Discover Dong Nai, your way'.
+Khẩu hiệu văn hóa: 'Đi để hiểu – trải nghiệm để yêu – chi tiêu để cùng phát triển'.
+Thông điệp trung thực: 'Giá, tình trạng hoạt động và chỗ còn trống luôn cần xác nhận với đơn vị cung cấp trước khi thanh toán'.
+
+XXII. NAI-TRAVEL DNA — TOÀN BỘ NHÓM KHÁCH VÀ NHU CẦU RIÊNG
+
+[Ý TƯỞNG] Khách du lịch trong Thành phố Đồng Nai: giải trí 1 ngày, khám phá quán mới, trải nghiệm quê hương cuối tuần, đi cùng đồng nghiệp.
+[Ý TƯỞNG] Khách từ TP.HCM/miền Đông Nam Bộ: tuyến đi ngắn, khung giờ khởi hành, bãi xe, tour 1N hoặc 2N1Đ, chi phí vận chuyển.
+[Ý TƯỞNG] Khách từ các tỉnh xa: thiết kế tuyến nhiều ngày có lưu trú, hỗ trợ chọn điểm đến quanh trục giao thông và chuyển tiếp phương tiện.
+[Ý TƯỞNG] Khách nước ngoài đi tự túc: bản đồ song ngữ, nhận diện tên địa danh cũ/mới, hướng dẫn giao tiếp, quy đổi tiền, phương thức thanh toán và thông tin y tế công khai.
+[Ý TƯỞNG] Khách quốc tế đi đoàn: dịch vụ lữ hành quốc tế đúng giấy phép, phiên dịch, lịch trình có tài liệu trước chuyến, quy tắc tham quan tôn giáo/văn hóa.
+[Ý TƯỞNG] Gia đình có em bé: tuổi, chiều cao theo quy định trò chơi, vệ sinh, giờ ngủ, điểm nghỉ, món ăn phù hợp trẻ, thời gian chờ và phương án khi trẻ mệt.
+[Ý TƯỞNG] Gia đình đa thế hệ: điều tiết nhịp độ, ít đi bộ, ghế nghỉ, xe đẩy, đường bằng phẳng, điều hòa/điểm trú nắng, bữa ăn dễ dùng.
+[Ý TƯỞNG] Người cao tuổi: đánh dấu bậc thang, độ dốc và khoảng cách giữa điểm dừng nếu đã khảo sát; không tự khẳng định 'phù hợp cho mọi người'.
+[Ý TƯỞNG] Người sử dụng xe lăn: thông số cửa, đường dốc, WC tiếp cận, phòng nghỉ tầng trệt, xe hỗ trợ, ảnh bằng chứng hoặc xác nhận từ cơ sở.
+[Ý TƯỞNG] Người có hạn chế thị giác/thính giác: audio guide, phụ đề, điều hướng tương phản cao, bàn phím và hướng dẫn hỗ trợ từ nhân viên.
+[Ý TƯỞNG] Người có dị ứng thực phẩm: biểu mẫu nguyện vọng ăn uống; thông tin thành phần chỉ được xác nhận từ nhà hàng, không tự cam kết món an toàn.
+[Ý TƯỞNG] Người ăn chay/ăn kiêng/tuân theo yêu cầu tôn giáo: bộ lọc cơ sở tự khai và trạng thái đã kiểm tra.
+[Ý TƯỞNG] Khách thích chụp ảnh: mùa ánh sáng, góc nhìn công khai hợp lệ, điểm chụp đẹp, quy tắc chụp trong cộng đồng/bảo tàng, không công khai tọa độ nhạy cảm.
+[Ý TƯỞNG] Khách yêu thiên nhiên, xem chim: lịch quan sát theo chuyên gia, số lượng nhóm hạn chế, tour có hướng dẫn; tuyệt đối không tiết lộ nơi trú của loài nguy cấp.
+[Ý TƯỞNG] Du khách muốn chữa lành/nghỉ dưỡng: tuyến yên tĩnh, cơ sở nghỉ có thật, hoạt động nhẹ nhàng; không đưa ra lời hứa trị bệnh.
+[Ý TƯỞNG] Digital nomad và khách công tác: Wi-Fi được kiểm tra, góc làm việc, ổ cắm, thời gian check-in, nghỉ sau giờ làm, hóa đơn hợp lệ.
+[Ý TƯỞNG] Khách đoàn doanh nghiệp: lập đề nghị tour, team-building, gala, xe, bữa ăn, phòng họp, báo giá B2B có nhân viên xác nhận.
+[Ý TƯỞNG] Khách MICE/sự kiện/hội nghị: sức chứa địa điểm, công năng âm thanh, di chuyển, lưu trú cùng cụm, phiên dịch.
+[Ý TƯỞNG] Học sinh/sinh viên: tour ngoại khóa/STEAM/lịch sử, phiếu học tập, trò chơi tri thức, quản lý nhóm và thông tin phụ huynh theo quyền.
+[Ý TƯỞNG] Giáo viên/nhà nghiên cứu: lịch sử có nguồn, tuyến khảo sát giáo dục, lưu chú thích, tài liệu chuyên gia xác nhận.
+[Ý TƯỞNG] Cặp đôi/honeymoon: trải nghiệm lãng mạn có nguồn, riêng tư, góc ảnh, nghỉ dưỡng, quà địa phương, tránh quảng cáo quá mức.
+[Ý TƯỞNG] Người đi một mình: địa điểm có dịch vụ hỗ trợ rõ ràng, giờ nhận khách, quy tắc thông báo lịch trình riêng tư, không ghép người lạ mặc định.
+[Ý TƯỞNG] Nhóm bạn trẻ: so sánh hoạt động, split-bill, bình chọn kế hoạch, đặt tour nhóm có người đại diện.
+[Ý TƯỞNG] Du khách ít ngân sách: lựa chọn miễn phí/chi phí thấp có nguồn, tuyến ít quãng đường, món ăn phù hợp, cảnh báo khoản phí chưa biết.
+[Ý TƯỞNG] Khách cao cấp: chỗ nghỉ sang trọng, xe riêng, private guide, trải nghiệm ít người, điều khoản dịch vụ rõ ràng.
+[Ý TƯỞNG] Khách có vật nuôi: chỉ gợi ý nơi đã xác nhận chấp nhận thú cưng, yêu cầu rọ mõm/dây dắt/vệ sinh nếu có.
+[Ý TƯỞNG] Khách thích phượt/xe máy: tuyến được phép, thời gian thực tế, đổ xăng, mưa, giới hạn chạy đêm, không cổ vũ chạy tốc độ nguy hiểm.
+[Ý TƯỞNG] Khách thích đạp xe/chạy bộ: tuyến có dữ liệu độ dốc, điểm nghỉ, nước uống, đoạn có mật độ giao thông cao để cân nhắc.
+[Ý TƯỞNG] Khách hành hương/tâm linh: quy tắc trang phục, lịch nghi lễ chính thức, chỗ đậu xe, giờ thăm, tôn trọng sinh hoạt cộng đồng.
+[Ý TƯỞNG] Khách có mục tiêu nghề nghiệp: tham quan học tập về nông nghiệp, thủ công, sinh thái hoặc công nghiệp tại cơ sở có phép đón khách.
+[Ý TƯỞNG] Người dân xa quê: tuyến ký ức Biên Hòa–Trấn Biên, tuyến làng nghề, bản đồ ảnh cũ/mới có bản quyền.
+[Ý TƯỞNG] Khách tự lái ô tô: ước tính tổng đường và phụ phí theo tuyến, bãi đỗ đã xác nhận, điểm nghỉ, hướng dẫn tiếp cận.
+[Ý TƯỞNG] Người cần lịch trình cực ngắn: 'Tôi có 3 giờ trước giờ hẹn', AI chỉ gợi ý điểm đủ thời gian đi–về và kiểm chứng mở cửa.
+[Ý TƯỞNG] Khách đột xuất: 'Tôi đang ở đây, còn một buổi chiều', AI xem những gì có thể đi được theo vị trí tự nguyện cung cấp.
+
+Mỗi nhóm khách cần một hồ sơ nhu cầu tự chọn: thành viên, lịch rảnh, ngân sách, sở thích, yêu cầu tiếp cận, giới hạn ăn uống, ngôn ngữ, phương tiện, mức vận động, tính riêng tư và ưu tiên môi trường. Dữ liệu nhạy cảm chỉ thu thập tối thiểu và không suy đoán từ ảnh cá nhân.
+
+XXIII. NAIVERSE EXPLORE — BẢN ĐỒ DU LỊCH TƯƠNG TÁC NHƯ MỘT 'VŨ TRỤ'
+
+[Ý TƯỞNG] Bản đồ 2D toàn thành phố cùng bộ lọc địa hình, hành chính mới và vùng lịch sử; hỗ trợ tìm cả tên gọi cũ.
+[Ý TƯỞNG] Bản đồ địa điểm ở nhiều tỷ lệ: toàn thành phố -> vùng trải nghiệm -> cụm nhỏ -> lối vào có tọa độ đã đối chiếu.
+[Ý TƯỞNG] Bản đồ cảnh đẹp: hồ, suối, thác, núi, rừng, vườn trái cây, công viên, điểm ngắm cảnh.
+[Ý TƯỞNG] Bản đồ văn hóa: di tích, bảo tàng, làng nghề, công trình tôn giáo được phép tham quan.
+[Ý TƯỞNG] Bản đồ ẩm thực: đặc sản theo vùng, chợ ẩm thực, quán gia đình, cơ sở có menu và giờ đã kiểm tra.
+[Ý TƯỞNG] Bản đồ giải trí: công viên nước, khu trò chơi, khu sinh thái, sân thể thao du lịch, hoạt động trong nhà.
+[Ý TƯỞNG] Bản đồ lưu trú: khách sạn, resort, homestay, lodge, campsite được xác nhận hoạt động và điều kiện pháp lý.
+[Ý TƯỞNG] Bản đồ trải nghiệm địa phương: nhà vườn, xưởng thủ công, lớp nấu ăn, hướng dẫn viên, workshop.
+[Ý TƯỞNG] Bản đồ theo mùa: điểm đẹp vào mùa trái cây, ngày có sự kiện xác minh, thời điểm ngắm cảnh theo lịch sinh thái.
+[Ý TƯỞNG] Bản đồ theo thời gian trong ngày: sáng sớm, chiều muộn, ban ngày, hoạt động buổi tối đã được kiểm tra giờ mở.
+[Ý TƯỞNG] Lớp 'đã mở xác minh', 'đang tạm đóng', 'cần hỏi lại', 'đang có sự kiện', 'chỉ xem thông tin'.
+[Ý TƯỞNG] Lớp giá: không mất phí / trả phí / giá lịch sử / yêu cầu báo giá; tránh hiển thị bản đồ 'toàn bộ vé rẻ' khi chưa đủ dữ liệu.
+[Ý TƯỞNG] Lớp phù hợp: gia đình có trẻ, người già, đi một mình, du khách quốc tế, khách ít vận động.
+[Ý TƯỞNG] Lớp tiếp cận: đường vào, cầu thang, WC, bãi đậu, ghế nghỉ, đường dốc, trạng thái từng chi tiết đã kiểm tra.
+[Ý TƯỞNG] Lớp mức đông: 'dự báo đông' dựa vào lịch sử + sự kiện có nguồn; không tạo nhãn realtime khi không có dữ liệu.
+[Ý TƯỞNG] Lớp thời tiết: mưa, nhiệt độ, cảnh báo khí tượng; nêu nhà cung cấp và thời gian cập nhật.
+[Ý TƯỞNG] Lớp 'trải nghiệm xanh': đơn vị tham gia giảm rác, sử dụng bình nước tái dùng và bảo vệ hệ sinh thái với bằng chứng.
+[Ý TƯỞNG] Lớp 'Ẩm thực quanh đây': nơi ăn được xác minh trong một bán kính và có khả năng phục vụ nhóm khách.
+[Ý TƯỞNG] Lớp 'Nghỉ qua đêm': cơ sở lưu trú quanh điểm đến và quãng đường tới các điểm tham quan.
+[Ý TƯỞNG] Lớp 'địa điểm ít người biết': không phá vỡ sức chứa sinh thái hoặc riêng tư cộng đồng.
+[Ý TƯỞNG] Lớp ảnh 360° có bản quyền/đồng ý, phân biệt ảnh mặt đất – drone – ảnh mô phỏng.
+[Ý TƯỞNG] Bản đồ video ngắn theo địa điểm, ngày quay, chủ sở hữu, xem trước cảnh quan.
+[Ý TƯỞNG] Bản đồ âm thanh: tiếng rừng, tiếng nước, âm nhạc địa phương đã được đồng ý, dành cho khám phá từ xa.
+[Ý TƯỞNG] Bản đồ lịch sử theo thời điểm: di tích được ghi bằng tên cũ/mới, đường dẫn hồ sơ sử học.
+[Ý TƯỞNG] Bản đồ di sản của người địa phương: câu chuyện được người kể cho phép công bố; lưu công lao đóng góp.
+[Ý TƯỞNG] 'Từ một bức ảnh đến điểm đến': dùng ảnh địa danh được quyền phân tích để tìm các hồ sơ có hình tương tự; trả kết quả xác suất chứ không khẳng định chính xác.
+[Ý TƯỞNG] Bản đồ bộ sưu tập riêng: lưu điểm muốn đi, đã đi, muốn hỏi giá, đã lưu để thảo luận với nhóm.
+[Ý TƯỞNG] Vẽ vùng quan tâm: 'có gì thú vị trong 30 phút lái xe quanh đây' với điều kiện giao thông tham khảo.
+[Ý TƯỞNG] Theo dõi một hành trình trên bản đồ: các điểm dừng có ngày giờ, tổng quãng đường, chi phí dự kiến, liên kết đối tác.
+[Ý TƯỞNG] Chế độ ngoại tuyến: lưu điểm đến, địa chỉ, tài liệu và các khu vực bản đồ có giấy phép; không giả dữ liệu realtime.
+[Ý TƯỞNG] Mỗi địa điểm có nút 'Thông tin sai?' để cộng đồng góp ý với bằng chứng.
+[Ý TƯỞNG] 'Bản đồ tại cửa ngõ': bộ sưu tập dành cho khách vừa đến tại trạm xe, sân bay, khu lưu trú; vị trí hiển thị phụ thuộc sự đồng ý.
+
+XXIV. MỘT HỒ SƠ ĐIỂM ĐẾN CHUẨN NAI-VERSE LÀ MỘT BỘ TRI THỨC SỐ
+
+Tên và tên bản địa; tên lịch sử; alias viết không dấu; mã định danh riêng; phân loại chính/phụ; địa chỉ hành chính hiện hành và địa chỉ lịch sử (không thay thế lẫn nhau); kinh/vĩ độ lối vào; nhiều cổng vào; mô tả khách quan; thuyết minh có nguồn; ảnh đại diện bản quyền rõ; album ảnh theo mùa; video 360°; hình minh họa có nhãn; chủ thể quản lý; kênh chính thức; giờ hoạt động; ngày đóng cửa; giới hạn số người; vé từng đối tượng; thuế/phụ thu; chính sách hủy; trạng thái bookable; mức tiếp cận; yêu cầu trang phục; hoạt động trẻ em; khu dành cho phụ huynh; hạ tầng vệ sinh; nước uống; điện thoại sóng yếu; khu vực cần hướng dẫn; quy tắc không xả rác; không gian yên tĩnh; món đặc sản liên quan; thời điểm hợp mùa; lưu trú gần; tuyến gợi ý; thời tiết ảnh hưởng; cảnh báo chỉ từ nguồn có trách nhiệm; review có bằng chứng; cập nhật gần nhất; danh mục nguồn; nút báo lỗi/đính chính.
+
+Không nên chấm số sao tổng hợp khi chưa có nguồn và phương pháp; không dùng logo cơ quan nhà nước để tạo cảm giác được bảo trợ. 'Địa điểm ở Đồng Nai' và 'dịch vụ được phép hoạt động' là hai trạng thái khác nhau. Điểm bí mật sinh thái hoặc điểm thuộc cộng đồng chưa cho phép không được tiết lộ tọa độ chính xác.
+
+XXV. HỆ SINH THÁI TRẢI NGHIỆM ĐẶC TRƯNG ĐỒNG NAI CÓ THỂ MỞ RỘNG
+
+A. NƯỚC — HỒ — SÔNG — THÁC:
+- Ngắm bình minh/hoàng hôn từ khu vực hồ Trị An được phép tiếp cận; picnic không lấn chiếm và thu gom rác.
+- Chương trình kể chuyện hồ Trị An: lịch sử, thủy điện, môi trường và cộng đồng ven hồ theo nguồn.
+- Chuyến quan sát sinh thái hồ có đơn vị cung cấp phương tiện và cứu hộ được phép; không khuyến khích tự ra đảo/đi thuyền không đăng ký.
+- Đảo Ó–Đồng Trường: giới thiệu cảnh quan và trạng thái tiếp đón rõ ràng; chưa xác minh đủ thủ tục thì không bán vé/tour.
+- Suối Mơ: danh mục hoạt động nước theo chiều cao/độ tuổi, thời gian, giới hạn trò chơi và vé được xác minh.
+- Thác Mai/Bàu Nước Sôi: hồ sơ điều kiện tiếp cận, dự án đầu tư, điểm an toàn, giới hạn môi trường.
+- Thác Giang Điền, Thác Đá Hàn và các thác nhỏ khác: giới thiệu chỉ sau khi cập nhật tình trạng vận hành, quyền tham quan và cảnh báo.
+- Sông Đồng Nai và các đoạn sông có dịch vụ hợp pháp: tuyến ảnh phong cảnh, nghề nghề thủ công/gốm, tìm hiểu sinh kế, trải nghiệm ẩm thực.
+- Hồ Thác Mơ: điểm nhìn cảnh quan, hướng dẫn tiếp cận hồ ở khu được phép, không tự ý đến hạ tầng vận hành thủy điện.
+- Các hồ nhỏ hoặc suối chưa xác minh: chỉ vào 'địa điểm cần nghiên cứu', không tự công bố là điểm được phép cắm trại/bơi.
+
+B. RỪNG — THIÊN NHIÊN — QUAN SÁT ĐỘNG VẬT:
+- Vườn quốc gia Cát Tiên: hành trình rừng, cây cổ thụ, quan sát động vật theo thời gian và tuyến được vườn cho phép.
+- Khu Bảo tồn Thiên nhiên – Văn hóa Đồng Nai/rừng Mã Đà: hành trình sinh thái, lịch sử, xe đạp/đi bộ theo quy định.
+- Vườn quốc gia Bù Gia Mập: trải nghiệm giáo dục đa dạng sinh học có thuyết minh chuyên môn.
+- Birdwatching tour với hướng dẫn viên được phép, ghi nhận ảnh không gây hại sinh vật; không công khai tổ chim/địa điểm loài nguy cấp.
+- Nature journaling: vẽ lá cây, ghi âm môi trường và học nhận diện sinh vật bằng AI dưới dạng gợi ý tham khảo.
+- Citizen science tùy chọn: quan sát chim/bướm/cây theo mẫu, chờ chuyên gia xác nhận trước khi công bố.
+- Tour đọc dấu vết thiên nhiên từ mẫu ảnh được phép, nhắc không săn đuổi/cho động vật ăn.
+- 'Ngày không màn hình' kết hợp audio guide ngắn và hoạt động quan sát có người tổ chức.
+
+C. NÚI — ĐỊA HÌNH — NGẮM CẢNH:
+- Núi Chứa Chan và Bà Rá: tuyến ngắm cảnh, hành hương theo quy tắc riêng, mức thể lực và thời tiết.
+- Đá Ba Chồng: câu chuyện địa chất có kiểm chứng và gợi ý vị trí chụp ảnh không vượt rào an toàn.
+- Trảng cỏ Bù Lạch: trải nghiệm phong cảnh, bảo tồn thảm cỏ, không lái xe phá mặt cỏ.
+- Các điểm cao có cảnh quan tại vùng Phước Long, Bù Gia Mập: chỉ quảng bá điểm tham quan khi có quyền tiếp cận.
+- 'Đường ảnh vùng đất đỏ': dẫn từ cảnh nông nghiệp đến thiên nhiên, thuyết minh sự khác biệt địa hình.
+
+D. NÔNG NGHIỆP — VƯỜN CÂY — NÔNG THÔN:
+- Hành trình làng bưởi Tân Triều: câu chuyện giống bưởi, món ăn từ bưởi, thử hương vị với người bán thật.
+- Hành trình vườn trái cây Bình Lộc/Long Khánh theo mùa; bán vé hái trái khi chủ vườn cho phép và có bảng giá.
+- Buổi học phân biệt loại bưởi/sầu riêng/chôm chôm chỉ là giáo dục, không khẳng định chuẩn chất lượng từ hình ảnh.
+- 'Một buổi làm nhà vườn': trải nghiệm quy trình chăm cây phù hợp an toàn và nội quy vườn.
+- 'Farm breakfast': bữa sáng tại vườn với đơn vị tổ chức/ATTP hợp lệ.
+- 'Đặt mùa trái cây trước': đăng ký nhận tin khi mùa trải nghiệm thực sự mở, không thu cọc tự động nếu chủ vườn chưa xác nhận.
+- Nông sản thành quà: trải nghiệm xong mua quà tại đơn vị bán địa phương có giấy tờ nguồn gốc.
+- Tour cảm quan hương vị vùng miền: trái cây, cà phê, hạt điều, món từ bưởi theo cơ sở xác minh.
+- 'Đường hoa và cây xanh' trên cơ sở khu vườn có phép tham quan, không tự tạo địa điểm.
+- 'Một ngày sống chậm ở nông thôn': tham gia hoạt động do nông hộ thiết kế, giới hạn số khách và không làm gián đoạn công việc.
+
+E. VĂN HÓA — DI SẢN — TÂM LINH — LỊCH SỬ:
+- Văn miếu Trấn Biên, bảo tàng, các tuyến di tích Biên Hòa: hướng dẫn lịch sử có nguồn và audio guide.
+- Nghề gốm Biên Hòa: workshop được xưởng đồng ý, câu chuyện thợ gốm và tác phẩm địa phương.
+- Thiên nhiên đi kèm ký ức Chiến khu D, Sóc Bom Bo, Tà Thiết, Nhà Giao tế Lộc Ninh, tuyến về nguồn cho trường học.
+- Du lịch cộng đồng tại Tà Lài, Bom Bo và vùng dân tộc bản địa: cộng đồng tự quản nội dung trải nghiệm, lợi ích tài chính minh bạch.
+- 'Du lịch kể chuyện từ người dân': audio phỏng vấn có hợp đồng đồng ý, thù lao/ghi công và quyền gỡ bỏ.
+- Tour ẩm thực kết hợp kể chuyện nguồn gốc món, tập quán phục vụ, nguyên liệu và khuyến nghị tôn trọng.
+- Hành hương theo ngày lễ/giờ nghi thức do cơ sở tôn giáo công bố; không tự tổ chức hoạt động tại không gian thờ tự.
+- 'Thử tài làm nghề': làm gốm, thủ công nhỏ, chuẩn bị món truyền thống, quà trải nghiệm — chỉ với cơ sở tự nguyện tham gia.
+- 'Đêm văn hóa' theo lịch tổ chức thực tế, không quảng bá biểu diễn của cộng đồng như sẵn có mỗi tối.
+
+F. GIẢI TRÍ — GIA ĐÌNH — GIÁO DỤC:
+- The Amazing Bay và các khu Sơn Tiên: lựa chọn trò chơi theo điều kiện chiều cao và gói vé đúng loại.
+- Bửu Long, Bò Cạp Vàng, Suối Mơ và các công viên: khám phá hoạt động bằng bản đồ khu vực nếu đơn vị cho phép.
+- Tour sinh nhật/nhóm bạn: lịch trình có đồ ăn, tiệc, hoạt động, an toàn cho trẻ với bên cung cấp xác nhận.
+- Tour STEM thiên nhiên: quiz nhận biết loài, vòng tuần hoàn nước, đất, môi trường tại điểm được phép.
+- Giáo dục bảo tồn: check-in hoàn thành nhiệm vụ học tập, không bắt sinh viên/học sinh tiếp xúc môi trường nguy hiểm.
+- Gamification học lịch sử tại di tích bằng câu đố có nguồn và nội dung được đơn vị quản lý duyệt.
+- Tour hợp đồng cho đoàn trường có hồ sơ năng lực bên tổ chức và quản lý trẻ em phù hợp.
+
+G. ĐẶC SẢN — ẨM THỰC — ĐỒ UỐNG — MUA SẮM:
+- Gỏi bưởi/chè bưởi và sản phẩm từ bưởi; cá hồ Trị An; hạt điều, trái cây Long Khánh; ẩm thực bản địa do cộng đồng giới thiệu.
+- Bản đồ bữa sáng, bữa trưa, bữa tối theo đường đi thực tế; cảnh báo khi giờ mở không xác minh.
+- Food passport: thử món và lấy tem từ cơ sở tham gia hợp lệ, tránh khuyến khích ăn quá mức.
+- Workshop món địa phương qua đầu bếp/người dân đồng ý, hỗ trợ phiên dịch thực đơn.
+- Chợ/quầy quà địa phương có nguồn gốc, hóa đơn, đóng gói, giao tận nhà nếu đối tác cung cấp.
+- 'Mua quà theo ngân sách': quà bưởi, hạt điều, gốm, đặc sản đóng gói với tồn kho và giá có nguồn.
+- 'Taste Match': đề xuất món theo sở thích vị, ngân sách, giới hạn ăn kiêng; chất gây dị ứng xác nhận từ chủ cơ sở.
+- Trải nghiệm cà phê/chế biến hạt, cửa hàng rang xay, hoạt động hậu trường chỉ khi được phép.
+
+H. DU LỊCH MỚI LẠ VÀ KẾT HỢP NGÀNH:
+- Du lịch nghỉ dưỡng ven rừng, ven hồ, detox kỹ thuật số (wellness phi y tế).
+- Du lịch ảnh cưới/ảnh gia đình theo cảnh quan công khai và điều kiện quay chụp.
+- Du lịch thể thao mềm: cycling, đi bộ thiên nhiên, chạy bộ phong cảnh theo tuyến đã khảo sát.
+- Du lịch học hỏi nghề nghiệp: đào tạo xanh, nhà máy/cơ sở công nghiệp có quyền tiếp khách, minh bạch nội quy an toàn.
+- Tour hội nghị kết hợp dã ngoại: ngày họp, ngày trải nghiệm, địa điểm nghỉ cùng khu vực.
+- Du lịch làm việc từ xa: lưu trú có Wi-Fi, không gian làm việc, quán cà phê yên tĩnh đã kiểm tra.
+- Du lịch nhiếp ảnh chim/rừng có hướng dẫn và giới hạn tác động.
+- Tour thiện nguyện chỉ thông qua tổ chức đáng tin và nhu cầu do cộng đồng xác định; không thương mại hóa khó khăn của người dân.
+- Tourism scavenger hunt theo địa điểm công cộng, tránh nhiệm vụ trèo rào/đi vào khu cấm.
+- Hành trình lịch sử tương tác AR tại bảo tàng nếu được đơn vị quản lý chấp thuận nội dung và hình ảnh.
+
+XXVI. HỆ THỐNG 'TOUR CONSTRUCTOR' — KHÔNG CHỈ GỢI Ý, MÀ LẮP GHÉP ĐƯỢC DỊCH VỤ
+
+Một tour trong NaiVerse có thể gồm: khởi hành -> di chuyển -> trải nghiệm -> bữa ăn -> nghỉ -> trải nghiệm buổi chiều -> lưu trú -> di chuyển hôm sau -> quà địa phương -> phản hồi sau chuyến. Mỗi khối có đơn vị bán, giá, hạn chế về thời gian, số khách, ngày dịch vụ, xác nhận còn chỗ và bằng chứng cho thông tin.
+
+Ý tưởng biến thể: 'Chọn gu trước – tour xuất hiện'; 'Chọn thời gian trước – tìm điểm phù hợp'; 'Chọn ngân sách trước – AI tối ưu chi phí'; 'Chọn khách sạn trước – dựng tuyến quanh nơi ở'; 'Chọn một ảnh trước – AI gợi ý cụm trải nghiệm tương tự'; 'Chọn điểm dừng bắt buộc – AI lấp đầy khoảng thời gian còn lại'; 'Chọn cảnh quan muốn chụp – gợi ý khung giờ đẹp có điều kiện'; 'Chọn món phải ăn – tổ chức bữa đúng lịch'; 'Chọn nơi tránh đông – ưu tiên thời điểm/điểm ít đông dựa dữ liệu'; 'Chọn mức ít vận động – giảm đi bộ'; 'Chọn lịch làm việc – đi chơi ngoài giờ'; 'Chọn chủ đề gia đình – gợi ý trải nghiệm hợp trẻ'; 'Chọn thử thách ẩm thực/di sản – AI biến thành hành trình theo chủ đề'.
+
+Đầu ra tour đáng tin cậy: mục tiêu; thời gian; bản đồ; thứ tự điểm; tổng km và thời gian theo tuyến tham khảo; thời gian ở mỗi điểm; vé/ăn/xe/ngủ; tổng đã biết, phần chưa biết và dự phòng; nguồn; điều kiện đặt; lý do chọn; phương án thay thế; nút chia sẻ nhóm; nút yêu cầu doanh nghiệp báo giá; nút sửa tay. Tất cả không được tự gắn nhãn 'đã đặt' khi mới lập kế hoạch.
+
+XXVII. VŨ TRỤ TRÍ TUỆ NHÂN TẠO NAI-VERSE — 150+ KHẢ NĂNG AI VÀ TỰ ĐỘNG HÓA
+
+Đây là danh mục TÍNH NĂNG TIỀM NĂNG chứ không phải 150 công cụ đã hoàn thiện. Mỗi ý tưởng cần có dữ liệu thực và phép thử riêng; nhiều phần kết hợp AI + quy tắc + thuật toán tối ưu + thao tác con người, không được gọi mọi thứ là 'AI dự báo'.
+
+A. AI TÌM KIẾM VÀ KHÁM PHÁ
+01. Natural Language Discovery: hiểu câu 'muốn chỗ mát, ít người, gần nước, đi từ Bình Phước cũ' và chuyển thành ràng buộc tìm kiếm.
+02. Multilingual Search: tìm bằng tiếng Anh, Nhật, Hàn, Hoa hoặc tiếng Việt có dấu/không dấu, trả về tên địa điểm tương ứng.
+03. Historic Place Alias: biết 'Biên Hòa', 'Long Khánh', 'Bình Phước' có thể là tên vùng lịch sử trong mô tả cũ.
+04. Image-to-Place: khách tải ảnh phong cảnh, hệ thống gợi ý ứng viên điểm tương tự; hiển thị độ tin cậy và chống nhận nhầm ảnh nơi khác.
+05. Sketch-to-Experience: khách vẽ mong muốn 'hồ + ăn trưa + trẻ nhỏ', AI gợi ý hoạt động tương ứng.
+06. Mood Search: tìm theo cảm xúc như thư giãn, ấm cúng, sôi động, khám phá, lãng mạn, gần thiên nhiên.
+07. Semantic Filters: phân biệt 'ít đi bộ' với 'gần nhất' và 'có xe lăn tiếp cận' với 'có xe điện'.
+08. Hidden Gem Recommendation: tìm điểm nhỏ có bằng chứng, ít xuất hiện trong kết quả nhưng phù hợp sở thích và sức chứa.
+09. Seasonal Explorer: ghép mùa trái cây, thời tiết, sự kiện và lịch vận hành có nguồn để khuyến nghị thời điểm.
+10. Near-me Context: dựa trên vị trí người dùng chủ động chia sẻ, không theo dõi nền liên tục.
+11. Things-to-do Ranking: cân bằng gu khách, quãng đi, chi phí, đánh giá có nguồn, điều kiện mở cửa và tác động địa phương.
+12. Child-friendly Matching: khớp chiều cao trò chơi, thời gian ngủ, khu vệ sinh trẻ và lịch tránh nắng theo dữ liệu xác nhận.
+13. Allergy-aware Filtering: loại món/nhà hàng không đáp ứng yêu cầu sau khi chủ cơ sở xác nhận; khi chưa rõ phải nói 'chưa xác minh'.
+14. Budget Discovery: tìm điểm tham quan miễn phí, trả phí, giá chưa biết, ưu tiên phương án không làm vượt chi phí đã chắc chắn.
+15. Map Clustering AI: nhóm các điểm theo cùng phong cách và khoảng cách thật, không nhóm theo tên địa danh chung chung.
+
+B. AI TRỢ LÝ DU LỊCH CÁ NHÂN
+16. Trip DNA Interview: trò chuyện ngắn để xác định ràng buộc mà khách chưa đề cập.
+17. Constraint Extraction: bóc tách người, tuổi, ngày, phương tiện, ngân sách, mức thể lực, điểm phải đi và các điều không thích.
+18. Missing-info Prompt: hỏi đúng phần thiếu như giờ về, tuổi/chiều cao trẻ khi vé phụ thuộc thông số.
+19. Dynamic Itinerary Builder: ghép lịch trình với kiểm tra khả thi về giờ, đường đi, chỗ nghỉ, giá và trạng thái dịch vụ.
+20. Multi-objective Tour Optimizer: so sánh ít đi lại, chi phí, đa dạng trải nghiệm, mức nghỉ, mong muốn nhóm; ghi rõ đánh đổi.
+21. Smart Stop Ordering: xếp điểm theo địa lý và giờ mở thực tế, không hứa thời gian nếu API giao thông không có.
+22. Plan Stress Tester: phát hiện chuyến đi quá dày, trùng giờ, ăn trưa muộn, hoạt động sau giờ đóng.
+23. Weather-aware Alternative: đưa lựa chọn khác khi nguồn dự báo cho thấy mưa/gió/nắng mạnh; không tự tuyên bố thời tiết chắc chắn.
+24. Disruption-aware Replanning: khi một điểm không nhận khách, AI thay thế nhưng giữ điểm bắt buộc và mức ngân sách; tính năng chỉ đơn giản là tái tối ưu lịch trình, không dùng 'khẩn cấp' như marketing.
+25. Group Consensus Planner: tổng hợp sở thích của nhiều thành viên đã đồng ý chia sẻ, đưa phương án dung hòa.
+26. Smart Break Scheduler: tự chèn nghỉ, ăn, vệ sinh, nạp năng lượng và thời gian đón trả khi phù hợp.
+27. Start-from-Booking: khách có phòng đặt sẵn, AI chỉ xây hành trình quanh chỗ ở và giờ nhận/trả phòng.
+28. 3-hour Micro Trip: tạo tour ngắn tại nơi khách đang ở, tính cả thời gian quay về đúng giờ.
+29. Road Trip Assistant: nhận kiểu phương tiện, nhu cầu dừng nghỉ và hạn chế lái đêm.
+30. Surprise Day Curator: chọn trải nghiệm bất ngờ trong danh mục đã xác minh, cho khách đặt quyền kiểm soát mức độ bất ngờ.
+31. Smart Packing Assistant: gợi ý danh sách vật dụng dựa địa điểm, thời tiết, số ngày và quy định đơn vị tổ chức.
+32. Trip Calendar: đưa lịch trình có xác nhận vào lịch của khách, không tự gửi cho người khác.
+33. Personalized Travel Page: tạo một liên kết lịch trình riêng, tự chọn quyền xem và thời hạn truy cập.
+34. After-trip Replay: bản đồ hành trình, ảnh đã đồng ý lưu, chi phí cuối cùng, điểm đã ghé.
+
+C. AI GIÁ, VÉ VÀ MUA DỊCH VỤ
+35. Price Source Extractor: trích các trường giá, ngày, tuổi, chiều cao, thuế, điều kiện từ trang niêm yết được phép đọc.
+36. Price Disagreement Detector: phát hiện cùng vé nhưng nguồn A/B báo giá khác; không tự phán nhà bán tăng giá sai.
+37. Same-product Normalizer: không so vé công viên nước với vé cả khu phức hợp, không so phòng khác hạng.
+38. Family Ticket Calculator: tính nhóm người theo điều kiện tuổi/chiều cao được nhà cung cấp xác minh.
+39. Hidden-fee Explainer: tách phí phát sinh, ăn uống không gồm, đặt cọc, phụ thu ngày lễ, vé trò chơi phụ.
+40. Tour Quote Decomposer: bóc tour thành xe + bữa + phòng + vé + hướng dẫn viên + bảo hiểm + phụ thu.
+41. Total Trip Cost Estimator: trình bày chi phí đã biết, ước lượng có nhãn và hạng mục chưa có giá.
+42. Budget Guard: đưa cảnh báo khi tổng chắc chắn vượt ngân sách; không giảm tổng bằng cách loại khoản còn thiếu.
+43. Value-for-money Comparator: so lợi ích theo nhóm khách, không chỉ sắp xếp giá rẻ đến đắt.
+44. Cancellation Policy Reader: tóm tắt điều khoản đặt phòng/tour do đối tác cung cấp, dẫn nguồn văn bản gốc.
+45. Price Change Watch: theo dõi chính các nguồn được phép theo điều khoản, gửi thông báo khi một gói thay đổi.
+46. Offer Expiry Reminder: nhắc giá chỉ còn hiệu lực đến ngày nào, cần xác nhận lại trước trả tiền.
+47. Quote Draft Agent: tạo dự thảo email yêu cầu báo giá với số người, ngày, ngân sách và yêu cầu đặc biệt.
+48. Quote Quality Checker: phát hiện báo giá thiếu điều khoản, thiếu dịch vụ, thiếu chính sách hủy, không so sánh được.
+49. Booking Readiness Checker: chỉ bật đặt thật khi sản phẩm có nhà cung cấp, giá, tồn chỗ, chính sách và quyền bán hợp lệ.
+50. Reservation Handoff: chuyển nhu cầu và thông tin tối thiểu sang đối tác với sự đồng ý; không tự ghi 'đã đặt'.
+51. Split Cost Calculator: chia tiền theo nhóm khi các khoản khác nhau theo tuổi/nhu cầu; xử lý phần thiếu giá.
+52. Deposit Risk Flag: nhắc khách kiểm tra pháp nhân, tài khoản nhận tiền và hợp đồng; không kết luận scam khi thiếu chứng cứ.
+
+D. AI KHÁCH SẠN, HOMESTAY VÀ LƯU TRÚ
+53. Stay-to-Trip Matching: chọn nơi ở để giảm quãng đi và phù hợp điểm tham quan, không chỉ nơi có giá tốt.
+54. Hotel Amenity Extractor: đọc tiện nghi cơ sở công bố, chuẩn hóa và đánh dấu cần xác minh.
+55. Room Comparison: so cùng ngày, hạng phòng, số khách, ăn sáng, hủy phòng và tổng thuế phí.
+56. Family Room Fit: lưu ý giường phụ, cũi, quy định trẻ em, giới hạn số khách đã công bố.
+57. Workcation Filter: Wi-Fi được xác nhận, không gian làm việc, ổ cắm, độ yên tĩnh theo review.
+58. Accessibility Match: tìm cơ sở có bằng chứng về ram dốc, WC và cửa cho xe lăn.
+59. Late-arrival Coordination: nhắc nhân viên liên hệ trước khi khách đến muộn; không tự cam kết giữ phòng.
+60. Review Theme Summarizer: tóm tắt hàng trăm đánh giá theo vệ sinh, dịch vụ, Wi-Fi, âm thanh, tiện nghi có trích dẫn review.
+61. Review Recency Checker: cảnh báo hồ sơ có quá ít nhận xét mới; không coi im lặng là chất lượng kém.
+62. Room Photo Authenticity Aid: kiểm tra ảnh bị lặp, metadata công khai nếu có, yêu cầu nguồn ảnh và quyền dùng.
+63. Guest Message Translator: dịch trao đổi đặt phòng với đồng ý của hai bên.
+64. Check-in Guide: chuẩn bị giờ check-in, giấy tờ cần thiết theo chính sách chính thức, lưu ý bảo mật.
+65. Stay Problem Triage: phân loại yêu cầu vệ sinh, điều hòa, hủy phòng, mất đồ để chuyển người hỗ trợ.
+66. Guest Follow-up AI: tóm tắt góp ý sau lưu trú, đề xuất cải thiện dịch vụ cho chủ cơ sở.
+
+E. AI ẨM THỰC ĐỊA PHƯƠNG
+67. Cuisine Discovery: khách nói vị thích – ngân sách – khu vực – thời gian, AI gợi ý nhà hàng có dữ liệu thật.
+68. Dish Storyteller: kể chuyện nguồn gốc món từ tài liệu/hướng dẫn viên được phép sử dụng.
+69. Menu OCR: khách chụp menu, AI đọc tiếng Việt, dịch món và mô tả thành phần có điều kiện.
+70. Allergen Questions: AI gợi ý câu hỏi cần hỏi nhà bếp, không thay mặt cơ sở xác nhận an toàn dị ứng.
+71. Food Trail Generator: gắn hành trình thử món theo cung đường, giờ ăn, ngày nghỉ của quán.
+72. Group Meal Planner: tính bữa ăn theo nhóm, suất trẻ em, ăn chay/ăn kiêng, phụ thu phòng riêng nếu có.
+73. Dish-price Comparator: so cùng món và khẩu phần khi cơ sở cung cấp giá/khối lượng; không kết luận đắt vô lý từ ảnh đơn lẻ.
+74. Menu Translation by Culture: giải thích nguyên liệu/tập quán ăn cho khách ngoại quốc, tránh dịch máy thô.
+75. Food Waste Estimator: dự báo suất chuẩn bị cho nhà hàng nếu có lịch sử đặt thật; giảm lãng phí và đo trước-sau.
+76. Local Ingredient Matcher: liên kết nhà hàng với nhà vườn địa phương và câu chuyện nguyên liệu khi có dữ liệu xác nhận.
+77. Real Opening Hours Watch: báo quán có giờ hoạt động chưa xác minh, không giả làm 'đang mở' realtime.
+78. Reservation Requests: giúp khách gửi yêu cầu bàn; xác nhận chỉ khi nhà hàng phản hồi hoặc hệ thống booking được phép.
+
+F. AI HƯỚNG DẪN VIÊN SỐ VÀ NỘI DUNG
+79. Multilingual Virtual Guide: hỏi đáp về địa điểm trên kho tri thức có nguồn; hỗ trợ VI/EN trước, thêm ngôn ngữ tùy dữ liệu.
+80. Audio Tour Generator: chuyển lời thuyết minh được duyệt thành audio dễ nghe.
+81. Contextual QR Guide: quét mã ở điểm được phép đặt bảng -> mở câu chuyện, hình ảnh, tuyến tham quan.
+82. Photo Landmark Recognition: nhận dạng ứng viên công trình/địa danh công khai, hiển thị căn cứ và mức chắc chắn.
+83. AR Historical Overlay: đặt lớp minh họa lịch sử trên màn hình, gắn nhãn 'phục dựng' nếu không phải hiện trạng.
+84. Virtual Tour Narrator: dẫn khách trong ảnh 360° do chủ sở hữu cấp phép.
+85. Place-name Pronunciation Coach: giúp khách nước ngoài đọc tên địa danh, món ăn cơ bản.
+86. Cultural Etiquette Assistant: giải thích trang phục, ứng xử tại nơi thờ tự, khu cộng đồng theo thông tin của đơn vị quản lý.
+87. Museum Quiz AI: sinh câu hỏi từ tư liệu đã duyệt cho học sinh; giáo viên duyệt độ chính xác.
+88. Local Story Recording: người dân tự cung cấp giọng kể, xác nhận quyền giọng nói/hình ảnh và có nút rút lại.
+89. Nature Interpretation: dùng ảnh lá/cây/chim để gợi ý phân loại, không khẳng định loài quý hiếm chỉ từ mô hình.
+90. Guide Knowledge Companion: hướng dẫn viên tra nhanh dữ liệu nguồn, lịch sử và cập nhật dịch vụ trước chuyến.
+91. Offline Audio Pocket Guide: nghe nội dung đã tải và xem địa điểm không cần Internet, không cho là trạng thái điểm đến realtime.
+92. Travel Photo Caption: đề xuất chú thích ảnh riêng tư với đúng tên nơi sau khi người dùng xác nhận.
+
+G. AI GIAO THÔNG VÀ HÀNH TRÌNH DI CHUYỂN
+93. Route by Purpose: chọn tuyến theo mục tiêu ít thời gian, ít km, đi dễ, tránh đi đêm, có điểm dừng; có giới hạn dữ liệu.
+94. Multi-stop Optimizer: điều chỉnh thứ tự các điểm đi, có tính tới khung giờ và thời gian dịch vụ.
+95. Transit Gap Detector: đánh dấu đoạn chuyển tiếp cần xe riêng/taxi/bus, không sáng tác chuyến xe không tồn tại.
+96. Airport-to-DongNai Travel Assistant: hỗ trợ hành trình từ các sân bay đang có dịch vụ thực tế vào thời điểm đến; không giả lịch bay/vận hành.
+97. Parking Finder: gợi ý điểm đỗ có chủ thể xác nhận và chi phí nếu có.
+98. Weather-route Conflict: tìm lịch trình dự phòng khi mưa lớn ảnh hưởng hoạt động ngoài trời.
+99. Rest-stop Recommendation: đề xuất điểm nghỉ có vệ sinh/đồ ăn/nhiên liệu theo dữ liệu được cập nhật.
+100. Arrival Time Checker: tránh lộ trình đưa khách đến sau giờ đóng cửa.
+101. Child-seat Reminder: nhắc người dùng trao đổi với đơn vị xe về trang bị phù hợp khi đi cùng trẻ.
+102. Travel Distance Explainer: lý giải vì sao một cung đường đẹp nhưng quá dài cho chuyến đi một ngày.
+103. Group Vehicle Matching: gợi ý loại xe theo số khách/hành lý, yêu cầu doanh nghiệp vận tải báo giá xác nhận.
+104. Last-mile Guidance: từ bãi xe đến cổng điểm tham quan, cầu tàu hoặc cổng vườn với dữ liệu đã khảo sát.
+105. Nearby Alternatives: khi một điểm hủy tour, tìm hoạt động gần nhất đúng thời gian còn lại.
+106. Eco-route Comparison: ước lượng quãng đường và tín hiệu phát thải theo phương pháp có nêu giả định, không tự nhận 'carbon neutral'.
+
+H. AI GIỌNG NÓI, HÌNH ẢNH VÀ NGÔN NGỮ
+107. Voice Trip Builder: nói tự nhiên tiếng Việt, máy hỏi lại khi dữ liệu chưa rõ.
+108. Real-time Voice Interpretation: hỗ trợ dịch cuộc trò chuyện hai chiều với sự đồng ý; ở tình huống quan trọng cần người xác nhận.
+109. Audio Menu Translation: đọc menu theo ngôn ngữ khách, hỗ trợ phát âm tên món.
+110. Signboard OCR: chụp biển báo, bảng nội quy và dịch có chú thích phần không rõ chữ.
+111. Handwritten Booking Note Reader: doanh nghiệp tải phiếu ghi tay để chuyển thành yêu cầu booking cần duyệt.
+112. Photo-based Trip Diary: nhận ảnh chuyến đi và giúp gắn địa điểm do người dùng xác nhận.
+113. Voice Accessibility: hướng dẫn điều hướng chức năng web bằng giọng nói, vẫn hỗ trợ bàn phím và trình đọc màn hình.
+114. Local Accent Understanding: cải thiện nhận giọng địa phương qua dữ liệu được đồng ý và kiểm thử.
+115. Cross-lingual Search: người dùng hỏi tiếng Anh nhưng bài review tiếng Việt vẫn được tìm và tóm tắt có nguồn.
+116. Image Quality Assistant: nhắc nhà cung cấp chụp lại ảnh dịch vụ nếu ảnh tối/mờ, không dùng AI bịa cảnh thật.
+
+I. AI CỘNG ĐỒNG, ĐÁNH GIÁ, DANH TIẾNG
+117. Review Digest: tổng hợp điểm được khen/chê có trích dẫn từ các review thật.
+118. Suspicious Review Signals: phát hiện dấu hiệu spam/lặp bất thường; không tự kết tội người viết.
+119. Duplicate Place Merger: gợi ý khi nhiều hồ sơ là cùng một nhà hàng/homestay.
+120. Conflict Resolver: phát hiện hai review khẳng định giờ hoạt động khác nhau và yêu cầu cơ sở đối chiếu.
+121. Community Q&A Answerer: tìm câu trả lời trong bài viết có nguồn và ghi rõ có thể lỗi thời.
+122. Travel Buddy Preference Matching: đề xuất nhóm công khai theo gu nếu người dùng đồng ý; không ép ghép đôi cá nhân.
+123. Comment Moderation: lọc thông tin cá nhân, ngôn ngữ thù ghét, quấy rối, quảng cáo lừa đảo.
+124. Spam Promotion Filter: nhận diện bài giả dạng review quảng cáo để kiểm duyệt.
+125. Fraud Clue Triage: cảnh báo điểm bất thường trong liên kết thanh toán/tài khoản người nhận để khách kiểm tra, không quyết định hình sự.
+126. Travel Story Curator: gom nhật ký từng chuyến thành album kể chuyện với quyền chia sẻ riêng tư.
+127. Reputational Fairness: cho cơ sở quyền giải thích, sửa thông tin, phản hồi các tranh chấp công khai đã kiểm duyệt.
+128. Experience Verification Assist: hỗ trợ khớp hóa đơn/booking tự nguyện cung cấp, che dữ liệu cá nhân trước khi kiểm duyệt.
+
+J. AI THỜI TIẾT, AN TOÀN, DU LỊCH XANH
+129. Weather Brief: tóm tắt dự báo có giờ cập nhật và nguồn, gợi ý mang đồ thích hợp.
+130. Official Warning Summarizer: tóm tắt bản tin cơ quan chuyên môn, không tạo cảnh báo tự phong.
+131. Service Interruption Detector: phát hiện nguồn tin về đóng cửa/đình chỉ, chuyển kiểm duyệt để cập nhật hồ sơ.
+132. Suspicious Price Report Analyzer: phân tích báo giá cao bất thường so với điều kiện tương đương; không buộc tội trục lợi.
+133. Tourist Incident Triage: phân loại sự cố do khách chủ động gửi và cung cấp kênh xử lý thích hợp.
+134. Urgent Human Escalation: lúc người dùng bấm khẩn cấp, ưu tiên chỉ dẫn gọi trực tiếp 113/114/115 hoặc đơn vị tại điểm, không trả lời bằng chatbot dài.
+135. Green Trip Advisor: giảm đi vòng, gợi ý doanh nghiệp có cam kết môi trường được xác minh.
+136. Waste Hotspot Recognition: dùng ảnh rác do tình nguyện viên gửi để nhóm báo cáo cho người quản trị; không tự công khai vị trí nhạy cảm.
+137. Wildlife Protection Guard: từ chối gợi ý mua bán động vật hoang dã, tiếp cận tổ chim hoặc điểm nhạy cảm.
+138. Over-tourism Watch: phân tích lượt quan tâm/booking có thật nhằm đề xuất thời điểm khác, không tuyên bố khả năng chịu tải nếu chưa khảo sát.
+139. Community Benefit Explanation: chỉ ra tour có những dịch vụ của cơ sở địa phương nào và doanh thu dự kiến chảy đến đơn vị nào nếu có hợp đồng.
+140. Water Activity Warning: hiển thị yêu cầu áo phao, đơn vị tổ chức, giới hạn thời tiết và quy định; không xác nhận hồ nào bơi tự do an toàn.
+
+K. AI CHO DOANH NGHIỆP DU LỊCH — DOANH THU VÀ VẬN HÀNH
+141. Lead Intake Copilot: đọc chat/form/email được cho phép, bóc số khách, ngày đi, sở thích và ngân sách.
+142. Business Inquiry Router: chuyển yêu cầu đến đơn vị có phạm vi dịch vụ và giấy phép phù hợp, tránh chuyển vào nhóm không liên quan.
+143. Tour Proposal Generator: phác thảo 2–3 tour có bảng dịch vụ, chỗ chưa biết giá và lý do chọn.
+144. B2B RFQ Drafter: tạo yêu cầu báo giá cho xe, phòng, nhà hàng, guide, vé; nhân viên duyệt trước khi gửi.
+145. Supplier Quote Comparator: so báo giá nhà cung cấp trên cùng điều kiện và hạn chót phản hồi.
+146. Availability Conflict Finder: cảnh báo một guide/xe/phòng bị xếp lịch trùng trong dữ liệu đối tác cung cấp.
+147. Group Logistics Planner: đề xuất lịch đón khách và nhóm xe; giao thông và chỗ đỗ cần xác minh.
+148. Tour Margin Simulator: mô phỏng biên lợi nhuận trên dữ liệu giá nhập thật; không hiển thị doanh thu giả như số liệu đã đạt.
+149. After-hours Lead Assistant: tiếp nhận thông tin tối thiểu ngoài giờ, hứa nhân viên phản hồi nếu có quy trình thật, không tự cam kết hotline 24/7.
+150. Guest Preference Memory: lưu yêu cầu khách trở lại khi có đồng ý, cho khách xóa/đổi thông tin.
+151. Multilingual Customer Reply: soạn trả lời đa ngữ dựa chính sách đối tác; chuyển nhân viên duyệt khi điều kiện thay đổi.
+152. Service Upsell Suggestion: gợi ý bữa ăn/đặc sản/guide khi thật sự phù hợp, không tự động bán ép.
+153. No-show Analysis: từ lịch sử hủy/tham gia thật dự báo rủi ro và đề nghị nhắc lịch với sự đồng ý.
+154. Demand Forecasting: dự báo nhu cầu theo mùa, lễ hội, ngày lễ khi có dữ liệu lịch sử đủ.
+155. Staffing Planner: đề nghị bố trí nhân viên theo booking đã xác nhận và dự báo, người quản lý quyết định cuối.
+156. Review-to-Action: gom phản hồi về vệ sinh, đón khách, đồ ăn, đường đi thành phiếu cải thiện dịch vụ.
+157. Multi-property Dashboard: chủ cơ sở quản lý nhiều homestay/nhà nghỉ bằng danh mục phân quyền.
+158. Farm Experience Inventory: nhà vườn quản lý ngày đón khách, sản lượng trải nghiệm, giá và sức chứa hợp lệ.
+159. Guide Portfolio Assistant: hướng dẫn viên lập hồ sơ năng lực, ngoại ngữ, tuyến chuyên môn, giấy tờ theo quy định.
+160. Partner Opportunity Finder: tìm vùng thiếu nhà hàng/điểm nghỉ qua dữ liệu nhu cầu ẩn danh, không suy đoán sự thiếu hụt chắc chắn chỉ từ bản đồ.
+161. Tour Package A/B Analysis: đo tỷ lệ khách gửi yêu cầu theo cách trình bày; báo cáo chỉ dùng dữ liệu thực.
+162. Trip Satisfaction Summarizer: tự tạo báo cáo sau tour từ survey thật và cảnh báo nguy cơ thiên lệch mẫu.
+163. Content Studio for MSMEs: AI gợi ý mô tả đa ngữ từ dữ liệu cơ sở xác minh, ảnh đúng nơi và cam kết có chứng cứ.
+164. Dynamic FAQ Builder: tạo FAQ riêng cho mỗi nhà cung cấp từ giá, nội quy, địa chỉ, lịch đón; cập nhật phiên bản.
+165. Business Translation: dịch hợp đồng giới thiệu/tài liệu tiếp khách, nội dung pháp lý quan trọng cần người chuyên môn soát.
+
+L. AI CHO QUẢN LÝ ĐIỂM ĐẾN VÀ HỆ SINH THÁI
+166. Destination Knowledge Graph: liên kết địa điểm – dịch vụ – mùa – vùng – câu chuyện – chủ thể – giấy phép – lịch sử cập nhật.
+167. Source Freshness Manager: gắn tuổi dữ liệu, ngày hết hạn, người kiểm chứng và nhắc cập nhật.
+168. Administrative Boundary Helper: đối chiếu địa chỉ hành chính mới với tên địa bàn cũ có nguồn chính thức.
+169. Tourism Demand Observatory: tổng hợp lượt quan tâm, booking và phản hồi ẩn danh theo vùng nếu dữ liệu có thật.
+170. Data Quality Scoring: chấm độ đầy đủ hồ sơ địa điểm, không chấm uy tín doanh nghiệp bằng proxy thiếu công bằng.
+171. Accessibility Coverage Map: chỉ ra những thuộc tính hỗ trợ tiếp cận còn thiếu bằng chứng để khảo sát.
+172. Culture Content Review Queue: đưa nội dung liên quan bản sắc cộng đồng cho người đại diện/nhà chuyên môn duyệt.
+173. Missing Category Finder: phát hiện vùng nhiều người tìm chỗ nghỉ nhưng chưa có đối tác đủ hồ sơ, là tín hiệu chứ không phải kết luận.
+174. Incident Pattern Clustering: gom phản ánh giống nhau để ưu tiên xác minh, không tự tạo 'bản đồ tội phạm'.
+175. Community Impact Dashboard: đo số đối tác nhỏ, lượng đơn hợp lệ, tiền trả cho dịch vụ cộng đồng nếu có dữ liệu từ hợp đồng.
+176. Sustainability Opportunity Discovery: gợi ý tuyến ít xe hơn hoặc thời gian tránh đông, minh bạch giả định tính toán.
+177. Provider Compliance Checklist: hỗ trợ đọc tài liệu đã cung cấp và nhắc giấy tờ cần xem, không thay thế kiểm tra của cơ quan cấp phép.
+178. Co-design Feedback Loop: cộng đồng địa phương duyệt đề xuất trải nghiệm mới trước khi quảng bá thương mại.
+
+M. AI TƯƠNG LAI/THỰC NGHIỆM, PHẢI GHI RÕ ĐIỀU KIỆN
+179. AR Navigation at Venues: hướng dẫn trong bảo tàng/khu giải trí từ bản đồ nội bộ có được phép.
+180. 3D Destination Twin: dựng mô hình 3D từ dữ liệu quét/quay hợp pháp; không mặc định mọi điểm có digital twin.
+181. Generative Tour Trailer: tạo video giới thiệu từ ảnh được cấp quyền, phải ghi nhãn khi khung cảnh là AI tạo.
+182. Edge AI Offline Guide: trợ lý cơ bản chạy trên laptop/điện thoại khi mất mạng, dùng tri thức đã đóng gói và cảnh báo nội dung cũ.
+183. AI-powered Sign-language Avatar: thử nghiệm hỗ trợ thông tin du lịch bằng ngôn ngữ ký hiệu, phải đánh giá cùng cộng đồng sử dụng.
+184. Sentiment-aware Chat: tùy chỉnh mức độ giải thích theo phản hồi tự nguyện, không suy đoán cảm xúc nhạy cảm từ webcam.
+185. Collaborative Tour Negotiator: giúp cả nhóm thương lượng điểm dừng và ngân sách, ưu tiên đồng thuận minh bạch.
+186. AI Scenic Reel Creator: từ ảnh đi thật do người dùng sở hữu -> video tổng kết, nhạc có bản quyền.
+187. Travel Carbon Ledger: ước tính theo hệ số công bố, cho phép người dùng biết khoảng sai số; không tự ghi 'đã bù trừ'.
+188. Agentic Supplier Comparison: mô hình có thể đề nghị kiểm tra giá/suất còn trống qua API đối tác, nhưng thao tác tiền và xác nhận đặt luôn cần ủy quyền rõ.
+189. Personalized Ambient Audio: âm thanh thiên nhiên tại chỗ trong trải nghiệm số khi có bản quyền; không mô phỏng giả thành âm thanh thu trực tiếp.
+190. Eco-education Game: thử thách tìm hiểu rừng, hồ, nguồn nước, di sản bằng trò chơi điện tử, không kích thích tiếp cận động vật nhạy cảm.
+
+ĐIỀU KIỆN CHUNG CỦA MỌI MODULE AI: Cung cấp nguồn và thời gian cho thông tin biến đổi; thể hiện độ không chắc chắn; tách dữ liệu thật, gợi ý, mô phỏng; cho người dùng sửa; không tự ý tiêu tiền hay gửi thông tin cá nhân; ghi lại hành động có kiểm toán; chỉ trình bày các chỉ số chất lượng sau khi đo thực tế.
+
+XXVIII. 5 'TRẢI NGHIỆM AI CÓ HỒN' — ĐIỂM KHÁC BIỆT KHÓ SAO CHÉP
+
+1. 'ĐỒNG NAI TRONG MỘT CÂU NÓI': Người dùng nói 'Tôi còn đúng một chiều, muốn nhìn hồ, ăn ngon, bé 6 tuổi đi cùng, không quá 500.000đ', hệ thống tìm ứng viên hợp lý về quãng đi, ghi rõ khoản chưa có giá và cho khách điều chỉnh trực tiếp.
+2. 'VÉ RẺ ĐÚNG NGHĨA': Từ hai bảng vé công bố khác nhau, hệ thống so đối tượng tuổi/chiều cao/ngày, ghi rõ nguồn đang mâu thuẫn và hướng khách sang nơi xác nhận chính thức thay vì giả làm aggregator cập nhật realtime.
+3. 'HÀNH TRÌNH ĐỔI THEO BẢN ĐỒ': Một địa điểm thông báo đóng hoặc khách loại một trải nghiệm, sơ đồ các điểm và bảng chi phí thay đổi ngay, có giải thích tại sao.
+4. 'KHÁCH NƯỚC NGOÀI ĐƯỢC CHÀO ĐÓN': Cùng một câu hỏi được hiểu bằng ngoại ngữ, trả lời bằng lịch trình bám địa danh Đồng Nai và giải thích món ăn, quy tắc văn hóa, trợ giúp đi lại.
+5. 'MỖI ĐỒNG CHI TIÊU CÓ GIÁ TRỊ': Khách thấy cơ sở nào trực tiếp cung cấp dịch vụ — nhà vườn, hướng dẫn viên, homestay, quán ăn — cùng cam kết xã hội được chứng minh, thay vì chỉ danh sách điểm check-in.
+
+XXIX. BẢN ĐỒ 'AI TƯ VẤN KHI ĐANG ĐI' — TRỢ LÝ THEO TỪNG THỜI ĐIỂM
+
+TRƯỚC CHUYẾN ĐI:
+- Phỏng vấn du lịch bằng câu hỏi ngắn, tự chọn quyền riêng tư, nhập bạn đồng hành; so sánh 3 concept chuyến đi.
+- Kiểm tra khoảng cách thực tế, ngày nào có giờ mở đã xác minh, dịch vụ nào chỉ nhận khách theo hẹn.
+- Ước lượng tài chính theo gói minh bạch: chi phí cố định + giá có điều kiện + khoản dự phòng + chưa biết.
+- Tạo danh sách đồ mang, bản đồ, lưu địa chỉ chỗ ở, số điện thoại nhà cung cấp, quy định tại rừng/hồ.
+- Nhắc khách về dịch vụ tour/xe/đò cần đơn vị được phép tổ chức, theo quy định của nơi đến.
+- Gợi ý khách lưu bản đồ offline khi đi rừng và cung cấp kênh liên hệ người dẫn đường.
+
+TRONG CHUYẾN ĐI:
+- 'Mình ở đâu, còn bao lâu?' dùng vị trí tự nguyện và thời gian trên lịch đã duyệt; không tự suy đoán tốc độ di chuyển.
+- 'Tìm món ăn ngay gần tuyến' hiển thị nơi đã có thông tin giờ và dữ liệu menu đáng tin.
+- 'Tôi cần một chỗ nghỉ/nhà vệ sinh' đưa gợi ý theo hồ sơ điểm, nêu trạng thái đã xác minh.
+- 'Địa điểm này là gì?' mở audio guide và hồ sơ văn hóa có trích nguồn.
+- 'Tôi mất kết nối mạng' mở hướng dẫn đã tải và hiển thị rõ thông tin có thể đã cũ.
+- 'Một thành viên mệt, đổi tour nhẹ hơn' đề nghị lịch trình ít vận động và thời gian về phù hợp.
+- 'Trời mưa, có nên đổi điểm?' so sánh lựa chọn trong nhà theo dự báo có nguồn, nhắc xem cảnh báo chính thức.
+- 'Có thay đổi vé/giờ' khách cập nhật từ ảnh bảng niêm yết, AI trích thông tin nhưng chờ nhân viên/nguồn chính thức xác nhận.
+
+SAU CHUYẾN ĐI:
+- 'Bản đồ ký ức' ghi các nơi đã ghé do khách xác nhận, không theo dõi nền mặc định.
+- Tổng hợp chi phí dự tính và chi phí thực tế từ các khoản khách tự điền hoặc hóa đơn được đồng ý xử lý.
+- Tạo review có cấu trúc theo vệ sinh, dịch vụ, giá, an toàn, tiếp cận, ăn uống, không bắt buộc chấm sao.
+- Gửi phản hồi riêng cho đối tác nếu khách đồng ý và có kênh liên hệ thực.
+- Tạo album/video cá nhân có quyền riêng tư; xuất nhật ký hành trình và ý tưởng chuyến sau.
+- Tặng ưu đãi từ nhà bán có hợp đồng, không tự tạo voucher/điểm thưởng quy đổi tiền không có đối tác.
+
+XXX. NAI-VERSE COMMUNITY — CỘNG ĐỒNG DU LỊCH — MẠNG XÃ HỘI DU LỊCH NHỎ NHƯNG ĐÁNG TIN
+
+1. Trang feed 'Hôm nay ở Đồng Nai': câu chuyện, ảnh mới, review, lịch lễ hội đã xác minh, người địa phương chia sẻ.
+2. Cộng đồng theo vùng: Trị An/Mã Đà; Cát Tiên–Tà Lài; Biên Hòa–Trấn Biên; Long Khánh–Xuân Lộc; Bù Gia Mập–Bom Bo–Phước Long.
+3. Cộng đồng theo gu: gia đình trẻ em, chụp ảnh, trekking có phép, birdwatching, đi một mình, ăn uống, du lịch xanh, MICE, du lịch ít vận động.
+4. Hỏi đáp tại mỗi địa điểm: điều kiện giá/giờ mới nhất, bãi đỗ, chi phí phát sinh, kinh nghiệm đi lần đầu.
+5. Bài viết trải nghiệm: có thể gắn ảnh, thời gian đi, chi phí từng khoản và điều muốn cảnh báo người sau.
+6. Bộ 'đi rồi mới chia sẻ' xác minh bằng booking/hóa đơn tự nguyện cung cấp, được che thông tin nhạy cảm; không phân biệt đối xử với khách không có hóa đơn.
+7. Nhóm lập kế hoạch: mời bạn bè vào chuyến, bình chọn địa điểm, phân công người đặt xe/phòng, chia danh sách hành lý.
+8. Hỏi ý kiến cộng đồng: chọn ảnh đại diện, chọn tuyến, thăm dò trải nghiệm; kết quả bình chọn không thay bằng chứng dịch vụ.
+9. Check-in du lịch số: passport và bộ sưu tập dấu các điểm được phép tham gia, kiểm soát anti-spoofing ở mức hợp lý.
+10. Nhật ký điểm đến: ghi âm câu chuyện, lưu cảm nhận, đánh dấu 'muốn quay lại', cho phép xem riêng.
+11. Tìm người đồng hành: chỉ theo sự đồng ý, hỗ trợ chặn/báo cáo, ẩn số điện thoại/vị trí chính xác mặc định, đặc biệt không ghép nhóm trẻ vị thành niên với người lạ.
+12. Sáng tác hành trình: người dân hoặc hướng dẫn viên đưa lịch trình có thông tin nguồn, khách sao chép và cá nhân hóa.
+13. Chuyên mục du lịch trách nhiệm: đề xuất nhặt rác đúng tổ chức, không cổ vũ tự vào vùng lõi rừng, không dùng hoạt động 'thiện nguyện' làm nội dung câu view.
+14. Phản hồi doanh nghiệp: đối thoại lịch sự; người bán có quyền cung cấp bằng chứng đính chính, quản trị viên xử lý tranh chấp.
+15. Chống review giả: tín hiệu đăng trùng, đột biến đánh giá, ảnh dùng lại, links đáng ngờ; không đánh dấu công khai một người là lừa đảo chỉ do AI nghi ngờ.
+16. Quyền ảnh cộng đồng: lựa chọn giấy phép/đồng ý, watermark tùy chọn, nút báo vi phạm, cơ chế gỡ hình trẻ em hoặc người không đồng ý.
+17. Bảng xếp hạng người đóng góp thông tin hữu ích, tránh thưởng số lượng review khiến spam tăng.
+18. AI tóm tắt cộng đồng tuần: '3 điều nên biết về điểm X' với liên kết về bài viết cụ thể, nêu khi nguồn bất đồng.
+19. Travel Buddy đa ngữ: kết nối nhóm khách từ các tỉnh/quốc gia theo sự đồng ý và nguyên tắc an toàn.
+20. Local Ambassador: chương trình người bản địa hỗ trợ thuyết minh, chia sẻ địa điểm và nhận phần thưởng hợp pháp từ hệ sinh thái.
+
+XXXI. ĐỒNG NAI TỪNG GÓC NHỎ — HỆ THỐNG BAO PHỦ ĐIỂM ĐẾN KHÔNG BỎ SÓT
+
+NaiVerse nên hiểu rằng 'toàn bộ du lịch Đồng Nai' không có nghĩa là vài chục tên nơi nổi tiếng. Cách bao phủ bền vững là từ bản đồ địa giới hiện hành, những POI có nguồn, các loại trải nghiệm, người cung cấp dịch vụ và trạng thái xác minh. Phân tích cần phân biệt: điểm có tiềm năng cảnh quan, điểm được phép tham quan, điểm có dịch vụ có thể đặt và điểm tạm ngưng.
+
+DANH MỤC VÙNG KHỞI TẠO TỪ FILE GỐC:
+01. Biên Hòa/Trấn Biên và khu đô thị: Sơn Tiên Amazing Bay, Amazing World, Bửu Long, Văn miếu, đình/chùa và các di tích, bảo tàng, ẩm thực, gốm, các khách sạn.
+02. Tân Triều và vùng sông Đồng Nai: cù lao/vườn bưởi, làng bưởi, các món từ bưởi, nghệ nhân, cảnh sông ở nơi được phép.
+03. Nhơn Trạch/Đại Phước và vùng sinh thái sông: Bò Cạp Vàng, trải nghiệm sinh thái, dịch vụ nhóm nếu hoạt động hợp pháp.
+04. Trảng Bom/Thống Nhất và các khu dã ngoại: Giang Điền, Đá Hàn và dịch vụ lưu trú/ăn uống quanh điểm được xác minh.
+05. Vĩnh Cửu–Trị An–Mã Đà: lòng hồ, đảo, rừng bảo tồn, lịch sử Chiến khu D và du lịch ven hồ được phép.
+06. Định Quán–La Ngà: Đá Ba Chồng, Thác Mai, Bàu Nước Sôi, các cơ sở glamping theo giấy phép, các hoạt động sinh thái.
+07. Tân Phú–Cát Tiên–Tà Lài: Suối Mơ, VQG Cát Tiên, trải nghiệm cộng đồng, nhà nghỉ sinh thái và dịch vụ hướng dẫn.
+08. Long Khánh–Bình Lộc–Xuân Lộc: mùa trái cây, trải nghiệm nhà vườn, núi Chứa Chan, cơ sở ẩm thực và quà đặc sản.
+09. Vùng Bom Bo/Bù Đăng trước đây: Sóc Bom Bo, làng văn hóa cộng đồng, trảng cỏ Bù Lạch nếu tiếp cận được phép.
+10. Vùng Bù Gia Mập: vườn quốc gia, cảnh quan, quan sát thiên nhiên do đơn vị quản lý cho phép.
+11. Vùng Phước Long/Bà Rá/Thác Mơ: núi, hồ, di tích và cảnh quan vùng cao thuộc thành phố mới.
+12. Vùng Lộc Ninh/Lộc Thành: Tà Thiết, Nhà Giao tế, tuyến về nguồn và trải nghiệm văn hóa địa phương.
+13. Khu vực sân bay, tuyến kết nối, các cụm công nghiệp: trải nghiệm quá cảnh, thương mại dịch vụ và tour tìm hiểu nghề nghiệp chỉ khi có cơ sở đón tiếp được cấp phép.
+14. Hệ thống xã/phường mới: tất cả POI phân về đơn vị hành chính chuẩn có nguồn 2026, giữ alias lịch sử để khách vẫn tìm thấy bằng địa chỉ cũ.
+
+LOẠI ĐỊA ĐIỂM CẦN TÌM THÊM CHO MỖI VÙNG:
+- Di tích cấp quốc gia/cấp thành phố, di sản cộng đồng và bảo tàng; tình trạng mở cửa cần xác minh.
+- Danh thắng, hồ, suối, thác, núi, rừng, vườn cây; phân biệt khu có quyền tiếp cận và khu bảo vệ.
+- Khu vui chơi trẻ em, giải trí trong nhà, thể thao, khu sinh thái tư nhân.
+- Nhà hàng, quán ăn, chợ, món nổi tiếng, quán nhỏ gia đình có giấy phép/điều kiện phù hợp.
+- Khách sạn, homestay, lodge, resort, campsite, chỗ nghỉ nhóm, phòng hội nghị.
+- Xưởng thủ công, nông trại đón khách, trải nghiệm chế biến, làng nghề, nơi bán đặc sản.
+- Hướng dẫn viên/nhà tổ chức tour có chứng từ phù hợp, đội xe hợp pháp.
+- Sự kiện theo mùa được cơ quan/nhà tổ chức công bố, không tự lặp lịch năm cũ.
+- Điểm bãi xe, nhà vệ sinh, điểm dừng, trạm xe, khu chờ, dịch vụ hỗ trợ tiếp cận.
+- Cơ quan quản lý điểm đến, kênh hỗ trợ công khai, nơi tiếp nhận phản ánh.
+
+BA NGUYÊN TẮC DỮ LIỆU ĐỊA PHƯƠNG:
+A. Nếu hồ sơ không có tọa độ/địa chỉ xác minh, đánh dấu 'chưa ghim chính xác', không đưa pin giả.
+B. Nếu một cơ sở chưa xác minh giấy phép/mở cửa, vẫn có thể là 'địa điểm cần tìm hiểu' nhưng không kích hoạt 'Mua ngay'.
+C. Không biến địa chỉ của một khu bảo tồn, nơi tín ngưỡng, nhà dân hoặc vùng lõi thiên nhiên thành địa điểm kinh doanh có thể tự do vào.
+
+XXXII. THƯ VIỆN Ý TƯỞNG TOUR ĐỘC QUYỀN CÓ THỂ THƯƠNG MẠI HÓA
+
+Dưới đây là Ý TƯỞNG TÊN HÀNH TRÌNH, không phải tour đang chào bán. Tour chỉ nhận khách khi có đơn vị tổ chức phù hợp và điều kiện được xác minh.
+
+01. Một ngày xanh Biên Hòa – Trấn Biên: văn hóa, ẩm thực, công viên.
+02. Amazing Family Day: vui chơi Sơn Tiên + bữa ăn + phương tiện, tối ưu chiều cao trẻ.
+03. Làng bưởi và câu chuyện phù sa: nhà vườn Tân Triều + món từ bưởi + mua quà.
+04. Bình minh Trị An: ngắm hồ + bữa sáng gần hồ + trải nghiệm bờ hồ có phép.
+05. Trị An chậm một nhịp: 2N1Đ nghỉ ven hồ + cảnh rừng + ẩm thực.
+06. Hành trình cảnh hồ không hoạt động dưới nước: dành cho khách thích chụp ảnh và gia đình ít vận động.
+07. Mã Đà – câu chuyện rừng và lịch sử: giáo dục lịch sử qua tuyến bảo tồn được phép.
+08. Cát Tiên lắng nghe rừng: tour thiên nhiên có hướng dẫn, ngắm chim từ điểm phù hợp.
+09. Cát Tiên cho người mới: tuyến ít vận động theo dịch vụ do vườn xác nhận.
+10. Tà Lài cùng cộng đồng: dệt, kể chuyện, ẩm thực với chủ nhà/đơn vị cộng đồng tổ chức.
+11. Định Quán địa chất và cảnh quan: Đá Ba Chồng + điểm ăn/nghỉ phù hợp.
+12. Nước và đá: Suối Mơ + Đá Ba Chồng trong khung thời gian hợp lý.
+13. Thác Mai tìm hiểu thiên nhiên: chỉ khi có thông tin mở cửa và điều kiện vào thực tế.
+14. Long Khánh mùa chôm chôm: vườn đón khách + đặc sản + ảnh vườn.
+15. Long Khánh mùa sầu riêng: lịch vườn có xác nhận, câu chuyện cây trái, không bắt buộc thu hoạch.
+16. Quà từ nông trại: trải nghiệm trái cây + làm quà địa phương.
+17. Núi Chứa Chan một ngày: hành hương/ngắm cảnh theo điều kiện phù hợp thể lực.
+18. Từ gốm đến bưởi: câu chuyện thủ công và nông sản theo vùng phù hợp khoảng cách.
+19. Biên Hòa dành cho khách ngoại quốc: di sản + gốm + phiên dịch.
+20. Đồng Nai cho ông bà và cháu: điểm ít di chuyển, ăn uống tiện, có chỗ nghỉ.
+21. Đồng Nai tiết kiệm một ngày: điểm miễn phí hoặc giá có nguồn, tự túc hợp lý.
+22. Một ngày không màn hình ở nhà vườn: workshop và trải nghiệm tương tác trực tiếp.
+23. Đặc sản vòng quanh Đồng Nai: ẩm thực vùng đô thị, bưởi, trái cây, quà mang về.
+24. Check-in văn hóa Trấn Biên: tour ảnh + thuyết minh di tích được duyệt.
+25. Giáo dục công dân địa phương: học địa lý, văn hóa và lịch sử qua bản đồ.
+26. Sóc Bom Bo câu chuyện cộng đồng: chỉ với cộng đồng chủ trì, tránh biểu diễn bị thương mại hóa quá mức.
+27. Bù Gia Mập có chuyên gia dẫn đường: rừng, sinh thái, văn hóa, giới hạn sức chứa.
+28. Bà Rá – Thác Mơ cảnh quan vùng cao: thăm điểm được phép và đi đúng điều kiện thời tiết.
+29. Trảng cỏ có trách nhiệm: tham quan ngắm cảnh theo quyền tiếp cận, không xâm hại thảm cỏ.
+30. Tà Thiết – Lộc Ninh về nguồn: lịch sử có nguồn, phù hợp nhóm học sinh/cựu chiến binh.
+31. Nông sản và người làm nghề: chuỗi gặp nghệ nhân/nông hộ với đồng ý.
+32. Một thành phố, ba hệ sinh thái: trải nghiệm đô thị – nông thôn – thiên nhiên trong nhiều ngày, không nhồi quá xa một ngày.
+33. Photo Weekend Đồng Nai: bình minh hồ + đường phố/kiến trúc + nông trại.
+34. Birdwatching Weekend: tour thiên nhiên hướng dẫn viên chuyên môn, danh sách loài do chuyên gia duyệt.
+35. Green Team Retreat: hoạt động nhóm nhẹ + thực hành du lịch không rác + workshop doanh nghiệp.
+36. Trip for Everyone: điểm có khả năng tiếp cận đã khảo sát, dịch vụ hỗ trợ đã xác minh.
+37. Couples Nature Escape: nghỉ dưỡng riêng tư + cảnh quan ven hồ/rừng, có kênh đặt hợp lệ.
+38. Family Two Generations: hai nhóm hoạt động song song để trẻ chơi và người lớn nghỉ.
+39. Corporate Tour + CSR: chương trình đóng góp cho địa phương do đối tác đáng tin xác lập, không diễn giải thành 'tour thiện nguyện' vô trách nhiệm.
+40. Community-made Breakfast: bữa sáng chế biến với người dân theo đặt trước và điều kiện an toàn thực phẩm.
+41. Dong Nai Digital Nomad Weekend: chỗ ở có Wi-Fi + điểm nghỉ sau giờ làm và phương tiện.
+42. Weekend without Long Drives: hạn chế quãng đi, ưu tiên một cụm điểm thay vì phủ toàn thành phố.
+43. Rainy Day Escape: văn hóa/bảo tàng/trải nghiệm trong nhà có giờ mở đã xác minh.
+44. The Great Dong Nai Passport: tích lũy dấu hành trình qua nhiều kỳ nghỉ, không ép đi vào nơi nhạy cảm.
+45. Local Artist Weekend: workshop gốm/đồ thủ công và mua trực tiếp sản phẩm.
+46. Hidden Food Gems: trải nghiệm quán nhỏ tự nguyện tham gia, minh bạch an toàn và menu.
+47. School Heritage Challenge: học sinh hoàn thành bài giải đố tại di tích bằng dữ liệu lịch sử có nguồn.
+48. Travel Photography with Ethics: ảnh cảnh quan, quyền riêng tư, bảo tồn và kỹ năng chụp ảnh.
+49. Quiet Travel in Dong Nai: dành cho người cần không gian yên, tránh nơi đông, không có lời hứa 'chắc chắn tĩnh lặng'.
+50. A Day with Local Guides: để người dân kể chuyện tự nguyện và được hưởng phí hướng dẫn minh bạch.
+
+XXXIII. TRẢI NGHIỆM KHÁCH NƯỚC NGOÀI — NAI-VERSE GLOBAL WELCOME
+
+- Trang chào mừng đa ngôn ngữ, đơn vị tiền tệ hiển thị tham khảo, giá thanh toán gốc và tỷ giá có thời điểm.
+- Bản đồ những khu vực thật sự có dịch vụ giao tiếp bằng ngoại ngữ theo xác nhận của nhà cung cấp.
+- Trợ lý hiểu câu hỏi 'Can I visit Cat Tien without a guide?' và trả lời theo quy định/vé cụ thể có nguồn, không tự suy đoán.
+- Giới thiệu văn hóa Việt Nam nói chung và nét Đồng Nai nói riêng: đồ ăn, lời chào, trang phục nơi tôn giáo, văn hóa cộng đồng.
+- Hỗ trợ tìm tour có quyền phục vụ khách quốc tế tương ứng giấy phép lữ hành; không nhầm giấy phép nội địa với quốc tế.
+- Bộ thuật ngữ hành chính mới/cũ: 'Long Khanh (former city area)', 'Binh Phuoc former province area' với cách diễn đạt đã kiểm tra.
+- Dịch menu và bảng giá bằng camera, hiển thị bản gốc cạnh bản dịch để khách đối chiếu.
+- Câu thoại mẫu cho khách và chủ nhà: hỏi giờ mở, quy định trẻ em, chi phí, dị ứng, hủy chỗ, đổi ngày.
+- Gợi ý lựa chọn phù hợp văn hóa tôn giáo/ẩm thực khi cơ sở cung cấp thông tin rõ ràng.
+- Tour thiên nhiên có guide giao tiếp được ngôn ngữ phù hợp, quyền nghề nghiệp/điểm đến đã xác minh.
+- Nội dung nhập cảnh, visa, bảo hiểm và chăm sóc sức khỏe chỉ dẫn đến nguồn nhà nước và cơ sở có thẩm quyền; không tự tư vấn quyết định pháp lý/y tế.
+- Bảng đổi ngôn ngữ ngay giữa chat/lịch trình, giữ các tên riêng không dịch sai.
+- Gợi ý kênh liên hệ được cung cấp cho khách ngoại quốc trong trường hợp cần cứu trợ, ưu tiên gọi số khẩn cấp theo điều kiện viễn thông địa phương.
+- Trang 'Respect Local Culture' có đóng góp từ cộng đồng, không kể chuyện dân tộc thiểu số bằng nội dung tự suy diễn.
+- Hỗ trợ chia sẻ lịch trình song ngữ cho người dẫn đoàn, khách và doanh nghiệp.
+
+XXXIV. DU LỊCH BAO TRÙM — KHÔNG ĐỂ KHÁCH CÓ NHU CẦU KHÁC BIỆT BỊ BỎ QUÊN
+
+- Tìm nơi có WC tiếp cận, ram dốc, lối đi đủ rộng, tay vịn, thang máy, chỗ ngồi theo tiêu chí được đối chiếu.
+- Tính số bậc thang và đoạn dốc chỉ khi có dữ liệu khảo sát đáng tin, không suy đoán từ ảnh vệ tinh.
+- Nhãn 'chưa có dữ liệu tiếp cận' phải rõ ràng, tránh giả khẳng định 'thân thiện xe lăn'.
+- Giao diện đọc dễ, chữ lớn, tương phản tốt, mô tả ảnh, hỗ trợ keyboard, screen reader và phụ đề video.
+- Voice interface cho người ít gõ được, có nút tắt/ghi âm rõ ràng và đồng ý lưu dữ liệu.
+- Chế độ lịch trình nhẹ: nghỉ nhiều, bữa ăn đều, quãng đi ngắn, tránh nóng kéo dài.
+- Chế độ sensory-friendly: gợi ý không gian yên tĩnh/ít ánh sáng mạnh theo cơ sở đã xác minh, không suy đoán trạng thái đông.
+- Chế độ 'đi cùng người chăm sóc' chia sẻ thông tin lịch trình theo quyền.
+- Tóm tắt điều khoản đơn giản, dễ đọc cho người ít hiểu công nghệ, có nút hỏi người bán thật.
+- Khách có ngôn ngữ ký hiệu: video/caption tài liệu do chuyên gia kiểm tra; avatar AI nếu thử nghiệm phải công bố giới hạn.
+- Mỗi điểm đến có nơi gửi câu hỏi về accessibility trực tiếp cho cơ sở.
+
+XXXV. DU LỊCH AN TOÀN — TRUNG TÂM THÔNG TIN KHÔNG ĐỨNG RA THAY NHÀ CHỨC TRÁCH
+
+A. THỜI TIẾT: Hiển thị dữ liệu dự báo với thời gian cập nhật, cảnh báo chính thức, khuyến nghị đối chiếu trước hoạt động rừng/nước/núi.
+B. RỪNG: Chỉ hướng đến tuyến tham quan hợp pháp, không tự gợi ý xuyên rừng, săn bắt, đi đêm ngoài quy định hoặc dùng bản đồ khi khu cấm.
+C. NƯỚC: Yêu cầu nhà cung cấp dịch vụ có điều kiện tổ chức, phương tiện cứu hộ/áo phao theo quy định và nhân viên hướng dẫn; không khuyên bơi tự do ở hồ/sông.
+D. TRẺ EM: Trò chơi có điều kiện chiều cao, khu nguy hiểm, kế hoạch liên lạc và hỗ trợ khi lạc trẻ; không lưu/đăng công khai vị trí của trẻ.
+E. PHƯƠNG TIỆN: Hợp đồng, loại xe, điểm đón, bảo hiểm và nhà xe có pháp nhân cần xác nhận theo thỏa thuận.
+F. CƠ SỞ LƯU TRÚ: Địa chỉ, hóa đơn/điều kiện đặt, số hỗ trợ chính thức, điều khoản hủy; tránh chuyển tiền vào tài khoản do người lạ gửi trong chat.
+G. GIÁ: So sánh đúng dịch vụ, thuế và phụ thu; kiểm tra lại trên website/nhà cung cấp có quyền phân phối.
+H. SỰ CỐ: Nút khẩn cấp gọi ngay, chia sẻ vị trí khi người dùng chủ động cho phép và có Internet/dịch vụ hỗ trợ; không tự kết luận tình trạng nguy hiểm.
+I. PHẢN ÁNH: Báo rác, đường hỏng, nguy cơ tại điểm, giá không rõ, cơ sở không đúng cam kết; kiểm duyệt tránh phỉ báng hoặc tiết lộ dữ liệu riêng tư.
+J. PHÒNG GIAN LẬN: AI nhận tín hiệu link giả, tài khoản nhận tiền không trùng thông tin đối tác và bằng chứng lạ; luôn diễn đạt 'cần xác minh' thay vì kết tội.
+K. TRẠNG THÁI: CLOSED / PAUSED / UNKNOWN / VERIFIED-OPEN / OPEN-ACCORDING-TO-PROVIDER; mọi trạng thái có ngày và nguồn.
+L. ĐỒNG THUẬN: Form phản ánh, công khai ảnh cá nhân, sử dụng định vị và liên hệ cơ quan luôn dựa vào sự cho phép rõ ràng.
+
+CHUẨN ĐỘNG TÁC AN TOÀN: 'Đưa thông tin có nguồn; hỏi lại trước quyết định; chuyển đúng con người; không giả xác nhận; ghi lịch sử đính chính'.
+
+XXXVI. NAI-GREEN — DU LỊCH XANH KHÔNG CHỈ LÀ MÀU XANH GIAO DIỆN
+
+1. Một chuyến đi ít quãng đường vòng: gợi ý cụm trải nghiệm gần nhau, giải thích cách giảm di chuyển.
+2. Hành trình thân thiện môi trường: ưu tiên dịch vụ địa phương chứng minh được việc giảm đồ nhựa/thu gom rác.
+3. Chỉ số phát thải tham khảo: công thức rõ ràng và khoảng sai số; không tự gắn nhãn carbon-neutral.
+4. Bộ quy tắc khi đến rừng/hồ: không xả rác, không cho động vật ăn, không hái cây, không phát tiếng ồn gây hại.
+5. Travel Passport xanh: thưởng nhiệm vụ học tập, lựa chọn hoạt động có trách nhiệm, tránh cơ chế khuyến khích check-in vô độ.
+6. Hồ sơ doanh nghiệp xanh: hành động có ảnh/bằng chứng và người phụ trách, chu kỳ xác minh, tránh greenwashing.
+7. Tiếp thị trải nghiệm cộng đồng: nhắc văn hóa địa phương không phải 'show' phải diễn bất cứ khi nào khách muốn.
+8. Chia sẻ lợi ích: minh bạch cơ sở hưởng phí trong tour cộng đồng khi có hợp đồng và sự đồng ý.
+9. Chống quá tải điểm đến: chỉ sử dụng dữ liệu sức chứa do bên quản lý cung cấp để giảm tải; không tự công bố ngưỡng sinh thái.
+10. Học từ phản ánh: phân tích vị trí có tín hiệu vấn đề môi trường để chủ thể liên quan tự nguyện phối hợp xử lý.
+11. Giới thiệu kinh tế tuần hoàn: trải nghiệm gốm, sửa chữa, tái sử dụng vật liệu, đặc sản đóng gói thân thiện trong điều kiện phù hợp.
+12. Ưu tiên giới thiệu câu chuyện bảo tồn thay vì ảnh câu khách về động vật hoang dã.
+13. Bộ nội dung về nguồn nước, rừng, đất đỏ, phù sa và tác động của du lịch bằng nguồn khoa học công khai.
+14. Khảo sát ảnh hưởng tích cực/tiêu cực đến cư dân điểm đến; không chỉ đo lượng khách, đo cả sự hài lòng cộng đồng nếu có sự tham gia.
+15. Vai trò AI: dự báo nhu cầu (nếu có dữ liệu), tìm tuyến ít km, tóm tắt tác động, phát hiện hình ảnh rác do khách gửi và hướng dẫn ứng xử.
+
+XXXVII. TRẢI NGHIỆM WEBSITE VÀ ỨNG DỤNG NAI-VERSE Ở MỨC ĐẦY ĐỦ
+
+Đây là bản mô tả TRẢI NGHIỆM SẢN PHẨM (không phải đặc tả code/thiết kế màn hình phải lập trình ngay).
+
+TRANG KHÁM PHÁ / DISCOVER:
+- Hero thương hiệu lấy ảnh thật của Đồng Nai đã được cấp quyền, một hộp tìm kiếm tự nhiên: 'Bạn muốn đi Đồng Nai theo phong cách nào?'.
+- Các nút khám phá nhanh 'Một ngày', 'Gia đình', 'Thiên nhiên', 'Vui chơi', 'Ăn ngon', 'Có người lớn tuổi', 'Nước ngoài', 'Theo ngân sách'.
+- Điểm đến theo vùng và theo mùa, thẻ cảnh quan có giá/giờ/độ tin cậy, không nhồi huy hiệu hoặc rating giả.
+- Bản đồ đồng bộ danh sách địa điểm, có chế độ không cần bản đồ cho kết nối yếu.
+- Gợi ý 'khám phá một địa điểm ít biết' từ dữ liệu có nguồn và điều kiện được phép.
+
+TRANG BẢN ĐỒ / EXPLORE MAP:
+- Zoom, tìm theo tên cũ/mới, bộ lọc loại hình, trạng thái xác minh, mức chi phí, tiện nghi, mùa, thời gian.
+- Click địa điểm xem ảnh đúng nơi, thời điểm nguồn, các hoạt động có thể đặt nếu đã có đối tác.
+- Chuyển sang bảng danh sách cho người dùng không muốn tương tác bản đồ.
+- Xem đường đi dự kiến theo phương tiện được hỗ trợ, cảnh báo khi thiếu thông tin giao thông.
+- Bật lớp giá/ẩm thực/lưu trú/trải nghiệm/xanh/an toàn, mỗi lớp có giải thích giới hạn.
+
+TRANG AI JOURNEY STUDIO:
+- Chat hiểu nhu cầu, nhiều phương án tour đặt cạnh nhau, kéo điểm để đổi lịch, thay đổi ngân sách tức thì.
+- Câu hỏi làm rõ chỉ hỏi khi thiếu thông tin cốt lõi, không biến thành form 30 trường.
+- Mỗi điểm có lý do AI chọn và cơ sở dữ liệu liên quan; nhãn đỏ cho điểm đóng hoặc thông tin cần xác minh.
+- Đồng hồ tính tổng thời gian/quãng đường theo nguồn định tuyến, biểu đồ chi phí theo loại dịch vụ.
+- Xuất PDF/chia sẻ link lịch trình đã lưu, quyền chỉ xem/có thể chỉnh sửa cho nhóm.
+
+TRANG TOUR & EXPERIENCE MARKETPLACE:
+- Tour có người tổ chức được xác minh, các cấu phần của tour, mô tả lịch, điều kiện, sức chứa, giá có nguồn.
+- Huy hiệu 'Nhà cung cấp đã xác minh hồ sơ' cần ghi rõ phạm vi và thời điểm, không đồng nghĩa dịch vụ chắc chắn an toàn.
+- So sánh nhiều tour cùng điều kiện, nút xin báo giá, gửi yêu cầu booking/giữ chỗ theo khả năng thực của đối tác.
+- Danh sách điều khoản và khoản phí chưa bao gồm luôn xem được trước khi gửi yêu cầu.
+
+TRANG NƠI Ở / STAY:
+- Tìm theo ngày, phòng, số khách, nguyện vọng giường, tiếp cận, khoảng cách đến điểm du lịch; giá không có realtime thì hiện 'hỏi giá'.
+- Mỗi nhà cung cấp có trang ảnh thật, tiện nghi có nguồn, giờ nhận/trả phòng, hủy, câu hỏi từ cộng đồng.
+- Chuyển sang web đặt phòng chính thức hoặc gửi yêu cầu tư vấn nếu chưa có API đối tác.
+
+TRANG ĂN UỐNG / TASTE:
+- Bản đồ món theo vùng, câu chuyện văn hóa, ảnh món thật, dị ứng/ăn chay theo thông tin chủ quán.
+- Gợi ý 'ăn gì quanh điểm tôi sắp tới', tạo bàn ăn cho nhóm và hỏi giữ bàn ở cơ sở tham gia.
+
+TRANG AI GUIDE / STORY:
+- Chế độ đọc/nghe/ngắm, thuyết minh đa ngôn ngữ, ảnh 360°, câu chuyện người dân địa phương.
+- Trích dẫn và người đóng góp, nút 'phát hiện sai' hoặc 'cần giải thích'.
+
+TRANG CỘNG ĐỒNG / NAI-VERSE PEOPLE:
+- Forum theo vùng, review, cẩm nang ngắn, nhật ký hành trình, câu hỏi, nhóm đi, bản đồ đóng góp.
+- Quyền riêng tư ảnh và check-in, hệ thống kiểm duyệt khiếu nại, spam và các bài chưa xác minh.
+
+TRANG ĐỒNG NAI XANH & AN TOÀN:
+- Các nguồn cảnh báo, quy tắc đi rừng/núi/hồ, trạng thái dịch vụ, kênh liên hệ công khai.
+- Phản ánh có kiểm duyệt về rác, chất lượng, giá, tiếp cận; nút khẩn cấp gọi cơ quan chức năng.
+
+TRANG DOANH NGHIỆP / PARTNER STUDIO:
+- Đăng hồ sơ chủ thể, chứng từ cần có, lịch dịch vụ, phòng/chỗ/trải nghiệm, giá và điều khoản, ảnh có bản quyền.
+- Theo dõi yêu cầu khách, lập báo giá nháp, chuyển nhân viên duyệt, nhắc lịch, giải quyết tranh chấp, tổng hợp review và doanh thu thực.
+
+TRANG HƯỚNG DẪN VIÊN / GUIDE PORTFOLIO:
+- Năng lực, ngôn ngữ, tuyến chuyên môn, lịch nhận đoàn, mức giá tham khảo, chính sách dịch vụ, chứng từ theo quy định.
+- Không xác nhận một người đủ điều kiện làm hướng dẫn viên chỉ dựa ảnh profile hay lời tự khai.
+
+TRANG HÀNH TRÌNH CÁ NHÂN / MY TRIPS:
+- Chuyến chuẩn bị/đang đi/đã đi, chi phí dự kiến và thực tế, giấy tờ cần nhớ, vé xác nhận, ảnh và nhật ký.
+- Quyền kiểm soát dữ liệu cá nhân, xóa ảnh/check-in, hạn chia sẻ, tải xuống lịch trình.
+
+TRANG ĐÁNH GIÁ & MINH BẠCH:
+- Nguồn giá, trạng thái hoạt động, lịch sử cập nhật, ghi chú thay đổi, review và phản hồi của doanh nghiệp.
+- Tách 'mô phỏng demo', 'tự khai', 'có nguồn chính thức', 'đối tác xác minh', 'chưa kiểm tra'.
+
+THIẾT KẾ GIAO DIỆN MONG MUỐN: Nhận diện du lịch địa phương hiện đại, giàu ảnh thật, màu tự nhiên, typography dễ đọc, bố cục bản đồ lớn; không lạm dụng gradient/neon/3D trang trí. Mobile-first, liên kết chia sẻ mở tốt trên điện thoại, người dùng không cần tải app vẫn lập được chuyến đi trên web/PWA. Tránh gây nghiện scroll bằng thông báo vô nghĩa.
+
+XXXVIII. MÔ HÌNH KINH DOANH NAI-VERSE — TỪ KHÁCH XEM BẢN ĐỒ ĐẾN NGUỒN THU THẬT
+
+KHÁCH HÀNG TRẢ TIỀN (CHỈ KHI PHÁP LÝ VÀ HỢP ĐỒNG PHÙ HỢP):
+1. Doanh nghiệp lữ hành: sử dụng AI tour builder, báo giá, CRM, báo cáo lead theo gói thuê phần mềm.
+2. Khách sạn/homestay: bộ công cụ hồ sơ số, hỗ trợ đa ngữ, phân tích phản hồi, gửi yêu cầu đặt phòng.
+3. Nhà hàng/quán ăn: menu song ngữ, đặt bàn/nhóm, bộ công cụ giới thiệu món theo tuyến.
+4. Nhà vườn/làng nghề: trang trải nghiệm, quản lý suất đón khách, voucher và bán đặc sản.
+5. Hướng dẫn viên: hồ sơ giới thiệu chuyên môn và lịch tiếp nhận đoàn hợp lệ.
+6. Công ty vận chuyển: kênh nhận yêu cầu báo giá xe theo tuyến, số khách, lịch và hành lý.
+7. Doanh nghiệp MICE: bán dịch vụ hội nghị, hội thảo, team building, gala qua marketplace B2B.
+8. Doanh nghiệp tổ chức sự kiện: đăng trải nghiệm đúng ngày, vé và quy tắc tham gia được phép.
+
+CÁC HÌNH THỨC TẠO DOANH THU:
+- Phí sử dụng SaaS hằng tháng cho B2B, gói cơ bản/đa cơ sở/đội ngũ; luôn rõ phạm vi dữ liệu và dịch vụ.
+- Phí theo số lead đủ điều kiện nếu chủ thể đồng ý và không dùng tiêu chí tính phí làm sai xếp hạng khách quan.
+- Hoa hồng booking khi có hợp đồng phân phối, trách nhiệm xác nhận, thanh toán, hoàn hủy và hóa đơn rõ ràng.
+- Gói công cụ nâng cao cho nhà cung cấp: điều hành đoàn, tài liệu đa ngữ, phân tích nhu cầu, chăm sóc khách tự động có duyệt.
+- Marketplace bán trải nghiệm văn hóa/nông nghiệp: phí dịch vụ minh bạch, ưu tiên tỷ phần lợi ích cho cộng đồng chủ trì.
+- Các nội dung tài trợ có nhãn quảng cáo; thứ hạng gợi ý khách quan không phụ thuộc mua quảng cáo.
+- Kênh B2B tour học đường/công ty: thu phí tạo/cung cấp báo giá từ đối tác được phép theo thỏa thuận.
+- Dịch vụ sản xuất nội dung số 360° cho doanh nghiệp (ảnh thật, thuyết minh đa ngữ) khi có quyền ghi hình và quyền khai thác.
+- Sản phẩm dữ liệu tổng hợp/ẩn danh cho cơ sở du lịch có quyền sử dụng, không bán thông tin cá nhân hoặc lịch di chuyển riêng tư.
+- Gói cộng đồng/đào tạo số: workshop sử dụng AI marketing, quản lý giá, chụp ảnh dịch vụ đúng thật, không bán tuyên bố giấy phép giả.
+
+NỀN TẢNG PHÂN PHỐI PHÙ HỢP CƠ CẤU THỊ TRƯỜNG:
+- Business-to-Consumer (B2C): khách được khám phá miễn phí, chọn dịch vụ, gửi yêu cầu và đặt từ đối tác.
+- Business-to-Business (B2B): tour riêng, đoàn trường, doanh nghiệp, teambuilding, lưu trú dài ngày.
+- Business-to-Business-to-Consumer (B2B2C): đối tác dùng NaiVerse làm trợ lý trên website của họ để nhận khách.
+- Community-to-Consumer: sản phẩm văn hóa/trải nghiệm do cộng đồng tạo và kiểm soát lịch hoạt động.
+- Destination Service Platform: chỉ giới thiệu là hạ tầng thông tin cho địa phương sau khi có hợp tác chính thức.
+
+TRẢI NGHIỆM THƯƠNG MẠI CÓ TRÁCH NHIỆM:
+Phí nền tảng hiển thị rõ. Một dịch vụ chỉ được đánh dấu bookable khi có chủ thể hợp lệ, giá đủ điều kiện và xác nhận chỗ. Thanh toán qua cổng có giấy phép/phù hợp hoặc dẫn người dùng đến kênh chính thức của đối tác. Không bắt khách thanh toán vào tài khoản cá nhân không được xác minh qua chat. Không tự làm 'giá gốc' hay 'giảm 80%' khi không có bằng chứng về giá trước khuyến mãi.
+
+XXXIX. HỆ SINH THÁI ĐỐI TÁC ĐÁNG MỜI HỢP TÁC
+
+Nguồn chính thức [ĐÃ CÓ NGUỒN]:
+https://svhttdl.dongnai.gov.vn/vi/gioi-thieu/danh-sach-cac-cong-ty-da-cap-giay-phep-kinh-doanh-lu-hanh-noi-dia.html
+Trang Sở có danh sách doanh nghiệp được cấp giấy phép kinh doanh lữ hành nội địa và quốc tế. Đó là nguồn gốc để kiểm tra, không phải xác nhận giấy phép đang còn hiệu lực cho ngày ký hợp đồng.
+
+NHÓM ỨNG VIÊN LỮ HÀNH NỘI ĐỊA có tên trong danh sách công khai:
+- Công ty TNHH Trị An Adventure: ứng viên phù hợp khảo sát chuyên đề thiên nhiên Trị An; danh sách thể hiện giấy phép 75-0062/2025.
+- Công ty CP Truyền thông – Du lịch Long Khánh: ứng viên tuyến vùng Long Khánh và sự kiện; danh sách thể hiện giấy phép 75-0061/2025.
+- Công ty TNHH TMDV DL CK Journey: ứng viên tạo chương trình địa phương; danh sách thể hiện giấy phép 75-0053/2024.
+- Công ty TNHH TMDV DL Trấn Biên: đơn vị có tên trong danh sách, cần rà soát hồ sơ dịch vụ từng loại.
+- Công ty TNHH DL Sự kiện và các đơn vị khác trong danh sách Sở: tiềm năng du lịch đoàn, school tour, MICE tùy năng lực được chứng minh.
+- Chi nhánh Vietravel Đồng Nai; chi nhánh Saigontourist: ứng viên lớn, phải kiểm tra đơn vị ký hợp đồng, phạm vi quyền bán và thông tin chi nhánh.
+
+NHÓM LỮ HÀNH QUỐC TẾ [ĐÃ CÓ NGUỒN] nên khảo sát riêng:
+- Công ty CP Du lịch Đồng Nai và các doanh nghiệp khác trong mục giấy phép quốc tế của Sở, kiểm tra phạm vi inbound/outbound hiện hành.
+- Công ty TNHH Annam Birding xuất hiện trong danh sách giấy phép lữ hành quốc tế năm 2026 (số trên trang Sở: 75-0026/2026) [ĐÃ CÓ NGUỒN]. Có thể là đối tượng nghiên cứu tour chuyên biệt xem chim; chưa xác nhận NaiVerse có hợp tác hay năng lực cho từng tuyến.
+
+NHÓM CƠ SỞ LƯU TRÚ CÓ TRANG RIÊNG TỪ FILE GỐC:
+- The Mira Central Park: https://themiracentralpark.com.vn/vi/
+- Aurora Hotel Plaza: https://aurorahotelplaza.com/
+- Cát Tiên Jungle Lodge: https://cattienjunglelodge.com/vi/
+- Orchard Home Resort Nam Cát Tiên: https://orchardresort.vn/
+- Green Hope Lodge, Forest Floor Lodge và các cơ sở khác chỉ đưa vào danh mục sau khi xác minh kênh tiếp nhận hiện hành.
+
+NHÓM ĐỐI TÁC BỔ SUNG CÓ THỂ TÌM KIẾM:
+- Các chủ nhà vườn Tân Triều, Bình Lộc/Long Khánh, cơ sở gốm Biên Hòa.
+- Hướng dẫn viên có nghiệp vụ rừng/núi và ngoại ngữ, hướng dẫn viên trong cộng đồng bản địa do cộng đồng giới thiệu.
+- Nhà hàng gia đình, quán đặc sản, đơn vị nấu ăn tập thể, cơ sở phục vụ người ăn chay/dị ứng có thông tin rõ ràng.
+- Đơn vị xe du lịch, taxi, xe đưa đón, dịch vụ bãi đỗ, vận chuyển có giấy phép.
+- Công viên nước/khu vui chơi Sơn Tiên, Bửu Long, Suối Mơ và cơ sở trực tiếp bán vé/đại lý được phép.
+- Đơn vị điều hành VQG Cát Tiên, VQG Bù Gia Mập, khu bảo tồn: hợp tác thuyết minh/dữ liệu/tuyến theo quyền và quy định; không tự tuyên bố là đối tác.
+- Cộng đồng Tà Lài, Sóc Bom Bo, tổ chức văn hóa địa phương: để cộng đồng tự quyết nội dung và hưởng lợi.
+- Trường học, doanh nghiệp MICE, hội nhóm khám phá có trách nhiệm, hiệp hội doanh nghiệp nhỏ.
+
+Mỗi đối tác có tiêu chí xem xét: đúng pháp nhân; ngành nghề/giấy phép cần thiết; dịch vụ rõ; giá/điều khoản thật; quyền ảnh; phương án phản hồi; vệ sinh và an toàn trong phạm vi hợp đồng; cơ chế tiếp nhận khiếu nại; khả năng phục vụ khách ngoại quốc; minh bạch khoản chia; ngày xác minh gần nhất.
+
+XL. HỆ THỐNG 'DU LỊCH SỐ TIN CẬY' — KHÔNG TẠO UY TÍN GIẢ
+
+TẦNG THÔNG TIN:
+(1) Thông tin từ cơ quan quản lý/đơn vị vận hành; có URL, ngày cập nhật.
+(2) Thông tin đối tác cung cấp qua tài khoản đã xác minh; có người chịu trách nhiệm và thời hạn.
+(3) Thông tin tham khảo từ nguồn thứ ba có giấy phép/có thể trích dẫn; không khẳng định là nguồn trực tiếp.
+(4) Phản ánh cộng đồng chưa xác minh, có trạng thái kiểm duyệt.
+(5) Nội dung demo/mô phỏng, gắn nhãn rõ, không nhập vào dữ liệu kinh doanh thật.
+
+TẦNG TRẠNG THÁI:
+- Đã xác minh địa điểm; chưa xác minh tình trạng hoạt động.
+- Đang hoạt động theo nguồn chính thức có ngày; chưa biết còn vé/chỗ.
+- Đối tác báo đang nhận khách; đang đợi kiểm tra lại.
+- Tạm đóng/gián đoạn; có thông tin từ cơ quan/nhà cung cấp.
+- Giá lịch sử; giá mới chưa xác minh; giá có điều kiện; giá được đối tác xác nhận cho ngày cụ thể.
+- Hồ sơ nhà cung cấp đã xét giấy tờ nhưng chất lượng trải nghiệm không có bảo đảm tuyệt đối.
+
+NHỮNG CHI TIẾT CẦN MINH BẠCH TRÊN TRANG:
+Người chịu trách nhiệm dữ liệu, ngày cập nhật, kỳ hiệu lực, nguồn đầu tiên, trạng thái giá, điều kiện đặt, link gốc, khiếu nại và kết quả đính chính. AI không được sửa nội dung chính thức vào cơ sở dữ liệu mà không qua kiểm duyệt.
+
+CÁC VẤN ĐỀ NHẠY CẢM CẦN TRÁNH:
+- Không tự tuyên bố có liên kết chính quyền/được Sở công nhận khi chưa có văn bản.
+- Không dùng danh tiếng thật của khách sạn/doanh nghiệp để gắn 'đối tác NaiVerse' khi chưa ký.
+- Không xác nhận 'an toàn tuyệt đối', 'đã kiểm định 100%', 'giá rẻ nhất Đồng Nai' khi chưa có đánh giá tương ứng.
+- Không bán vé/đò tới Đảo Ó–Đồng Trường khi chưa xác minh chính xác tình trạng thủ tục và đơn vị khai thác.
+- Không mô tả hình ảnh minh họa/ảnh AI tạo là ảnh thực địa Đồng Nai.
+- Không công khai địa điểm riêng tư, nơi ở người dân hoặc tọa độ sinh vật nguy cấp.
+- Không cam kết mọi bài trong diễn đàn đúng sự thật; cần mô hình kiểm duyệt và quyền phản hồi.
+
+XLI. 12 CÂU CHUYỆN KHÁCH HÀNG 'CÓ THỂ TRÌNH DIỄN TOÀN BỘ' (GIẢ ĐỊNH)
+
+01. Gia đình trẻ em: 'Hai người lớn và một bé cao 1,2 m đi Amazing Bay'. AI hiểu điều kiện vé theo chiều cao, đối chiếu các trang giá khác nhau, không tự khẳng định giá nào là giá hiện hành khi có mâu thuẫn.
+02. Cặp đôi: 'Ngắm hoàng hôn Trị An, ngủ ven hồ, chi tiêu 2 triệu'. AI dựng 2 tour khác nhau theo dữ liệu lưu trú, yêu cầu xác nhận đơn vị đón khách ven hồ.
+03. Nhóm 6 bạn: 'Muốn chụp ảnh ở hồ, ăn ngon và cắm trại'. AI chỉ liệt kê campsite được phép và nhà cung cấp có kênh liên hệ thật; cảnh báo không tự cắm ở bờ hồ chưa được phép.
+04. Khách Anh: 'I want local crafts, a forest experience and vegetarian meals'. AI kết hợp gốm, Cát Tiên hoặc tuyến tương ứng và cửa hàng món chay có xác nhận.
+05. Gia đình có người sử dụng xe lăn: 'Chỉ chọn nơi có WC và lối vào phù hợp'. AI ghi rõ điểm nào có bằng chứng và điểm nào cần gọi hỏi.
+06. Đoàn doanh nghiệp 40 người: tour 2N1Đ, AI tổng hợp nhu cầu, chia hạng mục báo giá, doanh nghiệp được cấp phép tiếp nhận và nhân viên gửi báo giá chính thức.
+07. Học sinh: tour về nguồn Văn miếu/di tích theo lịch hợp lý, tài liệu thuyết minh giáo viên duyệt, trò chơi quiz.
+08. Người yêu rừng: 2N1Đ Cát Tiên, guide hợp lệ, lưu trú gần và quy tắc khu bảo tồn, không để AI tự chỉ lối mòn trái quy định.
+09. Khách vừa đến Đồng Nai: có 5 giờ trống, không muốn đi xa, AI chỉ chọn điểm còn đủ thời gian theo dữ liệu vị trí và giờ mở.
+10. Khách du lịch ẩm thực: yêu cầu món từ bưởi, cá, hạt điều, không ăn cay; AI tạo đường ăn uống và ghi chỗ cần hỏi thành phần.
+11. Người đã đi tour phản ánh: 'Điểm tham quan đóng, vé tôi thấy giá khác'. Hệ thống nhận bằng chứng, chuyển kiểm duyệt, đánh dấu nguồn giá xung đột và nhắc người bán trả lời.
+12. Du khách thích tìm điểm mới: chọn vùng Bom Bo–Bù Gia Mập–Phước Long; AI đề xuất hành trình cộng đồng và rừng có tổ chức, đưa câu chuyện văn hóa từ nguồn có sự tham gia của cộng đồng.
+
+XLII. GIÁ TRỊ ĐƯỢC CHỨNG MINH ĐƯỢC THÌ MỚI LÀ ĐỀ TÀI BUSINESS MẠNH
+
+Các chỉ số có thể nghiên cứu và đo từ hoạt động thật, không điền số thành tích tưởng tượng:
+- Thời gian từ câu hỏi ban đầu đến lịch trình có giá và nguồn cho một nhóm khách.
+- Tỷ lệ lịch trình đáp ứng hết ràng buộc cứng (ngày, số khách, giờ, ngân sách chắc chắn, trẻ em).
+- Số giá/giờ mở có nguồn cập nhật trong kỳ; tỷ lệ giá sai điều kiện.
+- Thời gian doanh nghiệp lập báo giá nháp và thời gian đến khi nhân viên gửi báo giá đã duyệt.
+- Số lead chất lượng được đối tác tiếp nhận; tỷ lệ lead chuyển thành booking xác nhận, doanh thu chỉ khi có giao dịch thật.
+- Số cơ sở địa phương nhỏ được khách khám phá và thực tế sử dụng dịch vụ.
+- Thời gian lưu trú bình quân từ booking đã xác nhận, không suy diễn từ lượng click.
+- Mức hài lòng sau chuyến và khả năng giới thiệu cho bạn bè; không dùng rating được tạo giả.
+- Tỷ lệ hỏi đáp du lịch cần con người sửa, độ chính xác thông tin giá, tour và điểm đến có nguồn.
+- Tỷ lệ khách dùng đa ngôn ngữ hoàn thành yêu cầu hỗ trợ, số lần thông tin không rõ được hỏi lại.
+- Tỷ lệ phát hiện review spam trên tập đánh giá có nhãn, kết quả khiếu nại sai của doanh nghiệp.
+- Kết quả kiểm thử giao diện trên điện thoại cấu hình thấp và khi mạng yếu.
+- Tỷ lệ người dùng phân biệt đúng giữa 'giá tham khảo' và 'giá được xác nhận', giữa 'đã tìm thấy' và 'đã đặt'.
+- Khách đánh giá tính hữu ích về khả năng tiếp cận, thông tin an toàn và ứng xử có trách nhiệm.
+
+Các ví dụ định lượng trong bài dự thi phải có phương pháp, số lượng mẫu và baseline. Không tự nói 'tăng 300% chuyển đổi' hay 'AI hiểu 100% mọi ngôn ngữ' nếu chưa đo. Độ hài lòng, lợi nhuận, tác động môi trường cần dẫn nguồn và công bố giả định.
+
+XLIII. TRI THỨC DU LỊCH TỪ KHẮP THẾ GIỚI CÓ THỂ ÁP DỤNG CHO ĐỒNG NAI
+
+Đây là nhóm cảm hứng quốc tế, không phải tuyên bố mọi nơi đã có tính năng tương tự:
+- Destination Management Platform: dữ liệu điểm đến, kinh doanh, sự kiện và sức chứa hiển thị thống nhất, phân quyền rõ.
+- AI Concierge: trợ lý hiểu ngữ cảnh chuyến đi, có thể tư vấn trước và trong khi du lịch, nhưng phụ thuộc kho thông tin có nguồn.
+- Digital Travel Passport: sưu tập trải nghiệm và phần thưởng từ đối tác, tránh spam check-in.
+- Smart Tourism Village: người dân chủ động đăng dịch vụ và hưởng lợi, không biến thành đơn vị cung cấp nội dung miễn phí.
+- Cultural Story Maps: nghe chuyện di sản do chuyên gia và cộng đồng xác thực theo vị trí.
+- Digital Twin of Attractions: bản sao ảo của điểm tham quan khi đơn vị cung cấp dữ liệu và quyền hình ảnh.
+- Accessible Tourism Directory: hạ tầng tiếp cận được kiểm tra thực địa bằng tiêu chí cụ thể.
+- Climate-aware Travel: gắn thời tiết, mùa và lịch hoạt động, không biến dự báo thời tiết thành bảo đảm.
+- Smart Destination Stewardship: quan tâm cả môi trường và cư dân, không chỉ số lượt khách.
+- Circular Tourism: kết nối quà địa phương, tái sử dụng, giảm lãng phí đồ ăn/vật tư và hành trình hiệu quả.
+- Place-based Economy: bản đồ thương mại cho nhà vườn, nhà hàng, chủ lưu trú và hướng dẫn viên ở khu vực ít nổi tiếng.
+- Verified Tourism Commerce: xếp hạng tính phù hợp dựa vào dữ liệu, công bố bài được tài trợ riêng.
+- Travel Accessibility by Design: chủ động hỏi điều kiện tiếp cận và không suy đoán từ vẻ ngoài địa điểm.
+- Responsible Wildlife Tourism: bảo vệ vị trí nhạy cảm và hạn chế kích thích động vật hoang dã.
+- Tourism Resilience: biết điểm đóng, dịch vụ thay thế và liên hệ người hỗ trợ khi một phần tour không diễn ra.
+- AI for Micro-Business: các công cụ dịch menu, trả lời khách, đăng trải nghiệm và tạo báo giá cho chủ cơ sở nhỏ.
+
+Nguồn định hướng quốc tế:
+UN Tourism – World Tourism Day 2026: https://www.un.org/en/events/tourismday/index.shtml
+UNDP & UN Tourism – Sustainable Tourism R&D, 27/8/2026: https://www.undp.org/publications/sustainable-tourism-rd-scalable-intelligence-systemic-transformation
+
+XLIV. NGUỒN DỮ LIỆU, GIỚI HẠN CÔNG NGHỆ VÀ TÍNH HỢP PHÁP
+
+Nguồn địa phương và quy định:
+https://dongnai.gov.vn/vi/news/Du-lich-Dong-Nai/
+https://svhttdl.dongnai.gov.vn/vi/news/du-lich/
+https://svhttdl.dongnai.gov.vn/vi/gioi-thieu/danh-sach-cac-cong-ty-da-cap-giay-phep-kinh-doanh-lu-hanh-noi-dia.html
+https://svhttdl.dongnai.gov.vn/vi/news/du-lich/ubnd-tinh-dong-nai-ban-hanh-quy-che-phoi-hop-trong-quan-ly-cac-hoat-dong-du-lich-235.html
+https://vietnamtourism.gov.vn/
+https://nchmf.gov.vn/
+
+Nguồn tham khảo mục tiêu kinh tế du lịch (không phải kết quả đã đạt):
+https://dongnai.gov.vn/vi/wcag/Tin-chi-dao-dieu-hanh/ban-hanh-ke-hoach-phat-trien-du-lich-tren-dia-ban-tinh-dong-nai-nam-2026-11312.html
+
+Bản đồ và định tuyến:
+https://www.openstreetmap.org/
+https://operations.osmfoundation.org/policies/tiles/
+https://operations.osmfoundation.org/policies/nominatim/
+https://openrouteservice.org/
+https://developers.google.com/maps/billing-and-pricing/pricing
+https://developers.google.com/maps/documentation/routes/usage-and-billing
+
+Thời tiết:
+https://open-meteo.com/en/terms
+
+Quyền và giới hạn:
+- OSM là kho dữ liệu mở, nhưng máy chủ tile của OSM Foundation có hạn mức và điều khoản; phải có attribution, không scrape bulk/prefetch trái chính sách.
+- Nominatim public của OSM có mức tối đa 1 request/giây cho toàn ứng dụng và không dùng cho autocomplete công khai; muốn tải POI quy mô lớn phải dùng bộ dữ liệu/extract hoặc dịch vụ phù hợp.
+- Open-Meteo free API chỉ được sử dụng phi thương mại theo điều khoản hiện hành; nếu NaiVerse có doanh thu cần nguồn có quyền thương mại.
+- Google Maps/Places/Routes yêu cầu tuân thủ thanh toán, điều kiện dữ liệu, giới hạn cache, hiển thị đúng nền tảng và giấy phép.
+- Không lấy hình Google Maps, mạng xã hội, bài báo hoặc ảnh drone của người khác đưa vào app khi chưa có quyền.
+- Không dùng dữ liệu Google Maps bị cấm kết hợp với nền bản đồ khác theo điều khoản có thể áp dụng.
+- Không scraping web đặt vé/phòng trái terms; giá do đối tác cung cấp hoặc API được cấp quyền, ngoài ra chỉ dùng giá tham khảo có nguồn.
+- Cần thận trọng dữ liệu trẻ em, định vị chính xác, ảnh mặt người, thông tin hộ chiếu và giao dịch, giới hạn truy cập theo quyền.
+- Không nên lưu thẻ tín dụng hoặc thông tin nhạy cảm trên nền tảng tự xây khi không cần thiết; dùng nhà cung cấp thanh toán đủ điều kiện.
+- Mọi thông tin thay đổi nhanh (giá, vé, đặt chỗ, lịch sự kiện, giấy phép, đóng cửa) chỉ có giá trị tại thời điểm xác minh.
+
+XLV. TRIẾT LÝ AI CỦA NAI-VERSE — 'RẤT GIỎI NHƯNG BIẾT KHI NÀO KHÔNG BIẾT'
+
+AI trong du lịch là người gợi ý, người tóm tắt và người phối hợp; không được biến thành nguồn chân lý duy nhất. Một câu trả lời có trách nhiệm phải thể hiện:
+- 'Tôi hiểu bạn muốn gì': nhu cầu và điều kiện được đọc đúng.
+- 'Tôi biết thông tin này từ đâu': mỗi điểm và giá có nguồn, thời gian và trạng thái.
+- 'Tôi không biết điều gì': giá chưa xác nhận, phòng chưa kiểm tra, dịch vụ chưa có quyền bán.
+- 'Tôi đề xuất vì sao': quãng đường, sở thích, ngân sách, lịch hoạt động, nhóm người dùng.
+- 'Bạn có thể quyết định': cho khách đổi điểm, thêm bớt dịch vụ, hỏi bên bán thật, không bị ép mua.
+- 'Tôi không hành động trái phép': không tự thu tiền, không đặt vé giả, không tuyên bố thay cơ quan công quyền.
+
+Hình ảnh trong tương lai: NaiVerse là một hệ sinh thái số nơi mỗi địa điểm có câu chuyện đáng tin, mỗi doanh nghiệp nhỏ có cơ hội được nhìn thấy, mỗi du khách có hành trình phù hợp và mỗi hoạt động gắn với sự tôn trọng đất, nước, rừng, con người Đồng Nai.
+
+KẾT LUẬN CHUNG CHO TOÀN BỘ FILE:
+NaiVerse có thể trở thành một sản phẩm AI Digital Business xuất sắc nếu kết nối thành một chuỗi giá trị KHÉP KÍN VÀ CÓ NGUỒN:
+KHÁM PHÁ ĐỒNG NAI -> HIỂU SỞ THÍCH -> TẠO TOUR HỢP LÝ -> KIỂM TRA GIÁ/ĐIỀU KIỆN -> KẾT NỐI BÊN BÁN CÓ THẨM QUYỀN -> DU LỊCH CÓ TRÁCH NHIỆM -> CHIA SẺ TRẢI NGHIỆM -> TẠO THÊM THU NHẬP CHO CƠ SỞ ĐỊA PHƯƠNG.
+
+Tài liệu được mở rộng từ bản gốc NaiVerse, giữ nguyên toàn bộ 20 phần cũ, bổ sung 25 mục chuyên sâu và 190 khả năng AI/tự động hóa mang tính ý tưởng. Không phải prompt lập trình, không phải kế hoạch dự án, không phải cam kết dữ liệu đã được xác minh 100% hay chức năng đã triển khai.
+
+HẾT TÀI LIỆU.

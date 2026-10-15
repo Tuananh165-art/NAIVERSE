@@ -1,0 +1,30 @@
+import "server-only";
+import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
+
+export async function createSupabaseServerClient() {
+  const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!url || !key) return null;
+
+  const cookieStore = await cookies();
+  return createServerClient(url, key, {
+    cookies: {
+      getAll: () => cookieStore.getAll(),
+      setAll: (cookiesToSet) => {
+        try {
+          cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
+        } catch {
+          // Server Components cannot mutate cookies; middleware refreshes auth sessions.
+        }
+      },
+    },
+  });
+}
+
+export async function getCurrentUser() {
+  const client = await createSupabaseServerClient();
+  if (!client) return null;
+  const { data: { user } } = await client.auth.getUser();
+  return user;
+}
