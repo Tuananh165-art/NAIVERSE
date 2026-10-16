@@ -105,12 +105,10 @@ export const guideInputSchema = z.object({
 }).strict();
 
 export const guideAnswerSchema = z.object({
-  claims: z.array(z.object({
+  excerpts: z.array(z.object({
     text: z.string().trim().min(8).max(500),
-    evidence: z.string().trim().min(8).max(500),
     citationRef: z.string().trim().min(3).max(120),
   }).strict()).min(1).max(3),
-  followUpQuestions: z.array(z.string().trim().min(5).max(180)).max(3),
 }).strict();
 
 export const priceReviewInputSchema = z.object({

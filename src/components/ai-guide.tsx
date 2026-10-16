@@ -6,15 +6,34 @@ import { BookOpenCheck, LoaderCircle, Sparkles } from "lucide-react";
 
 type GuideIntent = "overview" | "price" | "hours" | "family_access" | "source_status";
 type GuideResponse = {
-  claims: Array<{
+  excerpts: Array<{
     text: string;
-    evidence: string;
     citation: { ref: string; label: string; href: string; checkedAt: string | null; status: string };
   }>;
-  followUpQuestions: string[];
   aiUsed: boolean;
   reason?: string;
 };
+
+function statusLabel(status: string, en: boolean) {
+  if (en) return status;
+  const labels: Record<string, string> = {
+    verified: "đã xác minh",
+    historical: "thông tin lịch sử",
+    conflicting: "đang mâu thuẫn",
+    unknown: "chưa xác minh",
+    expired: "hết hiệu lực",
+    "not yet effective": "chưa đến thời hạn áp dụng",
+    "stale; requires reconfirmation": "dữ liệu cũ; cần xác nhận lại",
+    "no price record listed": "chưa có bản ghi giá",
+    "no hours record listed": "chưa có bản ghi giờ hoạt động",
+    "source listed; claim still subject to catalog status": "có tham chiếu nguồn; vẫn theo trạng thái catalog",
+    "no public source URL": "không có URL nguồn công khai",
+    needs_confirmation: "cần xác nhận",
+    reference: "tham khảo",
+    paused_reference: "tham khảo, tạm dừng",
+  };
+  return labels[status] || status;
+}
 
 export function AiGuide({ signedIn, places }: { signedIn: boolean; places: Array<{ id: string; name: string; nameEn: string }> }) {
   const locale = useLocale();
@@ -58,7 +77,7 @@ export function AiGuide({ signedIn, places }: { signedIn: boolean; places: Array
   return <div className="split-layout" style={{ marginTop: 24 }}>
     <section className="panel">
       <h2 className="panel-title"><BookOpenCheck size={19}/>{en ? "Choose what to check" : "Chọn nội dung cần tra cứu"}</h2>
-      <p className="panel-copy">{en ? "NaiVerse retrieves public catalog, price and hours records, then asks DeepSeek to explain only those records. There is no free-text field." : "NaiVerse truy xuất catalog, giá và giờ công khai rồi nhờ DeepSeek giải thích đúng các bản ghi đó. Màn hình không gửi văn bản tự do."}</p>
+      <p className="panel-copy">{en ? "NaiVerse retrieves public catalog, price and hours records, then asks DeepSeek to select exact source excerpts. There is no free-text field." : "NaiVerse truy xuất catalog, giá và giờ công khai rồi nhờ DeepSeek chọn trích đoạn nguyên văn từ nguồn. Màn hình không gửi văn bản tự do."}</p>
       <label className="form-label" htmlFor="guide-place">{en ? "Destination" : "Địa điểm"}</label>
       <select id="guide-place" className="field" value={placeId} onChange={(event) => { setPlaceId(event.target.value); setResult(null); }}>
         {places.map((place) => <option key={place.id} value={place.id}>{en ? place.nameEn : place.name}</option>)}
@@ -81,22 +100,19 @@ export function AiGuide({ signedIn, places }: { signedIn: boolean; places: Array
     </section>
 
     <section className="panel" aria-live="polite">
-      <h2 className="panel-title">{en ? "Grounded answer" : "Câu trả lời có nguồn"}</h2>
-      {!result && <p className="panel-copy">{en ? "The answer will show the retrieved sources and their status. Missing facts stay unknown." : "Câu trả lời sẽ kèm nguồn được truy xuất và trạng thái của nguồn. Thông tin thiếu vẫn được ghi là chưa biết."}</p>}
+      <h2 className="panel-title">{en ? "Source excerpts" : "Trích đoạn nguồn"}</h2>
+      {!result && <p className="panel-copy">{en ? "DeepSeek selects exact excerpts from retrieved records. Missing facts stay unknown." : "DeepSeek chọn trích đoạn nguyên văn từ hồ sơ được truy xuất. Thông tin thiếu vẫn được ghi là chưa biết."}</p>}
       {result && <>
-        <p className="form-hint">{en ? "Each statement is paired with an exact excerpt from the cited record. Check that the summary does not go beyond the excerpt." : "Mỗi phát biểu đi kèm trích đoạn nguyên văn từ nguồn được dẫn. Hãy kiểm tra phần tóm tắt không nói quá nội dung trích đoạn."}</p>
-        {result.claims.map((claim, index) => <article className="panel" key={`${claim.citation.ref}-${index}`} style={{ marginTop: 14, padding: 16 }}>
-          <p>{claim.text}</p>
-          <blockquote className="form-hint" style={{ borderLeft: "3px solid var(--accent)", paddingLeft: 12 }}>{claim.evidence}</blockquote>
+        <p className="form-hint">{en ? "These are exact excerpts selected from the cited records; NaiVerse does not paraphrase them. Check the source date and status before relying on changing details." : "Đây là trích đoạn nguyên văn được chọn từ nguồn dẫn; NaiVerse không diễn giải lại. Hãy kiểm tra ngày và trạng thái nguồn trước khi dùng thông tin có thể thay đổi."}</p>
+        {result.excerpts.map((excerpt, index) => <article className="panel" key={`${excerpt.citation.ref}-${index}`} style={{ marginTop: 14, padding: 16 }}>
+          <blockquote style={{ borderLeft: "3px solid var(--accent)", paddingLeft: 12 }}>{excerpt.text}</blockquote>
           <p className="form-hint" style={{ marginTop: 10 }}>
-            {claim.citation.href.startsWith("http")
-              ? <a href={claim.citation.href} target="_blank" rel="noreferrer">{claim.citation.label}</a>
-              : <a href={claim.citation.href}>{claim.citation.label}</a>}
-            <small> · {claim.citation.status}{claim.citation.checkedAt ? " · " + (en ? "checked " : "đối chiếu ") + claim.citation.checkedAt : ""}</small>
+            {excerpt.citation.href.startsWith("http")
+              ? <a href={excerpt.citation.href} target="_blank" rel="noreferrer">{excerpt.citation.label}</a>
+              : <a href={excerpt.citation.href}>{excerpt.citation.label}</a>}
+            <small> · {statusLabel(excerpt.citation.status, en)}{excerpt.citation.checkedAt ? " · " + (en ? "checked " : "đối chiếu ") + excerpt.citation.checkedAt : ""}</small>
           </p>
         </article>)}
-        {result.followUpQuestions.length > 0 && <div style={{ marginTop: 16 }}><strong>{en ? "Questions to confirm" : "Điều nên hỏi thêm"}</strong><ul>{result.followUpQuestions.map((question, index) => <li key={index}>{question}</li>)}</ul></div>}
-        {!result.aiUsed && <p className="form-hint" role="status">{en ? "No model call was made because there was no retrieved evidence." : "Không gọi model vì không có bằng chứng phù hợp được truy xuất."}</p>}
       </>}
     </section>
   </div>;

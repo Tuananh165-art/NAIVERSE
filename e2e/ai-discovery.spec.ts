@@ -175,6 +175,8 @@ test("map route assistant and username registration are discoverable", async ({ 
 test("the source-grounded AI guide is reachable and sends only fixed, consented choices", async ({ page }) => {
   await page.goto("/vi/ai/guide");
   await expect(page.getByRole("heading", { name: "Trợ lý tra cứu du lịch NaiVerse" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Trích đoạn nguồn" })).toBeVisible();
+  await expect(page.getByText("DeepSeek chọn trích đoạn nguyên văn từ hồ sơ được truy xuất.")).toBeVisible();
   await expect(page.getByLabel("Địa điểm", { exact: true })).toBeVisible();
   await expect(page.getByLabel("Nội dung hỏi", { exact: true })).toBeVisible();
   const ask = page.getByRole("button", { name: "Hỏi trợ lý AI" });

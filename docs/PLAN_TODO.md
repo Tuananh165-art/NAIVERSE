@@ -9,25 +9,27 @@
 
 ## Xác minh tổng thể mới nhất — 16/10/2026
 
-- [x] Unit/integration mới nhất: 91 passed, 21 skipped; lint/typecheck đạt; production build Next.js 16.4.1 đạt sau khi dùng dist riêng để không tranh chấp thư mục `.next` đang chạy.
-- [x] Playwright Chromium: 20/20; gồm AI Guide, FairPrice discovery/consent, ảnh nhóm cộng đồng có nhãn, form username, chặn AI API khi chưa đăng nhập và bàn phím đổi sang đăng ký/hiện mật khẩu bằng Enter. Đã chạy một worker trong môi trường cho phép tạo tiến trình.
+- [x] Unit/integration mới nhất (mặc định, không bật live keys): 93 passed, 41 skipped; lint/typecheck đạt. Các test live opt-in được đếm skipped khi chạy mặc định.
+- [x] Playwright Chromium: 22/22; gồm AI Guide, FairPrice discovery/consent, ảnh nhóm cộng đồng có nhãn, username registration request, username-login request/error, chặn AI API khi chưa đăng nhập và bàn phím đổi sang đăng ký/hiện mật khẩu bằng Enter. Test đăng ký/đăng nhập chặn request Supabase tại trình duyệt.
 - [x] DeepSeek Trip DNA ngày 16/10: sau khi làm rõ taxonomy và sửa một nhãn expected development không có căn cứ, đo lại đạt 358/358 field; khóa prompt rồi chạy holdout một lần đạt 176/180 (97,8%). Bốn mismatch holdout được ghi trong `AI_AUDIT.md`, không dùng để tinh chỉnh.
 - [x] Regression kiểm tra payload DeepSeek thực gửi đã che GPS DMS dạng ASCII và dấu prime/định hướng Bắc–Đông tiếng Việt; trước khi sửa, test chứng minh DMS bị lọt qua bộ lọc thập phân.
 - [x] DeepSeek FairPrice live VI/EN: 2/2, gồm báo giá có câu lệnh prompt injection; output được kiểm tra theo exact evidence và không giữ tuyên bố “rẻ nhất/cheapest/đã xác nhận”.
+- [x] AI Guide selection adversarial live VI/EN: 10/10 development và 10/10 holdout trong hai lượt DeepSeek tách riêng; nhiều loại nguồn cạnh tranh, giá cũ/mâu thuẫn, giờ lịch sử, tiếp cận và injection. Fixture nhỏ, không xem là độ chính xác tổng quát.
 - [ ] Luồng authenticated còn cần tài khoản test và mailbox do chủ project kiểm soát: đăng ký/email confirmation, username-login, RLS khách A/B và doanh nghiệp A/B, ghi trip/FairPrice, cùng quota Upstash qua request thật. Probe bảng công khai không xác minh các quyền này.
 
 ## Cập nhật trạng thái 16/10/2026
 
-Người dùng đã xác nhận quyền sử dụng đủ 14 ảnh đầu vào; hash SHA-256 khớp, catalog có 43 lượt dùng ảnh trên đủ 35 hồ sơ yêu cầu ảnh. Nhóm nghề/ẩm thực cộng đồng được miễn ảnh và dùng artwork có nhãn; ảnh Bù Lạch gắn đúng hồ sơ. Auth hỗ trợ đăng ký username/email + password, đăng nhập bằng username hoặc email + password, và đăng xuất local; unit/E2E kiểm tra luồng giao diện/endpoint, nhưng chưa đăng ký bằng tài khoản test thật hoặc xác minh RLS A/B. `NAIVERSE_SETUP_ALL.sql` được tạo lặp lại cho ra cùng nội dung, gồm 34 migration và seed 36 địa điểm. Probe chỉ đọc ngày 16/10/2026 xác nhận Auth settings, Upstash PING, các bảng chính và 36 địa điểm công khai; migration 0033 cũng được xác nhận qua dòng Combo 3 đã cập nhật. Live smoke DeepSeek/Open-Meteo/ORS đạt 24/24 trên 7 file; FairPrice prompt-injection VI/EN được chạy thêm đạt 2/2; AI Guide exact excerpt VI/EN đạt 2/2; handler smoke vẫn mock auth, limiter và ghi DB. Unit/integration hiện đạt **91 passed/21 skipped**; E2E đạt **20/20**; lint, typecheck và production build Next.js 16.4.1 đạt. Đánh giá Trip DNA mới nhất đạt **358/358 development, 176/180 holdout**; đây là mẫu nhỏ. Xem [kiểm toán AI](AI_AUDIT.md), [kịch bản demo](DEMO_KICH_BAN.md), [trạng thái ảnh](PHOTO_GAPS.md) và phần TODO bên dưới.
+Người dùng đã xác nhận quyền sử dụng đủ 14 ảnh đầu vào; hash SHA-256 khớp, catalog có 43 lượt dùng ảnh trên đủ 35 hồ sơ yêu cầu ảnh. Nhóm nghề/ẩm thực cộng đồng được miễn ảnh và dùng artwork có nhãn; ảnh Bù Lạch gắn đúng hồ sơ. Auth hỗ trợ đăng ký username/email + password, đăng nhập bằng username hoặc email + password, và đăng xuất local; unit/E2E kiểm tra luồng giao diện/endpoint, nhưng chưa đăng ký bằng tài khoản test thật hoặc xác minh RLS A/B. `NAIVERSE_SETUP_ALL.sql` được tạo lặp lại cho ra cùng nội dung, gồm 34 migration và seed 36 địa điểm. Probe chỉ đọc ngày 16/10/2026 xác nhận Auth settings, Upstash PING, các bảng chính và 36 địa điểm công khai; migration 0033 cũng được xác nhận qua dòng Combo 3 đã cập nhật. Live smoke DeepSeek/Open-Meteo/ORS đạt 24/24 trên 7 file; FairPrice prompt-injection VI/EN được chạy thêm đạt 2/2; AI Guide extractive VI/EN đạt 2/2, evaluator đạt 10/10 development + 10/10 holdout trong hai lượt riêng; handler smoke vẫn mock auth, limiter và ghi DB. Unit/integration hiện đạt **93 passed/41 skipped** ở cấu hình mặc định; E2E đạt **22/22**; lint/typecheck và production build đạt. Đánh giá Trip DNA mới nhất đạt **358/358 development, 176/180 holdout**; các bộ đánh giá đều có mẫu nhỏ. Xem [kiểm toán AI](AI_AUDIT.md), [kịch bản demo](DEMO_KICH_BAN.md), [trạng thái ảnh](PHOTO_GAPS.md) và phần TODO bên dưới.
 
 ## Cập nhật AI Guide — 16/10/2026
 
 - [x] Thêm `/vi/ai/guide` và `/en/ai/guide`: chọn một địa điểm công khai và loại câu hỏi cố định; yêu cầu consent trước khi gửi.
 - [x] Truy xuất hồ sơ địa điểm, nguồn, giá và giờ liên quan; chuẩn hóa dấu tiếng Việt và giới hạn citation vào ID nguồn thực sự đã truy xuất. Giá/giờ hết hạn, cũ, xung đột hoặc chưa xác minh được giữ nguyên trạng thái.
-- [x] Không có ô prompt tự do trong AI Guide; không gửi tên, liên hệ, GPS hoặc ghi chú cá nhân. Thông tin giá và giờ do ứng dụng lấy theo intent; model chỉ giải thích hồ sơ đã chọn.
-- [x] Unit/route tests bao gồm auth, từ chối field câu hỏi tự do, payload privacy, citation ngoài tập nguồn và evidence không khớp đoạn trích. Server trả tối đa ba phát biểu, mỗi phát biểu có đoạn nguyên văn từ đúng nguồn; UI hiển thị sát nhau để đối chiếu.
-- [x] DeepSeek thật: smoke Guide VI/EN đạt 2/2 ngày 16/10/2026 sau khi rút ngắn output. Đây là kiểm tra model với catalog tĩnh, chưa phải kiểm thử đăng nhập/Redis/Supabase live xuyên suốt.
-- [ ] Exact excerpt không chứng minh entailment ngữ nghĩa. Bổ sung bộ ca adversarial đánh giá phát biểu có nói quá đoạn trích hay không; tiếp tục yêu cầu người xem đối chiếu nguồn.
+- [x] Không có ô prompt tự do trong AI Guide; không gửi tên, liên hệ, GPS hoặc ghi chú cá nhân. Thông tin giá và giờ do ứng dụng lấy theo intent; DeepSeek chỉ chọn đoạn nguyên văn phù hợp từ hồ sơ đã truy xuất.
+- [x] Unit/route tests bao gồm auth, từ chối field câu hỏi tự do, payload privacy, citation ngoài tập nguồn và từ chối paraphrase/đoạn không khớp. AI Guide chỉ trả tối đa ba trích đoạn nguyên văn đã kiểm tra, không hiển thị phát biểu do model tự viết.
+- [x] Chạy DeepSeek smoke extractive VI/EN sau khi đổi Guide; đạt 2/2 trên hồ sơ Amazing Bay tĩnh, kiểm tra output đúng schema và text là substring nguyên văn của đúng nguồn. Route unit kiểm tra giá hết hạn, giờ mâu thuẫn, injection trong source note, sai citation và paraphrase bị loại.
+- [x] Thêm evaluator opt-in `RUN_LIVE_AI_GUIDE_EVAL` với hai split riêng, 10 ca mỗi split VI/EN, nhiều nguồn cạnh tranh, status cũ/mâu thuẫn, wheelchair access và prompt injection. DeepSeek đạt 10/10 development và 10/10 holdout trong hai lượt; mẫu nhỏ, chưa đo chất lượng trên truy vấn người dùng đại diện.
+- [x] API thật và evaluator dùng chung bộ lọc nguồn theo intent/system prompt; hồ sơ bị lọc trước khi gửi model. Exact citation/substr checks vẫn là cổng bắt buộc, và catalog cần được con người rà soát trước công bố.
 - [x] Thêm AI Packing Assistant trong Journey Studio: DeepSeek chỉ sắp xếp mã vật dụng/độ ưu tiên được phép từ trip facts có cấu trúc; nhãn, lý do, cảnh báo sức khỏe/tiếp cận do ứng dụng kiểm soát. Không gửi prompt gốc, budget, GPS hay liên hệ.
 - [x] Thêm migration `0034_ai_packing_usage_feature.sql` để ghi feature usage; route kiểm tra auth, consent, Upstash, điểm dừng catalog và loại mã/lý do không phù hợp.
 - [x] Bổ sung bộ lọc trước biên DeepSeek: xóa field tọa độ và che email, số điện thoại, cặp GPS khỏi text; regression kiểm tra nội dung request thực sự gửi đi.
@@ -41,7 +43,7 @@ Người dùng đã xác nhận quyền sử dụng đủ 14 ảnh đầu vào; 
 
 ## Cập nhật accessibility và hợp nhất catalog — 16/10/2026
 
-- [x] Thêm axe-core vào Playwright và audit WCAG 2.1 A/AA trên 6 trạng thái trang VI/EN; sửa màu chữ phụ không đủ tương phản và accessible name của nút đổi ngôn ngữ. E2E toàn bộ đạt 20/20, gồm bài thao tác bàn phím.
+- [x] Thêm axe-core vào Playwright và audit WCAG 2.1 A/AA trên 6 trạng thái trang VI/EN; sửa màu chữ phụ không đủ tương phản và accessible name của nút đổi ngôn ngữ. E2E toàn bộ hiện đạt 22/22, gồm auth request dùng stub và bài thao tác bàn phím.
 - [x] Sửa catalog server để giữ ảnh local được người dùng cấp quyền khi database có ảnh đã duyệt, loại ảnh trùng theo URL/nguồn, khử evidence trùng và giữ nguyên `labelEn` từ JSONB database. Unit regression và trang Bù Lạch/Giang Điền/Mã Đà E2E xác nhận.
 - [ ] Kiểm thử thủ công bằng bàn phím/đọc màn hình và thiết bị thật; audit tự động/responsive source không thay thế kiểm tra assistive technology trên thiết bị.
 
@@ -86,7 +88,8 @@ Người dùng đã xác nhận quyền sử dụng đủ 14 ảnh đầu vào; 
 - [x] Thêm regression FairPrice cho prompt injection trong quote và loại bỏ field không có exact evidence; giữ policy quote như untrusted data.
 - [x] Rà mismatch Trip DNA, làm rõ taxonomy interests, hiệu chỉnh một nhãn development suy diễn và chạy lại development 358/358; khóa prompt rồi đo holdout một lần 176/180. Thêm regression privacy cho tọa độ DMS gửi model; smoke feature 24/24 là kiểm tra mẫu, không bảo đảm mọi câu trả lời luôn đúng.
 - [x] Thêm AI Guide route regression cho giá hết hạn, giờ mâu thuẫn, ghi chú nguồn có câu lệnh injection được giữ là dữ liệu, và citation/status trả về khớp nguồn đã truy xuất.
-- [ ] Đánh giá adversarial đầu ra model cho từng phát biểu về giá/giờ đối chiếu exact evidence. Route hiện giới hạn citation vào ID nguồn thật, nhưng chưa xác minh từng câu trong câu trả lời có được trích nguyên văn từ nguồn.
+- [x] AI Guide kiểm tra mọi đoạn trả lời là exact substring của citation; không còn cho model tạo phần diễn giải tự do. FairPrice giữ exact evidence cho từng field, kèm fixture prompt injection.
+- [x] Bổ sung 10 fixture holdout riêng cho việc DeepSeek chọn đoạn theo intent giữa nhiều nguồn cạnh tranh; đạt 10/10 trong lượt live riêng. Cần tiếp tục mở rộng trước khi xem đây là độ đúng đại diện.
 - [ ] Playwright E2E/kiểm thử RLS giữa khách A/B và doanh nghiệp A/B với hai project member thật.
 - [x] Tự động audit axe WCAG 2.1 A/AA trên trang chủ VI/EN, khám phá, đăng ký, AI Guide EN và FairPrice VI; sửa contrast màu chữ phụ và accessible name locale switcher. Chromium sạch không còn vi phạm trong sáu trạng thái trang đã kiểm tra.
 - [ ] Kiểm thử thủ công bằng bàn phím/đọc màn hình và thiết bị thật; audit tự động/responsive source không thay thế kiểm tra assistive technology trên thiết bị.

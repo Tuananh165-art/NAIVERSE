@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 vi.mock("server-only", () => ({}));
 import { places } from "@/lib/catalog";
-import { buildPlaceGuideDocuments } from "@/lib/guide-retrieval";
+import { buildGuideSystemPrompt, buildPlaceGuideDocuments, filterGuideDocumentsByIntent } from "@/lib/guide-retrieval";
 import { requestDeepSeekJson } from "@/lib/deepseek";
 import { guideAnswerSchema } from "@/lib/schemas";
 
@@ -12,32 +12,28 @@ describe.skipIf(!liveRequested)("live DeepSeek AI guide smoke (explicit opt-in)"
   for (const locale of ["vi", "en"] as const) {
     it("answers from a retrieved Amazing Bay catalog record in " + locale, async () => {
       const place = places.find((item) => item.id === "amazing-bay")!;
-      const documents = buildPlaceGuideDocuments([place], locale);
+      const documents = filterGuideDocumentsByIntent(buildPlaceGuideDocuments([place], locale), "overview");
       const documentByRef = new Map(documents.map((document) => [document.ref, document]));
       const schema = guideAnswerSchema.superRefine((result, context) => {
-        result.claims.forEach((claim, index) => {
-          const source = documentByRef.get(claim.citationRef);
-          if (!source || !source.content.includes(claim.evidence)) {
-            context.addIssue({ code: "custom", path: ["claims", index], message: "Claim evidence must be an exact excerpt from its cited record." });
+        result.excerpts.forEach((excerpt, index) => {
+          const source = documentByRef.get(excerpt.citationRef);
+          if (!source || !source.content.includes(excerpt.text)) {
+            context.addIssue({ code: "custom", path: ["excerpts", index], message: "Answer must be an exact excerpt from its cited record." });
           }
         });
       });
-      let output: { claims: Array<{ text: string; evidence: string; citationRef: string }>; followUpQuestions: string[] };
+      let output: { excerpts: Array<{ text: string; citationRef: string }> };
       try {
         output = await requestDeepSeekJson({
-        schema,
+          schema,
           maxTokens: 1200,
-        system: [
-          "Answer only from the retrieved public destination record. Do not invent current operation, price, hours, entrance or safety.",
-          "Return 1 to 3 concise atomic claims in the requested language. Each claim must include one verbatim continuous evidence excerpt and the exact citationRef of that document; do not state facts beyond the excerpt.",
-          "If a fact is absent, cite the exact caveat that says it is unconfirmed. Return claims and up to 3 short followUpQuestions as JSON.",
-        ].join(" "),
-        input: {
-          locale,
-          selectedPlaceId: place.id,
-          task: locale === "en" ? "Summarize the destination and what visitors should confirm." : "Tóm tắt địa điểm và điều khách nên xác nhận.",
-          retrievedDocuments: documents.map(({ ref, label, checkedAt, status, content }) => ({ ref, label, checkedAt, status, content })),
-        },
+          system: buildGuideSystemPrompt(),
+          input: {
+            locale,
+            selectedPlaceId: place.id,
+            task: locale === "en" ? "Select source excerpts that summarize the destination and note what visitors should confirm." : "Chọn trích đoạn nguồn tóm tắt địa điểm và nêu điều khách nên xác nhận.",
+            retrievedDocuments: documents.map(({ ref, label, checkedAt, status, content }) => ({ ref, label, checkedAt, status, content })),
+          },
         });
       } catch (error) {
         const diagnostics = error && typeof error === "object" && "diagnostics" in error && Array.isArray(error.diagnostics)
@@ -45,8 +41,8 @@ describe.skipIf(!liveRequested)("live DeepSeek AI guide smoke (explicit opt-in)"
           : "no safe schema diagnostics available";
         throw new Error("Live guide smoke failed: " + diagnostics);
       }
-      expect(output.claims.length).toBeGreaterThan(0);
-      expect(output.claims.every((claim) => documentByRef.get(claim.citationRef)?.content.includes(claim.evidence))).toBe(true);
+      expect(output.excerpts.length).toBeGreaterThan(0);
+      expect(output.excerpts.every((excerpt) => documentByRef.get(excerpt.citationRef)?.content.includes(excerpt.text))).toBe(true);
     }, 30_000);
   }
 });

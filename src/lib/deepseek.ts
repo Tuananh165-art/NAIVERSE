@@ -57,9 +57,30 @@ export async function requestDeepSeekJson<T>(options: {
         }),
       });
     } catch {
-      throw new AiProviderError("unavailable", "DeepSeek is temporarily unavailable. Please retry later.");
+      throw new AiProviderError("unavailable", "DeepSeek is temporarily unavailable. Please retry later.", ["transport_error"]);
     }
-    if (!response.ok) throw new AiProviderError("unavailable", "DeepSeek could not complete this request.");
+    if (!response.ok) {
+      const diagnostics = [`http_status:${response.status}`];
+      try {
+        const errorEnvelope = await response.json() as { error?: { type?: unknown; code?: unknown; param?: unknown } };
+        const safeField = (name: string, value: unknown) => {
+          if (typeof value === "string" && /^[a-zA-Z0-9_.-]{1,64}$/.test(value)) diagnostics.push(`${name}:${value}`);
+        };
+        safeField("provider_type", errorEnvelope.error?.type);
+        safeField("provider_code", errorEnvelope.error?.code);
+        safeField("provider_param", errorEnvelope.error?.param);
+        const message = typeof (errorEnvelope.error as { message?: unknown } | undefined)?.message === "string"
+          ? (errorEnvelope.error as { message: string }).message.toLowerCase()
+          : "";
+        const reason = /model|engine/.test(message) ? "model_config"
+          : /thinking|response_format|stream|parameter|field/.test(message) ? "request_parameter"
+          : /balance|quota|credit|rate limit/.test(message) ? "quota_or_limit"
+          : /token|context/.test(message) ? "token_or_context_limit"
+          : "provider_rejected_request";
+        diagnostics.push(`provider_reason:${reason}`);
+      } catch { /* Provider error bodies are deliberately not logged or returned. */ }
+      throw new AiProviderError("unavailable", "DeepSeek could not complete this request.", diagnostics);
+    }
 
     let repairHint = "response: invalid_or_oversized";
     try {

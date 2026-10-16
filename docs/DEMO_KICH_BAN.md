@@ -30,8 +30,8 @@ Tài liệu này giúp chạy demo từ tài khoản mới tới hành trình v�
 1. Đăng nhập rồi mở `/vi/ai/guide`; nếu chưa áp dụng schema Supabase, hãy cài project mới bằng `NAIVERSE_SETUP_ALL.sql` trước.
 2. Chọn địa điểm và một loại câu hỏi cố định như tổng quan, giá/điều kiện, giờ nguồn nêu, gia đình/tiếp cận hoặc tình trạng nguồn.
 3. Đọc nội dung đồng ý: chỉ ID địa điểm công khai, loại câu hỏi, ngôn ngữ và hồ sơ catalog liên quan được gửi tới DeepSeek; màn hình không có ô nhập tự do, không gửi GPS hay thông tin liên hệ.
-4. Tích consent rồi hỏi. Mỗi phát biểu có trích đoạn nguyên văn từ nguồn, nhãn trạng thái và ngày đối chiếu. Giá/giờ cũ, mâu thuẫn hoặc chưa xác minh phải giữ nguyên nhãn. Server từ chối citation không nằm trong nguồn truy xuất hoặc trích đoạn không khớp chính xác tài liệu được dẫn.
-5. Đọc cả phát biểu lẫn trích đoạn cạnh nó; việc khớp nguyên văn không tự chứng minh phần diễn giải đúng về ngữ nghĩa. Nếu phát biểu nói quá nguồn hoặc nguồn không đủ xác nhận, không dùng như thông tin đã xác nhận và gửi phản ánh để rà soát.
+4. Tích consent rồi hỏi. Câu trả lời chỉ gồm các đoạn ngắn nguyên văn được DeepSeek chọn, kèm nguồn, trạng thái và ngày đối chiếu. Giá/giờ cũ, mâu thuẫn hoặc chưa xác minh vẫn giữ nguyên nhãn. Server từ chối citation ngoài tập nguồn hoặc đoạn không khớp chính xác tài liệu được dẫn.
+5. Đọc đoạn trích cùng trạng thái và ngày kiểm tra. AI Guide không tự diễn giải hoặc bổ sung dữ kiện; model vẫn có thể chọn thiếu hoặc chưa đúng đoạn liên quan. Nếu nguồn thiếu, cũ hoặc mâu thuẫn thì coi là cần xác nhận với đơn vị, không coi là booking hay giá được bảo đảm.
 6. Mở `/en/ai/guide` và lặp lại để kiểm tra tiếng Anh. Thu hồi consent thì nút gửi bị khóa.
 
 ### FairPrice Lens — trích báo giá, không chấm “đắt/rẻ”
@@ -164,3 +164,33 @@ Lần đo DeepSeek ngày 16/10/2026: development 358/358 field (40 prompt); hold
 ## 8. Ranh giới tính năng hiện tại
 
 Đã có AI trip extraction/suggestions, thời tiết và lời khuyên an toàn/xanh, giải thích metric tuyến, AI Guide tra cứu theo câu hỏi cố định, AI Packing Assistant và FairPrice Lens có giới hạn. Tên/giờ/giá catalog do ứng dụng quản lý; model không xác minh hiện trạng. Guide không có prompt tự do; packing dùng mã có kiểm soát. FairPrice chỉ trích quote có bằng chứng exact substring và đưa candidate giá nguồn; chưa có xác minh end-to-end trên Supabase/Upstash thật. Retrieval Guide hiện là catalog có cấu trúc, chưa cần LangChain/embeddings ở quy mô này. Operator Copilot, thuyết minh/TTS và Stress Test theo timeline/giờ mở cửa vẫn thuộc backlog; không trình diễn chúng như đã hoàn thành. Xem [AI_AUDIT.md](AI_AUDIT.md) và PLAN_TODO.md để theo dõi trạng thái.
+
+## 9. Ma trận chạy thử AI thật theo từng tính năng
+
+Các lệnh dưới đây gửi request thật tới DeepSeek và một số dịch vụ dữ liệu; có thể phát sinh phí/quota. Chạy riêng từng nhóm sau khi kiểm tra `.env`; dùng dữ liệu fixture, không dùng thông tin cá nhân. Tất cả bài API smoke giả lập Supabase Auth/Upstash/DB, ngoại trừ test live riêng nếu được ghi rõ. Không bật các biến này trong CI. Mặc định mọi live test đều bỏ qua.
+
+| Nhóm cần kiểm tra | Cờ bật | File test | Bằng chứng mong đợi | Giới hạn |
+|---|---|---|---|---|
+| Trip DNA, thời tiết VI/EN, sự cố, giải thích metric tuyến; geometry ORS tùy cờ | `RUN_LIVE_AI_SMOKE=true`; thêm `RUN_LIVE_ROUTE_SMOKE=true` để gọi ORS | `src/lib/ai-live-smoke.test.ts` | Schema hợp lệ; các trường chính đúng fixture; Open-Meteo có forecast; tuyến ORS có geometry | Không gọi handler có session thật; ORS không chứng minh traffic/giờ mở cửa |
+| Journey Studio tạo ba phương án | `RUN_LIVE_AI_PLAN_SMOKE=true` | `src/lib/plan-live-smoke.test.ts` | HTTP 200 và tối đa ba phương án chỉ chứa ID trong catalog | Auth, limiter được mock; không ghi chuyến vào Supabase |
+| Weather handler và map route assistant | `RUN_LIVE_AI_HANDLERS_SMOKE=true` | `src/lib/ai-handler-live-smoke.test.ts` | Forecast VI/EN qua handler; route dùng metric thử; nhánh khẩn cấp không gọi model | Auth, Upstash/limiter và DB được cô lập/mock |
+| Route assistant end-to-end qua ORS → DeepSeek | `RUN_LIVE_AI_FULL_ROUTE_SMOKE=true` | `src/lib/route-assist-live-smoke.test.ts` | Hai tuyến đường thực và giải thích được kiểm tra schema | Session/limiter giả lập; không chứng minh đăng nhập production |
+| AI Guide trích đoạn nguyên văn | `RUN_LIVE_AI_GUIDE_SMOKE=true` | `src/lib/guide-live-smoke.test.ts` | VI/EN, trích đoạn đúng hồ sơ và citation | Fixture Amazing Bay, không có Supabase/Redis thật |
+| AI Guide chọn đúng loại nguồn giữa các đoạn cạnh tranh | `RUN_LIVE_AI_GUIDE_EVAL=true` | `src/lib/guide-live-eval.test.ts` | 10 development + 10 holdout VI/EN, đúng citation, chuỗi con chính xác, không lặp prompt injection | Hai split 10 case là mẫu nhỏ, không đại diện độ chính xác mọi yêu cầu |
+| Checklist hành lý | `RUN_LIVE_AI_PACKING_SMOKE=true` | `src/lib/packing-live-smoke.test.ts` | Chỉ mã món/lý do hợp lệ theo dữ kiện cấu trúc, VI/EN | Không phải tư vấn y tế, xác nhận quy định điểm đến hay test DB |
+| FairPrice Lens | `RUN_LIVE_AI_FAIR_PRICE_SMOKE=true` | `src/lib/fair-price-live-smoke.test.ts` | Trường trích xuất khớp exact evidence trong quote VI/EN | Không đánh giá đắt/rẻ, không xác minh báo giá thật, không test DB/Redis |
+| Đánh giá Trip DNA development/holdout | `RUN_LIVE_AI_TRIP_DNA_EVAL=true`; development cần thêm `RUN_LIVE_AI_TRIP_DNA_SPLIT=development` | `src/lib/trip-dna-live-eval.test.ts` | Báo độ đúng field trên 40 prompt development hoặc 20 holdout, không in prompt/output | Tốn nhiều request; giữ holdout riêng, không dùng để chỉnh prompt |
+
+Ví dụ chạy một nhóm với PowerShell. Xóa cờ trong `finally` để tránh các lần test sau vô tình gọi model:
+
+```powershell
+$env:RUN_LIVE_AI_GUIDE_EVAL = 'true'
+try {
+  npm.cmd test -- --configLoader native --pool=threads --reporter=dot src/lib/guide-live-eval.test.ts -t development
+  npm.cmd test -- --configLoader native --pool=threads --reporter=dot src/lib/guide-live-eval.test.ts -t holdout
+} finally {
+  Remove-Item Env:\RUN_LIVE_AI_GUIDE_EVAL -ErrorAction SilentlyContinue
+}
+```
+
+Để chạy unit/route test không gọi provider thật, dùng `npm.cmd test -- --configLoader native --pool=threads --reporter=dot`. Lần kiểm tra hiện tại: mặc định **93 passed, 41 skipped**; Playwright **22/22**; live Guide smoke **2/2**; Guide adversarial **10/10 development + 10/10 holdout** trong hai lượt; bộ AI/provider tổng hợp **24/24 trên 7 file**. Đây là smoke/fixture chứ không chứng minh mọi câu trả lời hoặc RLS/auth/quote/trip thật. Theo lựa chọn của chủ dự án, các bước cần ghi dữ liệu chạy thủ công theo [HUONG_DAN.md](HUONG_DAN.md) trên staging do chủ dự án quản lý.

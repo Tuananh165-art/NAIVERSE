@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { places } from "@/lib/catalog";
-import { buildPlaceGuideDocuments, findGuidePlaces } from "@/lib/guide-retrieval";
+import { buildPlaceGuideDocuments, filterGuideDocumentsByIntent, findGuidePlaces, type GuideDocument } from "@/lib/guide-retrieval";
 
 describe("catalog RAG retrieval", () => {
   it("matches Vietnamese place aliases without diacritics", () => {
@@ -22,5 +22,24 @@ describe("catalog RAG retrieval", () => {
     expect(documents.some((document) => document.ref === "place:amazing-bay" && document.href === "/en/places/amazing-bay")).toBe(true);
     expect(documents.every((document) => document.href.startsWith("https://") || document.href.startsWith("/en/places/"))).toBe(true);
     expect(documents.some((document) => document.content.includes("does not by itself prove current operation"))).toBe(true);
+  });
+
+  it("builds Vietnamese excerpts without English field labels", () => {
+    const amazingBay = places.find((place) => place.id === "amazing-bay")!;
+    const document = buildPlaceGuideDocuments([amazingBay], "vi").find((item) => item.ref === "place:amazing-bay")!;
+    expect(document.content).toContain("Tên: The Amazing Bay");
+    expect(document.content).toContain("Trạng thái xác minh: cần xác nhận.");
+    expect(document.content).not.toContain("Verification status:");
+  });
+
+  it("filters retrieved documents to the selected question type", () => {
+    const documents: GuideDocument[] = ["place:one", "evidence:one:1", "price:old", "hours:reported", "catalog:prices:one", "catalog:hours:one"].map((ref) => ({
+      ref, label: ref, href: "/vi/places/one", checkedAt: null, status: "unknown", content: ref,
+    }));
+    expect(filterGuideDocumentsByIntent(documents, "price").map(({ ref }) => ref)).toEqual(["price:old", "catalog:prices:one"]);
+    expect(filterGuideDocumentsByIntent(documents, "hours").map(({ ref }) => ref)).toEqual(["hours:reported", "catalog:hours:one"]);
+    expect(filterGuideDocumentsByIntent(documents, "family_access").map(({ ref }) => ref)).toEqual(["place:one", "evidence:one:1"]);
+    expect(filterGuideDocumentsByIntent(documents, "source_status").map(({ ref }) => ref)).toEqual(["place:one", "evidence:one:1"]);
+    expect(filterGuideDocumentsByIntent(documents, "overview")).toHaveLength(documents.length);
   });
 });
