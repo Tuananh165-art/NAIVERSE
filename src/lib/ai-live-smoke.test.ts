@@ -56,6 +56,20 @@ describe.skipIf(!enabled)("live DeepSeek smoke tests (explicit opt-in)", () => {
     expect(result.travelDate).toBe(expectedDate);
   }, 30_000);
 
+  it("asks for a day instead of inventing one when a Vietnamese request names only a month", async () => {
+    const input = tripInputSchema.parse({ prompt: "Gia đình 2 người muốn đi Đồng Nai trong một ngày vào tháng 11 năm 2026.", consent: true, locale: "vi" });
+    const result = await interpretTrip(input, places);
+    expect(result.travelDate).toBeNull();
+    expect(result.missingInformation.length).toBeGreaterThan(0);
+  }, 30_000);
+
+  it("asks for a day instead of inventing one when an English request names only a month", async () => {
+    const input = tripInputSchema.parse({ prompt: "Two adults want a one-day trip to Dong Nai sometime in November 2026.", consent: true, locale: "en" });
+    const result = await interpretTrip(input, places);
+    expect(result.travelDate).toBeNull();
+    expect(result.missingInformation.length).toBeGreaterThan(0);
+  }, 30_000);
+
   it("summarizes a real regional Open-Meteo forecast through DeepSeek", async () => {
     const travelDate = dateInVietnam(new Date(Date.now() + 24 * 60 * 60 * 1000));
     const weather = await getDailyForecast(10.87, 106.87, travelDate);
