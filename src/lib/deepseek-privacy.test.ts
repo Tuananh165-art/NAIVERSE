@@ -25,6 +25,7 @@ const previousApiKey = process.env.DEEPSEEK_API_KEY;
 
 afterEach(() => {
   vi.unstubAllGlobals();
+  vi.useRealTimers();
   if (previousApiKey === undefined) delete process.env.DEEPSEEK_API_KEY;
   else process.env.DEEPSEEK_API_KEY = previousApiKey;
 });
@@ -101,5 +102,24 @@ describe("DeepSeek request privacy boundary", () => {
     expect(modelInput.prompt).not.toContain("minh@example.com");
     expect(modelInput.prompt).not.toContain("10.87485");
     expect(modelInput.prompt).not.toContain("106.87036");
+  });
+
+  it("gives Trip DNA a deterministic Vietnam-local date for relative travel dates", async () => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-10-16T17:30:00.000Z"));
+    process.env.DEEPSEEK_API_KEY = "unit-test-key";
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({
+      choices: [{ message: { content: JSON.stringify({ ...validIntent, travelDate: "2026-10-17" }) } }],
+    }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await interpretTrip(tripInputSchema.parse({
+      prompt: "Gia đình 2 người đi Đồng Nai ngày mai trong 2 ngày.", consent: true, locale: "vi",
+    }));
+
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string) as { messages: Array<{ content: string }> };
+    expect(body.messages[0].content).toContain("2026-10-17");
+    expect(body.messages[0].content).toContain("Asia/Ho_Chi_Minh");
+    expect(body.messages[0].content).toContain("relative travel dates");
   });
 });

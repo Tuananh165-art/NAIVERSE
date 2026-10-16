@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useLocale } from "next-intl";
 import { Link } from "@/i18n/routing";
 import { CircleDollarSign, LoaderCircle, Sparkles } from "lucide-react";
+import { compareConfirmedVndPrices, type PriceEquivalenceConfirmation } from "@/lib/price-comparison";
 
 type PriceReference = {
   id: string; label: string; audience: string; amountVnd: number | null; status: string; statusLabel: string;
@@ -15,6 +16,19 @@ type ReviewItem = {
 };
 type Review = { items: ReviewItem[]; questions: string[]; references: PriceReference[]; disclaimer: string; aiUsed: boolean };
 type Destination = { id: string; name: string; nameEn: string };
+type ComparisonChoice = { referenceId: string; confirmations: PriceEquivalenceConfirmation };
+
+const emptyConfirmations = (): PriceEquivalenceConfirmation => ({
+  sameItem: false, sameUnit: false, sameAudience: false, sameValidity: false, sameTerms: false,
+});
+
+function todayInVietnam() {
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Ho_Chi_Minh", year: "numeric", month: "2-digit", day: "2-digit",
+  }).formatToParts(new Date());
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+  return `${values.year}-${values.month}-${values.day}`;
+}
 
 const missingLabels: Record<string, { vi: string; en: string }> = {
   audience: { vi: "đối tượng áp dụng", en: "eligible audience" },
@@ -52,10 +66,12 @@ export function FairPriceLens({ signedIn, places }: { signedIn: boolean; places:
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [review, setReview] = useState<Review | null>(null);
+  const [comparisonChoices, setComparisonChoices] = useState<Record<number, ComparisonChoice>>({});
 
   async function submit() {
     setError("");
     setReview(null);
+    setComparisonChoices({});
     setLoading(true);
     try {
       const response = await fetch("/api/ai/fair-price", {
@@ -65,10 +81,30 @@ export function FairPriceLens({ signedIn, places }: { signedIn: boolean; places:
       });
       const body = await response.json();
       if (!response.ok) throw new Error(body.error?.message ?? (en ? "The quote could not be reviewed." : "Chưa thể rà soát báo giá."));
-      setReview(body as Review);
+      const nextReview = body as Review;
+      setReview(nextReview);
+      setComparisonChoices(Object.fromEntries(nextReview.items.map((item, index) => {
+        const references = nextReview.references.filter((candidate) => candidate.status === "verified" && candidate.amountVnd !== null);
+        const suggestedReference = references.find((candidate) => candidate.id === item.possibleReferenceId) ?? references[0];
+        return [index, { referenceId: suggestedReference?.id ?? "", confirmations: emptyConfirmations() }];
+      })));
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : (en ? "Please try again." : "Vui lòng thử lại."));
     } finally { setLoading(false); }
+  }
+
+  function updateComparison(index: number, update: { referenceId?: string; confirmations?: Partial<PriceEquivalenceConfirmation> }) {
+    setComparisonChoices((current) => {
+      const existing = current[index] ?? { referenceId: "", confirmations: emptyConfirmations() };
+      return {
+        ...current,
+        [index]: {
+          ...existing,
+          ...update,
+          confirmations: update.confirmations ? { ...existing.confirmations, ...update.confirmations } : existing.confirmations,
+        },
+      };
+    });
   }
 
   return <div className="split-layout" style={{ marginTop: 24 }}>
@@ -101,6 +137,17 @@ export function FairPriceLens({ signedIn, places }: { signedIn: boolean; places:
         <p className="alert alert-blue" role="status">{review.disclaimer}</p>
         {review.items.map((item, index) => {
           const reference = review.references.find((candidate) => candidate.id === item.possibleReferenceId);
+          const choice = comparisonChoices[index] ?? { referenceId: "", confirmations: emptyConfirmations() };
+          const selectedReference = review.references.find((candidate) => candidate.id === choice.referenceId);
+          const eligibleReferences = review.references.filter((candidate) => candidate.status === "verified" && candidate.amountVnd !== null);
+          const comparison = compareConfirmedVndPrices({
+            quotePriceText: item.priceText,
+            evidenceVerified: item.evidenceVerified,
+            priceTextVerified: item.priceTextVerified,
+            reference: selectedReference,
+            confirmations: choice.confirmations,
+            today: todayInVietnam(),
+          });
           return <article className="panel" key={`${item.label}-${index}`} style={{ marginTop: 14, padding: 16 }}>
             <h3>{item.label}</h3>
             <p><strong>{en ? "Extracted price text" : "Phần giá trích xuất"}:</strong> {item.priceText || (en ? "Not verified" : "Chưa xác minh được")}</p>
@@ -117,6 +164,40 @@ export function FairPriceLens({ signedIn, places }: { signedIn: boolean; places:
               <p>{reference.label} · {reference.amountVnd === null ? (en ? "amount unknown" : "chưa có số tiền") : money(reference.amountVnd, en)} · {statusLabel(reference.status, en)}</p>
               <p className="form-hint">{reference.audience} · {reference.terms}</p>
             </div>}
+            {item.evidenceVerified && <section aria-label={en ? "Confirmed numeric comparison" : "Đối chiếu số liệu có xác nhận"} style={{ marginTop: 16, paddingTop: 14, borderTop: "1px solid #e4ebe5" }}>
+              <h4>{en ? "Optional numeric comparison" : "Đối chiếu số liệu (tùy chọn)"}</h4>
+              <p className="form-hint">{en ? "This is arithmetic only. Compare only a current verified VND catalog record, and check every equivalence below with the provider first." : "Đây chỉ là phép tính. Chỉ so với bản ghi catalog VND đã xác minh hiện tại; hãy hỏi nhà cung cấp và xác nhận từng điều kiện tương đương trước."}</p>
+              {eligibleReferences.length > 0 && item.priceTextVerified ? <>
+                <label className="form-label" htmlFor={`price-reference-${index}`}>{en ? "Verified catalog reference" : "Giá catalog đã xác minh"}</label>
+                <select id={`price-reference-${index}`} className="field" value={choice.referenceId} onChange={(event) => updateComparison(index, { referenceId: event.target.value, confirmations: emptyConfirmations() })}>
+                  <option value="">{en ? "Choose a reference" : "Chọn bản ghi giá"}</option>
+                  {eligibleReferences.map((candidate) => <option key={candidate.id} value={candidate.id}>{candidate.label} · {candidate.amountVnd === null ? "—" : money(candidate.amountVnd, en)} · {candidate.audience}</option>)}
+                </select>
+                {selectedReference && <fieldset style={{ border: 0, padding: 0, margin: "12px 0", display: "grid", gap: 8 }}>
+                  <legend className="form-label">{en ? "Confirm equivalence with the provider" : "Xác nhận tính tương đương với nhà cung cấp"}</legend>
+                  {([
+                    ["sameItem", en ? "Same product or service" : "Cùng sản phẩm hoặc dịch vụ"],
+                    ["sameUnit", en ? "Same unit and quantity basis" : "Cùng đơn vị và cách tính số lượng"],
+                    ["sameAudience", en ? "Same eligible audience" : "Cùng đối tượng áp dụng"],
+                    ["sameValidity", en ? "Same travel date and validity period" : "Cùng ngày đi và thời hạn áp dụng"],
+                    ["sameTerms", en ? "Same inclusions, exclusions and conditions" : "Cùng khoản bao gồm, chưa gồm và điều kiện"],
+                  ] as const).map(([key, label]) => <label key={key} className="form-hint" style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
+                    <input type="checkbox" checked={choice.confirmations[key]} onChange={(event) => updateComparison(index, { confirmations: { [key]: event.target.checked } })}/>
+                    <span>{label}</span>
+                  </label>)}
+                </fieldset>}
+                {comparison && selectedReference && <div className="alert alert-blue" role="status">
+                  <p>{en ? "Quote amount" : "Mức trong báo giá"}: {money(comparison.quoteAmountVnd, en)} · {en ? "catalog amount" : "mức catalog"}: {money(comparison.referenceAmountVnd, en)}</p>
+                  <strong>{comparison.relation === "same"
+                    ? (en ? "The numeric amounts are equal." : "Hai số tiền bằng nhau.")
+                    : comparison.relation === "higher"
+                      ? (en ? `The quote amount is higher by ${money(comparison.differenceVnd, en)}.` : `Số tiền báo giá cao hơn ${money(comparison.differenceVnd, en)}.`)
+                      : (en ? `The quote amount is lower by ${money(Math.abs(comparison.differenceVnd), en)}.` : `Số tiền báo giá thấp hơn ${money(Math.abs(comparison.differenceVnd), en)}.`)}</strong>
+                  <p className="form-hint">{en ? "This arithmetic does not judge value, verify the provider or guarantee availability." : "Phép tính này không đánh giá đáng tiền, xác minh nhà cung cấp hoặc bảo đảm còn dịch vụ."}</p>
+                </div>}
+                {!comparison && <p className="form-hint" role="status">{en ? "No comparison is shown until the quote amount and all five equivalence checks are supported and confirmed." : "Chưa hiện phép so sánh cho đến khi số tiền hợp lệ và cả năm điều kiện tương đương được xác nhận."}</p>}
+              </> : <p className="form-hint">{en ? "A numeric comparison is unavailable: the quote amount is not verified or there is no current verified catalog amount." : "Chưa thể đối chiếu số: giá trong báo giá chưa được xác minh hoặc chưa có giá catalog hiện hành đã xác minh."}</p>}
+            </section>}
           </article>;
         })}
         {review.questions.length > 0 && <div style={{ marginTop: 18 }}><strong>{en ? "Questions to ask the provider" : "Câu hỏi nên gửi nhà cung cấp"}</strong><ul>{review.questions.map((question, index) => <li key={index}>{question}</li>)}</ul></div>}

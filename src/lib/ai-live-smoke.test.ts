@@ -18,6 +18,11 @@ function dateInVietnam(date: Date) {
   return `${value.year}-${value.month}-${value.day}`;
 }
 
+function tomorrowInVietnam() {
+  const [year, month, day] = dateInVietnam(new Date()).split("-").map(Number);
+  return dateInVietnam(new Date(Date.UTC(year, month - 1, day + 1, 12)));
+}
+
 describe.skipIf(!enabled)("live DeepSeek smoke tests (explicit opt-in)", () => {
   it("parses a Vietnamese itinerary through the real configured model", async () => {
     const input = tripInputSchema.parse({ prompt: "Gia đình có 2 người lớn và một trẻ cao 120 cm, thích thiên nhiên, đi 2 ngày bằng ô tô.", consent: true, locale: "vi" });
@@ -35,6 +40,20 @@ describe.skipIf(!enabled)("live DeepSeek smoke tests (explicit opt-in)", () => {
     expect(result.durationDays).toBe(2);
     expect(result.childHeightCm).toBe(120);
     expect(Array.isArray(result.interests)).toBe(true);
+  }, 30_000);
+
+  it("resolves a Vietnamese relative date against the current Vietnam date", async () => {
+    const expectedDate = tomorrowInVietnam();
+    const input = tripInputSchema.parse({ prompt: "Gia đình hai người đi Đồng Nai ngày mai trong một ngày.", consent: true, locale: "vi" });
+    const result = await interpretTrip(input, places);
+    expect(result.travelDate).toBe(expectedDate);
+  }, 30_000);
+
+  it("resolves an English relative date against the current Vietnam date", async () => {
+    const expectedDate = tomorrowInVietnam();
+    const input = tripInputSchema.parse({ prompt: "Two adults plan a one-day trip in Dong Nai tomorrow.", consent: true, locale: "en" });
+    const result = await interpretTrip(input, places);
+    expect(result.travelDate).toBe(expectedDate);
   }, 30_000);
 
   it("summarizes a real regional Open-Meteo forecast through DeepSeek", async () => {
