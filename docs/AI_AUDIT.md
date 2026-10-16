@@ -2,6 +2,13 @@
 
 ## Phạm vi và kết luận
 
+### Kiểm chứng tiếp theo sau khóa model — 16/10/2026
+
+- Lời gọi dùng DeepSeek thật đạt **33/33 trên 7 file** với model alias `deepseek-v4-flash`, Open-Meteo và OpenRouteService thật. Handler vẫn giả lập phiên Supabase, Upstash và ghi DB.
+- Full suite mặc định đạt **149 passed, 66 skipped (215 tổng)**; lint, typecheck và production build Next.js 16.4.1 đạt, gồm **47/47 static pages**. Build dùng distDir cô lập; config được khôi phục sau build.
+- `src/lib/deepseek.ts` từ chối gọi nếu `DEEPSEEK_MODEL` khác `deepseek-v4-flash`; bốn regression kiểm tra cả hai đường gọi và xác nhận model gửi đi.
+- Các số **32/32** và **145/65** ở phần ghi nhận trước bên dưới là kết quả trước lần khóa model này. Đây là lượt xác minh mới hơn, không thay đổi kết luận về các giới hạn AI/RLS.
+
 Rà soát repository và provider thật ngày 16/10/2026. Mọi lời gọi mô hình của ứng dụng đi qua server và DeepSeek Chat Completions; `.env` đang chọn `deepseek-v4-flash`, key không đưa xuống client. JSON đầu ra được kiểm tra bằng Zod, có tối đa một lần sửa schema, timeout và giới hạn output. Không có LangChain, vector database hoặc nhà cung cấp LLM thứ hai.
 
 **Trả lời trực tiếp:** chưa thể nói toàn bộ tính năng AI “đúng tuyệt đối và chạy end-to-end”. Sáu nhóm đã có trong code vượt qua live smoke bằng fixture hiện tại; Trip DNA còn ba mismatch holdout, hai evaluator Guide đều có mẫu nhỏ, và tích hợp authenticated handler vẫn chưa dùng Supabase/Upstash thật. Weather/Rain Plan và route assistant có ranh giới dữ liệu rõ, nhưng không phải cảnh báo thời tiết chính thức, giao thông realtime hoặc kiểm tra giờ mở cửa. LLM duy nhất là DeepSeek; các phép tính tiền, kiểm tra schema/evidence, giới hạn dữ liệu và điều kiện an toàn vẫn do code quyết định.

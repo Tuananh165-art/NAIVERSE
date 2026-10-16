@@ -225,3 +225,13 @@ Lint/typecheck/unit/build là cổng repository. Tích hợp Supabase, DeepSeek,
 - [x] Thêm [docs/THIET_LAP_DICH_VU.md](THIET_LAP_DICH_VU.md) với đường dẫn dashboard, các bước Supabase/Upstash/DeepSeek/ORS, bảng biến môi trường, GitHub → Vercel, smoke test và giới hạn gói; liên kết từ README và hướng dẫn chính.
 - [x] Probe đọc-only: Supabase Auth settings HTTP 200, Upstash Redis HTTP 200/PONG; `public.places` vẫn HTTP 404/PGRST205. Chưa áp migrations lên project Supabase, nên Auth/username thật, lưu dữ liệu, RLS A/B và limiter thật **chưa kiểm chứng**.
 - [x] 13/14 ảnh đầu vào đã có bản triển khai và hồ sơ catalog khớp hash; 1 ảnh Bù Lạch không phù hợp nhóm nghề/ẩm thực. [PHOTO_GAPS.md](PHOTO_GAPS.md) ghi quy trình provenance; 0/36 cổng vào đã xác minh vẫn là việc cần nguồn/khảo sát riêng.
+
+## Tiếp tục kiểm chứng hợp đồng AI — 16/10/2026
+
+- [x] Khóa mọi request LLM ở alias `deepseek-v4-flash`; cả `requestDeepSeekJson` và Trip DNA từ chối fail-closed nếu cấu hình model khác. Bốn regression chứng minh request dùng đúng alias và không gửi request khi chọn model khác.
+- [x] Xác minh lại bảy bộ live smoke: **33/33 đạt** với DeepSeek, Open-Meteo và OpenRouteService thật. Handler Supabase/Auth, quota Upstash và ghi DB vẫn được mock.
+- [x] Full unit/integration **149 passed, 66 skipped**; lint/typecheck đạt. Production build Next.js 16.4.1 đạt compile, TypeScript và **47/47 static pages** bằng distDir cô lập; đã khôi phục config do Next tự cập nhật và dọn build output.
+- [ ] Mở rộng đánh giá AI Guide VI/EN trên toàn bộ 36 mục catalog đã duyệt, đo retrieval recall, citation đúng nguồn và tỉ lệ từ chối khi thiếu căn cứ; chỉ cân nhắc LangChain/embeddings nếu lexical retrieval bỏ sót có đo được.
+- [ ] Bổ sung và adjudicate ca phát triển cho yêu cầu đa phương tiện (ví dụ xe buýt + đi bộ); schema Trip DNA hiện chỉ biểu diễn một phương tiện. Không sửa theo mismatch holdout cũ.
+- [ ] Stress Test timeline vẫn chờ dữ liệu thời lượng dừng, giờ hoạt động và buffer tuyến đủ nguồn; chưa được khẳng định lịch trình kịp giờ.
+- [ ] Xác minh AI qua Supabase/Upstash thật và RLS A/B vẫn theo lựa chọn của người dùng: chỉ cung cấp hướng dẫn, chưa ghi dữ liệu test vào Production.

@@ -5,6 +5,7 @@ import { redactSensitiveModelText, sanitizeDeepSeekInput } from "@/lib/ai-privac
 import type { z } from "zod";
 
 const MAX_RESPONSE_BYTES = 256_000;
+const REQUIRED_DEEPSEEK_MODEL = "deepseek-v4-flash";
 
 export class AiProviderError extends Error {
   readonly code: "not_configured" | "unavailable" | "invalid_output";
@@ -15,6 +16,14 @@ export class AiProviderError extends Error {
     this.code = code;
     this.diagnostics = diagnostics;
   }
+}
+
+function configuredDeepSeekModel(): string {
+  const model = process.env.DEEPSEEK_MODEL?.trim() || REQUIRED_DEEPSEEK_MODEL;
+  if (model !== REQUIRED_DEEPSEEK_MODEL) {
+    throw new AiProviderError("not_configured", `NaiVerse only supports ${REQUIRED_DEEPSEEK_MODEL}.`);
+  }
+  return model;
 }
 
 function todayInVietnam(date: Date): string {
@@ -34,6 +43,7 @@ export async function requestDeepSeekJson<T>(options: {
 }): Promise<T> {
   const key = process.env.DEEPSEEK_API_KEY;
   if (!key) throw new AiProviderError("not_configured", "DeepSeek has not been configured.");
+  const model = configuredDeepSeekModel();
   const baseUrl = (process.env.DEEPSEEK_BASE_URL || "https://api.deepseek.com").replace(/\/$/, "");
   if (!/^https:\/\/api\.deepseek\.com$/.test(baseUrl)) {
     throw new AiProviderError("not_configured", "DeepSeek base URL must use the official API host.");
@@ -56,7 +66,7 @@ export async function requestDeepSeekJson<T>(options: {
         headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
         signal: AbortSignal.timeout(25_000),
         body: JSON.stringify({
-          model: process.env.DEEPSEEK_MODEL || "deepseek-v4-flash",
+          model,
           messages,
           response_format: { type: "json_object" },
           thinking: { type: "disabled" },
@@ -128,6 +138,7 @@ export async function requestDeepSeekJson<T>(options: {
 export async function interpretTrip(input: TripInput, catalog: Place[] = sourcePlaces): Promise<TripIntent> {
   const key = process.env.DEEPSEEK_API_KEY;
   if (!key) throw new AiProviderError("not_configured", "DeepSeek has not been configured.");
+  const model = configuredDeepSeekModel();
 
   const baseUrl = (process.env.DEEPSEEK_BASE_URL || "https://api.deepseek.com").replace(/\/$/, "");
   if (!/^https:\/\/api\.deepseek\.com$/.test(baseUrl)) {
@@ -182,7 +193,7 @@ export async function interpretTrip(input: TripInput, catalog: Place[] = sourceP
         headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
         signal: AbortSignal.timeout(25_000),
         body: JSON.stringify({
-          model: process.env.DEEPSEEK_MODEL || "deepseek-v4-flash",
+          model,
           messages: [
             { role: "system", content: system },
             { role: "user", content: attempt === 0 ? userContent : `${userContent}\nReturn valid JSON matching the example. Keep every unsupported value null or empty.` },

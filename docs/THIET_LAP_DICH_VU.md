@@ -47,7 +47,7 @@ Tài liệu chính thức: [tạo project Supabase](https://supabase.com/docs/gu
 ## 3. Tạo API key DeepSeek
 
 1. Đăng nhập [DeepSeek Platform](https://platform.deepseek.com/) và mở phần API keys; tạo key riêng cho NaiVerse rồi lưu an toàn. Tài liệu gọi API: [Your First API Call](https://api-docs.deepseek.com/guides/codex).
-2. Điền `DEEPSEEK_API_KEY`, `DEEPSEEK_MODEL=deepseek-v4-flash`, `DEEPSEEK_BASE_URL=https://api.deepseek.com` vào `.env`. Key không được có tiền tố `NEXT_PUBLIC_`.
+2. Điền `DEEPSEEK_API_KEY`, `DEEPSEEK_MODEL=deepseek-v4-flash`, `DEEPSEEK_BASE_URL=https://api.deepseek.com` vào `.env`. Key không được có tiền tố `NEXT_PUBLIC_`. Ứng dụng fail-closed nếu chọn alias model khác `deepseek-v4-flash`.
 3. Khởi động lại server. Đăng nhập và thử Journey Studio, `/vi/ai/conditions` và `/vi/ai/routes`. AI thật cần Supabase session và Upstash; tình huống khẩn cấp phải hiển thị số liên hệ ngay, không gọi model.
 4. Để gọi model thật từ test, dùng lệnh opt-in trong phần **Kiểm tra AI live** ở [HUONG_DAN.md](HUONG_DAN.md). Mỗi lần chạy tạo request thật theo tài khoản và có thể phát sinh chi phí.
 
