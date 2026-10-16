@@ -77,6 +77,25 @@ describe.skipIf(!enabled)("live AI API handler smoke (provider real; auth and Re
     expect(payload.advice.greenAdvice.length).toBeLessThanOrEqual(4);
   }, 45_000);
 
+  it.each([
+    ["vi", "Tôi làm thất lạc túi gần khu tham quan, chưa có nguy hiểm trực tiếp."],
+    ["en", "I lost my bag near the visitor area, but there is no immediate danger."],
+  ] as const)("runs the non-urgent incident endpoint in %s without escalating it to an emergency", async (locale, incident) => {
+    const response = await postConditions(new Request("http://localhost/api/ai/conditions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ mode: "incident", locale, consent: true, incident }),
+    }));
+    const payload = await response.json();
+
+    expect(response.status, JSON.stringify(payload)).toBe(200);
+    expect(payload.aiUsed).toBe(true);
+    expect(payload.urgent).toBe(false);
+    expect(payload.advice.urgency).not.toBe("emergency");
+    expect(payload.advice.incidentCategory).toBe("lost_item");
+    expect(payload.advice.practicalSteps.length).toBeGreaterThan(0);
+  }, 45_000);
+
   it("runs the route assistant endpoint with live DeepSeek and isolated route metrics", async () => {
     const previousOrsKey = process.env.OPENROUTESERVICE_API_KEY;
     process.env.OPENROUTESERVICE_API_KEY = "route-metrics-fixture-only";

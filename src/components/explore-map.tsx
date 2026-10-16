@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { MapContainer, Marker, Popup, TileLayer, Polyline, useMap, CircleMarker } from "react-leaflet";
+import { MapContainer, Marker, Popup, Polyline, useMap, CircleMarker } from "react-leaflet";
 import L from "leaflet";
 import { Link } from "@/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
+import { MapTileLayer } from "@/components/map-tile-layer";
 import type { Place } from "@/lib/catalog";
 import type { RouteResult } from "@/lib/route";
 
@@ -15,19 +16,17 @@ export function ExploreMap({ places, route }: { places: Place[]; route?: RouteRe
   const locale = useLocale();
   const t = useTranslations("catalog");
   const plottable = useMemo(() => places.filter((place): place is Place & { latitude: number; longitude: number } => place.latitude !== null && place.longitude !== null), [places]);
-  const tileUrl = process.env.NEXT_PUBLIC_MAP_TILE_URL || "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 
   return (
     <div>
       <MapContainer center={center} zoom={8} scrollWheelZoom={false} className="map" aria-label={locale === "en" ? "Map of Dong Nai destinations" : "Bản đồ các điểm đến Đồng Nai"}>
-        <TileLayer url={tileUrl} attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>' />
+        <MapTileLayer locale={locale} />
         {plottable.map((place) => <Marker key={place.id} position={[place.latitude, place.longitude]} icon={marker}><Popup><strong>{locale === "en" ? place.nameEn : place.name}</strong><br /><Link href={`/places/${place.id}`}>{locale === "en" ? "View details" : "Xem chi tiết"}</Link></Popup></Marker>)}
         {route?.geometry && <Polyline positions={route.geometry} pathOptions={{ color: "#12634b", weight: 5, opacity: .86 }} />}
         <MapResize />
         <UseMyLocation locale={locale} />
       </MapContainer>
       {plottable.length === 0 && <div className="empty-state" style={{ marginTop: 12 }}>{t("pinMissing")} {locale === "en" ? `The catalog currently has ${places.length} destinations awaiting a verified pin.` : `Danh mục hiện có ${places.length} địa điểm đang chờ đối chiếu tọa độ.`}</div>}
-      <p className="form-hint" style={{ textAlign: "right" }}>© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap contributors</a></p>
     </div>
   );
 }

@@ -122,4 +122,27 @@ describe("DeepSeek request privacy boundary", () => {
     expect(body.messages[0].content).toContain("Asia/Ho_Chi_Minh");
     expect(body.messages[0].content).toContain("relative travel dates");
   });
+
+  it("increases Trip DNA output limit once when DeepSeek reports truncated JSON", async () => {
+    process.env.DEEPSEEK_API_KEY = "unit-test-key";
+    const fetchMock = vi.fn()
+      .mockResolvedValueOnce(new Response(JSON.stringify({
+        choices: [{ finish_reason: "length", message: { content: '{"durationDays":2' } }],
+      }), { status: 200 }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({
+        choices: [{ finish_reason: "stop", message: { content: JSON.stringify(validIntent) } }],
+      }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const result = await interpretTrip(tripInputSchema.parse({
+      prompt: "Two adults visiting Dong Nai for two days.", consent: true, locale: "en",
+    }));
+
+    expect(result.durationDays).toBe(2);
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    const firstRequest = JSON.parse(fetchMock.mock.calls[0][1].body as string) as { max_tokens: number };
+    const retryRequest = JSON.parse(fetchMock.mock.calls[1][1].body as string) as { max_tokens: number };
+    expect(firstRequest.max_tokens).toBe(1400);
+    expect(retryRequest.max_tokens).toBe(2400);
+  });
 });

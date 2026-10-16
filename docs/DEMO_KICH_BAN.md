@@ -64,8 +64,9 @@ Tài liệu này giúp chạy demo từ tài khoản mới tới hành trình v�
 2. Thử ngày ngoài phạm vi dự báo: website nói rõ chưa có dự báo, không tự nội suy.
 3. Dùng tình huống mưa do người dùng nhập để xem phương án thay thế; đây là gợi ý, không phải cảnh báo khí tượng chính thức.
 4. Bấm nút khẩn cấp để hiện số gọi trực tiếp. Luồng khẩn cấp không cần gọi DeepSeek.
-5. Thử sự cố động vật hoang dã hoặc nghi ngờ lừa đảo: AI đưa bước xử lý thận trọng, không chẩn đoán y tế hay xác nhận an toàn.
-6. Kiểm tra gợi ý xanh: “quãng đường ngắn hơn” chỉ là chỉ báo khoảng cách, không phải số phát thải hoặc tuyên bố trung hòa carbon.
+5. Thử sự cố thất lạc túi không nguy hiểm bằng câu “Tôi làm thất lạc túi gần khu tham quan, chưa có nguy hiểm trực tiếp.” Mong đợi API trả `urgent=false`, `incidentCategory=lost_item` và bước xử lý ngắn; thử lại tiếng Anh. Nếu đầu ra mô hình vượt schema, ứng dụng báo lỗi thay vì trình bày thành công giả.
+6. Thử sự cố động vật hoang dã hoặc nghi ngờ lừa đảo: AI đưa bước xử lý thận trọng, không chẩn đoán y tế hay xác nhận an toàn.
+7. Kiểm tra gợi ý xanh: “quãng đường ngắn hơn” chỉ là chỉ báo khoảng cách, không phải số phát thải hoặc tuyên bố trung hòa carbon.
 
 ### So sánh tuyến AI
 
@@ -121,7 +122,7 @@ Không chạy lỗi provider bằng cách sửa key trong file dùng thật; n�
 
        npm.cmd run lint
        npm.cmd run typecheck
-       npm.cmd test -- --maxWorkers=1
+       npm.cmd test -- --configLoader native --pool=threads --reporter=dot
        npm.cmd run test:e2e -- --workers=1
        npm.cmd run build
 
@@ -129,21 +130,18 @@ E2E bàn phím: `npm.cmd run test:e2e -- --workers=1 e2e/keyboard-accessibility.
 
 Lưu log lệnh, ảnh chụp trang nguồn, kết quả AI kèm model/provider, và ảnh các luồng đăng nhập/khách/nhân viên. Test tự động với mock không chứng minh dịch vụ ngoài đã hoạt động.
 
-Live smoke DeepSeek/ORS tốn request thật. Nếu chủ động chạy, dùng PowerShell:
+Live smoke DeepSeek/ORS tốn request thật. Chỉ chạy khi muốn kiểm tra provider hiện tại; dùng PowerShell để bật đủ cờ, chạy tuần tự và luôn dọn cờ kể cả khi test lỗi:
 
-       $env:RUN_LIVE_AI_SMOKE = 'true'
-       $env:RUN_LIVE_AI_HANDLERS_SMOKE = 'true'
-       $env:RUN_LIVE_ROUTE_SMOKE = 'true'
-       $env:RUN_LIVE_AI_FULL_ROUTE_SMOKE = 'true'
-       $env:RUN_LIVE_AI_PLAN_SMOKE = 'true'
-       $env:RUN_LIVE_AI_GUIDE_SMOKE = 'true'
-       $env:RUN_LIVE_AI_PACKING_SMOKE = 'true'
-       npm.cmd test -- --maxWorkers=1 src/lib/ai-live-smoke.test.ts src/lib/ai-handler-live-smoke.test.ts src/lib/route-assist-live-smoke.test.ts src/lib/plan-live-smoke.test.ts
-       npm.cmd test -- --maxWorkers=1 src/lib/guide-live-smoke.test.ts src/lib/packing-live-smoke.test.ts
-       $env:RUN_LIVE_AI_FAIR_PRICE_SMOKE = 'true'
-       npm.cmd test -- --maxWorkers=1 src/lib/fair-price-live-smoke.test.ts
-       Remove-Item Env:\RUN_LIVE_AI_FAIR_PRICE_SMOKE -ErrorAction SilentlyContinue
-       Remove-Item Env:\RUN_LIVE_AI_SMOKE, Env:\RUN_LIVE_AI_HANDLERS_SMOKE, Env:\RUN_LIVE_ROUTE_SMOKE, Env:\RUN_LIVE_AI_FULL_ROUTE_SMOKE, Env:\RUN_LIVE_AI_PLAN_SMOKE, Env:\RUN_LIVE_AI_GUIDE_SMOKE, Env:\RUN_LIVE_AI_PACKING_SMOKE
+```powershell
+$flags = @('RUN_LIVE_AI_SMOKE','RUN_LIVE_AI_HANDLERS_SMOKE','RUN_LIVE_ROUTE_SMOKE','RUN_LIVE_AI_FULL_ROUTE_SMOKE','RUN_LIVE_AI_PLAN_SMOKE','RUN_LIVE_AI_GUIDE_SMOKE','RUN_LIVE_AI_PACKING_SMOKE','RUN_LIVE_AI_FAIR_PRICE_SMOKE')
+foreach ($flag in $flags) { Set-Item -Path "Env:$flag" -Value 'true' }
+try {
+  npm.cmd test -- --configLoader native --pool=threads --maxWorkers=1 --reporter=dot src/lib/ai-live-smoke.test.ts src/lib/ai-handler-live-smoke.test.ts src/lib/route-assist-live-smoke.test.ts src/lib/plan-live-smoke.test.ts src/lib/guide-live-smoke.test.ts src/lib/packing-live-smoke.test.ts src/lib/fair-price-live-smoke.test.ts
+  if ($LASTEXITCODE -ne 0) { throw "Live AI smoke failed with exit code $LASTEXITCODE" }
+} finally {
+  foreach ($flag in $flags) { Remove-Item -Path "Env:$flag" -ErrorAction SilentlyContinue }
+}
+```
 
 Lệnh này gửi request tới model thật; không bật trong CI. Bộ lọc che email/điện thoại/cặp GPS ở server, nhưng hãy dùng dữ liệu giả lập và không nhập bí mật. Handler smoke cô lập session/Redis/ghi DB nên không chứng minh các dịch vụ đó hoạt động xuyên suốt. Kết quả live trước đó không thay thế lần kiểm tra mới sau khi đổi code.
 
@@ -151,7 +149,7 @@ Evaluator Trip DNA giữ riêng 40 ca development và 20 ca holdout (mỗi split
 
        $env:RUN_LIVE_AI_TRIP_DNA_EVAL = 'true'
        $env:RUN_LIVE_AI_TRIP_DNA_SPLIT = 'development'
-       npm.cmd test -- --maxWorkers=1 src/lib/trip-dna-live-eval.test.ts -t 'meets the 90%'
+       npm.cmd test -- --configLoader native --pool=threads --reporter=dot src/lib/trip-dna-live-eval.test.ts -t 'meets the 90%'
        Remove-Item Env:\RUN_LIVE_AI_TRIP_DNA_EVAL, Env:\RUN_LIVE_AI_TRIP_DNA_SPLIT -ErrorAction SilentlyContinue
 
 Sau khi khóa thay đổi, chạy holdout riêng bằng cách bỏ biến split (mặc định là holdout):
@@ -196,4 +194,4 @@ try {
 }
 ```
 
-Để chạy unit/route test không gọi provider thật, dùng `npm.cmd test -- --configLoader native --pool=threads --reporter=dot`. Lần kiểm tra hiện tại: mặc định **111 passed, 43 skipped**; Playwright **22/22**; FairPrice comparator unit tests pass; live Guide smoke **2/2**; Guide adversarial **10/10 development + 10/10 holdout** trong hai lượt; bộ AI/provider tổng hợp **26/26 trên 7 file**. Live smoke gồm 24/24 trên sáu file và FairPrice 2/2 riêng. Đây là smoke/fixture chứ không chứng minh mọi câu trả lời hoặc RLS/auth/quote/trip thật. Theo lựa chọn của chủ dự án, các bước cần ghi dữ liệu chạy thủ công theo [HUONG_DAN.md](HUONG_DAN.md) trên staging do chủ dự án quản lý.
+Lần kiểm tra mã nguồn ngày 16/10/2026: unit/integration mặc định **116 passed, 47 skipped**; lint và typecheck đạt. Bảy file live smoke hiện đạt **30/30** với DeepSeek, Open-Meteo và ORS thật; đã thêm ca sự cố không khẩn cấp VI/EN qua API handler. FairPrice smoke kiểm tra quote có prompt injection và exact evidence. Bộ đánh giá Trip DNA gần nhất: 358/358 development, 177/180 holdout regression re-run; Guide source-selection evaluator: 10/10 development và 10/10 holdout trong hai lần chạy riêng. Đây là mẫu nhỏ, không phải cam kết mọi output đúng. Playwright Chromium đạt **23/23** trên source hiện tại, gồm map/route assistant, OSM tile failure → MapTiler fallback (tile response được mock), consent, API 401 và axe-core; production build Next.js 16.4.1 cũng đạt, biên dịch 47 static pages và route table. Auth/Redis/DB thật và RLS A/B vẫn chưa kiểm chứng; theo lựa chọn của chủ dự án, chỉ cung cấp hướng dẫn, không ghi dữ liệu lên Supabase.

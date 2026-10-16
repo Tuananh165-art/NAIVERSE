@@ -18,5 +18,10 @@ export default defineConfig({
     url: "http://localhost:3000/vi",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
+    env: {
+      ...process.env,
+      NEXT_PUBLIC_MAP_TILE_PROVIDER: "osm",
+      NEXT_PUBLIC_MAPTILER_KEY: "playwright-map-tile-fallback-test-key",
+    },
   },
 });

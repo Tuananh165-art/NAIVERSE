@@ -102,13 +102,16 @@ Tài liệu: [Import Git repository](https://vercel.com/docs/git), [quản lý p
 | `UPSTASH_REDIS_REST_TOKEN` | Upstash database → Connect → REST API | AI/auth rate limits | Server secret |
 | `OPENROUTESERVICE_API_KEY` | ORS developer dashboard | AI route assistant | Server secret |
 | `NEXT_PUBLIC_MAP_TILE_URL` | Mặc định `https://tile.openstreetmap.org/{z}/{x}/{y}.png` | Bản đồ | Public; tuân thủ OSM attribution/policy |
+| `NEXT_PUBLIC_MAP_TILE_PROVIDER` | `osm` (mặc định) hoặc `maptiler` | Chọn nguồn tile chính; nguồn kia làm fallback nếu đủ cấu hình | Public |
+| `NEXT_PUBLIC_MAPTILER_KEY` | MapTiler Cloud dashboard → API keys; giới hạn referrer/domain trước khi dùng | Bật MapTiler fallback | Public key, giới hạn origin; không dùng private token |
+| `NEXT_PUBLIC_MAP_TILE_ATTRIBUTION` | Chỉ cần nếu tự đặt tile URL ngoài OSM/MapTiler | Attribution của URL tile tùy chỉnh | Public; giữ attribution bắt buộc theo provider |
 | `NEXT_PUBLIC_APP_URL` | Local `http://localhost:3000`, production URL Vercel | Callback/link ứng dụng | Public |
 | `AI_USER_MINUTE_LIMIT` | Mặc định `5` | Giới hạn AI | Server config |
 | `AI_USER_DAILY_LIMIT` | Mặc định `20` | Giới hạn AI | Server config |
 | `AI_GLOBAL_DAILY_LIMIT` | Mặc định `200` | Giới hạn AI toàn app | Server config |
 | `DEMO_MODE` | `true` cho doanh nghiệp giả lập | Gắn nhãn quote/inquiry DEMO | Server config |
 
-MVP không cần API key cho Open-Meteo free forecast; free endpoint chỉ phù hợp phi thương mại. Vercel Hobby cũng chỉ dành cho mục đích cá nhân/phi thương mại. Xem rà soát dịch vụ và quota đã cập nhật tại [SERVICE_LIMITS.md](SERVICE_LIMITS.md). Bản đồ dùng OpenStreetMap với [tile usage policy](https://operations.osmfoundation.org/policies/tiles/); không tải trước/offline hoặc chạy crawler.
+MVP không cần API key cho Open-Meteo free forecast; free endpoint chỉ phù hợp phi thương mại. Vercel Hobby cũng chỉ dành cho mục đích cá nhân/phi thương mại. Xem rà soát dịch vụ và quota đã cập nhật tại [SERVICE_LIMITS.md](SERVICE_LIMITS.md). Bản đồ dùng OpenStreetMap với [tile usage policy](https://operations.osmfoundation.org/policies/tiles/); không tải trước/offline hoặc chạy crawler. OSM tile server là best-effort, không có SLA. MapTiler key là tùy chọn cho fallback; giới hạn domain/referrer và theo dõi quota. Sau khi thay public env, phải redeploy Vercel.
 
 ## 8. Tiêu chí xác nhận xong cấu hình
 

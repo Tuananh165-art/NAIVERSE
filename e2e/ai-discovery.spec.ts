@@ -22,6 +22,31 @@ test("explore map links to the AI road-route assistant", async ({ page }) => {
   await expect(page.getByText(/Catalog pins are not verified entrances/)).toBeVisible();
 });
 
+test("explore map switches to its configured backup when OSM tiles are unreachable", async ({ page }) => {
+  let osmTileRequests = 0;
+  let backupTileRequests = 0;
+
+  await page.route("https://tile.openstreetmap.org/**", async (route) => {
+    osmTileRequests += 1;
+    await route.abort("failed");
+  });
+  await page.route("https://api.maptiler.com/maps/streets-v4/256/**", async (route) => {
+    backupTileRequests += 1;
+    await route.fulfill({
+      status: 200,
+      contentType: "image/png",
+      body: Buffer.from("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/S6sAAAAASUVORK5CYII=", "base64"),
+    });
+  });
+
+  await page.goto("/vi/places");
+
+  await expect(page.getByRole("status").filter({ hasText: "Đang dùng máy chủ bản đồ dự phòng." })).toBeVisible();
+  await expect.poll(() => osmTileRequests).toBeGreaterThan(0);
+  await expect.poll(() => backupTileRequests).toBeGreaterThan(0);
+  await expect(page.locator(".leaflet-control-attribution")).toContainText("MapTiler");
+});
+
 test("home exposes weather/safety and map route assistants", async ({ page }) => {
   const hydrationErrors: string[] = [];
   await page.addInitScript(() => {

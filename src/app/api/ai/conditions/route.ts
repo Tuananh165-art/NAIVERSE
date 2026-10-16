@@ -61,7 +61,7 @@ export async function POST(request: Request) {
         "Return exactly these keys and enum values: urgency is routine, prompt_human_help or emergency; incidentCategory is weather, injury, lost_item, unsafe_condition, scam_concern, wildlife or other. For a non-urgent lost-item report, use incidentCategory lost_item and do not use emergency.",
         "Refuse assistance that facilitates wildlife trafficking, harming wildlife, or locating nests/sensitive habitats; suggest observing from a distance and contacting park staff.",
         "Green advice must be actionable and modest; never claim carbon neutrality, verified environmental credentials, or emissions figures without supplied evidence.",
-        "Follow the response limits exactly: summary at most 500 characters, at most 5 practicalSteps, indoorAlternative at most 240 characters, at most 4 greenAdvice items, and each list item at most 220 characters.",
+        "Keep the response concise: summary at most 500 characters, at most 5 practicalSteps, indoorAlternative at most 240 characters, at most 4 greenAdvice items, and each practicalSteps/greenAdvice item at most 160 characters (the hard schema limit is 220).",
         `Write in ${input.locale === "en" ? "English" : "Vietnamese"}. urgency must be emergency only if the provided facts describe immediate danger; incidentCategory must be weather for weather mode.`,
         'JSON shape: {"summary":"...","practicalSteps":["..."],"indoorAlternative":"...","greenAdvice":["..."],"urgency":"routine","incidentCategory":"weather"}',
       ].join(" "),

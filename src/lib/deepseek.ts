@@ -173,6 +173,8 @@ export async function interpretTrip(input: TripInput, catalog: Place[] = sourceP
   });
 
   let lastError: unknown;
+  const initialMaxTokens = 1400;
+  let retryMaxTokens = initialMaxTokens;
   for (let attempt = 0; attempt < 2; attempt += 1) {
     try {
       const response = await fetch(endpoint, {
@@ -188,7 +190,7 @@ export async function interpretTrip(input: TripInput, catalog: Place[] = sourceP
           temperature: 0,
           response_format: { type: "json_object" },
           thinking: { type: "disabled" },
-          max_tokens: 1400,
+          max_tokens: attempt === 0 ? initialMaxTokens : retryMaxTokens,
           stream: false,
         }),
       });
@@ -198,9 +200,19 @@ export async function interpretTrip(input: TripInput, catalog: Place[] = sourceP
         throw new AiProviderError("invalid_output", "DeepSeek response exceeded the allowed size.");
       }
       const envelope: unknown = JSON.parse(text);
-      const content = (envelope as { choices?: Array<{ message?: { content?: unknown } }> })?.choices?.[0]?.message?.content;
+      const firstChoice = (envelope as { choices?: Array<{ finish_reason?: unknown; message?: { content?: unknown } }> })?.choices?.[0];
+      if (attempt === 0 && firstChoice?.finish_reason === "length") {
+        retryMaxTokens = Math.min(initialMaxTokens * 2, 2400);
+      }
+      const content = firstChoice?.message?.content;
       if (typeof content !== "string" || !content.trim()) throw new AiProviderError("invalid_output", "DeepSeek returned an empty response.");
-      const parsed = tripIntentSchema.safeParse(JSON.parse(content));
+      let modelOutput: unknown;
+      try {
+        modelOutput = JSON.parse(content);
+      } catch {
+        throw new AiProviderError("invalid_output", "DeepSeek returned invalid travel request JSON.");
+      }
+      const parsed = tripIntentSchema.safeParse(modelOutput);
       if (!parsed.success) throw new AiProviderError("invalid_output", "DeepSeek returned an invalid travel request.");
 
       return {

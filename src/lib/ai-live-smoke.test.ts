@@ -75,7 +75,7 @@ describe.skipIf(!enabled)("live DeepSeek smoke tests (explicit opt-in)", () => {
     const weather = await getDailyForecast(10.87, 106.87, travelDate);
     const advice = await requestDeepSeekJson({
       schema: conditionsAdviceSchema,
-      system: "Return one Vietnamese JSON object. Use only these forecast facts; do not invent warnings or venue hours. Keep summary within 500 characters, practicalSteps to at most 5 items, indoorAlternative within 240 characters, greenAdvice to at most 4 items, and each list item within 220 characters. JSON: {summary:string,practicalSteps:string[],indoorAlternative:string,greenAdvice:string[],urgency:'routine',incidentCategory:'weather'}.",
+      system: "Return one Vietnamese JSON object. Use only these forecast facts; do not invent warnings or venue hours. Keep summary within 500 characters, practicalSteps to at most 5 items, indoorAlternative within 240 characters, greenAdvice to at most 4 items, and each list item within 160 characters. JSON: {summary:string,practicalSteps:string[],indoorAlternative:string,greenAdvice:string[],urgency:'routine',incidentCategory:'weather'}.",
       input: { mode: "weather", activity: "đi bộ ngoài trời", forecast: weather.forecast, fetchedAt: weather.fetchedAt, locale: "vi" },
       maxTokens: 500,
     });
@@ -89,7 +89,7 @@ describe.skipIf(!enabled)("live DeepSeek smoke tests (explicit opt-in)", () => {
     const weather = await getDailyForecast(10.87, 106.87, travelDate);
     const advice = await requestDeepSeekJson({
       schema: conditionsAdviceSchema,
-      system: "Return one English JSON object. Use only these forecast facts; do not invent warnings or venue hours. Keep summary within 500 characters, practicalSteps to at most 5 items, indoorAlternative within 240 characters, greenAdvice to at most 4 items, and each list item within 220 characters. JSON: {summary:string,practicalSteps:string[],indoorAlternative:string,greenAdvice:string[],urgency:'routine',incidentCategory:'weather'}.",
+      system: "Return one English JSON object. Use only these forecast facts; do not invent warnings or venue hours. Keep summary within 500 characters, practicalSteps to at most 5 items, indoorAlternative within 240 characters, greenAdvice to at most 4 items, and each list item within 160 characters. JSON: {summary:string,practicalSteps:string[],indoorAlternative:string,greenAdvice:string[],urgency:'routine',incidentCategory:'weather'}.",
       input: { mode: "weather", activity: "Outdoor walking", forecast: weather.forecast, fetchedAt: weather.fetchedAt, locale: "en" },
       maxTokens: 500,
     });
@@ -108,7 +108,7 @@ describe.skipIf(!enabled)("live DeepSeek smoke tests (explicit opt-in)", () => {
         "For a lost item without immediate danger, give short practical steps and suggest contacting venue staff or local authorities if needed. Do not mark it as an emergency.",
         "Return exactly the schema keys. urgency must be routine, prompt_human_help or emergency; incidentCategory must be weather, injury, lost_item, unsafe_condition, scam_concern, wildlife or other. For this non-urgent lost-item case, use urgency routine and incidentCategory lost_item.",
         "Green advice must be practical and modest; never claim carbon neutrality or verified environmental credentials without evidence.",
-        "Keep summary within 500 characters, practicalSteps to at most 5 items, indoorAlternative within 240 characters, greenAdvice to at most 4 items, and each list item within 220 characters.",
+        "Keep summary within 500 characters, practicalSteps to at most 5 items, indoorAlternative within 240 characters, greenAdvice to at most 4 items, and each list item within 160 characters.",
         'Write in Vietnamese. JSON shape: {"summary":"...","practicalSteps":["..."],"indoorAlternative":"","greenAdvice":["..."],"urgency":"routine","incidentCategory":"lost_item"}',
       ].join(" "),
       input: {
@@ -136,7 +136,7 @@ describe.skipIf(!enabled)("live DeepSeek smoke tests (explicit opt-in)", () => {
         "For a lost item without immediate danger, give short practical steps and suggest contacting venue staff or local authorities if needed. Do not mark it as an emergency.",
         "Return exactly the schema keys. urgency must be routine, prompt_human_help or emergency; incidentCategory must be weather, injury, lost_item, unsafe_condition, scam_concern, wildlife or other. For this non-urgent lost-item case, use urgency routine and incidentCategory lost_item.",
         "Green advice must be practical and modest; never claim carbon neutrality or verified environmental credentials without evidence.",
-        "Keep summary within 500 characters, practicalSteps to at most 5 items, indoorAlternative within 240 characters, greenAdvice to at most 4 items, and each list item within 220 characters.",
+        "Keep summary within 500 characters, practicalSteps to at most 5 items, indoorAlternative within 240 characters, greenAdvice to at most 4 items, and each list item within 160 characters.",
         'Write in English. JSON shape: {"summary":"...","practicalSteps":["..."],"indoorAlternative":"","greenAdvice":["..."],"urgency":"routine","incidentCategory":"lost_item"}',
       ].join(" "),
       input: { mode: "incident", incident: "I lost my bag near the visitor area, but there is no immediate danger.", locale: "en" },

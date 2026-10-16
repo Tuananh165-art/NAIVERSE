@@ -64,7 +64,7 @@ Các lệnh kiểm tra repository:
 ~~~~powershell
 npm.cmd run lint
 npm.cmd run typecheck
-npm.cmd test
+npm.cmd test -- --configLoader native --pool=threads --reporter=dot
 npm.cmd run build
 ~~~~
 
@@ -75,7 +75,7 @@ npm.cmd run test:e2e:install
 npm.cmd run test:e2e -- --workers=1
 ~~~~
 
-Bộ Playwright hiện đạt 22/22, kiểm tra lối vào AI desktop/390px, hotline không cần chatbot, bản đồ/tuyến, đăng ký username gửi metadata tới endpoint Supabase giả lập, username-login gửi thông tin tới endpoint server giả lập, thao tác bàn phím đổi chế độ đăng ký/hiện mật khẩu, API AI chặn người chưa đăng nhập, ảnh người dùng và các nhãn nguồn. Axe-core kiểm tra WCAG 2.1 A/AA trên sáu trạng thái trang VI/EN; các bài auth chặn request tại trình duyệt, không tạo tài khoản thật, không kiểm thử RLS A/B và không thay thế kiểm tra assistive technology trên thiết bị.
+Bộ Playwright hiện đạt 23/23, bao gồm ca ép OSM tile lỗi để kiểm tra MapTiler fallback bằng key giả lập, lối vào AI desktop/390px, hotline không cần chatbot, bản đồ/tuyến, đăng ký username gửi metadata tới endpoint Supabase giả lập, username-login gửi thông tin tới endpoint server giả lập, thao tác bàn phím đổi chế độ đăng ký/hiện mật khẩu, API AI chặn người chưa đăng nhập, ảnh người dùng và các nhãn nguồn. Axe-core kiểm tra WCAG 2.1 A/AA trên sáu trạng thái trang VI/EN; các bài auth chặn request tại trình duyệt, không tạo tài khoản thật, không kiểm thử RLS A/B và không thay thế kiểm tra assistive technology trên thiết bị.
 
 Sau khi tạo itinerary trong Journey Studio, kéo tới **AI chuẩn bị hành lý**. Chỉ bật consent khi đồng ý gửi dữ kiện cấu trúc; mô tả chuyến gốc, ngân sách, GPS và tài khoản không được đưa vào request. DeepSeek chọn mã vật dụng và độ ưu tiên từ danh sách hữu hạn; server kiểm tra mã/lý do phù hợp với dữ kiện. Tên, giải thích, lưu ý sức khỏe/tiếp cận do ứng dụng ánh xạ tĩnh; checklist không phải dự báo, quy định địa điểm hoặc tư vấn y tế. Migration 0034 thêm nhãn feature `packing` vào `ai_usage`.
 
@@ -162,9 +162,9 @@ Khách chỉ đọc được ảnh/giờ/giá đã được duyệt bằng polic
 
    Cấu hình mặc định giữ `DEEPSEEK_MODEL=deepseek-v4-flash` theo yêu cầu của project. Theo [tài liệu DeepSeek hiện hành](https://api-docs.deepseek.com/guides/codex), alias `deepseek-v4-flash` cũ vẫn được chấp nhận nhưng request được phục vụ bằng `deepseek-flash` / V4.1 Flash; nếu log usage trả tên khác, đó là thông tin provider báo chứ không phải model tự chọn trong ứng dụng.
 
-7. Kiểm tra kết nối thật mà không in key/prompt: trong PowerShell đặt `$env:RUN_LIVE_AI_SMOKE='true'`, sau đó chạy `npm.cmd test -- src/lib/ai-live-smoke.test.ts`. Bộ này gọi model thật cho parser chuyến đi, forecast Open-Meteo, phân loại một sự cố không khẩn cấp, và giải thích số liệu tuyến bằng Zod. Mỗi lần chạy tạo vài request có tính phí; chỉ chạy chủ động, không bật trong CI.
+7. Kiểm tra kết nối thật mà không in key/prompt: trong PowerShell đặt `$env:RUN_LIVE_AI_SMOKE='true'`, sau đó chạy `npm.cmd test -- --configLoader native --pool=threads --reporter=dot src/lib/ai-live-smoke.test.ts`. Bộ này gọi model thật cho parser chuyến đi, forecast Open-Meteo, phân loại một sự cố không khẩn cấp, và giải thích số liệu tuyến bằng Zod. Mỗi lần chạy tạo vài request có tính phí; chỉ chạy chủ động, không bật trong CI.
 
-8. Kiểm tra handler thời tiết bằng provider thật (DeepSeek + Open-Meteo), nhưng cô lập xác thực Supabase và giới hạn Upstash: đặt `$env:RUN_LIVE_AI_HANDLERS_SMOKE='true'`, rồi chạy `npm.cmd test -- src/lib/ai-handler-live-smoke.test.ts`. Test tạo 2 yêu cầu thời tiết (VI/EN) và một ca khẩn cấp bypass auth/Redis/model. Bộ này không kiểm tra định tuyến thật; để test ORS → geometry → DeepSeek, bật `RUN_LIVE_AI_FULL_ROUTE_SMOKE` như phần cập nhật live ở cuối tài liệu. Mỗi lần chạy có thể tốn phí model; không bật trong CI.
+8. Kiểm tra handler thời tiết bằng provider thật (DeepSeek + Open-Meteo), nhưng cô lập xác thực Supabase và giới hạn Upstash: đặt `$env:RUN_LIVE_AI_HANDLERS_SMOKE='true'`, rồi chạy `npm.cmd test -- --configLoader native --pool=threads --reporter=dot src/lib/ai-handler-live-smoke.test.ts`. Test tạo 2 yêu cầu thời tiết (VI/EN) và một ca khẩn cấp bypass auth/Redis/model. Bộ này không kiểm tra định tuyến thật; để test ORS → geometry → DeepSeek, bật `RUN_LIVE_AI_FULL_ROUTE_SMOKE` như phần cập nhật live ở cuối tài liệu. Mỗi lần chạy có thể tốn phí model; không bật trong CI.
 
 Probe phiên kiểm tra này nhận HTTP 200, JSON hợp lệ, provider báo model `deepseek-flash` cho alias cấu hình `deepseek-v4-flash`. Provider có thể đổi cách định tuyến; luôn kiểm tra lại trước buổi demo.
 
@@ -205,6 +205,16 @@ Chưa cần LangChain/vector database cho 36 hồ sơ có cấu trúc. API truy 
 - ORS trả ước tính mạng đường, không có kẹt xe realtime; route assistant tối ưu hoán vị các điểm trung gian từ ma trận ORS, giữ điểm đầu/cuối. Nó không dùng giờ xe buýt, bãi đỗ hay giờ mở để tối ưu.
 - GPS chỉ được đọc sau thao tác chủ động và quyền trình duyệt. Trợ lý forecast làm tròn tọa độ đến 0,1 độ, chỉ gửi Open-Meteo; model không nhận GPS. Route pins chỉ gửi ORS.
 - Open-Meteo đã được nối cho forecast theo ngày, trong phạm vi 7 ngày và tại vùng tọa độ làm tròn. Dự báo không phải cảnh báo chính thức, không phải phép đo tại cửa điểm đến; xem điều khoản free/non-commercial.
+
+### Khắc phục bản đồ nền không tải
+
+Nếu Leaflet vẫn hiện khung xám, nút phóng to hoặc marker nhưng không có đường phố, hãy mở DevTools → Network, lọc `tile.openstreetmap.org`, rồi mở một request ảnh tile. Mã `ERR_CONNECTION_REFUSED` hoặc `ERR_NAME_NOT_RESOLVED` nghĩa là trình duyệt không tới được máy chủ qua mạng/DNS/firewall/proxy; chưa phải bằng chứng quota. `429`/`403` mới gợi ý giới hạn hoặc chính sách chặn từ nhà cung cấp. Thử mở cùng URL bằng cửa sổ ẩn danh, tắt extension chặn nội dung, hoặc đổi mạng để phân biệt.
+
+Mặc định NaiVerse dùng tile công cộng của OpenStreetMap, không cần API key. Dịch vụ tile này best-effort, không có SLA và có thể tạm từ chối kết nối; dữ liệu OpenStreetMap miễn phí không đồng nghĩa máy chủ tile công cộng được bảo đảm hoạt động liên tục. Bản đồ hiện tự chuyển sang MapTiler nếu đã cấu hình key và có lỗi tile, đồng thời thay attribution theo nhà cung cấp. Không có key thì ứng dụng báo lỗi và có nút thử lại.
+
+Muốn bật dự phòng MapTiler: tạo API key trong dashboard MapTiler, giới hạn key theo website/referrer `https://naiverse.vercel.app/*` (và `http://localhost:3000/*` khi test local), bật quyền cho raster tiles, sau đó đặt `NEXT_PUBLIC_MAPTILER_KEY` trong Vercel → Project → Settings → Environment Variables cho Production/Preview cần dùng. Đặt `NEXT_PUBLIC_MAP_TILE_PROVIDER=osm` để OSM vẫn là nguồn chính; đặt `maptiler` nếu muốn MapTiler là nguồn chính và OSM dự phòng. Redeploy sau khi đổi biến. Key MapTiler là key public dùng trong trình duyệt: phải giới hạn domain và theo dõi usage, không dùng secret/private token.
+
+Gói MapTiler Free phù hợp thử nghiệm và có quota; khi chạm hạn mức dịch vụ có thể tạm dừng đến kỳ mới. Nếu muốn mua, MapTiler Cloud có gói trả phí Flex và tính phí theo điều kiện hiện tại của họ; kiểm tra dashboard, quota, overage và điều khoản thương mại trước khi bật. Không cần mua ngay để khắc phục lỗi hiện tại: trước tiên thử mạng khác và bật fallback miễn phí theo gói hiện hành nếu phù hợp. Xem [giá MapTiler](https://www.maptiler.com/cloud/pricing/), [ví dụ Leaflet chính thức](https://docs.maptiler.com/leaflet/examples/raster-tiles-in-leaflet-js/) và [chính sách tile OSM](https://operations.osmfoundation.org/policies/tiles/).
 
 ## 5. Test tính năng theo vai trò
 
@@ -326,15 +336,15 @@ Sau migration `0022`, chạy `supabase/migrations/0023_buu_long_2026_summer_repo
 
 ~~~~powershell
 $env:RUN_LIVE_AI_SMOKE = 'true'
-npm.cmd test -- src/lib/ai-live-smoke.test.ts
+npm.cmd test -- --configLoader native --pool=threads --reporter=dot src/lib/ai-live-smoke.test.ts
 Remove-Item Env:\RUN_LIVE_AI_SMOKE
 
 $env:RUN_LIVE_AI_HANDLERS_SMOKE = 'true'
-npm.cmd test -- src/lib/ai-handler-live-smoke.test.ts
+npm.cmd test -- --configLoader native --pool=threads --reporter=dot src/lib/ai-handler-live-smoke.test.ts
 Remove-Item Env:\RUN_LIVE_AI_HANDLERS_SMOKE
 
 $env:RUN_LIVE_ROUTE_SMOKE = 'true'
-npm.cmd test -- src/lib/ai-live-smoke.test.ts
+npm.cmd test -- --configLoader native --pool=threads --reporter=dot src/lib/ai-live-smoke.test.ts
 Remove-Item Env:\RUN_LIVE_ROUTE_SMOKE
 ~~~~
 
@@ -352,7 +362,7 @@ $env:RUN_LIVE_AI_HANDLERS_SMOKE = 'true'
 $env:RUN_LIVE_ROUTE_SMOKE = 'true'
 $env:RUN_LIVE_AI_FULL_ROUTE_SMOKE = 'true'
 $env:RUN_LIVE_AI_PLAN_SMOKE = 'true'
-npm.cmd test -- --maxWorkers=1 src/lib/ai-live-smoke.test.ts src/lib/ai-handler-live-smoke.test.ts src/lib/route-assist-live-smoke.test.ts src/lib/plan-live-smoke.test.ts
+npm.cmd test -- --configLoader native --pool=threads --reporter=dot src/lib/ai-live-smoke.test.ts src/lib/ai-handler-live-smoke.test.ts src/lib/route-assist-live-smoke.test.ts src/lib/plan-live-smoke.test.ts
 Remove-Item Env:\RUN_LIVE_AI_SMOKE, Env:\RUN_LIVE_AI_HANDLERS_SMOKE, Env:\RUN_LIVE_ROUTE_SMOKE, Env:\RUN_LIVE_AI_FULL_ROUTE_SMOKE, Env:\RUN_LIVE_AI_PLAN_SMOKE
 ~~~~
 
@@ -387,7 +397,7 @@ Sau migration `0025_amazing_bay_child_price_conflict_2026.sql`, chạy thêm `su
 5. Smoke model độc lập dùng hai request minh họa (có thể phát sinh chi phí), không dùng session/Redis/ghi DB:
 
        $env:RUN_LIVE_AI_GUIDE_SMOKE = 'true'
-       npm.cmd test -- --maxWorkers=1 src/lib/guide-live-smoke.test.ts
+       npm.cmd test -- --configLoader native --pool=threads --reporter=dot src/lib/guide-live-smoke.test.ts
        Remove-Item Env:\RUN_LIVE_AI_GUIDE_SMOKE
 
     Lần chạy extractive ngày 16/10/2026 đạt **2/2**. Smoke chỉ xác nhận model trả JSON và đoạn trích khớp hồ sơ công khai; không chứng minh đăng nhập, giới hạn Upstash, bảng Supabase hoặc toàn luồng browser/API thật. Chất lượng chọn nguồn được đánh giá riêng bằng 10 development và 10 holdout, đều đạt 10/10 trong hai lượt; mẫu này còn nhỏ.
@@ -404,7 +414,7 @@ Sau migration `0025_amazing_bay_child_price_conflict_2026.sql`, chạy thêm `su
 AI Packing smoke (2 request DeepSeek VI/EN, opt-in):
 
        $env:RUN_LIVE_AI_PACKING_SMOKE = 'true'
-       npm.cmd test -- --maxWorkers=1 src/lib/packing-live-smoke.test.ts
+       npm.cmd test -- --configLoader native --pool=threads --reporter=dot src/lib/packing-live-smoke.test.ts
        Remove-Item Env:\RUN_LIVE_AI_PACKING_SMOKE
 
 Smoke chỉ gửi dữ kiện chuyến giả lập có cấu trúc, không gửi prompt tự do; các output code/lý do ngoài danh sách sẽ fail schema. Request live có thể phát sinh chi phí.
@@ -412,11 +422,11 @@ Smoke chỉ gửi dữ kiện chuyến giả lập có cấu trúc, không gửi
 ### Kết quả kiểm tra repository mới nhất
 
 - ESLint: đạt; `npx.cmd tsc --noEmit --incremental false`: đạt.
-- Unit/integration: **111 passed, 43 skipped** (154 tổng ở cấu hình mặc định), gồm regression prompt injection FairPrice, quote parsing/evidence, đối chiếu giá VND chỉ sau năm xác nhận, che tọa độ GPS DMS trước khi gửi DeepSeek, tham chiếu ngày `Asia/Ho_Chi_Minh` cho Trip DNA, AI Guide chỉ trả đoạn nguyên văn theo citation và giữ nhãn giá hết hạn/giờ mâu thuẫn, kiểm soát quyền đổi thứ tự điểm dừng, hợp nhất ảnh/nguồn DB với catalog tĩnh và kiểm tra cột migration SQL 0033 khớp schema. Live smoke/evaluator DeepSeek chỉ chạy riêng khi bật biến opt-in.
-- Playwright Chromium: **22/22 E2E**; có kiểm tra root `/`, thuộc tính `data-yd-*` mô phỏng extension chèn trước hydration, ảnh người dùng, FairPrice VI/EN, request đăng ký/username-login bị stub, API AI trả 401 khi chưa đăng nhập và thao tác form bằng bàn phím. Axe-core WCAG 2.1 A/AA đạt trên 6 trạng thái trang VI/EN; kiểm tra bằng assistive technology/thiết bị thật vẫn đang chờ.
-- Production build Next.js 16.4.1: đạt; build route table có cả `/[locale]/ai/fair-price` và `/api/ai/fair-price`.
+- Unit/integration mới nhất: **116 passed, 47 skipped** (163 tổng ở cấu hình mặc định), gồm regression prompt injection FairPrice, quote parsing/evidence, đối chiếu giá VND chỉ sau năm xác nhận, che tọa độ GPS DMS trước khi gửi DeepSeek, tham chiếu ngày `Asia/Ho_Chi_Minh` cho Trip DNA, retry JSON bị cắt tối đa một lần, AI Guide chỉ trả đoạn nguyên văn theo citation, kiểm soát quyền đổi thứ tự điểm dừng, và các kiểm tra dữ liệu/migration. Live smoke/evaluator DeepSeek chỉ chạy riêng khi bật biến opt-in.
+- Playwright Chromium: **23/23 E2E đạt** trên source hiện tại, gồm map/route assistant và regression fallback MapTiler khi OSM tile lỗi, AI entry points, FairPrice VI/EN, auth flow stub, API 401 và axe-core WCAG 2.1 A/AA trên 6 trạng thái trang VI/EN. Kiểm tra bằng assistive technology/thiết bị thật vẫn đang chờ.
+- Production build Next.js 16.4.1: **đạt** sau khi chạy ngoài sandbox quyền hạn chế; TypeScript, page data và 47 static pages được tạo thành công. Build route table có cả `/[locale]/ai/fair-price` và `/api/ai/fair-price`.
 - Probe dịch vụ chỉ đọc mới nhất ngày 16/10/2026: Supabase Auth settings **HTTP 200**, Upstash Redis **HTTP 200/PONG**; `places`, `profiles.username`, `trips`, `trip_shares`, `ai_usage`, `price_references`, `place_media` đều HTTP 200. REST chỉ đọc thấy 36 địa điểm, 51 price references, 27 media records và 35 hours records. Migration 0033 được đối chiếu trực tiếp qua Combo 3 có URL sản phẩm hiện hành, 599.000 ₫ và trạng thái `unknown`. Chưa xác nhận đăng ký/đăng nhập bằng tài khoản test, RLS A/B, quota AI thật hoặc ghi/đọc trip qua phiên người dùng; không chạy lại bundle trên database đang có dữ liệu.
-- Live AI smoke mới nhất: **26/26 trên 7 file** với model `deepseek-v4-flash`, Open-Meteo và OpenRouteService thật; gồm 24/24 trên sáu file tính năng và FairPrice 2/2 riêng. Hai ca mới xác nhận DeepSeek hiểu “ngày mai/tomorrow” theo ngày Việt Nam. Handler smoke vẫn mock session, limiter và DB; đây chưa phải luồng AI production end-to-end.
+- Live AI smoke mới nhất ngày 16/10/2026: **30/30 trên 7 file** với model `deepseek-v4-flash`, Open-Meteo và OpenRouteService thật; gồm sự cố không khẩn cấp qua endpoint VI/EN, ngày “ngày mai/tomorrow”, hỏi lại khi chỉ nêu tháng, FairPrice exact evidence, Guide và Packing. Handler smoke vẫn mock session, limiter và DB; đây chưa phải luồng AI production end-to-end.
 - AI Guide adversarial selector: **10/10 development + 10/10 holdout** trong hai lần chạy riêng; evaluator mới được thêm để giữ split holdout cố định.
 - FairPrice adversarial live smoke bổ sung sau đó: **2/2** VI/EN với câu lệnh prompt injection nằm trong quote; hai output không đưa “rẻ nhất/cheapest/đã xác nhận” vào các field trích xuất.
 - `npm.cmd run catalog:photo-gaps`: **35** hồ sơ yêu cầu ảnh, đủ 35 có ảnh; 0 ảnh bắt buộc còn thiếu. Nhóm trải nghiệm nghề/ẩm thực cộng đồng được miễn ảnh và hiển thị minh họa có nhãn. Ảnh trảng cỏ Bù Lạch gắn đúng hồ sơ `bu-lach-grassland`; hash của cả 14 ảnh nguồn khớp asset triển khai.
