@@ -99,10 +99,13 @@ export const routeAdviceSchema = z.object({
 
 export const guideInputSchema = z.object({
   placeId: z.string().regex(/^[a-z0-9-]{2,80}$/),
-  intent: z.enum(["overview", "price", "hours", "family_access", "source_status"]),
+  intent: z.enum(["overview", "price", "hours", "family_access", "source_status"]).optional(),
+  question: z.string().trim().min(8).max(240).optional(),
   locale: localeSchema.default("vi"),
   consent: z.literal(true),
-}).strict();
+}).strict().refine((input) => Boolean(input.intent) !== Boolean(input.question), {
+  message: "Provide exactly one fixed intent or natural-language question.",
+});
 
 export const guideAnswerSchema = z.object({
   excerpts: z.array(z.object({

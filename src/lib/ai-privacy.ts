@@ -10,11 +10,13 @@ const coordinateKeys = new Set([
 ]);
 
 const dmsCoordinatePair = /(?<![\p{L}\d])\d{1,2}\s*°\s*\d{1,2}\s*['′’]\s*\d{1,2}(?:\.\d+)?\s*(?:["″”])?\s*[NSB]\s*[,;/]\s*\d{1,3}\s*°\s*\d{1,2}\s*['′’]\s*\d{1,2}(?:\.\d+)?\s*(?:["″”])?\s*[EWĐT](?![\p{L}\d])/giu;
+const labelledIdentityNumber = /(\b(?:passport(?:\s+(?:no\.?|number))?|national\s+id|identity(?:\s+card)?(?:\s+(?:no\.?|number))?|cccd|cmnd|căn\s+cước(?:\s+công\s+dân)?|can\s+cuoc(?:\s+cong\s+dan)?|số\s+giấy\s+tờ|so\s+giay\s+to)\s*(?:(?:no\.?|number|#|:|is|là)\s*)?)([A-Z0-9][A-Z0-9-]{5,19})(?![\p{L}\d])/giu;
 
-/** Redacts direct contact details and coordinate pairs from free-form model text. */
+/** Redacts direct contact details, labelled identity numbers and coordinate pairs from free-form model text. */
 export function redactSensitiveModelText(value: string): string {
   return value
     .replace(/\b[^\s@]+@[^\s@]+\.[^\s@]+\b/gu, "[email redacted]")
+    .replace(labelledIdentityNumber, "$1[identifier redacted]")
     .replace(/(?<![\p{L}\d])(?:\+?\d[\s().-]*){10,15}(?![\p{L}\d])/gu, "[phone redacted]")
     .replace(dmsCoordinatePair, "[coordinates redacted]")
     .replace(/(?<![\d.])-?\d{1,3}\.\d{2,}\s*(?:°?\s*[NS])?\s*[,;/]\s*-?\d{1,3}\.\d{2,}\s*(?:°?\s*[EW])?(?!\d)/giu, "[coordinates redacted]");

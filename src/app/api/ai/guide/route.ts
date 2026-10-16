@@ -5,7 +5,7 @@ import { AiProviderError, requestDeepSeekJson } from "@/lib/deepseek";
 import { guideAnswerSchema, guideInputSchema } from "@/lib/schemas";
 import { jsonError } from "@/lib/http";
 import { getPlaceCatalog, getPlaceHours, getPlacePriceReferences } from "@/lib/catalog-server";
-import { buildGuideSystemPrompt, buildPlaceGuideDocuments, filterGuideDocumentsByIntent, type GuideDocument, type GuideIntent } from "@/lib/guide-retrieval";
+import { buildGuideSystemPrompt, buildPlaceGuideDocuments, filterGuideDocumentsByIntent, rankGuideDocumentsByQuestion, type GuideDocument, type GuideIntent } from "@/lib/guide-retrieval";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -74,9 +74,9 @@ function localizedRecordField(en: string, vi: string, locale: "vi" | "en") {
   return locale === "en" ? en : vi;
 }
 
-async function relatedDocuments(placeId: string, locale: "vi" | "en", intent: GuideIntent, detailHref: string): Promise<GuideDocument[]> {
-  const includePrices = intent === "overview" || intent === "price";
-  const includeHours = intent === "overview" || intent === "hours";
+async function relatedDocuments(placeId: string, locale: "vi" | "en", intent: GuideIntent | "question", detailHref: string): Promise<GuideDocument[]> {
+  const includePrices = intent === "overview" || intent === "price" || intent === "question";
+  const includeHours = intent === "overview" || intent === "hours" || intent === "question";
   const [prices, hours] = await Promise.all([
     includePrices ? getPlacePriceReferences(placeId) : Promise.resolve([]),
     includeHours ? getPlaceHours(placeId) : Promise.resolve([]),
@@ -106,7 +106,7 @@ async function relatedDocuments(placeId: string, locale: "vi" | "en", intent: Gu
         : "Catalog công khai NaiVerse chưa có bản ghi giờ hoạt động cho địa điểm này. Việc thiếu bản ghi không xác nhận địa điểm đang mở hay đóng cửa.",
     });
   }
-  for (const price of prices.slice(0, intent === "price" ? 6 : 2)) {
+  for (const price of prices.slice(0, intent === "price" || intent === "question" ? 12 : 2)) {
     const status = currentRecordStatus(price.status, price.checked_at, price.valid_from, price.valid_to);
     const amount = price.amount_vnd === null
       ? localizedRecordField("unknown amount; never treat as zero", "chưa rõ số tiền; không được coi là 0 đồng", locale)
@@ -138,7 +138,7 @@ async function relatedDocuments(placeId: string, locale: "vi" | "en", intent: Gu
       ].join(" "),
     });
   }
-  for (const hour of hours.slice(0, intent === "hours" ? 7 : 2)) {
+  for (const hour of hours.slice(0, intent === "hours" || intent === "question" ? 12 : 2)) {
     const status = currentRecordStatus(hour.status, hour.checked_at, hour.valid_from, hour.valid_to);
     documents.push({
       ref: "hours:" + hour.id,
@@ -182,7 +182,7 @@ export async function POST(request: Request) {
   let body: unknown;
   try { body = await request.json(); } catch { return jsonError(400, "invalid_json", "Request body must be valid JSON."); }
   const parsed = guideInputSchema.safeParse(body);
-  if (!parsed.success) return jsonError(400, "invalid_request", "Select a destination and question type, then consent to AI processing.");
+  if (!parsed.success) return jsonError(400, "invalid_request", "Select a destination and provide one bounded question or task, then consent to AI processing.");
   const user = await getCurrentUser();
   if (!user) return jsonError(401, "sign_in_required", "Sign in to use the AI travel guide.");
   const allowance = await consumeAiAllowance(user.id);
@@ -190,19 +190,25 @@ export async function POST(request: Request) {
   if (allowance === "unavailable") return jsonError(503, "ai_limits_unavailable", "The AI safety limit service is not available yet. Please try again later.");
   if (allowance === "limited") return jsonError(429, "rate_limit", "AI request limit reached. Please try again later.");
 
-  const { locale, placeId, intent } = parsed.data;
+  const { locale, placeId, intent, question } = parsed.data;
+  const retrievalMode: GuideIntent | "question" = question ? "question" : intent!;
   const catalog = await getPlaceCatalog();
   const place = catalog.find((candidate) => candidate.id === placeId);
   if (!place) return jsonError(404, "place_not_found", "That destination is not in the public catalog.");
   const detailHref = "/" + locale + "/places/" + encodeURIComponent(place.id);
   const placeDocuments = buildPlaceGuideDocuments([place], locale);
-  const related = await relatedDocuments(place.id, locale, intent, detailHref);
+  const related = await relatedDocuments(place.id, locale, retrievalMode, detailHref);
   const allDocuments = [
     placeDocuments[0],
     ...related,
     ...placeDocuments.slice(1),
   ];
-  const documents = filterGuideDocumentsByIntent(allDocuments, intent).slice(0, 20);
+  const documents = question
+    ? rankGuideDocumentsByQuestion(allDocuments, question, 8)
+    : filterGuideDocumentsByIntent(allDocuments, intent!).slice(0, 20);
+  if (question && documents.length === 0) {
+    return NextResponse.json({ excerpts: [], aiUsed: false, reason: "no_relevant_sources" }, { headers: { "Cache-Control": "no-store" } });
+  }
   const sourceByRef = new Map(documents.map((document) => [document.ref, document]));
   const answerSchema = guideAnswerSchema.superRefine((result, context) => {
     result.excerpts.forEach((excerpt, index) => {
@@ -217,7 +223,7 @@ export async function POST(request: Request) {
   const startedAt = Date.now();
 
   try {
-    const task = intentPrompts[intent][locale];
+    const task = intent ? intentPrompts[intent][locale] : null;
     const result = await requestDeepSeekJson({
       schema: answerSchema,
       maxTokens: 1200,
@@ -225,7 +231,7 @@ export async function POST(request: Request) {
       input: {
         locale,
         placeId,
-        selectedTask: task,
+        ...(question ? { question } : { selectedTask: task }),
         retrievedDocuments: documents.map(({ ref, label, checkedAt, status, content }) => ({ ref, label, checkedAt, status, content })),
       },
     });

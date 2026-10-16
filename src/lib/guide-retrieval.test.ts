@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { places } from "@/lib/catalog";
-import { buildPlaceGuideDocuments, filterGuideDocumentsByIntent, findGuidePlaces, type GuideDocument } from "@/lib/guide-retrieval";
+import { buildPlaceGuideDocuments, filterGuideDocumentsByIntent, findGuidePlaces, rankGuideDocumentsByQuestion, type GuideDocument } from "@/lib/guide-retrieval";
 
 describe("catalog RAG retrieval", () => {
   it("matches Vietnamese place aliases without diacritics", () => {
@@ -41,5 +41,25 @@ describe("catalog RAG retrieval", () => {
     expect(filterGuideDocumentsByIntent(documents, "family_access").map(({ ref }) => ref)).toEqual(["place:one", "evidence:one:1"]);
     expect(filterGuideDocumentsByIntent(documents, "source_status").map(({ ref }) => ref)).toEqual(["place:one", "evidence:one:1"]);
     expect(filterGuideDocumentsByIntent(documents, "overview")).toHaveLength(documents.length);
+  });
+
+  it("ranks Vietnamese and English price questions to price evidence", () => {
+    const documents: GuideDocument[] = [
+      { ref: "price:adult", label: "Adult admission price", href: "/vi/places/one", checkedAt: null, status: "reference", content: "Adult ticket price is 250000 VND; check current conditions before travel." },
+      { ref: "hours:weekday", label: "Reported opening hours", href: "/vi/places/one", checkedAt: null, status: "unknown", content: "Reported opening hours are not verified as current." },
+      { ref: "evidence:official", label: "Official destination page", href: "/vi/places/one", checkedAt: null, status: "reference", content: "This source lists the destination contact and general description." },
+    ];
+
+    expect(rankGuideDocumentsByQuestion(documents, "Giá vé người lớn bao nhiêu?")[0]?.ref).toBe("price:adult");
+    expect(rankGuideDocumentsByQuestion(documents, "What is the adult ticket price?")[0]?.ref).toBe("price:adult");
+  });
+
+  it("returns no evidence for an unrelated natural-language question", () => {
+    const documents: GuideDocument[] = [
+      { ref: "place:one", label: "Amazing Bay", href: "/vi/places/one", checkedAt: null, status: "reference", content: "A family destination with activities for visitors." },
+      { ref: "price:one", label: "Reported price", href: "/vi/places/one", checkedAt: null, status: "unknown", content: "Price not available in this record." },
+    ];
+
+    expect(rankGuideDocumentsByQuestion(documents, "How do I transfer cryptocurrency safely?")).toEqual([]);
   });
 });

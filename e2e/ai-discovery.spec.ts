@@ -47,6 +47,16 @@ test("explore map switches to its configured backup when OSM tiles are unreachab
   await expect(page.locator(".leaflet-control-attribution")).toContainText("MapTiler");
 });
 
+test("explore map explains when both configured tile providers are unreachable", async ({ page }) => {
+  await page.route("https://tile.openstreetmap.org/**", (route) => route.abort("failed"));
+  await page.route("https://api.maptiler.com/maps/streets-v4/256/**", (route) => route.abort("failed"));
+
+  await page.goto("/vi/places");
+
+  await expect(page.getByRole("status").filter({ hasText: "Không kết nối được máy chủ bản đồ từ mạng này." })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Thử lại" })).toBeVisible();
+});
+
 test("home exposes weather/safety and map route assistants", async ({ page }) => {
   const hydrationErrors: string[] = [];
   await page.addInitScript(() => {
@@ -197,20 +207,21 @@ test("map route assistant and username registration are discoverable", async ({ 
   await expect(page.getByRole("textbox", { name: "Mật khẩu" })).toBeVisible();
 });
 
-test("the source-grounded AI guide is reachable and sends only fixed, consented choices", async ({ page }) => {
+test("the source-grounded AI guide accepts bounded questions in Vietnamese and English with consent", async ({ page }) => {
   await page.goto("/vi/ai/guide");
-  await expect(page.getByRole("heading", { name: "Trợ lý tra cứu du lịch NaiVerse" })).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Trích đoạn nguồn" })).toBeVisible();
-  await expect(page.getByText("DeepSeek chọn trích đoạn nguyên văn từ hồ sơ được truy xuất.")).toBeVisible();
-  await expect(page.getByLabel("Địa điểm", { exact: true })).toBeVisible();
-  await expect(page.getByLabel("Nội dung hỏi", { exact: true })).toBeVisible();
-  const ask = page.getByRole("button", { name: "Hỏi trợ lý AI" });
-  await expect(ask).toBeDisabled();
-  await page.getByRole("checkbox").check();
-  await expect(ask).toBeDisabled();
-  await expect(page.getByText(/không gửi prompt tự do/i)).toBeVisible();
-});
+  const vietnameseQuestion = page.locator("#guide-question");
+  const vietnameseAsk = page.locator("button.button-primary");
+  await expect(vietnameseQuestion).toHaveAttribute("maxlength", "240");
+  await vietnameseQuestion.fill("Gia ve tre em tinh sao?");
+  await expect(vietnameseAsk).toBeDisabled();
+  await page.locator("input[type=checkbox]").check();
+  await expect(vietnameseAsk).toBeDisabled();
+  await expect(page.locator(".alert-blue").first()).toBeVisible();
 
+  await page.goto("/en/ai/guide");
+  await page.locator("#guide-question").fill("What does the catalog say about children's ticket prices?");
+  await expect(page.getByRole("button", { name: "Ask the AI guide" })).toBeDisabled();
+});
 test("FairPrice Lens is discoverable in Vietnamese and English and requires consent", async ({ page }) => {
   await page.goto("/vi");
   await expect(page.locator(".ai-tool-card[href$='/ai/fair-price']")).toContainText("AI rà soát báo giá du lịch");

@@ -59,6 +59,27 @@ describe("DeepSeek request privacy boundary", () => {
     expect(serializedInput).not.toContain("longitude");
   });
 
+  it("redacts labelled passport and identity numbers while preserving the surrounding request", async () => {
+    process.env.DEEPSEEK_API_KEY = "unit-test-key";
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({
+      choices: [{ message: { content: JSON.stringify({ answer: "Please contact the operator directly." }) } }],
+    }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await requestDeepSeekJson({
+      schema: z.object({ answer: z.string() }),
+      system: "Return a short JSON answer.",
+      input: { question: "Can I visit the museum? Passport no: XA1234567. My Vietnamese identity card is 079123456789." },
+    });
+
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string) as { messages: Array<{ content: string }> };
+    const modelInput = body.messages[1].content;
+    expect(modelInput).toContain("Can I visit the museum?");
+    expect(modelInput).toContain("[identifier redacted]");
+    expect(modelInput).not.toContain("XA1234567");
+    expect(modelInput).not.toContain("079123456789");
+  });
+
   it("redacts degree-minute-second GPS coordinates before sending free-form text", async () => {
     process.env.DEEPSEEK_API_KEY = "unit-test-key";
     const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({
@@ -78,6 +99,31 @@ describe("DeepSeek request privacy boundary", () => {
     expect(body.messages[1].content).not.toContain("106°52'12.90");
     expect(body.messages[1].content).not.toContain("10°52′29″B");
     expect(body.messages[1].content).not.toContain("106°52′13″Đ");
+  });
+
+  it("redacts contact details and GPS from natural AI guide questions before sending them", async () => {
+    process.env.DEEPSEEK_API_KEY = "unit-test-key";
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({
+      choices: [{ message: { content: JSON.stringify({ answer: "Please confirm the price with the venue." }) } }],
+    }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await requestDeepSeekJson({
+      schema: z.object({ answer: z.string() }),
+      system: "Return a short JSON answer.",
+      input: { question: "What is the ticket price? Call 0912345678 or minh@example.com. Coordinates 10.87485, 106.87036." },
+    });
+
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string) as { messages: Array<{ content: string }> };
+    const modelInput = body.messages[1].content;
+    expect(modelInput).toContain("What is the ticket price?");
+    expect(modelInput).toContain("[phone redacted]");
+    expect(modelInput).toContain("[email redacted]");
+    expect(modelInput).toContain("[coordinates redacted]");
+    expect(modelInput).not.toContain("0912345678");
+    expect(modelInput).not.toContain("minh@example.com");
+    expect(modelInput).not.toContain("10.87485");
+    expect(modelInput).not.toContain("106.87036");
   });
 
   it("redacts contact details and GPS from Trip DNA while preserving travel intent", async () => {
