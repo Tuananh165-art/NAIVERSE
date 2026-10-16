@@ -54,6 +54,7 @@ describe("weather, safety and route AI contracts", () => {
     const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({ features: [{ geometry: { coordinates: [[106.8, 10.9], [106.9, 11.0]] }, properties: { summary: { distance: 12_345, duration: 2_401 } } }] }), { status: 200 }));
     vi.stubGlobal("fetch", fetchMock);
     const route = await getDrivingRoute([{ name: "A", latitude: 10.9, longitude: 106.8 }, { name: "B", latitude: 11.0, longitude: 106.9 }], "shortest");
+    expect(fetchMock.mock.calls[0][0]).toBe("https://api.heigit.org/openrouteservice/v2/directions/driving-car/geojson?preference=shortest");
     expect(fetchMock.mock.calls[0][0]).toContain("preference=shortest");
     expect(route?.distanceKm).toBe(12.3);
     expect(route?.durationMinutes).toBe(41);
@@ -102,7 +103,7 @@ describe("weather, safety and route AI contracts", () => {
     try {
       const stops = [{ name: "A", latitude: 10.9, longitude: 106.8 }, { name: "B", latitude: 11, longitude: 106.9 }];
       await expect(getDrivingMatrix(stops)).resolves.toEqual({ durations: [[0, 120], [180, 0]], distances: [[0, 1500], [2000, 0]] });
-      expect(fetchMock.mock.calls[0][0]).toBe("https://api.openrouteservice.org/v2/matrix/driving-car");
+      expect(fetchMock.mock.calls[0][0]).toBe("https://api.heigit.org/openrouteservice/v2/matrix/driving-car");
       expect(JSON.parse(fetchMock.mock.calls[0][1].body as string)).toEqual({ locations: [[106.8, 10.9], [106.9, 11]], metrics: ["duration", "distance"], units: "m" });
     } finally {
       vi.unstubAllGlobals();

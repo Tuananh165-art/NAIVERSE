@@ -72,7 +72,14 @@ describe("POST /api/auth/username-login", () => {
     const signInWithPassword = vi.fn().mockResolvedValue({
       data: { session: { access_token: "access-test", refresh_token: "refresh-test" } }, error: null,
     });
-    const setSession = vi.fn().mockResolvedValue({ error: null });
+    const cookieSet = vi.fn();
+    const setSession = vi.fn().mockImplementation(async () => {
+      const serverOptions = mocks.createServerClient.mock.calls[0][2] as {
+        cookies: { setAll: (items: Array<{ name: string; value: string; options: { path: string } }>) => void };
+      };
+      serverOptions.cookies.setAll([{ name: "sb-test-auth-token", value: "session-cookie", options: { path: "/" } }]);
+      return { error: null };
+    });
     mocks.createClient
       .mockReturnValueOnce({
         from: () => ({ select: () => ({ eq: (_column: string, username: string) => {
@@ -82,7 +89,7 @@ describe("POST /api/auth/username-login", () => {
         auth: { admin: { getUserById: vi.fn().mockResolvedValue({ data: { user: { email: "traveler@example.com" } }, error: null }) } },
       })
       .mockReturnValueOnce({ auth: { signInWithPassword } });
-    mocks.cookies.mockResolvedValue({ getAll: () => [], set: vi.fn() });
+    mocks.cookies.mockResolvedValue({ getAll: () => [], set: cookieSet });
     mocks.createServerClient.mockReturnValue({ auth: { setSession } });
 
     const response = await POST(request({ username: "TRAVELER_01", password: "correct-horse-battery" }));
@@ -91,6 +98,7 @@ describe("POST /api/auth/username-login", () => {
     expect(await response.json()).toEqual({ ok: true });
     expect(signInWithPassword).toHaveBeenCalledWith({ email: "traveler@example.com", password: "correct-horse-battery" });
     expect(setSession).toHaveBeenCalledWith({ access_token: "access-test", refresh_token: "refresh-test" });
+    expect(cookieSet).toHaveBeenCalledWith("sb-test-auth-token", "session-cookie", { path: "/" });
     expect(response.headers.get("Cache-Control")).toBe("no-store");
   });
 });

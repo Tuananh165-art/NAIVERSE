@@ -67,7 +67,7 @@ export async function getDrivingMatrix(stops: RouteStop[]): Promise<RouteMatrix 
   if (!key || stops.length < 2 || stops.length > 8 || stops.some((stop) => stop.latitude === null || stop.longitude === null)) return null;
 
   try {
-    const response = await fetch("https://api.openrouteservice.org/v2/matrix/driving-car", {
+    const response = await fetch("https://api.heigit.org/openrouteservice/v2/matrix/driving-car", {
       method: "POST",
       headers: { Authorization: key, "Content-Type": "application/json" },
       body: JSON.stringify({ locations: stops.map((stop) => [stop.longitude, stop.latitude]), metrics: ["duration", "distance"], units: "m" }),
@@ -91,7 +91,7 @@ export async function getDrivingRoute(stops: RouteStop[], preference: RoutePrefe
   if (!key || routable.length < 2 || routable.length > 8) return null;
 
   try {
-    const response = await fetch(`https://api.openrouteservice.org/v2/directions/driving-car/geojson?preference=${preference}`, {
+    const response = await fetch(`https://api.heigit.org/openrouteservice/v2/directions/driving-car/geojson?preference=${preference}`, {
       method: "POST",
       headers: { Authorization: key, "Content-Type": "application/json", Accept: "application/geo+json" },
       body: JSON.stringify({ coordinates: routable.map((place) => [place.longitude, place.latitude]) }),

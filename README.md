@@ -18,9 +18,11 @@ Copy-Item .env.example .env
 npm.cmd run dev
 ~~~~
 
-Sau khi điền `.env`, chạy `npm.cmd run services:probe` để kiểm tra kết nối Supabase Auth/schema và Upstash Redis mà không in secret. `public.places` có thể báo `404/PGRST205` cho tới khi áp dụng đủ migration theo [hướng dẫn cài đặt](docs/HUONG_DAN.md).
+Sau khi điền `.env`, chạy `npm.cmd run services:probe` để kiểm tra kết nối Supabase Auth/schema và Upstash Redis mà không in secret. Probe ngày 16/10/2026 xác nhận Auth, Upstash PING, schema chính và 36 địa điểm công khai; kết quả này không thay cho kiểm tra đăng nhập, ghi dữ liệu hoặc RLS theo tài khoản. Nếu project mới báo `404/PGRST205`, làm theo [hướng dẫn cài đặt](docs/HUONG_DAN.md) và chỉ chạy bundle một lần trên database rỗng.
 
 Để tạo tài khoản dịch vụ, lấy đúng API URL/key, cấu hình environment variables và import GitHub vào Vercel theo từng bước, xem [Hướng dẫn thiết lập dịch vụ](docs/THIET_LAP_DICH_VU.md). Hướng dẫn test theo vai trò và cập nhật dữ liệu nằm trong [Hướng dẫn cài đặt, kiểm thử và demo](docs/HUONG_DAN.md).
+
+Giới hạn quota và điều kiện dùng dịch vụ cho demo/kinh doanh được rà soát tại [docs/SERVICE_LIMITS.md](docs/SERVICE_LIMITS.md); hãy kiểm tra lại với nhà cung cấp trước khi public hoặc dùng thương mại.
 
 Mở http://localhost:3000/vi. Khám phá danh mục không cần tài khoản. Trang chủ có thẻ dẫn tới AI Thời tiết/An toàn/Xanh và AI Giao thông; hai liên kết trên thanh điều hướng vẫn cuộn ngang được trên điện thoại. Đăng ký, AI thật, lưu hành trình, chia sẻ và gửi yêu cầu cần cấu hình dịch vụ theo docs/HUONG_DAN.md.
 

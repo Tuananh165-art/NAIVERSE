@@ -1,8 +1,14 @@
 # Kế hoạch, phạm vi và TODO NaiVerse
 
+## Cập nhật endpoint định tuyến và điều khoản dịch vụ — 16/10/2026
+
+- [x] Chuyển directions và matrix từ `api.openrouteservice.org` sang `api.heigit.org/openrouteservice/v2`; unit kiểm tra URL mới và route smoke gọi provider thật qua host mới đạt 4/4 test liên quan.
+- [x] Cập nhật hướng dẫn tạo key tại HeiGIT Account và lịch deprecated/tắt host cũ theo thông báo nhà cung cấp.
+- [x] Ghi lại quota/điều khoản demo hiện tại và các cổng cần hoàn tất trước kinh doanh trong [SERVICE_LIMITS.md](SERVICE_LIMITS.md). Review này không thay cho việc kiểm tra lại gói, giá hoặc giấy phép lúc triển khai.
+
 ## Cập nhật trạng thái 16/10/2026
 
-Người dùng đã xác nhận quyền sử dụng đủ 14 ảnh đầu vào; hash SHA-256 khớp, catalog hiện có 43 lượt dùng ảnh trên đủ 35 hồ sơ yêu cầu ảnh. Nhóm nghề/ẩm thực cộng đồng được miễn ảnh theo yêu cầu người dùng và tiếp tục dùng artwork có nhãn; ảnh trảng cỏ Bù Lạch được gắn đúng vào `bu-lach-grassland`. Tác giả/URL license riêng chưa được cung cấp nên không tạo provenance giả. Đăng ký username/email + password, đăng nhập username/email + password và đăng xuất local session đã có; đăng nhập/register live vẫn chờ áp schema Supabase. `NAIVERSE_SETUP_ALL.sql` gồm 34 migration và seed 36 địa điểm; đã sửa hai lỗi SQL Editor `42P17` ở index 0001 và `42703` ở migration 0033. Chưa xác định SQL Editor đã rollback toàn bộ hay giữ lại migration trước lỗi; kiểm tra preflight trong [hướng dẫn](HUONG_DAN.md) trước khi chạy tiếp. Trip DNA sau bổ sung phương tiện xe đạp đạt 353/358 development và 173/180 holdout; temperature 0 được đặt cho parser, nhưng mismatch vẫn dao động. FairPrice Lens có route/giao diện VI/EN, kiểm tra exact evidence và live fixture DeepSeek đạt 2/2; tích hợp Supabase/Redis thật chưa kiểm chứng. Xem [kiểm toán AI](AI_AUDIT.md) để biết giới hạn mẫu. 22 smoke feature có 20/22 pass lượt đầu, hai ca Weather chạy lại riêng đạt 2/2 sau HTTP 503. Xem [kịch bản demo](DEMO_KICH_BAN.md), [trạng thái ảnh](PHOTO_GAPS.md) và phần TODO bên dưới.
+Người dùng đã xác nhận quyền sử dụng đủ 14 ảnh đầu vào; hash SHA-256 khớp, catalog có 43 lượt dùng ảnh trên đủ 35 hồ sơ yêu cầu ảnh. Nhóm nghề/ẩm thực cộng đồng được miễn ảnh và dùng artwork có nhãn; ảnh Bù Lạch gắn đúng hồ sơ. Auth hỗ trợ đăng ký username/email + password, đăng nhập bằng username hoặc email + password, và đăng xuất local; unit/E2E kiểm tra luồng giao diện/endpoint, nhưng chưa đăng ký bằng tài khoản test thật hoặc xác minh RLS A/B. `NAIVERSE_SETUP_ALL.sql` được tạo lặp lại cho ra cùng nội dung, gồm 34 migration và seed 36 địa điểm. Probe chỉ đọc ngày 16/10/2026 xác nhận Auth settings, Upstash PING, các bảng chính và 36 địa điểm công khai; migration 0033 cũng được xác nhận qua dòng Combo 3 đã cập nhật. Live smoke DeepSeek/Open-Meteo/ORS đạt 24/24 trên 7 file; FairPrice prompt-injection VI/EN được chạy thêm đạt 2/2; handler smoke vẫn mock auth, limiter và ghi DB. Unit/integration hiện đạt **87 passed/21 skipped**; E2E đạt **19/19**; lint, typecheck và production build Next.js 16.4.1 đạt. Trip DNA gần nhất 353/358 development và 173/180 holdout; đây là mẫu nhỏ. Xem [kiểm toán AI](AI_AUDIT.md), [kịch bản demo](DEMO_KICH_BAN.md), [trạng thái ảnh](PHOTO_GAPS.md) và phần TODO bên dưới.
 
 ## Cập nhật AI Guide — 16/10/2026
 
@@ -65,14 +71,15 @@ Người dùng đã xác nhận quyền sử dụng đủ 14 ảnh đầu vào; 
 - [ ] Operator Copilot gọi LLM để đọc brief/soạn chương trình; hiện có form báo giá thủ công, lưu nháp và duyệt trước chia sẻ.
 - [x] Lưu, đổi tên, sao chép, xóa, chia sẻ/thu hồi và gửi yêu cầu cho trip.
 - [x] Sửa trực tiếp thứ tự điểm dừng sau khi đã lưu trip; không giữ metric tuyến cũ sau khi đổi thứ tự.
-- [ ] Rà soát năm mismatch development và sáu mismatch holdout để xác định có vấn đề nhãn/ngữ nghĩa nào đáng sửa; không tối ưu theo holdout. Nếu sửa parser/prompt, đo lại development trước, rồi chỉ chạy holdout sau khi khóa thay đổi; mở rộng prompt injection, nguồn/giá/giờ và privacy.
+- [x] Thêm regression FairPrice cho prompt injection trong quote và loại bỏ field không có exact evidence; giữ policy quote như untrusted data.
+- [ ] Rà soát mismatch Trip DNA development/holdout và bổ sung adversarial kiểm thử nguồn/giá/giờ/privacy; không tối ưu theo holdout. Nếu sửa parser/prompt, đo development trước rồi chỉ chạy holdout sau khi khóa thay đổi. Live smoke đã đạt 24/24, nhưng không khẳng định mọi câu trả lời luôn đúng.
 - [ ] Playwright E2E/kiểm thử RLS giữa khách A/B và doanh nghiệp A/B với hai project member thật.
 - [x] Tự động audit axe WCAG 2.1 A/AA trên trang chủ VI/EN, khám phá, đăng ký, AI Guide EN và FairPrice VI; sửa contrast màu chữ phụ và accessible name locale switcher. Chromium sạch không còn vi phạm trong sáu trạng thái trang đã kiểm tra.
 - [ ] Kiểm thử thủ công bằng bàn phím/đọc màn hình và thiết bị thật; audit tự động/responsive source không thay thế kiểm tra assistive technology trên thiết bị.
 - [x] Thêm weather provider, 29 lượt dùng ảnh có license công khai và 14 lượt dùng ảnh người dùng xác nhận quyền trực tiếp cho đủ 35 hồ sơ yêu cầu ảnh; nhóm `community-cultural-experiences` được miễn ảnh và giữ artwork theo yêu cầu người dùng. 10/36 feature points, 0 cổng vào đã xác minh.
 - [ ] Bổ sung credit/tác giả, ngày chụp và hồ sơ/phạm vi cấp quyền cho 14 ảnh người dùng nếu muốn provenance công khai đầy đủ. Nhóm cộng đồng không nằm trong backlog ảnh. Tiếp tục khảo sát OSM/cổng vào riêng biệt, không biến feature point thành cổng.
 - [x] Lập [quy trình và danh sách ảnh](PHOTO_GAPS.md), phân biệt 10 địa điểm cụ thể với 4 nhóm trải nghiệm; tích hợp đủ 14 ảnh có quyền trực tiếp vào hồ sơ khớp nội dung. Nhóm nghề/ẩm thực vẫn dùng minh họa.
-- [ ] Tái đánh giá giấy phép dịch vụ, giới hạn miễn phí, chi phí và điều kiện thương mại trước kinh doanh.
+- [x] Rà soát tại [SERVICE_LIMITS.md](SERVICE_LIMITS.md) điều khoản và quota demo của Vercel, Supabase, Upstash, Open-Meteo, HeiGIT/ORS, OSM và DeepSeek ngày 16/10/2026. Đây chưa phải phê duyệt kinh doanh; hoàn tất các cổng thương mại trong tài liệu trước khi public có thu phí.
 
 ## Cập nhật nguồn Bửu Long và kiểm thử AI live — 15/10/2026
 
@@ -116,7 +123,7 @@ Lint/typecheck/unit/build là cổng repository. Tích hợp Supabase, DeepSeek,
 - [x] Probe dịch vụ ngày 15/10/2026 lúc 18:48: Upstash REST `PING` trả HTTP 200/PONG; Supabase REST đọc bảng `places` trả HTTP 404/PGRST205, nên chưa thể test thật auth, profile, trip hoặc RLS cho tới khi schema được áp dụng.
 - [x] Chạy lại `npm.cmd run catalog:check-photos` lúc 18:50: 28 URL ảnh đang dùng đều trả response ảnh; kết quả chỉ xác nhận URL hoạt động, không xác nhận license hoặc ảnh vẫn đúng hiện trạng.
 - [x] Mở rộng Playwright home check sang viewport 390px, xác nhận lối tắt AI lập kế hoạch, thời tiết/an toàn/xanh, giao thông/tuyến và hai thẻ trợ lý; suite đạt 6/6 lúc 18:56 sau khi thêm kiểm tra trang chi tiết Bửu Long.
-- [ ] Áp dụng migrations 0001–0034 (hoặc bundle cập nhật) vào project Supabase thật, tạo tài khoản test và kiểm tra RLS/Redis trước khi đánh dấu luồng auth, lưu trip và AI production đã xác minh.
+- [ ] Tạo tài khoản test riêng sau khi schema đã hiện diện, rồi kiểm chứng đăng ký/email confirmation, username-login, lưu trip, RLS giữa A/B và quota Redis thật. Probe hiện thấy bảng/36 địa điểm nhưng không thay cho kiểm tra quyền ghi/đọc có xác thực; không chạy lại bundle toàn bộ trên database đang có dữ liệu.
 
 ## Nguồn cập nhật Suối Mơ và kiểm tra provider — 15/10/2026
 
@@ -140,7 +147,7 @@ Lint/typecheck/unit/build là cổng repository. Tích hợp Supabase, DeepSeek,
 - [x] Bổ sung bằng chứng cổng Amazing Bay từ trang vị trí chính thức nhưng không nâng tọa độ map center/pin feature thành tọa độ cổng; cập nhật E2E trang Cát Tiên kiểm tra giá Bàu Sấu và khoảng giá guide; Playwright hiện đạt 7/7.
 - [x] Thêm 14 minh họa SVG theo từng chủ đề cho hồ sơ chưa có ảnh license; card và trang chi tiết gắn nhãn rõ đây không phải ảnh thực địa. Regression kiểm tra đủ ID còn thiếu; ảnh chụp có nguồn vẫn được giữ nguyên.
 - [x] Sau artwork: full unit suite 53 passed/14 skipped; Playwright E2E 8/8; lint, typecheck và production build 40/40 route đều đạt. Build output tạm đã dọn, reference do Next tự cập nhật trong `next-env.d.ts` và `tsconfig.json` đã hoàn nguyên.
-- [ ] Kiểm tra schema thật sau khi chủ project áp dụng migrations 0001–0034; chưa có bảng `places` trong Supabase REST schema cache ở probe gần nhất.
+- [x] Probe chỉ đọc lại schema hiện thời: Auth settings và các bảng `places`, `profiles.username`, `trips`, `trip_shares`, `ai_usage`, `price_references`, `place_media` đều trả HTTP 200; `places` có 36 dòng. Cần kiểm chứng tài khoản/RLS riêng, không suy ra quyền ghi từ HTTP 200.
 
 ## Tiến độ tiếp tục — 15/10/2026
 
@@ -148,7 +155,7 @@ Lint/typecheck/unit/build là cổng repository. Tích hợp Supabase, DeepSeek,
 - [x] Xác minh lại sau migration 0031: unit 54 passed/14 skipped, Playwright toàn bộ 10/10 (gồm cả hai lịch Đá Hàn), lint, TypeScript và production build Next.js đạt 40/40 route. Build dist riêng đã dọn, `next-env.d.ts` và `tsconfig.json` được hoàn nguyên.
 - [x] Chạy lại 4 bộ live smoke với cấu hình trong `.env`: 18/18 đạt cho DeepSeek thật, Open-Meteo thật và OpenRouteService thật. Auth, Upstash quota và ghi DB vẫn mock; chưa chứng minh Supabase Auth/RLS hoặc Redis limiter thật.
 - [x] Nhận 13 ảnh có quyền trực tiếp và gắn đúng 13 hồ sơ; 1 ảnh Bù Lạch không phù hợp nhóm trải nghiệm cộng đồng nên tiếp tục dùng minh họa. Tọa độ cổng đã xác minh vẫn 0/36.
-- [ ] Áp dụng migrations 0001–0034 lên Supabase thật, rồi kiểm thử đăng ký/đăng nhập, dữ liệu trips và RLS giữa hai tài khoản/tổ chức.
+- [ ] Xác nhận migration set hiện hành trên Supabase qua SQL Editor rồi kiểm thử đăng ký/đăng nhập, dữ liệu trips và RLS giữa hai tài khoản/tổ chức; probe REST đã thấy schema và dữ liệu công khai, nhưng không chứng minh mọi constraint/migration hoặc quyền theo người dùng.
 
 ## Nguồn giờ và giá dịch vụ Giang Điền — 15/10/2026
 

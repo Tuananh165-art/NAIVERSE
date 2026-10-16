@@ -1,5 +1,7 @@
 # Hướng dẫn cài đặt, kiểm thử và demo NaiVerse
 
+OpenRouteService hiện gọi host mới `api.heigit.org/openrouteservice/v2`; key cấu hình cũ vẫn dùng được theo thông báo HeiGIT. Route smoke thực ngày 16/10/2026 qua host mới đạt 4/4 test trên hai file liên quan (các test live ngoài phạm vi bị skip). Xem [hướng dẫn cấu hình ORS](THIET_LAP_DICH_VU.md#5-tạo-api-key-openrouteservice) và [rà soát quota/điều khoản dịch vụ](SERVICE_LIMITS.md).
+
 ## Cài Supabase bằng một file SQL
 
 Bạn có thể chọn một trong hai cách: chạy migration rời theo phần thiết lập dịch vụ, hoặc tạo bundle duy nhất bằng npm.cmd run db:bundle-sql rồi dán NAIVERSE_SETUP_ALL.sql trong thư mục gốc vào SQL Editor của project Supabase mới. Bundle chứa đầy đủ migration 0001–0034 theo thứ tự và seed 36 địa điểm sau migration 0001. Khi đã chạy bundle, không chạy lại các migration rời hoặc seed:catalog. Chỉ dùng trên project rỗng; database hiện hữu/đã cài dở cần backup và áp dụng có chọn lọc migration chưa chạy. Bundle không có migration ledger và không phải công cụ nâng cấp database.
@@ -182,16 +184,17 @@ Probe phiên kiểm tra này nhận HTTP 200, JSON hợp lệ, provider báo mod
 
 ### AI giao thông và bản đồ
 
-1. Tạo key OpenRouteService trong developer dashboard, đặt `OPENROUTESERVICE_API_KEY` chỉ ở server, rồi mở `/vi/ai/routes` sau khi đăng nhập.
+1. Tạo key trong [HeiGIT Account](https://account.heigit.org/), đặt `OPENROUTESERVICE_API_KEY` chỉ ở server, rồi mở `/vi/ai/routes` sau khi đăng nhập. App gọi host mới `api.heigit.org/openrouteservice/v2`.
 2. Nhấp ít nhất hai điểm trên bản đồ; điểm đầu và cuối được giữ cố định, các điểm ở giữa được sắp thứ tự qua ma trận ORS. Chọn ưu tiên thời gian hoặc quãng đường; nhập số khách, giờ khởi hành và nhắc ghế trẻ em nếu cần; tích consent rồi so sánh.
 3. Kết quả gồm geometry nhanh/ngắn theo cùng thứ tự đã gợi ý, km/phút, bảng thứ tự điểm, ước lượng ma trận, giải thích DeepSeek và nguồn. Nút **Áp dụng thứ tự gợi ý** đổi thứ tự các pin hiện tại. Tối đa 8 điểm, nên server có thể xét toàn bộ hoán vị bên trong với hai đầu cố định.
 4. Matrix lỗi thì app giữ thứ tự nhập và nói rõ chưa tối ưu; không vẽ đường thẳng thay tuyến. Matrix tối ưu theo tổng pairwise duration hoặc distance của ORS, nhưng đây chỉ là tối ưu trên các metric của matrix, không bảo đảm tối ưu trên mọi điều kiện đường thực tế. Quãng ngắn chỉ là proxy giảm đường vòng, không phải số phát thải.
 5. Ghim do người dùng chọn, không phải cổng đã xác minh. DeepSeek chỉ nhận tên điểm và số liệu tuyến; tọa độ chỉ gửi ORS. Không có traffic realtime, lịch bus, chỗ đỗ, đường đóng, thời lượng dịch vụ hoặc giờ đóng cửa được xác minh; lựa chọn “tránh đến muộn” không bảo đảm đến trước giờ đóng hay tránh đi ban đêm.
 6. Thiếu ORS key trả `routing_not_configured`. Khi lỗi, kiểm tra quota, key/profile, vị trí ghim và phản hồi provider. Public ORS giới hạn từng dịch vụ; xem [ORS API restrictions](https://openrouteservice.org/restrictions/) và [API docs](https://openrouteservice.org/dev/) trước khi tăng tải.
+   Host cũ `api.openrouteservice.org` đã deprecated; key hiện tại dùng được với host mới, còn host cũ bị giảm quota và dự kiến tắt 02–06/11/2026. Xem [thông báo migration của ORS](https://ask.openrouteservice.org/t/deprecating-api-openrouteservice-org-in-favour-of-api-heigit-org/7912).
 
 ### Có cần LangChain/RAG không?
 
-Chưa cần LangChain/vector database cho 36 hồ sơ có cấu trúc. API truy xuất nguồn (Open-Meteo forecast, ORS route metrics, danh mục/giá đã duyệt) nạp phần liên quan thành context giới hạn rồi DeepSeek giải thích bằng JSON; tính toán và nguồn do server quyết định. Đây là retrieval có căn cứ, chưa phải kho RAG embedding tổng quát. Chỉ bổ sung LangChain/vector search khi corpus nguồn tăng đáng kể và đã có bài đánh giá recall, phiên bản tài liệu, lọc quyền, trích dẫn; RAG không thay nguồn realtime thời tiết/tuyến.
+Chưa cần LangChain/vector database cho 36 hồ sơ có cấu trúc. API truy xuất nguồn (Open-Meteo forecast, ORS route metrics, danh mục/giá đã duyệt) nạp phần liên quan thành context giới hạn rồi DeepSeek giải thích bằng JSON; tính toán và nguồn do server quyết định. Đây là retrieval có căn cứ, chưa phải kho RAG embedding tổng quát. Chỉ bổ sung LangChain/vector search khi corpus nguồn tăng đáng kể và đã có bài đánh giá recall, phiên bản tài liệu, lọc quyền, trích dẫn; RAG không thay nguồn realtime thời tiết/tuyến. Xem thêm [đánh giá giới hạn dịch vụ](SERVICE_LIMITS.md) trước khi public hoặc dùng thương mại.
 
 ## 4. Định tuyến, bản đồ và dịch vụ miễn phí
 
@@ -398,11 +401,13 @@ Smoke chỉ gửi dữ kiện chuyến giả lập có cấu trúc, không gửi
 ### Kết quả kiểm tra repository mới nhất
 
 - ESLint: đạt; `npx.cmd tsc --noEmit --incremental false`: đạt.
-- Unit/integration: **86 passed, 21 skipped** (107 tổng), gồm quote parsing/evidence, kiểm soát quyền đổi thứ tự điểm dừng, hợp nhất ảnh/nguồn DB với catalog tĩnh và kiểm tra cột migration SQL 0033 khớp schema; smoke DeepSeek live chỉ chạy riêng khi bật biến opt-in.
+- Unit/integration: **87 passed, 21 skipped** (108 tổng), gồm regression prompt injection FairPrice, quote parsing/evidence, kiểm soát quyền đổi thứ tự điểm dừng, hợp nhất ảnh/nguồn DB với catalog tĩnh và kiểm tra cột migration SQL 0033 khớp schema. Smoke DeepSeek live chỉ chạy riêng khi bật biến opt-in.
 - Playwright Chromium: **19/19 E2E**; có kiểm tra root `/`, thuộc tính `data-yd-*` mô phỏng extension chèn trước hydration, ảnh người dùng, FairPrice VI/EN, và API AI trả 401 khi chưa đăng nhập. Axe-core WCAG 2.1 A/AA đạt trên 6 trạng thái trang VI/EN; kiểm tra bằng assistive technology/thiết bị thật vẫn đang chờ.
 - Production build Next.js 16.4.1: đạt; build route table có cả `/[locale]/ai/fair-price` và `/api/ai/fair-price`.
-- Probe dịch vụ chỉ đọc ngày 16/10/2026: Supabase Auth settings **HTTP 200**, Upstash Redis **HTTP 200/PONG**, nhưng REST `public.places` **HTTP 404/PGRST205**. Điều này chưa phân biệt được bảng chưa tạo với schema cache/exposure; chạy truy vấn preflight ở đầu tài liệu trong SQL Editor trước khi chạy lại bundle đã sửa. Chưa xác nhận đăng ký/đăng nhập thật, RLS A/B, quota limiter thực hoặc AI end-to-end qua Supabase.
-- `npm.cmd run catalog:photo-gaps`: **35** hồ sơ yêu cầu ảnh, đủ 35 có ảnh; 0 ảnh bắt buộc còn thiếu. Nhóm trải nghiệm nghề/ẩm thực cộng đồng được miễn ảnh và hiển thị minh họa có nhãn. Ảnh trảng cỏ Bù Lạch gắn đúng hồ sơ `bu-lach-grassland`.
+- Probe dịch vụ chỉ đọc mới nhất ngày 16/10/2026: Supabase Auth settings **HTTP 200**, Upstash Redis **HTTP 200/PONG**; `places`, `profiles.username`, `trips`, `trip_shares`, `ai_usage`, `price_references`, `place_media` đều HTTP 200. REST chỉ đọc thấy 36 địa điểm, 51 price references, 27 media records và 35 hours records. Migration 0033 được đối chiếu trực tiếp qua Combo 3 có URL sản phẩm hiện hành, 599.000 ₫ và trạng thái `unknown`. Chưa xác nhận đăng ký/đăng nhập bằng tài khoản test, RLS A/B, quota AI thật hoặc ghi/đọc trip qua phiên người dùng; không chạy lại bundle trên database đang có dữ liệu.
+- Live AI smoke mới nhất: **24/24** trên 7 file với model `deepseek-v4-flash`, Open-Meteo và OpenRouteService thật. Handler smoke vẫn mock session, limiter và DB; đây chưa phải luồng AI production end-to-end.
+- FairPrice adversarial live smoke bổ sung sau đó: **2/2** VI/EN với câu lệnh prompt injection nằm trong quote; hai output không đưa “rẻ nhất/cheapest/đã xác nhận” vào các field trích xuất.
+- `npm.cmd run catalog:photo-gaps`: **35** hồ sơ yêu cầu ảnh, đủ 35 có ảnh; 0 ảnh bắt buộc còn thiếu. Nhóm trải nghiệm nghề/ẩm thực cộng đồng được miễn ảnh và hiển thị minh họa có nhãn. Ảnh trảng cỏ Bù Lạch gắn đúng hồ sơ `bu-lach-grassland`; hash của cả 14 ảnh nguồn khớp asset triển khai.
 
 Sau migration 0026, chạy `supabase/migrations/0027_suoi_mo_operator_activity_hours.sql`. Trang chính thức [Suối Mơ – tham quan và dã ngoại](https://suoimopark.com/vn/visit-picnic) nêu 08:00–17:00 cho hoạt động vui chơi, hồ bơi thiên nhiên và team building. Nguồn không nêu giờ mở cổng/toàn khu hoặc lịch ngoại lệ theo ngày, nên bản ghi ở trạng thái `unknown`; giờ 07:30–17:00 từ danh bạ Viet-Biz được giữ làm lịch sử, không dùng để lên lịch đến cổng.
 

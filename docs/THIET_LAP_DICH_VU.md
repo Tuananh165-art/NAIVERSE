@@ -64,10 +64,10 @@ Tham khảo: [tạo Redis database](https://upstash.com/docs/redis/overall/getst
 
 ## 5. Tạo API key OpenRouteService
 
-1. Đăng ký/đăng nhập [openrouteservice](https://openrouteservice.org/log-in/), sau đó mở developer dashboard để tạo API key.
+1. Đăng ký/đăng nhập [HeiGIT Account](https://account.heigit.org/), sau đó tạo API key OpenRouteService.
 2. Điền `OPENROUTESERVICE_API_KEY` vào `.env`, không đặt tiền tố `NEXT_PUBLIC_`.
 3. Mở `/vi/ai/routes`, chọn ít nhất hai pin do bạn tự đặt, đồng ý gửi tên và metric tuyến tới DeepSeek rồi so sánh. Tọa độ được gửi tới ORS; DeepSeek chỉ nhận tên điểm và số liệu. Kết quả ước lượng theo mạng đường, không có traffic realtime.
-4. Nếu provider báo 401/403, kiểm tra hoặc tạo lại key; nếu 429, kiểm tra quota/giới hạn và giảm request. Trước khi public, xem [ORS restrictions](https://openrouteservice.org/restrictions/) và [API docs](https://openrouteservice.org/dev/).
+4. App gọi `https://api.heigit.org/openrouteservice/v2`. Key ORS cũ được nhà cung cấp xác nhận dùng được với host mới. Không đổi về `api.openrouteservice.org`: host cũ đã bị giảm quota và sẽ ngừng hoạt động trong lịch tắt 02–06/11/2026. Nếu provider báo 401/403, kiểm tra key; nếu 429, xem quota endpoint trong HeiGIT Account và giảm request. Tham khảo [thông báo đổi host](https://ask.openrouteservice.org/t/deprecating-api-openrouteservice-org-in-favour-of-api-heigit-org/7912), [ORS restrictions](https://openrouteservice.org/restrictions/) và [API docs](https://openrouteservice.org/dev/).
 
 ## 6. Import GitHub vào Vercel
 
@@ -108,7 +108,7 @@ Tài liệu: [Import Git repository](https://vercel.com/docs/git), [quản lý p
 | `AI_GLOBAL_DAILY_LIMIT` | Mặc định `200` | Giới hạn AI toàn app | Server config |
 | `DEMO_MODE` | `true` cho doanh nghiệp giả lập | Gắn nhãn quote/inquiry DEMO | Server config |
 
-MVP không cần API key cho Open-Meteo free forecast; free endpoint chỉ phù hợp phi thương mại theo [điều khoản Open-Meteo](https://open-meteo.com/en/terms). Bản đồ dùng OpenStreetMap với [tile usage policy](https://operations.osmfoundation.org/policies/tiles/); không tải trước/offline hoặc chạy crawler.
+MVP không cần API key cho Open-Meteo free forecast; free endpoint chỉ phù hợp phi thương mại. Vercel Hobby cũng chỉ dành cho mục đích cá nhân/phi thương mại. Xem rà soát dịch vụ và quota đã cập nhật tại [SERVICE_LIMITS.md](SERVICE_LIMITS.md). Bản đồ dùng OpenStreetMap với [tile usage policy](https://operations.osmfoundation.org/policies/tiles/); không tải trước/offline hoặc chạy crawler.
 
 ## 8. Tiêu chí xác nhận xong cấu hình
 
