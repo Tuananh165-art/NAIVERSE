@@ -2,6 +2,8 @@
 
 OpenRouteService hiện gọi host mới `api.heigit.org/openrouteservice/v2`; key cấu hình cũ vẫn dùng được theo thông báo HeiGIT. Route smoke thực ngày 16/10/2026 qua host mới đạt 4/4 test trên hai file liên quan (các test live ngoài phạm vi bị skip). Xem [hướng dẫn cấu hình ORS](THIET_LAP_DICH_VU.md#5-tạo-api-key-openrouteservice) và [rà soát quota/điều khoản dịch vụ](SERVICE_LIMITS.md).
 
+Lệnh `npm.cmd run services:probe` hiện kiểm tra Auth, Redis PING, số dòng `places` công khai (seed mới mong đợi 36) và các cột bắt buộc của `price_references`, `organizations`, `place_media`, `place_hours` bằng truy vấn giới hạn 0 dòng. Probe không đọc dữ liệu riêng, không tạo/đổi dữ liệu và không thay thế kiểm tra RLS bằng tài khoản thật.
+
 ## Cài Supabase bằng một file SQL
 
 Bạn có thể chọn một trong hai cách: chạy migration rời theo phần thiết lập dịch vụ, hoặc tạo bundle duy nhất bằng npm.cmd run db:bundle-sql rồi dán NAIVERSE_SETUP_ALL.sql trong thư mục gốc vào SQL Editor của project Supabase mới. Bundle chứa đầy đủ migration 0001–0034 theo thứ tự và seed 36 địa điểm sau migration 0001. Khi đã chạy bundle, không chạy lại các migration rời hoặc seed:catalog. Chỉ dùng trên project rỗng; database hiện hữu/đã cài dở cần backup và áp dụng có chọn lọc migration chưa chạy. Bundle không có migration ledger và không phải công cụ nâng cấp database.
@@ -73,7 +75,7 @@ npm.cmd run test:e2e:install
 npm.cmd run test:e2e -- --workers=1
 ~~~~
 
-Bộ Playwright hiện đạt 19/19, kiểm tra lối vào AI desktop/390px, hotline không cần chatbot, bản đồ/tuyến, form username/password, API AI chặn người chưa đăng nhập, ảnh người dùng và các nhãn nguồn. Axe-core kiểm tra WCAG 2.1 A/AA trên sáu trạng thái trang VI/EN; bộ này không tạo tài khoản thật, không kiểm thử RLS A/B và không thay thế kiểm tra assistive technology trên thiết bị.
+Bộ Playwright hiện đạt 20/20, kiểm tra lối vào AI desktop/390px, hotline không cần chatbot, bản đồ/tuyến, form username/password, thao tác bàn phím đổi chế độ đăng ký/hiện mật khẩu, API AI chặn người chưa đăng nhập, ảnh người dùng và các nhãn nguồn. Axe-core kiểm tra WCAG 2.1 A/AA trên sáu trạng thái trang VI/EN; bộ này không tạo tài khoản thật, không kiểm thử RLS A/B và không thay thế kiểm tra assistive technology trên thiết bị.
 
 Sau khi tạo itinerary trong Journey Studio, kéo tới **AI chuẩn bị hành lý**. Chỉ bật consent khi đồng ý gửi dữ kiện cấu trúc; mô tả chuyến gốc, ngân sách, GPS và tài khoản không được đưa vào request. DeepSeek chọn mã vật dụng và độ ưu tiên từ danh sách hữu hạn; server kiểm tra mã/lý do phù hợp với dữ kiện. Tên, giải thích, lưu ý sức khỏe/tiếp cận do ứng dụng ánh xạ tĩnh; checklist không phải dự báo, quy định địa điểm hoặc tư vấn y tế. Migration 0034 thêm nhãn feature `packing` vào `ai_usage`.
 
@@ -108,7 +110,7 @@ Sau migration 0019, tiếp tục chạy theo thứ tự `0020_giang_dien_camping
 7. Trong Authentication → URL Configuration, đặt Site URL local là http://localhost:3000 và thêm redirect URL cần dùng khi test. Khi có domain Vercel mới, thêm domain đó tại Supabase.
 8. Email confirmation: để bật trên môi trường thật. Khi demo local, có thể tắt tạm Email confirmations trong Authentication → Providers → Email; bật lại trước deploy public. Đăng ký tại `/vi/auth` bằng tên hiển thị, username (3–24 ký tự chữ/số/gạch dưới), email và mật khẩu ít nhất 10 ký tự. Email dùng xác nhận/khôi phục tài khoản; lần sau đăng nhập được bằng username + password hoặc email + password. Username lưu chữ thường và có unique index; không tạo mật khẩu riêng ngoài Supabase.
 9. Xác nhận RLS: Table Editor phải hiển thị RLS enabled trên các bảng. Không thêm policy using true cho dữ liệu chuyến, yêu cầu, báo giá, thành viên hoặc hồ sơ.
-10. Chạy `npm.cmd run services:probe`. Kết quả mong đợi: Supabase Auth settings HTTP 200, `public.places` HTTP 200 và Upstash HTTP 200/PONG. Nếu `places` trả 404/PGRST205, kiểm tra migration đã chạy đúng thứ tự và `public` đã được expose trong API settings. Lệnh chỉ GET Auth/schema và gửi Redis `PING`; nó không tạo tài khoản, đọc bản ghi địa điểm, ghi Redis hay in URL/key. HTTP 200 không thay thế kiểm thử RLS.
+10. Chạy `npm.cmd run services:probe`. Kết quả mong đợi: Auth settings HTTP 200; `places` HTTP 200 với 36 dòng trên project vừa seed; `price_references`, `organizations`, `place_media`, `place_hours` HTTP 200; Upstash HTTP 200/PONG. Nếu bảng nào trả 404/PGRST205, kiểm tra migration và `public` đã được expose trong API settings. Các bảng phụ được probe với `limit=0`, không trả dòng dữ liệu. Lệnh không tạo tài khoản, không ghi Redis và không in URL/key. HTTP 200 chỉ xác nhận endpoint/schema nhìn thấy được, không thay thế kiểm thử RLS.
 
 ### Cấp tài khoản nhân viên demo
 
@@ -381,14 +383,14 @@ Sau migration `0025_amazing_bay_child_price_conflict_2026.sql`, chạy thêm `su
 1. Áp dụng migrations và seed theo mục cài Supabase. Với project hoàn toàn mới, chạy đúng một lần `NAIVERSE_SETUP_ALL.sql` ở thư mục gốc; không chạy thêm các migration riêng sau bundle.
 2. Khởi động `npm.cmd run dev`, đăng ký/đăng nhập và mở `/vi/ai/guide` hoặc `/en/ai/guide`.
 3. Chọn một địa điểm cùng loại câu hỏi cố định; đọc và chấp thuận consent trước khi gửi. Không có trường nhập prompt tự do. Request chỉ gồm ID địa điểm, enum câu hỏi, ngôn ngữ và consent; server tự lấy hồ sơ công khai liên quan trước khi gọi DeepSeek.
-4. Kiểm tra câu trả lời có nguồn, trạng thái và ngày đối chiếu. Trích dẫn phải thuộc tài liệu đã truy xuất; giá/giờ cũ, mâu thuẫn, hết hạn hoặc chưa xác minh không được gọi là hiện hành.
+4. Kiểm tra tối đa ba phát biểu ngắn; từng phát biểu đi cùng trích đoạn nguyên văn, nguồn, trạng thái và ngày đối chiếu. Server xác thực trích đoạn là chuỗi con chính xác của đúng nguồn được dẫn. Việc khớp trích đoạn không tự chứng minh phần diễn giải đúng về ngữ nghĩa, nên cần đọc và đối chiếu cả hai; giá/giờ cũ, mâu thuẫn, hết hạn hoặc chưa xác minh không được gọi là hiện hành.
 5. Smoke model độc lập dùng hai request minh họa (có thể phát sinh chi phí), không dùng session/Redis/ghi DB:
 
        $env:RUN_LIVE_AI_GUIDE_SMOKE = 'true'
        npm.cmd test -- --maxWorkers=1 src/lib/guide-live-smoke.test.ts
        Remove-Item Env:\RUN_LIVE_AI_GUIDE_SMOKE
 
-   Lần chạy 16/10/2026 đạt **2/2**. Đây chỉ xác nhận JSON model/citation của bộ smoke với dữ liệu công khai; không chứng minh đăng nhập, giới hạn Upstash, bảng Supabase hay toàn luồng browser/API thật.
+   Lần chạy 16/10/2026 đạt **2/2**. Đây chỉ xác nhận JSON model và exact excerpt của bộ smoke với dữ liệu công khai; không chứng minh diễn giải entailment, đăng nhập, giới hạn Upstash, bảng Supabase hay toàn luồng browser/API thật.
 
 AI Packing smoke (2 request DeepSeek VI/EN, opt-in):
 
@@ -401,8 +403,8 @@ Smoke chỉ gửi dữ kiện chuyến giả lập có cấu trúc, không gửi
 ### Kết quả kiểm tra repository mới nhất
 
 - ESLint: đạt; `npx.cmd tsc --noEmit --incremental false`: đạt.
-- Unit/integration: **87 passed, 21 skipped** (108 tổng), gồm regression prompt injection FairPrice, quote parsing/evidence, kiểm soát quyền đổi thứ tự điểm dừng, hợp nhất ảnh/nguồn DB với catalog tĩnh và kiểm tra cột migration SQL 0033 khớp schema. Smoke DeepSeek live chỉ chạy riêng khi bật biến opt-in.
-- Playwright Chromium: **19/19 E2E**; có kiểm tra root `/`, thuộc tính `data-yd-*` mô phỏng extension chèn trước hydration, ảnh người dùng, FairPrice VI/EN, và API AI trả 401 khi chưa đăng nhập. Axe-core WCAG 2.1 A/AA đạt trên 6 trạng thái trang VI/EN; kiểm tra bằng assistive technology/thiết bị thật vẫn đang chờ.
+- Unit/integration: **91 passed, 21 skipped** (112 tổng), gồm regression prompt injection FairPrice, quote parsing/evidence, che tọa độ GPS DMS trước khi gửi DeepSeek, AI Guide giữ nhãn giá hết hạn/giờ mâu thuẫn và exact excerpt theo từng citation, kiểm soát quyền đổi thứ tự điểm dừng, hợp nhất ảnh/nguồn DB với catalog tĩnh và kiểm tra cột migration SQL 0033 khớp schema. Smoke DeepSeek live chỉ chạy riêng khi bật biến opt-in.
+- Playwright Chromium: **20/20 E2E**; có kiểm tra root `/`, thuộc tính `data-yd-*` mô phỏng extension chèn trước hydration, ảnh người dùng, FairPrice VI/EN, API AI trả 401 khi chưa đăng nhập và thao tác form bằng bàn phím. Axe-core WCAG 2.1 A/AA đạt trên 6 trạng thái trang VI/EN; kiểm tra bằng assistive technology/thiết bị thật vẫn đang chờ.
 - Production build Next.js 16.4.1: đạt; build route table có cả `/[locale]/ai/fair-price` và `/api/ai/fair-price`.
 - Probe dịch vụ chỉ đọc mới nhất ngày 16/10/2026: Supabase Auth settings **HTTP 200**, Upstash Redis **HTTP 200/PONG**; `places`, `profiles.username`, `trips`, `trip_shares`, `ai_usage`, `price_references`, `place_media` đều HTTP 200. REST chỉ đọc thấy 36 địa điểm, 51 price references, 27 media records và 35 hours records. Migration 0033 được đối chiếu trực tiếp qua Combo 3 có URL sản phẩm hiện hành, 599.000 ₫ và trạng thái `unknown`. Chưa xác nhận đăng ký/đăng nhập bằng tài khoản test, RLS A/B, quota AI thật hoặc ghi/đọc trip qua phiên người dùng; không chạy lại bundle trên database đang có dữ liệu.
 - Live AI smoke mới nhất: **24/24** trên 7 file với model `deepseek-v4-flash`, Open-Meteo và OpenRouteService thật. Handler smoke vẫn mock session, limiter và DB; đây chưa phải luồng AI production end-to-end.

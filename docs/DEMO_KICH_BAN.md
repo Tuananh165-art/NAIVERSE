@@ -12,7 +12,7 @@ Tài liệu này giúp chạy demo từ tài khoản mới tới hành trình v�
 2. Điền dịch vụ trong .env theo THIET_LAP_DICH_VU.md. DeepSeek, Supabase Auth và Upstash cần hoạt động cho AI thật. OpenRouteService cần key để lấy tuyến lái xe. Open-Meteo không cần key.
 3. Với Supabase hoàn toàn mới, chạy một lần file NAIVERSE_SETUP_ALL.sql trong SQL Editor. File gồm 34 migration theo thứ tự và seed 36 hồ sơ địa điểm. Không chạy từng migration sau khi đã chạy bundle. Nếu lần trước đã báo lỗi, làm truy vấn preflight ở đầu HUONG_DAN.md trước khi quyết định chạy lại.
 4. Đặt Supabase Site URL là http://localhost:3000; thêm redirect URL local. Đăng ký một khách qua /vi/auth, xác nhận email nếu Supabase yêu cầu.
-5. Chạy npm.cmd run services:probe. Mong đợi Auth settings 200, public.places 200 và Upstash PONG. Lỗi 404/PGRST205 trên places nghĩa là schema chưa sẵn sàng; AI thật fail-closed khi thiếu session/limiter.
+5. Chạy `npm.cmd run services:probe`. Project mới sau khi seed mong đợi Auth HTTP 200, `public.places` HTTP 200 với 36 dòng, schema các bảng `price_references`, `organizations`, `place_media`, `place_hours` HTTP 200 và Upstash PONG. Probe chỉ đọc; không tạo tài khoản/ghi dữ liệu, và HTTP 200 không chứng minh RLS.
 6. Mở http://localhost:3000/vi; thử đổi sang English bằng nút ngôn ngữ. Trang chỉ dùng GPS sau khi khách chủ động bấm nút định vị.
 
 ## 2. Luồng demo khách
@@ -30,8 +30,9 @@ Tài liệu này giúp chạy demo từ tài khoản mới tới hành trình v�
 1. Đăng nhập rồi mở `/vi/ai/guide`; nếu chưa áp dụng schema Supabase, hãy cài project mới bằng `NAIVERSE_SETUP_ALL.sql` trước.
 2. Chọn địa điểm và một loại câu hỏi cố định như tổng quan, giá/điều kiện, giờ nguồn nêu, gia đình/tiếp cận hoặc tình trạng nguồn.
 3. Đọc nội dung đồng ý: chỉ ID địa điểm công khai, loại câu hỏi, ngôn ngữ và hồ sơ catalog liên quan được gửi tới DeepSeek; màn hình không có ô nhập tự do, không gửi GPS hay thông tin liên hệ.
-4. Tích consent rồi hỏi. Câu trả lời hiển thị nguồn, trạng thái và ngày đối chiếu; giá/giờ cũ, mâu thuẫn hoặc chưa xác minh phải giữ nguyên nhãn. Trích dẫn model không khớp tập nguồn đã truy xuất sẽ bị từ chối.
-5. Mở `/en/ai/guide` và lặp lại để kiểm tra tiếng Anh. Thu hồi consent thì nút gửi bị khóa.
+4. Tích consent rồi hỏi. Mỗi phát biểu có trích đoạn nguyên văn từ nguồn, nhãn trạng thái và ngày đối chiếu. Giá/giờ cũ, mâu thuẫn hoặc chưa xác minh phải giữ nguyên nhãn. Server từ chối citation không nằm trong nguồn truy xuất hoặc trích đoạn không khớp chính xác tài liệu được dẫn.
+5. Đọc cả phát biểu lẫn trích đoạn cạnh nó; việc khớp nguyên văn không tự chứng minh phần diễn giải đúng về ngữ nghĩa. Nếu phát biểu nói quá nguồn hoặc nguồn không đủ xác nhận, không dùng như thông tin đã xác nhận và gửi phản ánh để rà soát.
+6. Mở `/en/ai/guide` và lặp lại để kiểm tra tiếng Anh. Thu hồi consent thì nút gửi bị khóa.
 
 ### FairPrice Lens — trích báo giá, không chấm “đắt/rẻ”
 
@@ -105,6 +106,7 @@ Tài liệu này giúp chạy demo từ tài khoản mới tới hành trình v�
 
 - Thiếu DeepSeek hoặc key sai: AI báo lỗi cấu hình/provider; không giả lập thành công.
 - Thiếu Upstash: AI thật fail-closed; services:probe không ghi dữ liệu.
+- Kiểm tra biên privacy bằng fixture giả lập có tọa độ dạng `10°52'29.46"N, 106°52'12.90"E` hoặc dấu DMS tiếng Việt: payload gửi model không được chứa tọa độ gốc. Không dùng vị trí nhà riêng hay dữ liệu cá nhân.
 - Ngày thời tiết ngoài cửa sổ dự báo: thông báo thiếu forecast.
 - Tuyến không đủ tọa độ hoặc ORS lỗi: không trả quãng đường giả.
 - Giá/giờ hết hạn hoặc mâu thuẫn: không cộng khoản không xác minh vào tổng.
@@ -120,6 +122,8 @@ Không chạy lỗi provider bằng cách sửa key trong file dùng thật; n�
        npm.cmd test -- --maxWorkers=1
        npm.cmd run test:e2e -- --workers=1
        npm.cmd run build
+
+E2E bàn phím: `npm.cmd run test:e2e -- --workers=1 e2e/keyboard-accessibility.spec.ts`. Bài này xác nhận Enter đổi sang form đăng ký và bật/tắt hiển thị mật khẩu; axe + E2E không thay thế kiểm thử screen reader hay thao tác trên điện thoại thật.
 
 Lưu log lệnh, ảnh chụp trang nguồn, kết quả AI kèm model/provider, và ảnh các luồng đăng nhập/khách/nhân viên. Test tự động với mock không chứng minh dịch vụ ngoài đã hoạt động.
 
@@ -155,7 +159,7 @@ Sau khi khóa thay đổi, chạy holdout riêng bằng cách bỏ biến split 
        npm.cmd test -- --maxWorkers=1 src/lib/trip-dna-live-eval.test.ts -t 'meets the 90%'
        Remove-Item Env:\RUN_LIVE_AI_TRIP_DNA_EVAL -ErrorAction SilentlyContinue
 
-Lần đo mới nhất ngày 16/10/2026: development 353/358 field (98,6%); holdout 173/180 (96,1%). Đây là số đo trên mẫu nhỏ, không phải KPI tổng quát; mismatch có thể thay đổi giữa các lần gọi dù parser đặt `temperature: 0`. Chỉ chỉnh bằng 40 ca development; giữ 20 ca holdout cho tới khi khóa thay đổi, rồi chạy holdout một lần để xác nhận.
+Lần đo DeepSeek ngày 16/10/2026: development 358/358 field (40 prompt); holdout 176/180 (20 prompt, 97,8%). Đây là mẫu nhỏ, không phải KPI tổng quát hay cam kết độ đúng; mismatch có thể thay đổi giữa các lần gọi dù parser đặt `temperature: 0`. Sau khi chỉnh bằng development, khóa prompt rồi chỉ chạy holdout một lần; không dùng holdout để tinh chỉnh.
 
 ## 8. Ranh giới tính năng hiện tại
 

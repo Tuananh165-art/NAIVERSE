@@ -9,11 +9,14 @@ const coordinateKeys = new Set([
   "gpslocation",
 ]);
 
+const dmsCoordinatePair = /(?<![\p{L}\d])\d{1,2}\s*°\s*\d{1,2}\s*['′’]\s*\d{1,2}(?:\.\d+)?\s*(?:["″”])?\s*[NSB]\s*[,;/]\s*\d{1,3}\s*°\s*\d{1,2}\s*['′’]\s*\d{1,2}(?:\.\d+)?\s*(?:["″”])?\s*[EWĐT](?![\p{L}\d])/giu;
+
 /** Redacts direct contact details and coordinate pairs from free-form model text. */
 export function redactSensitiveModelText(value: string): string {
   return value
     .replace(/\b[^\s@]+@[^\s@]+\.[^\s@]+\b/gu, "[email redacted]")
     .replace(/(?<![\p{L}\d])(?:\+?\d[\s().-]*){10,15}(?![\p{L}\d])/gu, "[phone redacted]")
+    .replace(dmsCoordinatePair, "[coordinates redacted]")
     .replace(/(?<![\d.])-?\d{1,3}\.\d{2,}\s*(?:°?\s*[NS])?\s*[,;/]\s*-?\d{1,3}\.\d{2,}\s*(?:°?\s*[EW])?(?!\d)/giu, "[coordinates redacted]");
 }
 

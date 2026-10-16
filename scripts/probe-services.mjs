@@ -46,15 +46,38 @@ if (!supabaseUrl || !supabaseKey) {
       report("Supabase Auth settings", false, `request failed (${error instanceof Error ? error.name : "unknown error"})`);
     }
 
+    const publicTableChecks = [
+      { table: "price_references", columns: "id,place_id,item_label,status,source_url,checked_at,approved" },
+      { table: "organizations", columns: "id,slug,is_demo,status" },
+      { table: "place_media", columns: "id,place_id,credit,license,license_url,approved" },
+      { table: "place_hours", columns: "id,place_id,note,note_en,approved" },
+    ];
     try {
-      const { response, body } = await jsonRequest(`${origin}/rest/v1/places?select=id&limit=1`, { headers });
+      const { response, body } = await jsonRequest(`${origin}/rest/v1/places?select=id&limit=100`, {
+        headers: { ...headers, Prefer: "count=exact" },
+      });
       const code = typeof body?.code === "string" && /^PGRST\d+$/.test(body.code) ? ` ${body.code}` : "";
-      const detail = response.ok
-        ? `HTTP ${response.status}; table is visible (this does not verify RLS)`
-        : `HTTP ${response.status}${code}; check migrations, schema exposure and API key`;
-      report("Supabase public.places", response.ok, detail);
+      const total = response.headers.get("content-range")?.match(/\/(\d+)$/)?.[1];
+      const ok = response.ok && total !== undefined;
+      const detail = ok
+        ? `HTTP ${response.status}; ${total} public place rows (seed expected: 36; does not verify RLS)`
+        : `HTTP ${response.status}${code}; count unavailable; check migrations, schema exposure and API key`;
+      report("Supabase public.places", ok, detail);
     } catch (error) {
       report("Supabase public.places", false, `request failed (${error instanceof Error ? error.name : "unknown error"})`);
+    }
+
+    for (const { table, columns } of publicTableChecks) {
+      try {
+        const { response, body } = await jsonRequest(`${origin}/rest/v1/${table}?select=${columns}&limit=0`, { headers });
+        const code = typeof body?.code === "string" && /^PGRST\d+$/.test(body.code) ? ` ${body.code}` : "";
+        const detail = response.ok
+          ? `HTTP ${response.status}; required columns are visible (zero rows requested; does not verify RLS)`
+          : `HTTP ${response.status}${code}; table or expected columns missing; check migrations, schema exposure and API key`;
+        report(`Supabase public.${table}`, response.ok, detail);
+      } catch (error) {
+        report(`Supabase public.${table}`, false, `request failed (${error instanceof Error ? error.name : "unknown error"})`);
+      }
     }
   }
 }

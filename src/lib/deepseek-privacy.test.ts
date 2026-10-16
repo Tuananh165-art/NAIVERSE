@@ -58,6 +58,27 @@ describe("DeepSeek request privacy boundary", () => {
     expect(serializedInput).not.toContain("longitude");
   });
 
+  it("redacts degree-minute-second GPS coordinates before sending free-form text", async () => {
+    process.env.DEEPSEEK_API_KEY = "unit-test-key";
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({
+      choices: [{ message: { content: JSON.stringify({ answer: "I can help plan the trip." }) } }],
+    }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await requestDeepSeekJson({
+      schema: z.object({ answer: z.string() }),
+      system: "Return a short JSON answer.",
+      input: { activity: "Meet at 10°52'29.46\"N, 106°52'12.90\"E or 10°52′29″B; 106°52′13″Đ." },
+    });
+
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string) as { messages: Array<{ content: string }> };
+    expect(body.messages[1].content).toContain("[coordinates redacted]");
+    expect(body.messages[1].content).not.toContain("10°52'29.46");
+    expect(body.messages[1].content).not.toContain("106°52'12.90");
+    expect(body.messages[1].content).not.toContain("10°52′29″B");
+    expect(body.messages[1].content).not.toContain("106°52′13″Đ");
+  });
+
   it("redacts contact details and GPS from Trip DNA while preserving travel intent", async () => {
     process.env.DEEPSEEK_API_KEY = "unit-test-key";
     const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({

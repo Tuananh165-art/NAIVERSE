@@ -6,9 +6,12 @@ import { BookOpenCheck, LoaderCircle, Sparkles } from "lucide-react";
 
 type GuideIntent = "overview" | "price" | "hours" | "family_access" | "source_status";
 type GuideResponse = {
-  answer: string;
+  claims: Array<{
+    text: string;
+    evidence: string;
+    citation: { ref: string; label: string; href: string; checkedAt: string | null; status: string };
+  }>;
   followUpQuestions: string[];
-  citations: Array<{ ref: string; label: string; href: string; checkedAt: string | null; status: string }>;
   aiUsed: boolean;
   reason?: string;
 };
@@ -81,12 +84,18 @@ export function AiGuide({ signedIn, places }: { signedIn: boolean; places: Array
       <h2 className="panel-title">{en ? "Grounded answer" : "Câu trả lời có nguồn"}</h2>
       {!result && <p className="panel-copy">{en ? "The answer will show the retrieved sources and their status. Missing facts stay unknown." : "Câu trả lời sẽ kèm nguồn được truy xuất và trạng thái của nguồn. Thông tin thiếu vẫn được ghi là chưa biết."}</p>}
       {result && <>
-        <p className="panel-copy">{result.answer}</p>
+        <p className="form-hint">{en ? "Each statement is paired with an exact excerpt from the cited record. Check that the summary does not go beyond the excerpt." : "Mỗi phát biểu đi kèm trích đoạn nguyên văn từ nguồn được dẫn. Hãy kiểm tra phần tóm tắt không nói quá nội dung trích đoạn."}</p>
+        {result.claims.map((claim, index) => <article className="panel" key={`${claim.citation.ref}-${index}`} style={{ marginTop: 14, padding: 16 }}>
+          <p>{claim.text}</p>
+          <blockquote className="form-hint" style={{ borderLeft: "3px solid var(--accent)", paddingLeft: 12 }}>{claim.evidence}</blockquote>
+          <p className="form-hint" style={{ marginTop: 10 }}>
+            {claim.citation.href.startsWith("http")
+              ? <a href={claim.citation.href} target="_blank" rel="noreferrer">{claim.citation.label}</a>
+              : <a href={claim.citation.href}>{claim.citation.label}</a>}
+            <small> · {claim.citation.status}{claim.citation.checkedAt ? " · " + (en ? "checked " : "đối chiếu ") + claim.citation.checkedAt : ""}</small>
+          </p>
+        </article>)}
         {result.followUpQuestions.length > 0 && <div style={{ marginTop: 16 }}><strong>{en ? "Questions to confirm" : "Điều nên hỏi thêm"}</strong><ul>{result.followUpQuestions.map((question, index) => <li key={index}>{question}</li>)}</ul></div>}
-        {result.citations.length > 0 && <div style={{ marginTop: 16 }}><strong>{en ? "Retrieved sources" : "Nguồn đã truy xuất"}</strong><ul className="source-list">{result.citations.map((citation) => <li key={citation.ref}>
-          <a href={citation.href} target={citation.href.startsWith("http") ? "_blank" : undefined} rel={citation.href.startsWith("http") ? "noreferrer" : undefined}>{citation.label}</a>
-          <small> · {citation.status}{citation.checkedAt ? " · " + (en ? "checked " : "đối chiếu ") + citation.checkedAt : ""}</small>
-        </li>)}</ul></div>}
         {!result.aiUsed && <p className="form-hint" role="status">{en ? "No model call was made because there was no retrieved evidence." : "Không gọi model vì không có bằng chứng phù hợp được truy xuất."}</p>}
       </>}
     </section>
