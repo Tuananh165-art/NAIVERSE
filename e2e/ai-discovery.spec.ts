@@ -10,6 +10,8 @@ test("unprefixed root redirects to the Vietnamese home page", async ({ page }) =
 test("explore map links to the AI road-route assistant", async ({ page }) => {
   await page.goto("/vi/places");
 
+  await expect(page.getByRole("button", { name: "Khu du lịch Bửu Long" })).toBeVisible();
+
   const routeLink = page.getByRole("link", { name: "Lập tuyến với AI" });
   await expect(routeLink).toBeVisible();
   await expect(routeLink).toHaveAttribute("href", "/vi/ai/routes");

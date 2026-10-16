@@ -21,7 +21,7 @@ export function ExploreMap({ places, route }: { places: Place[]; route?: RouteRe
     <div>
       <MapContainer center={center} zoom={8} scrollWheelZoom={false} className="map" aria-label={locale === "en" ? "Map of Dong Nai destinations" : "Bản đồ các điểm đến Đồng Nai"}>
         <MapTileLayer locale={locale} />
-        {plottable.map((place) => <Marker key={place.id} position={[place.latitude, place.longitude]} icon={marker}><Popup><strong>{locale === "en" ? place.nameEn : place.name}</strong><br /><Link href={`/places/${place.id}`}>{locale === "en" ? "View details" : "Xem chi tiết"}</Link></Popup></Marker>)}
+        {plottable.map((place) => <Marker key={place.id} position={[place.latitude, place.longitude]} icon={marker} title={locale === "en" ? place.nameEn : place.name}><Popup><strong>{locale === "en" ? place.nameEn : place.name}</strong><br /><Link href={`/places/${place.id}`}>{locale === "en" ? "View details" : "Xem chi tiết"}</Link></Popup></Marker>)}
         {route?.geometry && <Polyline positions={route.geometry} pathOptions={{ color: "#12634b", weight: 5, opacity: .86 }} />}
         <MapResize />
         <UseMyLocation locale={locale} />

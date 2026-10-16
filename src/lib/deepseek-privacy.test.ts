@@ -80,6 +80,40 @@ describe("DeepSeek request privacy boundary", () => {
     expect(modelInput).not.toContain("079123456789");
   });
 
+  it("redacts explicitly labelled names while preserving the trip request in Vietnamese and English", async () => {
+    process.env.DEEPSEEK_API_KEY = "unit-test-key";
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({
+      choices: [{ message: { content: JSON.stringify({ answer: "I can help plan that trip." }) } }],
+    }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    await requestDeepSeekJson({
+      schema: z.object({ answer: z.string() }),
+      system: "Return a short JSON answer.",
+      input: {
+        questions: [
+          "Tên tôi là Nguyễn Văn An, gia đình tôi muốn đi Bửu Long 2 ngày.",
+          "My name is Jane Doe; I'd like a 2-day trip to Buu Long.",
+          "My name: John Smith, please plan a family outing.",
+          "The place name is Buu Long and I want a two-day family trip.",
+          "The place name: Buu Long is the destination.",
+        ],
+      },
+    });
+
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string) as { messages: Array<{ content: string }> };
+    const serializedInput = body.messages[1].content;
+    expect(serializedInput).toContain("[name redacted]");
+    expect(serializedInput).toContain("gia đình tôi muốn đi Bửu Long 2 ngày");
+    expect(serializedInput).toContain("I'd like a 2-day trip to Buu Long");
+    expect(serializedInput).toContain("please plan a family outing");
+    expect(serializedInput).toContain("The place name is Buu Long");
+    expect(serializedInput).toContain("The place name: Buu Long is the destination.");
+    expect(serializedInput).not.toContain("Nguyễn Văn An");
+    expect(serializedInput).not.toContain("Jane Doe");
+    expect(serializedInput).not.toContain("John Smith");
+  });
+
   it("redacts degree-minute-second GPS coordinates before sending free-form text", async () => {
     process.env.DEEPSEEK_API_KEY = "unit-test-key";
     const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({

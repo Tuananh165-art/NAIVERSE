@@ -8,7 +8,7 @@ Sáu nhóm AI đã tích hợp: Trip DNA/Journey Studio, thời tiết–an toà
 
 Chưa triển khai: upload tài liệu, Stress Test timeline theo giờ dừng/giờ mở cửa, Operator Copilot dùng LLM và thuyết minh TTS. Guide Q&A chỉ trả đoạn nguồn nguyên văn cho địa điểm đã chọn, không phải chatbot kiến thức mở. Catalog 36 hồ sơ có cấu trúc chưa cần LangChain/vector DB; xem [kiểm toán AI](AI_AUDIT.md).
 
-Kiểm tra repository gần nhất: unit/integration **144 passed, 65 skipped**, lint/typecheck đạt. Production build trên bản sao cô lập của source hiện tại đạt compile, TypeScript và **47/47 static pages**; build sandbox trực tiếp gặp EPERM. Playwright gần nhất tuần tự **23/23**. Auth thật, RLS khách/doanh nghiệp A/B, Upstash thật qua request handler và ghi DB chưa được kiểm thử. Xem [kế hoạch TODO](PLAN_TODO.md) để biết các phần còn chờ.
+Kiểm tra repository gần nhất: unit/integration **145 passed, 65 skipped**, lint/typecheck đạt. Playwright toàn bộ **24/24**, gồm marker có tên truy cập và axe-core trên VI/EN. Production build source hiện tại đạt compile, TypeScript và **47/47 static pages** bằng distDir cô lập. Auth thật, RLS khách/doanh nghiệp A/B, Upstash thật qua request handler và ghi DB chưa được kiểm thử. Xem [kế hoạch TODO](PLAN_TODO.md) để biết các phần còn chờ.
 
 ## 2. Chuẩn bị local và dịch vụ
 
@@ -102,7 +102,7 @@ Chạy:
        npm.cmd run test:e2e -- --workers=1
        npm.cmd run build
 
-Kết quả gần nhất: lint/typecheck đạt; unit **144 passed/65 skipped**; Playwright **23/23**. Production build đã pass trên bản sao cô lập của repository, biên dịch 47 trang tĩnh. E2E đăng ký/đăng nhập chặn request ra Supabase, không tạo tài khoản thật. Build trực tiếp trong sandbox có thể gặp EPERM; kết quả build nêu trên không phải deploy.
+Kết quả gần nhất: lint/typecheck đạt; unit **145 passed/65 skipped**; Playwright **24/24**. Production build source hiện tại đạt 47 trang tĩnh bằng distDir cô lập. E2E đăng ký/đăng nhập chặn request ra Supabase, không tạo tài khoản thật. Build này không phải deploy.
 
 ## 6. Live smoke DeepSeek/Open-Meteo/ORS
 

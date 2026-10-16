@@ -42,6 +42,20 @@ describe.skipIf(!enabled)("live DeepSeek smoke tests (explicit opt-in)", () => {
     expect(Array.isArray(result.interests)).toBe(true);
   }, 30_000);
 
+  it("keeps trip facts when an explicitly labelled traveler name is redacted", async () => {
+    const input = tripInputSchema.parse({
+      prompt: "My name is Jane Doe. Our family has two adults and one child 120 cm tall, and plans two days in Dong Nai by car with nature activities.",
+      consent: true,
+      locale: "en",
+    });
+    const result = await interpretTrip(input, places);
+    expect(result.partySize).toBe(3);
+    expect(result.durationDays).toBe(2);
+    expect(result.childHeightCm).toBe(120);
+    expect(result.transport).toBe("car");
+    expect(result.interests).toContain("nature");
+  }, 30_000);
+
   it("resolves a Vietnamese relative date against the current Vietnam date", async () => {
     const expectedDate = tomorrowInVietnam();
     const input = tripInputSchema.parse({ prompt: "Gia đình hai người đi Đồng Nai ngày mai trong một ngày.", consent: true, locale: "vi" });
