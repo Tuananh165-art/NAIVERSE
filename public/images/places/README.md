@@ -43,3 +43,8 @@ Ngày chụp (nếu biết):
 ```
 
 Không ghi ảnh là ảnh địa điểm nếu chưa xác định đúng địa điểm. Quyền dùng ảnh không xác nhận giờ hoạt động, giá, cổng vào, an toàn hoặc khả năng tiếp cận. Sau khi nhận tệp, cần kiểm tra trực quan, tối ưu kích thước, cập nhật catalog và provenance, rồi mới chạy lại kiểm thử. Chỉ ghi vào Git các ảnh mà quyền cho phép phân phối cùng mã nguồn và hiển thị trên website công khai; nếu quyền chỉ cho phép hiển thị trên bản deploy, ảnh phải được lưu trong kho lưu trữ phù hợp thay vì commit vào repository.
+
+
+## Ảnh Wikimedia Commons đã lưu cục bộ
+
+Các ảnh Wikimedia Commons dùng trong danh mục đã được lưu trong thư mục này để trang địa điểm không phụ thuộc tải ảnh trực tiếp từ máy chủ bên ngoài. Tác giả, trang nguồn, giấy phép và nhãn ảnh tư liệu được giữ trong `PlacePhoto` ở `src/lib/catalog.ts`.

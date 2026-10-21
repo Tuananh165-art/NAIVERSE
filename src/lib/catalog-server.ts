@@ -35,7 +35,14 @@ export async function getPlaceCatalog(): Promise<Place[]> {
     const staticPlace = sourcePlaces.find((source) => source.id === row.id);
     const databasePhotos = photosByPlace.get(row.id) ?? [];
     const fallbackPhotos = staticPlace?.photos ?? [];
-    const photos = [...databasePhotos];
+    const photos = databasePhotos.map((photo) => {
+      const localFallback = fallbackPhotos.find((fallbackPhoto) =>
+        fallbackPhoto.url.startsWith("/images/places/") &&
+        photo.sourceUrl &&
+        fallbackPhoto.sourceUrl === photo.sourceUrl,
+      );
+      return localFallback ? { ...photo, url: localFallback.url } : photo;
+    });
     for (const fallbackPhoto of fallbackPhotos) {
       const alreadyIncluded = photos.some((photo) =>
         photo.url === fallbackPhoto.url ||
