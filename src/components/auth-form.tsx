@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { Link, useRouter } from "@/i18n/routing";
 import { useTranslations, useLocale } from "next-intl";
 import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
+import { getAuthErrorMessage } from "@/lib/auth-error";
 import { AlertCircle, Eye, EyeOff, LoaderCircle, ShieldCheck } from "lucide-react";
 
 export function AuthForm() {
@@ -43,7 +44,7 @@ export function AuthForm() {
         if (data.session) { router.replace("/trips"); router.refresh(); }
         else setMessage(t("pendingEmail"));
       }
-    } catch { setError(t("error")); }
+    } catch (authError) { setError(getAuthErrorMessage(authError, locale === "vi" ? "vi" : "en")); }
     finally { setLoading(false); }
   }
 
@@ -62,7 +63,7 @@ export function AuthForm() {
       {error && <p className="alert alert-red" role="alert" style={{ marginTop: 14 }}><AlertCircle size={17} />{error}</p>}
       {message && <p className="alert" role="status" style={{ marginTop: 14 }}>{message}</p>}
       <button className="button button-primary" type="submit" disabled={loading} style={{ width: "100%", marginTop: 19 }}>{loading && <LoaderCircle size={16} className="animate-spin" />}{mode === "login" ? t("login") : t("register")}</button>
-      <button className="button button-quiet" type="button" style={{ width: "100%", marginTop: 9 }} onClick={() => { setMode(mode === "login" ? "register" : "login"); setError(""); setMessage(""); }}>{mode === "login" ? t("register") : t("login")}</button>
+      <button className="button button-quiet" type="button" disabled={loading} style={{ width: "100%", marginTop: 9 }} onClick={() => { setMode(mode === "login" ? "register" : "login"); setError(""); setMessage(""); }}>{mode === "login" ? t("register") : t("login")}</button>
       {mode === "login" && <Link className="text-link" style={{ justifyContent: "center", marginTop: 8 }} href="/auth/reset">{t("forgot")}</Link>}
       <p className="form-hint" style={{ marginTop: 17, textAlign: "center" }}>{locale === "vi" ? "Không dùng chung tài khoản demo. Hãy tạo tài khoản riêng; email thật chỉ chia sẻ khi bạn gửi yêu cầu cho doanh nghiệp. Đăng nhập bằng tên đăng nhập hoặc email." : "Do not share demo accounts. Create your own account; your email is shared with a business only when you submit an inquiry. Sign in with your username or email."}</p>
     </form>

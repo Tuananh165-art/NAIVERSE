@@ -39,6 +39,27 @@ test("register sends username and password to Supabase and shows email-confirmat
   });
 });
 
+test("register explains when Supabase rate limits signup or confirmation email", async ({ page }) => {
+  await page.route("**/auth/v1/signup*", async (route) => {
+    await route.fulfill({
+      status: 429,
+      contentType: "application/json",
+      body: JSON.stringify({ code: "over_email_send_rate_limit", message: "Email rate limit exceeded" }),
+    });
+  });
+
+  await page.goto("/vi/auth");
+  await page.locator("form.auth-panel button[type=button]").nth(1).click();
+  await page.locator("#full-name").fill("NaiVerse Test");
+  await page.locator("#auth-username").fill("naiverse_test");
+  await page.locator("#auth-email").fill("naiverse-test@example.com");
+  await page.locator("#auth-password").fill("correct-horse-battery");
+  await page.locator("form.auth-panel button[type=submit]").click();
+
+  await expect(page.locator("form.auth-panel").getByRole("alert")).toContainText("Supabase");
+  await expect(page.locator("form.auth-panel").getByRole("alert")).toContainText("SMTP");
+});
+
 test("username login sends credentials to the server endpoint and displays a generic failure", async ({ page }) => {
   let received: unknown;
   await page.route("**/api/auth/username-login", async (route) => {
