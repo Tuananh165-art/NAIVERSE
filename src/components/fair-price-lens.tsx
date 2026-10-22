@@ -117,10 +117,10 @@ export function FairPriceLens({ signedIn, places }: { signedIn: boolean; places:
       </select>
       <label className="form-label" htmlFor="price-review-text" style={{ marginTop: 14 }}>{en ? "Quote text" : "Nội dung báo giá"}</label>
       <textarea id="price-review-text" className="field" rows={9} minLength={30} maxLength={4000} value={quoteText} onChange={(event) => { setQuoteText(event.target.value); setReview(null); }} disabled={loading} placeholder={en ? "Paste the relevant quote, terms and exclusions…" : "Dán phần báo giá, điều kiện và khoản chưa bao gồm…"}/>
-      <p className="form-hint">{quoteText.length}/4000 · {en ? "The text is sent to DeepSeek only after consent and is not saved by this feature." : "Văn bản chỉ được gửi tới DeepSeek sau khi bạn đồng ý và không được tính năng này lưu lại."}</p>
+      <p className="form-hint">{quoteText.length}/4000 · {en ? "The text is sent to AI only after consent and is not saved by this feature." : "Văn bản chỉ được gửi tới AI sau khi bạn đồng ý và không được tính năng này lưu lại."}</p>
       <label className="form-hint" style={{ display: "flex", alignItems: "flex-start", gap: 9, marginTop: 12 }}>
         <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} disabled={loading}/>
-        <span>{en ? "I agree to send the pasted text, selected destination and public catalog price records to DeepSeek for extraction." : "Tôi đồng ý gửi văn bản đã dán, địa điểm đã chọn và bản ghi giá catalog công khai tới DeepSeek để trích xuất."}</span>
+        <span>{en ? "I agree to send the pasted text, selected destination and public catalog price records to AI for extraction." : "Tôi đồng ý gửi văn bản đã dán, địa điểm đã chọn và bản ghi giá catalog công khai tới AI để trích xuất."}</span>
       </label>
       {!signedIn && <p className="form-hint">{en ? "Sign in is required." : "Cần đăng nhập để sử dụng."} <Link className="text-link" href="/auth">{en ? "Sign in or register" : "Đăng nhập hoặc đăng ký"}</Link></p>}
       {error && <div className="alert alert-red" role="alert" style={{ marginTop: 12 }}>{error}</div>}

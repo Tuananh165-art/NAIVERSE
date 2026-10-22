@@ -7,6 +7,7 @@ import { tripInputSchema } from "@/lib/schemas";
 import { jsonError } from "@/lib/http";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getPlaceCatalog } from "@/lib/catalog-server";
+import { toTripIntent, tripClarificationQuestions } from "@/lib/trip-clarification";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -28,12 +29,22 @@ export async function POST(request: Request) {
   try {
     const startedAt = Date.now();
     const catalog = await getPlaceCatalog();
-    const intent = await interpretTrip(parsed.data, catalog);
-    const options = await buildPlans(intent, parsed.data.prompt, catalog);
+    const interpretation = await interpretTrip(parsed.data, catalog);
+    const questions = tripClarificationQuestions(interpretation, parsed.data.locale);
+    if (questions.length) {
+      return NextResponse.json({ status: "needs_clarification", questions }, { headers: { "Cache-Control": "no-store" } });
+    }
+    const intent = toTripIntent(interpretation);
+    if (!intent) return jsonError(502, "ai_invalid_output", "AI needs more trip details before it can prepare suggestions.");
+    const planningPrompt = [
+      parsed.data.prompt,
+      ...parsed.data.clarificationHistory.map((turn) => `Questions: ${turn.questions.join(" ")}\nUser answer: ${turn.answer}`),
+    ].join("\n");
+    const options = await buildPlans(intent, planningPrompt, catalog);
     const warnings = [...new Set(options.flatMap((option) => option.warnings))];
     const supabase = await createSupabaseServerClient();
     if (supabase) { try { await supabase.from("ai_usage").insert({ user_id: user.id, feature: "trip_plan", model_name: process.env.DEEPSEEK_MODEL || "deepseek-v4-flash", duration_ms: Date.now() - startedAt, outcome: "success" }); } catch { /* Usage logging is best-effort and never logs request content. */ } }
-    return NextResponse.json({ intent, options, warnings, generatedAt: new Date().toISOString(), demo: process.env.DEMO_MODE !== "false" }, { headers: { "Cache-Control": "no-store" } });
+    return NextResponse.json({ status: "ready", intent, options, warnings, generatedAt: new Date().toISOString(), demo: process.env.DEMO_MODE !== "false" }, { headers: { "Cache-Control": "no-store" } });
   } catch (error) {
     if (error instanceof AiProviderError) {
       const status = error.code === "not_configured" ? 503 : error.code === "invalid_output" ? 502 : 502;

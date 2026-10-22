@@ -24,7 +24,7 @@ export default async function PlacesPage({ params }: { params: Promise<{ locale:
         <div className="feature-band" style={{ marginTop: 18, padding: 20, alignItems: "center" }}>
           <div>
             <h3 className="panel-title" style={{ margin: 0 }}>{en ? "Compare a road journey with AI" : "So sánh hành trình đường bộ với AI"}</h3>
-            <p className="form-hint" style={{ marginBottom: 0 }}>{en ? "Choose 2–8 map points in the route assistant for OpenRouteService estimates and a DeepSeek explanation. Catalog pins are not verified entrances." : "Chọn 2–8 điểm trên bản đồ trợ lý tuyến để OpenRouteService ước lượng đường bộ và DeepSeek giải thích. Pin danh mục chưa phải cổng vào đã xác minh."}</p>
+            <p className="form-hint" style={{ marginBottom: 0 }}>{en ? "Choose 2–8 map points in the route assistant for OpenRouteService estimates and an AI explanation. Catalog pins are not verified entrances." : "Chọn 2–8 điểm trên bản đồ trợ lý tuyến để OpenRouteService ước lượng đường bộ và AI giải thích. Pin danh mục chưa phải cổng vào đã xác minh."}</p>
           </div>
           <Link className="button button-secondary" href="/ai/routes"><Route size={16} />{en ? "Open AI route planner" : "Lập tuyến với AI"}</Link>
         </div>

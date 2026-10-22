@@ -10,7 +10,10 @@ import type { TripIntent } from "@/lib/schemas";
 import { ExploreMapLoader } from "@/components/explore-map-loader";
 import { PackingAssistant } from "@/components/packing-assistant";
 
-type Result = { intent: TripIntent; options: PlanOption[]; warnings: string[]; demo: boolean };
+type ClarificationTurn = { questions: string[]; answer: string };
+type Result = { status: "ready"; intent: TripIntent; options: PlanOption[]; warnings: string[]; demo: boolean };
+type Clarification = { status: "needs_clarification"; questions: string[] };
+type JourneyResponse = Result | Clarification;
 const descriptions = { easy: { vi: "Ưu tiên trải nghiệm bạn yêu thích.", en: "Prioritizes the experiences you asked for." }, "short-drive": { vi: "Ưu tiên ở cùng một cụm địa lý.", en: "Prioritizes destinations in one region." }, varied: { vi: "Kết hợp nhiều kiểu trải nghiệm.", en: "Balances different types of experiences." } };
 
 export function JourneyStudio({ initialPrompt, places, signedIn }: { initialPrompt: string; places: Place[]; signedIn: boolean }) {
@@ -21,48 +24,46 @@ export function JourneyStudio({ initialPrompt, places, signedIn }: { initialProm
   const [prompt, setPrompt] = useState(initialPrompt);
   const [consent, setConsent] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<Result | null>(null);
+  const [result, setResult] = useState<JourneyResponse | null>(null);
+  const [clarificationHistory, setClarificationHistory] = useState<ClarificationTurn[]>([]);
+  const [followUpAnswer, setFollowUpAnswer] = useState("");
   const [error, setError] = useState("");
   const [selected, setSelected] = useState("easy");
   const [savedTripId, setSavedTripId] = useState("");
   const [saveTitle, setSaveTitle] = useState(english ? "My Dong Nai trip" : "Chuyến đi Đồng Nai");
-  const [days, setDays] = useState("");
-  const [partySize, setPartySize] = useState("");
-  const [budget, setBudget] = useState("");
-  const [travelDate, setTravelDate] = useState("");
-  const [transport, setTransport] = useState("unknown");
   const [notice, setNotice] = useState("");
-  const selectedOption = result?.options.find((option) => option.id === selected) ?? result?.options[0];
+  const readyResult = result?.status === "ready" ? result : null;
+  const selectedOption = readyResult?.options.find((option) => option.id === selected) ?? readyResult?.options[0];
 
   async function planTrip() {
-    setError(""); setNotice(""); setLoading(true); setResult(null); setSavedTripId("");
+    setError(""); setNotice(""); setLoading(true); setSavedTripId("");
+    const answer = followUpAnswer.trim();
+    const nextHistory = result?.status === "needs_clarification" && answer
+      ? [...clarificationHistory, { questions: result.questions, answer }]
+      : clarificationHistory;
     try {
       const response = await fetch("/api/ai/plan", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt: prompt.trim(), locale, consent, durationDays: days ? Number(days) : undefined, partySize: partySize ? Number(partySize) : undefined, budgetVnd: budget ? Number(budget) : undefined, travelDate: travelDate || undefined, transport: transport === "unknown" ? undefined : transport }),
+        body: JSON.stringify({ prompt: prompt.trim(), locale, consent, clarificationHistory: nextHistory }),
       });
       const body = await response.json();
       if (!response.ok) throw new Error(body.error?.message ?? t("retry"));
-      const nextResult = body as Result;
-      setResult(nextResult);
-      setDays(String(nextResult.intent.durationDays));
-      setPartySize(String(nextResult.intent.partySize));
-      setBudget(nextResult.intent.budgetVnd === null ? "" : String(nextResult.intent.budgetVnd));
-      setTravelDate(nextResult.intent.travelDate ?? "");
-      setTransport(nextResult.intent.transport);
+      setClarificationHistory(nextHistory);
+      setFollowUpAnswer("");
+      setResult(body as JourneyResponse);
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : t("retry"));
     } finally { setLoading(false); }
   }
 
   async function saveTrip(): Promise<string | null> {
-    if (!result || !selectedOption) return null;
+    if (!readyResult || !selectedOption) return null;
     setError(""); setNotice(""); setLoading(true);
     try {
       const response = await fetch("/api/trips", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
         title: saveTitle.trim(), locale,
-        intent: result.intent,
-        options: result.options,
+        intent: readyResult.intent,
+        options: readyResult.options,
         selectedOption: selected,
       }) });
       const body = await response.json();
@@ -109,39 +110,41 @@ export function JourneyStudio({ initialPrompt, places, signedIn }: { initialProm
       <div className="split-layout" style={{ marginTop: 24 }}>
         <section className="panel">
           <h2 className="panel-title">{t("promptLabel")}</h2>
-          <p className="panel-copy">{english ? "Describe dates, group size, preferences and budget. You can edit the suggested preferences after the AI reads your request." : "Mô tả số ngày, nhóm khách, sở thích và ngân sách. Bạn có thể chỉnh ràng buộc sau khi AI đọc yêu cầu."}</p>
+          <p className="panel-copy">{english ? "Describe the trip, including dates, group size, preferences and budget if you know them. The AI will use your description to prepare suggestions." : "Mô tả chuyến đi, gồm ngày đi, số khách, sở thích và ngân sách nếu bạn đã biết. AI sẽ dựa trên mô tả để tạo gợi ý."}</p>
           <label className="form-label" htmlFor="trip-prompt">{english ? "Trip request" : "Mô tả chuyến đi"}</label>
-          <textarea id="trip-prompt" className="field" rows={6} maxLength={1200} minLength={12} value={prompt} onChange={(event) => setPrompt(event.target.value)} placeholder={t("promptPlaceholder")} disabled={!signedIn || loading} />
-          <p className="form-label">{english ? "Review or override trip details" : "Kiểm tra hoặc chỉnh ràng buộc chuyến đi"}</p>
-          <div className="intent-fields">
-            <label><span>{english ? "Days" : "Số ngày"}</span><input className="field" type="number" min="1" max="3" value={days} onChange={(event) => setDays(event.target.value)} placeholder="1–3" disabled={!signedIn || loading}/></label>
-            <label><span>{english ? "Travelers" : "Số khách"}</span><input className="field" type="number" min="1" max="40" value={partySize} onChange={(event) => setPartySize(event.target.value)} placeholder="1–40" disabled={!signedIn || loading}/></label>
-            <label><span>{english ? "Budget (VND)" : "Ngân sách (VND)"}</span><input className="field" type="number" min="0" max="500000000" step="1000" value={budget} onChange={(event) => setBudget(event.target.value)} placeholder={english ? "Unknown" : "Chưa xác định"} disabled={!signedIn || loading}/></label>
-            <label><span>{english ? "Start date" : "Ngày khởi hành"}</span><input className="field" type="date" value={travelDate} onChange={(event) => setTravelDate(event.target.value)} disabled={!signedIn || loading}/></label>
-            <label><span>{english ? "Transport" : "Phương tiện"}</span><select className="field" value={transport} onChange={(event) => setTransport(event.target.value)} disabled={!signedIn || loading}><option value="unknown">{english ? "Not sure" : "Chưa rõ"}</option><option value="car">{english ? "Car" : "Ô tô"}</option><option value="private_vehicle">{english ? "Private vehicle" : "Xe riêng"}</option><option value="motorbike">{english ? "Motorbike" : "Xe máy"}</option><option value="bus">{english ? "Bus" : "Xe buýt/xe khách"}</option><option value="bicycle">{english ? "Bicycle" : "Xe đạp"}</option><option value="walking">{english ? "Walking" : "Đi bộ"}</option></select></label>
-          </div>
+          <textarea id="trip-prompt" className="field" rows={6} maxLength={1200} minLength={12} value={prompt} onChange={(event) => { setPrompt(event.target.value); setResult(null); setClarificationHistory([]); setFollowUpAnswer(""); }} placeholder={t("promptPlaceholder")} disabled={!signedIn || loading} />
           <p className="form-hint">{english ? "Do not include names, phone numbers, email addresses or precise live location. The request is sent to the configured AI provider and is not saved until you choose Save." : "Không nhập tên, số điện thoại, email hoặc vị trí chính xác. Yêu cầu được gửi tới nhà cung cấp AI và chưa lưu cho đến khi bạn chọn Lưu."}</p>
+          {result?.status === "needs_clarification" && <div className="alert alert-blue" role="status" style={{ display: "block", marginTop: 14 }}>
+            <strong>{english ? "A few details are needed before I can recommend a trip:" : "AI cần thêm vài thông tin trước khi gợi ý chuyến đi:"}</strong>
+            <ul style={{ margin: "8px 0 0", paddingLeft: 22 }}>{result.questions.map((question, index) => <li key={`${index}-${question}`}>{question}</li>)}</ul>
+            {clarificationHistory.length >= 5
+              ? <p style={{ margin: "10px 0 0" }}>{english ? "Please update your trip description above with these details to start again." : "Hãy bổ sung các thông tin này vào mô tả chuyến đi ở trên rồi gửi lại."}</p>
+              : <>
+                <label className="form-label" htmlFor="trip-follow-up" style={{ display: "block", marginTop: 13 }}>{english ? "Your answers" : "Thông tin bổ sung"}</label>
+                <textarea id="trip-follow-up" className="field" rows={3} maxLength={1200} value={followUpAnswer} onChange={(event) => setFollowUpAnswer(event.target.value)} placeholder={english ? "Answer the questions above. You can answer them together." : "Trả lời các câu hỏi trên. Bạn có thể ghi các câu trả lời cùng lúc."} disabled={!signedIn || loading} />
+              </>}
+          </div>}
           <label style={{ display: "flex", alignItems: "flex-start", gap: 9, marginTop: 17, color: "#61746b", fontSize: ".78rem", lineHeight: 1.6 }}>
             <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} disabled={!signedIn} style={{ marginTop: 3, accentColor: "#12634b" }} />
-            <span>{english ? "I agree to send this trip request to DeepSeek to generate itinerary suggestions. My name, account email and live GPS are not included." : "Tôi đồng ý gửi yêu cầu chuyến đi này tới DeepSeek để tạo gợi ý. Tên, email tài khoản và GPS trực tiếp không được đính kèm."}</span>
+            <span>{english ? "I agree to send this trip request to AI to generate itinerary suggestions. My name, account email and live GPS are not included." : "Tôi đồng ý gửi yêu cầu chuyến đi này tới AI để tạo gợi ý. Tên, email tài khoản và GPS trực tiếp không được đính kèm."}</span>
           </label>
           {error && <div className="alert alert-red" role="alert" style={{ marginTop: 14 }}><AlertCircle size={17} /><span>{error}</span></div>}
           {notice && <div className="alert" role="status" style={{ marginTop: 14 }}><Check size={17} /><span>{notice}</span></div>}
-          <button className="button button-primary" type="button" style={{ width: "100%", marginTop: 18 }} onClick={planTrip} disabled={!signedIn || !consent || loading || prompt.trim().length < 12 || (days !== "" && (!Number.isInteger(Number(days)) || Number(days) < 1 || Number(days) > 3)) || (partySize !== "" && (!Number.isInteger(Number(partySize)) || Number(partySize) < 1 || Number(partySize) > 40)) || (budget !== "" && (!Number.isSafeInteger(Number(budget)) || Number(budget) < 0 || Number(budget) > 500000000))}>
-            {loading ? <LoaderCircle size={17} className="animate-spin" /> : <Sparkles size={17} />}{loading ? t("loading") : result ? (english ? "Update suggestions" : "Cập nhật gợi ý") : t("plan")}<ArrowRight size={15} />
+          <button className="button button-primary" type="button" style={{ width: "100%", marginTop: 18 }} onClick={planTrip} disabled={!signedIn || !consent || loading || prompt.trim().length < 12 || (result?.status === "needs_clarification" && (!followUpAnswer.trim() || clarificationHistory.length >= 5))}>
+            {loading ? <LoaderCircle size={17} className="animate-spin" /> : <Sparkles size={17} />}{loading ? t("loading") : result?.status === "needs_clarification" ? (english ? "Send answers" : "Gửi câu trả lời") : readyResult ? (english ? "Update suggestions" : "Cập nhật gợi ý") : t("plan")}<ArrowRight size={15} />
           </button>
         </section>
         <aside className="panel">
           <h2 className="panel-title">{t("safetyTitle")}</h2><p className="panel-copy">{t("safetyBody")}</p>
           <div className="alert" style={{ marginTop: 16 }}><CircleDollarSign size={18} /><span>{english ? "Prices are missing or uncertain until a source confirms them. Unknown costs are not counted as free." : "Giá còn thiếu hoặc không chắc đến khi được nguồn xác nhận. Khoản chưa biết không được tính thành miễn phí."}</span></div>
           <div className="alert alert-blue" style={{ marginTop: 12 }}><RouteIcon size={18} /><span>{english ? "Driving distance appears only when the origin and verified entrance coordinates can be routed." : "Quãng đường lái xe chỉ hiển thị khi có điểm đầu và tọa độ cổng vào đã đối chiếu."}</span></div>
-          {result && <div className="metric-row"><div className="metric"><span className="metric-label">{english ? "Trip length" : "Số ngày"}</span><strong className="metric-value">{result.intent.durationDays} {english ? "days" : "ngày"}</strong></div><div className="metric"><span className="metric-label">{english ? "Group size" : "Số khách"}</span><strong className="metric-value">{result.intent.partySize}</strong></div><div className="metric"><span className="metric-label">{t("knownTotal")}</span><strong className="metric-value">{knownCostLabel}</strong></div></div>}
+          {readyResult && <div className="metric-row"><div className="metric"><span className="metric-label">{english ? "Trip length" : "Số ngày"}</span><strong className="metric-value">{readyResult.intent.durationDays} {english ? "days" : "ngày"}</strong></div><div className="metric"><span className="metric-label">{english ? "Group size" : "Số khách"}</span><strong className="metric-value">{readyResult.intent.partySize}</strong></div><div className="metric"><span className="metric-label">{t("knownTotal")}</span><strong className="metric-value">{knownCostLabel}</strong></div></div>}
         </aside>
       </div>
 
-      {result && <section className="result-area" aria-live="polite">
-        <div className="result-heading"><div><p className="eyebrow"><Sparkles size={14} />{english ? "YOUR TRIP OPTIONS" : "PHƯƠNG ÁN GỢI Ý"}</p><h2 className="section-title" style={{ fontSize: "1.75rem" }}>{english ? "Choose a starting point" : "Chọn một hướng để bắt đầu"}</h2></div>{result.demo && <span className="demo-ribbon">{english ? "DEMO DATA" : "DỮ LIỆU DEMO"}</span>}</div>
-        <div className="plan-options">{result.options.map((option) => {
+      {readyResult && <section className="result-area" aria-live="polite">
+        <div className="result-heading"><div><p className="eyebrow"><Sparkles size={14} />{english ? "YOUR TRIP OPTIONS" : "PHƯƠNG ÁN GỢI Ý"}</p><h2 className="section-title" style={{ fontSize: "1.75rem" }}>{english ? "Choose a starting point" : "Chọn một hướng để bắt đầu"}</h2></div>{readyResult.demo && <span className="demo-ribbon">{english ? "DEMO DATA" : "DỮ LIỆU DEMO"}</span>}</div>
+        <div className="plan-options">{readyResult.options.map((option) => {
           const title = option.id === "easy" ? (english ? "Your interests" : "Theo sở thích") : option.id === "short-drive" ? (english ? "One region" : "Cùng một vùng") : (english ? "More variety" : "Nhiều trải nghiệm");
           return <button className="plan-card" type="button" key={option.id} onClick={() => setSelected(option.id)} aria-pressed={selected === option.id} style={{ textAlign: "left", outline: selected === option.id ? "2px solid #12634b" : undefined, cursor: "pointer" }}>
             <strong>{title}</strong><p className="form-hint" style={{ minHeight: 38 }}>{descriptions[option.id][english ? "en" : "vi"]}</p><span className="status-label"><MapPin size={13} />{option.stops.length} {english ? "destinations" : "địa điểm"}</span>
@@ -162,7 +165,7 @@ export function JourneyStudio({ initialPrompt, places, signedIn }: { initialProm
             <section className="panel">
               <h3 className="panel-title">{t("risks")}</h3>
               <div className="metric-row"><div className="metric"><span className="metric-label">{t("knownTotal")}</span><strong className="metric-value">{knownCostLabel}</strong></div><div className="metric"><span className="metric-label">{t("unknownCosts")}</span><strong className="metric-value">{selectedOption.cost.unknownCount}</strong></div></div>
-              {result.intent.budgetVnd !== null && <div className="alert alert-blue"><CircleDollarSign size={17} /><span>{english ? "Your budget" : "Ngân sách của bạn"}: {result.intent.budgetVnd.toLocaleString(english ? "en-US" : "vi-VN")} ₫. {english ? "There is not enough verified price data to compare the complete trip cost." : "Chưa đủ giá xác minh để so tổng chi phí chuyến đi."}</span></div>}
+              {readyResult.intent.budgetVnd !== null && <div className="alert alert-blue"><CircleDollarSign size={17} /><span>{english ? "Your budget" : "Ngân sách của bạn"}: {readyResult.intent.budgetVnd.toLocaleString(english ? "en-US" : "vi-VN")} ₫. {english ? "There is not enough verified price data to compare the complete trip cost." : "Chưa đủ giá xác minh để so tổng chi phí chuyến đi."}</span></div>}
               <label className="form-label" htmlFor="trip-title">{english ? "Trip title" : "Tên hành trình"}</label><input id="trip-title" className="field" value={saveTitle} maxLength={90} minLength={2} onChange={(event) => setSaveTitle(event.target.value)} />
               <div style={{ display: "grid", gap: 8, marginTop: 15 }}>
                 <button className="button button-primary" onClick={saveTrip} disabled={loading || !signedIn || selectedOption.status === "infeasible"}>{t("save")}</button>
@@ -174,7 +177,7 @@ export function JourneyStudio({ initialPrompt, places, signedIn }: { initialProm
             </section>
           </div>
           <section className="panel" style={{ marginTop: 17 }}><h3 className="panel-title">{english ? "Map preview" : "Bản đồ hành trình"}</h3><p className="panel-copy">{english ? "Mapped place features are not verified entrances. A driving route appears only when every entrance is verified." : "Đối tượng địa điểm trên bản đồ chưa phải cổng vào đã xác minh. Chỉ hiện tuyến lái xe khi mọi cổng vào đều được đối chiếu."}</p><div style={{ marginTop: 14 }}><ExploreMapLoader places={selectedOption.stops} route={selectedOption.route} /></div></section>
-          <PackingAssistant signedIn={signedIn} intent={result.intent} placeIds={normalizedStops.map((place) => place.id)} />
+          <PackingAssistant signedIn={signedIn} intent={readyResult.intent} placeIds={normalizedStops.map((place) => place.id)} />
         </>}
       </section>}
     </div>

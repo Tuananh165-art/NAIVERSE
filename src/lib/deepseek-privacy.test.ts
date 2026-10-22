@@ -184,6 +184,40 @@ describe("DeepSeek request privacy boundary", () => {
     expect(modelInput.prompt).not.toContain("106.87036");
   });
 
+  it("keeps unspecified trip fields open and sends follow-up answers back to the parser", async () => {
+    process.env.DEEPSEEK_API_KEY = "unit-test-key";
+    const incompleteIntent = {
+      ...validIntent,
+      durationDays: null,
+      partySize: null,
+      travelDate: null,
+      transport: "unknown",
+      budgetVnd: null,
+      budgetFlexible: false,
+      travelDateFlexible: false,
+      transportFlexible: false,
+    };
+    const fetchMock = vi.fn().mockResolvedValue(new Response(JSON.stringify({
+      choices: [{ message: { content: JSON.stringify(incompleteIntent) } }],
+    }), { status: 200 }));
+    vi.stubGlobal("fetch", fetchMock);
+
+    const result = await interpretTrip(tripInputSchema.parse({
+      prompt: "Muốn đi nghỉ dưỡng ở Đồng Nai.",
+      consent: true,
+      locale: "vi",
+      clarificationHistory: [{ questions: ["Mấy ngày?"], answer: "Tên tôi là Nguyễn Văn An, đi 3 ngày." }],
+    }));
+
+    expect(result.durationDays).toBeNull();
+    expect(result.partySize).toBeNull();
+    const body = JSON.parse(fetchMock.mock.calls[0][1].body as string) as { messages: Array<{ content: string }> };
+    const modelInput = JSON.parse(body.messages[1].content) as { clarificationHistory: Array<{ answer: string }> };
+    expect(modelInput.clarificationHistory[0].answer).toContain("[name redacted]");
+    expect(modelInput.clarificationHistory[0].answer).toContain("đi 3 ngày");
+    expect(modelInput.clarificationHistory[0].answer).not.toContain("Nguyễn Văn An");
+  });
+
   it("gives Trip DNA a deterministic Vietnam-local date for relative travel dates", async () => {
     vi.useFakeTimers();
     vi.setSystemTime(new Date("2026-10-16T17:30:00.000Z"));

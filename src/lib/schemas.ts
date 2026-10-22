@@ -9,6 +9,10 @@ export const externalHttpUrlSchema = z.url().max(2048).refine((value) => {
 export const tripInputSchema = z.object({
   prompt: z.string().trim().min(12).max(1200),
   consent: z.literal(true),
+  clarificationHistory: z.array(z.object({
+    questions: z.array(z.string().trim().min(1).max(160)).min(1).max(8),
+    answer: z.string().trim().min(1).max(1200),
+  }).strict()).max(5).default([]),
   durationDays: z.number().int().min(1).max(3).optional(),
   partySize: z.number().int().min(1).max(40).optional(),
   travelDate: z.iso.date().optional(),
@@ -31,6 +35,18 @@ export const tripIntentSchema = z.object({
   lowMobility: z.boolean(),
   rainyDay: z.boolean(),
   missingInformation: z.array(z.string().max(160)).max(5),
+});
+
+export const tripInterpretationSchema = tripIntentSchema.extend({
+  durationDays: z.number().int().min(1).max(3).nullable().default(null),
+  partySize: z.number().int().min(1).max(40).nullable().default(null),
+  travelDate: z.iso.date().nullable().default(null),
+  transport: z.enum(["car", "private_vehicle", "motorbike", "bus", "bicycle", "walking", "unknown"]).default("unknown"),
+  budgetVnd: z.number().int().min(0).max(500_000_000).nullable().default(null),
+  missingInformation: z.array(z.string().max(160)).max(5).default([]),
+  budgetFlexible: z.boolean().default(false),
+  travelDateFlexible: z.boolean().default(false),
+  transportFlexible: z.boolean().default(false),
 });
 
 export const inquirySchema = z.object({
@@ -175,3 +191,4 @@ export const packingOutputSchema = z.object({
 
 export type TripInput = z.infer<typeof tripInputSchema>;
 export type TripIntent = z.infer<typeof tripIntentSchema>;
+export type TripInterpretation = z.infer<typeof tripInterpretationSchema>;

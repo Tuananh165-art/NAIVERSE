@@ -91,14 +91,21 @@ test("all three AI entry points remain discoverable on a phone-width screen", as
   await expect(page.locator(".ai-tool-card[href$='/ai/routes']")).toBeVisible();
 });
 
-test("Journey Studio distinguishes bicycle from walking in Vietnamese and English", async ({ page }) => {
+test("Journey Studio collects a trip description and generic AI consent in Vietnamese and English", async ({ page }) => {
   await page.goto("/vi/journey");
-  await expect(page.locator("select option[value='bicycle']")).toHaveText("Xe đạp");
-  await expect(page.locator("select option[value='walking']")).toHaveText("Đi bộ");
+  await expect(page.getByLabel("Mô tả chuyến đi")).toBeVisible();
+  await expect(page.getByText("Tôi đồng ý gửi yêu cầu chuyến đi này tới AI để tạo gợi ý.", { exact: false })).toBeVisible();
+  await expect(page.getByText("Kiểm tra hoặc chỉnh ràng buộc chuyến đi", { exact: true })).toHaveCount(0);
+  await expect(page.getByLabel("Số ngày", { exact: true })).toHaveCount(0);
+  await expect(page.getByLabel("Số khách", { exact: true })).toHaveCount(0);
+  await expect(page.getByLabel("Ngân sách (VND)", { exact: true })).toHaveCount(0);
+  await expect(page.getByLabel("Ngày khởi hành", { exact: true })).toHaveCount(0);
+  await expect(page.getByLabel("Phương tiện", { exact: true })).toHaveCount(0);
 
   await page.goto("/en/journey");
-  await expect(page.locator("select option[value='bicycle']")).toHaveText("Bicycle");
-  await expect(page.locator("select option[value='walking']")).toHaveText("Walking");
+  await expect(page.getByLabel("Trip request")).toBeVisible();
+  await expect(page.getByText("I agree to send this trip request to AI to generate itinerary suggestions.", { exact: false })).toBeVisible();
+  await expect(page.getByText("Review or override trip details", { exact: true })).toHaveCount(0);
 });
 
 test("place detail exposes sourced prices and hours with their uncertainty labels", async ({ page }) => {

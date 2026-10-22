@@ -64,14 +64,14 @@ export function PackingAssistant({ signedIn, intent, placeIds }: { signedIn: boo
   return <section className="panel" style={{ marginTop: 17 }} aria-live="polite">
     <h3 className="panel-title"><Backpack size={18}/>{en ? "AI packing checklist" : "AI chuẩn bị hành lý"}</h3>
     <p className="panel-copy">{en
-      ? "DeepSeek prioritizes a checklist from structured trip preferences and stop categories. The original trip description, budget, account details and coordinates are not sent."
-      : "DeepSeek sắp xếp checklist theo nhu cầu chuyến đi và loại điểm dừng. Mô tả gốc, ngân sách, tài khoản và tọa độ không được gửi."}</p>
+      ? "AI prioritizes a checklist from structured trip preferences and stop categories. The original trip description, budget, account details and coordinates are not sent."
+      : "AI sắp xếp checklist theo nhu cầu chuyến đi và loại điểm dừng. Mô tả gốc, ngân sách, tài khoản và tọa độ không được gửi."}</p>
     {!items.length && <>
       <label className="form-hint" style={{ display: "flex", alignItems: "flex-start", gap: 9, marginTop: 12 }}>
         <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)} disabled={!signedIn}/>
         <span>{en
-          ? "I agree to send only trip length, group size, selected interests, needs and destination categories to DeepSeek."
-          : "Tôi đồng ý gửi thời lượng, số khách, sở thích, nhu cầu đã chọn và loại điểm đến tới DeepSeek."}</span>
+          ? "I agree to send only trip length, group size, selected interests, needs and destination categories to AI."
+          : "Tôi đồng ý gửi thời lượng, số khách, sở thích, nhu cầu đã chọn và loại điểm đến tới AI."}</span>
       </label>
       {!signedIn && <p className="form-hint">{en ? "Sign in is required." : "Cần đăng nhập để dùng tính năng AI."}</p>}
       {error && <div className="alert alert-red" role="alert" style={{ marginTop: 12 }}>{error}</div>}

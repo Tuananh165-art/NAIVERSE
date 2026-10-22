@@ -68,7 +68,7 @@ export function AiGuide({ signedIn, places }: { signedIn: boolean; places: Array
   return <div className="split-layout" style={{ marginTop: 24 }}>
     <section className="panel">
       <h2 className="panel-title"><BookOpenCheck size={19}/>{en ? "Ask about this destination" : "Đặt câu hỏi về địa điểm"}</h2>
-      <p className="panel-copy">{en ? "NaiVerse finds matching public catalog, price and hours records. DeepSeek selects exact excerpts; it cannot add facts outside those sources." : "NaiVerse tìm hồ sơ công khai, giá và giờ liên quan. DeepSeek chọn trích đoạn nguyên văn, không tự thêm dữ kiện ngoài nguồn."}</p>
+      <p className="panel-copy">{en ? "NaiVerse finds matching public catalog, price and hours records. AI selects exact excerpts; it cannot add facts outside those sources." : "NaiVerse tìm hồ sơ công khai, giá và giờ liên quan. AI chọn trích đoạn nguyên văn, không tự thêm dữ kiện ngoài nguồn."}</p>
       <label className="form-label" htmlFor="guide-place">{en ? "Destination" : "Địa điểm"}</label>
       <select id="guide-place" className="field" value={placeId} onChange={(event) => { setPlaceId(event.target.value); setResult(null); }}>
         {places.map((place) => <option key={place.id} value={place.id}>{en ? place.nameEn : place.name}</option>)}
@@ -76,10 +76,10 @@ export function AiGuide({ signedIn, places }: { signedIn: boolean; places: Array
       <label className="form-label" htmlFor="guide-question" style={{ marginTop: 14 }}>{en ? "Your question" : "Câu hỏi của bạn"}</label>
       <textarea id="guide-question" className="field" rows={3} minLength={8} maxLength={240} value={question} onChange={(event) => { setQuestion(event.target.value); setResult(null); }} placeholder={en ? "Example: What does the catalog say about children's tickets?" : "Ví dụ: Catalog có thông tin gì về vé trẻ em?"}/>
       <p className="form-hint">{en ? "Up to 240 characters. Questions are matched against records for the selected place; if no source matches, the guide will say it has no evidence." : "Tối đa 240 ký tự. Câu hỏi được dò trong hồ sơ của địa điểm đã chọn; không có nguồn phù hợp thì trợ lý sẽ báo thiếu căn cứ."}</p>
-      <div className="alert alert-blue" style={{ marginTop: 12 }}>{en ? "Do not include names, identity numbers or private notes. Email, phone numbers and GPS coordinates are masked before the question reaches DeepSeek; the guide does not save the question." : "Không nhập tên, số giấy tờ hoặc ghi chú riêng tư. Email, số điện thoại và tọa độ GPS được che trước khi gửi DeepSeek; trợ lý không lưu câu hỏi."}</div>
+      <div className="alert alert-blue" style={{ marginTop: 12 }}>{en ? "Do not include names, identity numbers or private notes. Email, phone numbers and GPS coordinates are masked before the question reaches AI; the guide does not save the question." : "Không nhập tên, số giấy tờ hoặc ghi chú riêng tư. Email, số điện thoại và tọa độ GPS được che trước khi gửi AI; trợ lý không lưu câu hỏi."}</div>
       <label className="form-hint" style={{ display: "flex", alignItems: "flex-start", gap: 9, marginTop: 16 }}>
         <input type="checkbox" checked={consent} onChange={(event) => setConsent(event.target.checked)}/>
-        <span>{en ? "I agree to send the selected place, my question after contact/GPS masking, and matching public records to DeepSeek." : "Tôi đồng ý gửi địa điểm đã chọn, câu hỏi sau khi che liên hệ/GPS và các hồ sơ công khai phù hợp tới DeepSeek."}</span>
+        <span>{en ? "I agree to send the selected place, my question after contact/GPS masking, and matching public records to AI." : "Tôi đồng ý gửi địa điểm đã chọn, câu hỏi sau khi che liên hệ/GPS và các hồ sơ công khai phù hợp tới AI."}</span>
       </label>
       {!signedIn && <p className="form-hint">{en ? "Sign in is required to use the AI guide." : "Cần đăng nhập để dùng trợ lý AI."}</p>}
       {error && <div className="alert alert-red" role="alert" style={{ marginTop: 12 }}>{error}</div>}
