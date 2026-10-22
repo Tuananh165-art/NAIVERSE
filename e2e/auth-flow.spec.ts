@@ -1,25 +1,13 @@
 import { expect, test } from "@playwright/test";
 
-test("register sends username and password to Supabase and shows email-confirmation state", async ({ page }) => {
+test("register sends account details to the server and shows email-confirmation state", async ({ page }) => {
   let received: Record<string, unknown> | undefined;
-  await page.route("**/auth/v1/signup*", async (route) => {
+  await page.route("**/api/auth/signup", async (route) => {
     received = route.request().postDataJSON() as Record<string, unknown>;
     await route.fulfill({
       status: 200,
       contentType: "application/json",
-      body: JSON.stringify({
-        id: "11111111-1111-4111-8111-111111111111",
-        aud: "authenticated",
-        role: "authenticated",
-        email: "naiverse-test@example.com",
-        email_confirmed_at: null,
-        confirmation_sent_at: "2026-10-16T00:00:00Z",
-        app_metadata: { provider: "email", providers: ["email"] },
-        user_metadata: { full_name: "NaiVerse Test", username: "naiverse_test", locale: "vi" },
-        identities: [{ identity_id: "22222222-2222-4222-8222-222222222222", id: "11111111-1111-4111-8111-111111111111", user_id: "11111111-1111-4111-8111-111111111111", identity_data: { email: "naiverse-test@example.com" }, provider: "email", last_sign_in_at: null, created_at: "2026-10-16T00:00:00Z", updated_at: "2026-10-16T00:00:00Z" }],
-        created_at: "2026-10-16T00:00:00Z",
-        updated_at: "2026-10-16T00:00:00Z",
-      }),
+      body: JSON.stringify({ ok: true, session: false }),
     });
   });
 
@@ -35,16 +23,18 @@ test("register sends username and password to Supabase and shows email-confirmat
   expect(received).toMatchObject({
     email: "naiverse-test@example.com",
     password: "correct-horse-battery",
-    data: { full_name: "NaiVerse Test", username: "naiverse_test", locale: "vi" },
+    fullName: "NaiVerse Test",
+    username: "naiverse_test",
+    locale: "vi",
   });
 });
 
 test("register explains when Supabase rate limits signup or confirmation email", async ({ page }) => {
-  await page.route("**/auth/v1/signup*", async (route) => {
+  await page.route("**/api/auth/signup", async (route) => {
     await route.fulfill({
       status: 429,
       contentType: "application/json",
-      body: JSON.stringify({ code: "over_email_send_rate_limit", message: "Email rate limit exceeded" }),
+      body: JSON.stringify({ error: { code: "auth_rate_limit", message: "Too many sign-up attempts." } }),
     });
   });
 

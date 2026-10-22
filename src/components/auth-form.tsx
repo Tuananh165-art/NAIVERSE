@@ -24,10 +24,11 @@ export function AuthForm() {
 
   async function submit(event: FormEvent) {
     event.preventDefault(); setError(""); setMessage("");
-    if (!supabase) { setError(locale === "vi" ? "Hãy cấu hình Supabase theo hướng dẫn trước khi đăng nhập." : "Configure Supabase using the setup guide before signing in."); return; }
+    if (!supabase && mode === "login") { setError(locale === "vi" ? "Hãy cấu hình Supabase theo hướng dẫn trước khi đăng nhập." : "Configure Supabase using the setup guide before signing in."); return; }
     setLoading(true);
     try {
       if (mode === "login") {
+        if (!supabase) throw new Error(t("error"));
         if (email.trim().includes("@")) {
           const { error: authError } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
           if (authError) throw authError;
@@ -39,9 +40,14 @@ export function AuthForm() {
         router.replace("/trips"); router.refresh();
       } else {
         if (!/^[a-zA-Z0-9_]{3,24}$/.test(username.trim())) throw new Error(locale === "vi" ? "Tên đăng nhập cần 3–24 chữ cái không dấu, số hoặc dấu gạch dưới." : "Username must have 3–24 letters, digits or underscores.");
-        const { data, error: authError } = await supabase.auth.signUp({ email: email.trim(), password, options: { data: { full_name: fullName.trim(), username: username.trim().toLowerCase(), locale } } });
-        if (authError) throw authError;
-        if (data.session) { router.replace("/trips"); router.refresh(); }
+        const response = await fetch("/api/auth/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email.trim(), password, fullName: fullName.trim(), username: username.trim().toLowerCase(), locale }),
+        });
+        const result = await response.json();
+        if (!response.ok) throw result.error ?? new Error(t("error"));
+        if (result.session) { router.replace("/trips"); router.refresh(); }
         else setMessage(t("pendingEmail"));
       }
     } catch (authError) { setError(getAuthErrorMessage(authError, locale === "vi" ? "vi" : "en")); }

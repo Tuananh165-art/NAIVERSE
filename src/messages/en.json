@@ -87,7 +87,7 @@
     "login": "Sign in",
     "register": "Create account",
     "forgot": "Forgot password?",
-    "pendingEmail": "Check your email to confirm your account.",
+    "pendingEmail": "Check your email to confirm your NaiVerse account.",
     "error": "Unable to sign in. Check your email and password."
   },
   "common": {
